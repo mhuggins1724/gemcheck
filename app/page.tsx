@@ -3,23 +3,23 @@
 import { useState } from "react";
 
 const trendingCards = [
-  { name: "Charizard ex 006/197", set: "Obsidian Flames", gem: 72, profit: 48, verdict: "grade", type: "fire" },
-  { name: "Pikachu VMAX 044/185", set: "Vivid Voltage", gem: 68, profit: 32, verdict: "grade", type: "electric" },
-  { name: "Umbreon VMAX 215/203", set: "Evolving Skies", gem: 55, profit: 85, verdict: "grade", type: "psychic" },
-  { name: "Lugia V AA 186/195", set: "Silver Tempest", gem: 48, profit: 12, verdict: "hold", type: "water" },
-  { name: "Rayquaza VMAX AA", set: "Evolving Skies", gem: 42, profit: 120, verdict: "hold", type: "dragon" },
-  { name: "Mew VMAX 114/264", set: "Fusion Strike", gem: 74, profit: 22, verdict: "grade", type: "psychic" },
-  { name: "Giratina V AA 186/196", set: "Lost Origin", gem: 38, profit: -8, verdict: "skip", type: "dragon" },
-  { name: "Charizard V 154/172", set: "Brilliant Stars", gem: 65, profit: 35, verdict: "grade", type: "fire" },
+  { id: "charizard-ex", name: "Charizard ex 006/197", set: "Obsidian Flames", gem: 72, profit: 48, verdict: "grade", type: "fire" },
+  { id: "pikachu-vmax", name: "Pikachu VMAX 044/185", set: "Vivid Voltage", gem: 68, profit: 32, verdict: "grade", type: "electric" },
+  { id: "umbreon-vmax", name: "Umbreon VMAX 215/203", set: "Evolving Skies", gem: 55, profit: 85, verdict: "grade", type: "psychic" },
+  { id: "lugia-v-aa", name: "Lugia V AA 186/195", set: "Silver Tempest", gem: 48, profit: 12, verdict: "hold", type: "water" },
+  { id: "rayquaza-vmax", name: "Rayquaza VMAX AA", set: "Evolving Skies", gem: 42, profit: 120, verdict: "hold", type: "dragon" },
+  { id: "mew-vmax", name: "Mew VMAX 114/264", set: "Fusion Strike", gem: 74, profit: 22, verdict: "grade", type: "psychic" },
+  { id: "giratina-v-aa", name: "Giratina V AA 186/196", set: "Lost Origin", gem: 38, profit: -8, verdict: "skip", type: "dragon" },
+  { id: "charizard-v", name: "Charizard V 154/172", set: "Brilliant Stars", gem: 65, profit: 35, verdict: "grade", type: "fire" },
 ];
 
 const topMovers = [
-  { name: "Eevee Heroes Espeon", set: "Eevee Heroes", change: "+24%", up: true, type: "psychic" },
-  { name: "Base Set Charizard", set: "Base Set 1999", change: "+18%", up: true, type: "fire" },
-  { name: "Moonbreon VMAX", set: "Evolving Skies", change: "+15%", up: true, type: "psychic" },
-  { name: "Gold Star Rayquaza", set: "Deoxys", change: "+12%", up: true, type: "dragon" },
-  { name: "Gengar VMAX AA", set: "Fusion Strike", change: "-9%", up: false, type: "psychic" },
-  { name: "Arceus V AA", set: "Brilliant Stars", change: "-7%", up: false, type: "grass" },
+  { id: "umbreon-vmax", name: "Eevee Heroes Espeon", set: "Eevee Heroes", change: "+24%", up: true, type: "psychic" },
+  { id: "charizard-ex", name: "Base Set Charizard", set: "Base Set 1999", change: "+18%", up: true, type: "fire" },
+  { id: "umbreon-vmax", name: "Moonbreon VMAX", set: "Evolving Skies", change: "+15%", up: true, type: "psychic" },
+  { id: "rayquaza-vmax", name: "Gold Star Rayquaza", set: "Deoxys", change: "+12%", up: true, type: "dragon" },
+  { id: "mew-vmax", name: "Gengar VMAX AA", set: "Fusion Strike", change: "-9%", up: false, type: "psychic" },
+  { id: "charizard-v", name: "Arceus V AA", set: "Brilliant Stars", change: "-7%", up: false, type: "grass" },
 ];
 
 const pokeSets = [
@@ -63,7 +63,7 @@ export default function Home() {
             <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: "-0.5px" }}>GemCheck</span>
           </div>
           <div style={{ display: "flex", gap: 4, marginLeft: 16 }}>
-            <a href="#" style={{ padding: "8px 14px", borderRadius: 8, fontSize: 13, fontWeight: 500, color: text, background: tertBg, textDecoration: "none" }}>Home</a>
+            <a href="/" style={{ padding: "8px 14px", borderRadius: 8, fontSize: 13, fontWeight: 500, color: text, background: tertBg, textDecoration: "none" }}>Home</a>
             <a href="#" style={{ padding: "8px 14px", borderRadius: 8, fontSize: 13, fontWeight: 500, color: textSec, textDecoration: "none" }}>Sets</a>
             <a href="#" style={{ padding: "8px 14px", borderRadius: 8, fontSize: 13, fontWeight: 500, color: textSec, textDecoration: "none" }}>Hot Cards</a>
             <a href="#" style={{ padding: "8px 14px", borderRadius: 8, fontSize: 13, fontWeight: 500, color: textSec, textDecoration: "none" }}>Watchlist</a>
@@ -108,18 +108,20 @@ export default function Home() {
               var vColor = card.verdict === "hold" ? "#000" : "#fff";
               var vLabel = card.verdict === "grade" ? "Grade it" : card.verdict === "hold" ? "Hold" : "Skip";
               return (
-                <div key={card.name} style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 14, cursor: "pointer", position: "relative", overflow: "hidden", transition: "all 0.25s ease" }}>
-                  <div style={{ position: "absolute", top: 10, right: 10, zIndex: 2, fontSize: 10, fontWeight: 600, textTransform: "uppercase" as const, letterSpacing: "0.5px", padding: "4px 8px", borderRadius: 6, background: vBg, color: vColor }}>{vLabel}</div>
-                  <div style={{ width: "100%", aspectRatio: "0.72", borderRadius: 8, marginBottom: 12, overflow: "hidden" }}>
-                    <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, color: "rgba(255,255,255,0.4)", background: gradients[card.type] }}>{card.name.split(" ")[0]}</div>
+                <a key={card.name} href={"/card?id=" + card.id} style={{ textDecoration: "none", color: "inherit" }}>
+                  <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 14, cursor: "pointer", position: "relative", overflow: "hidden", transition: "all 0.25s ease" }}>
+                    <div style={{ position: "absolute", top: 10, right: 10, zIndex: 2, fontSize: 10, fontWeight: 600, textTransform: "uppercase" as const, letterSpacing: "0.5px", padding: "4px 8px", borderRadius: 6, background: vBg, color: vColor }}>{vLabel}</div>
+                    <div style={{ width: "100%", aspectRatio: "0.72", borderRadius: 8, marginBottom: 12, overflow: "hidden" }}>
+                      <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, color: "rgba(255,255,255,0.4)", background: gradients[card.type] }}>{card.name.split(" ")[0]}</div>
+                    </div>
+                    <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{card.name}</div>
+                    <div style={{ fontSize: 11, color: textTer, marginBottom: 10 }}>{card.set}</div>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                      <span style={{ fontSize: 11, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", padding: "3px 8px", borderRadius: 6, background: gemBg, color: gemColor }}>{card.gem}% gem</span>
+                      <span style={{ fontSize: 12, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: card.profit >= 0 ? greenText : redText }}>{card.profit >= 0 ? "+" : ""}${card.profit}</span>
+                    </div>
                   </div>
-                  <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{card.name}</div>
-                  <div style={{ fontSize: 11, color: textTer, marginBottom: 10 }}>{card.set}</div>
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                    <span style={{ fontSize: 11, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", padding: "3px 8px", borderRadius: 6, background: gemBg, color: gemColor }}>{card.gem}% gem</span>
-                    <span style={{ fontSize: 12, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: card.profit >= 0 ? greenText : redText }}>{card.profit >= 0 ? "+" : ""}${card.profit}</span>
-                  </div>
-                </div>
+                </a>
               );
             })}
           </div>
@@ -133,15 +135,17 @@ export default function Home() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 10 }}>
             {topMovers.map(function(mover, i) {
               return (
-                <div key={mover.name} style={{ display: "flex", alignItems: "center", gap: 14, background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: "12px 14px", cursor: "pointer", transition: "all 0.25s ease" }}>
-                  <div style={{ fontSize: 12, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: textTer, width: 20, textAlign: "center" as const }}>{i + 1}</div>
-                  <div style={{ width: 44, height: 60, borderRadius: 6, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, color: "rgba(255,255,255,0.4)", background: gradients[mover.type] }}>{mover.name.split(" ")[0].substring(0, 4)}</div>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: 13, fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{mover.name}</div>
-                    <div style={{ fontSize: 11, color: textTer }}>{mover.set}</div>
+                <a key={mover.name} href={"/card?id=" + mover.id} style={{ textDecoration: "none", color: "inherit" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 14, background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: "12px 14px", cursor: "pointer", transition: "all 0.25s ease" }}>
+                    <div style={{ fontSize: 12, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: textTer, width: 20, textAlign: "center" as const }}>{i + 1}</div>
+                    <div style={{ width: 44, height: 60, borderRadius: 6, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, color: "rgba(255,255,255,0.4)", background: gradients[mover.type] }}>{mover.name.split(" ")[0].substring(0, 4)}</div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: 13, fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{mover.name}</div>
+                      <div style={{ fontSize: 11, color: textTer }}>{mover.set}</div>
+                    </div>
+                    <div style={{ fontSize: 13, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: mover.up ? greenText : redText }}>{mover.change}</div>
                   </div>
-                  <div style={{ fontSize: 13, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: mover.up ? greenText : redText }}>{mover.change}</div>
-                </div>
+                </a>
               );
             })}
           </div>
