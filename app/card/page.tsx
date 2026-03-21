@@ -5,11 +5,11 @@ import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { supabase } from "../lib/supabase";
 
-var gradients: Record<string, string> = { fire: "linear-gradient(145deg,#7c2d12,#1c1917)", water: "linear-gradient(145deg,#1e3a5f,#0f172a)", electric: "linear-gradient(145deg,#854d0e,#1c1917)", grass: "linear-gradient(145deg,#14532d,#0f172a)", psychic: "linear-gradient(145deg,#581c87,#0f172a)", dragon: "linear-gradient(145deg,#1e3a5f,#581c87)" };
+var gradients: Record<string, string> = { fire: "linear-gradient(145deg,#7c2d12,#1c1917)", water: "linear-gradient(145deg,#1e3a5f,#0f172a)", electric: "linear-gradient(145deg,#854d0e,#1c1917)", grass: "linear-gradient(145deg,#14532d,#0f172a)", psychic: "linear-gradient(145deg,#581c87,#0f172a)", dragon: "linear-gradient(145deg,#1e3a5f,#581c87)", normal: "linear-gradient(145deg,#44403c,#1c1917)" };
 
 function CardDetailContent() {
   const searchParams = useSearchParams();
-  const id = searchParams.get("id") || "charizard-ex";
+  const id = searchParams.get("id") || "";
   const [isDark, setIsDark] = useState(true);
   const [card, setCard] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -73,13 +73,19 @@ function CardDetailContent() {
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 24px 40px" }}>
         <a href="/" style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 13, color: textSec, marginBottom: 20, padding: "6px 12px", borderRadius: 8, textDecoration: "none" }}>&larr; Back to cards</a>
 
-        <div style={{ display: "flex", gap: 32, marginBottom: 32, flexWrap: "wrap" as const }}>
-          <div style={{ width: 260, height: 364, borderRadius: 12, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, color: "rgba(255,255,255,0.4)", textAlign: "center" as const, border: "1px solid " + border, background: gradients[card.card_type] || gradients.fire }}>
-            {card.name.split(" ")[0]}<br />card image
+        <div style={{ display: "flex", gap: 40, marginBottom: 32, flexWrap: "wrap" as const, justifyContent: "center" }}>
+          <div style={{ width: 420, flexShrink: 0 }}>
+            <div style={{ width: "100%", borderRadius: 16, overflow: "hidden", border: "1px solid " + border, background: gradients[card.card_type] || gradients.normal, boxShadow: isDark ? "0 8px 32px rgba(0,0,0,0.4)" : "0 8px 32px rgba(0,0,0,0.12)" }}>
+              {card.image_url ? (
+                <img src={card.image_url} alt={card.name} style={{ width: "100%", display: "block" }} />
+              ) : (
+                <div style={{ width: "100%", aspectRatio: "0.72", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, color: "rgba(255,255,255,0.4)" }}>{card.name.split(" ")[0]}</div>
+              )}
+            </div>
           </div>
 
-          <div style={{ flex: 1, minWidth: 280 }}>
-            <h1 style={{ fontSize: 26, fontWeight: 700, letterSpacing: "-0.5px", marginBottom: 4 }}>{card.name}</h1>
+          <div style={{ flex: 1, minWidth: 300 }}>
+            <h1 style={{ fontSize: 28, fontWeight: 700, letterSpacing: "-0.5px", marginBottom: 4 }}>{card.name}</h1>
             <p style={{ fontSize: 14, color: textSec, marginBottom: 20 }}>{card.set_name} &middot; {card.set_code} &middot; {card.year}</p>
 
             <div style={{ display: "flex", gap: 6, flexWrap: "wrap" as const, marginBottom: 20 }}>
@@ -89,23 +95,15 @@ function CardDetailContent() {
 
             <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 16, padding: 20, marginBottom: 20 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 20, marginBottom: 16 }}>
-                <div style={{ width: 72, height: 72, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", flexShrink: 0, background: scoreBg, color: scoreColor }}>
-                  {card.grade_score}
-                </div>
+                <div style={{ width: 72, height: 72, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", flexShrink: 0, background: scoreBg, color: scoreColor }}>{card.grade_score}</div>
                 <div>
                   <h3 style={{ fontSize: 16, fontWeight: 600, marginBottom: 4 }}>{scoreLabel}</h3>
-                  <p style={{ fontSize: 13, color: textSec, lineHeight: 1.5 }}>
-                    {card.gem_rate}% gem rate with {profit10 >= 0 ? "+$" + profit10 : "-$" + Math.abs(profit10)} expected profit on PSA 10.
-                  </p>
+                  <p style={{ fontSize: 13, color: textSec, lineHeight: 1.5 }}>{card.gem_rate}% gem rate with {profit10 >= 0 ? "+$" + profit10 : "-$" + Math.abs(profit10)} expected profit on PSA 10.</p>
                 </div>
               </div>
               <div>
-                <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: textTer, marginBottom: 4 }}>
-                  <span>0%</span><span>Gem rate: {card.gem_rate}%</span><span>100%</span>
-                </div>
-                <div style={{ height: 6, background: tertBg, borderRadius: 3, overflow: "hidden" }}>
-                  <div style={{ height: "100%", width: card.gem_rate + "%", borderRadius: 3, background: green }}></div>
-                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: textTer, marginBottom: 4 }}><span>0%</span><span>Gem rate: {card.gem_rate}%</span><span>100%</span></div>
+                <div style={{ height: 6, background: tertBg, borderRadius: 3, overflow: "hidden" }}><div style={{ height: "100%", width: card.gem_rate + "%", borderRadius: 3, background: green }}></div></div>
               </div>
             </div>
 
@@ -120,7 +118,6 @@ function CardDetailContent() {
           <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16 }}>
             <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>Raw avg (30d)</div>
             <div style={{ fontSize: 24, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText }}>${card.raw_price}</div>
-            <div style={{ fontSize: 11, marginTop: 4, color: textTer }}>Stable</div>
           </div>
           <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16 }}>
             <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>PSA 10 avg</div>
@@ -150,14 +147,7 @@ function CardDetailContent() {
         </div>
 
         <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 16, padding: 20, marginBottom: 20 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-            <div style={{ fontSize: 14, fontWeight: 600 }}>Price history</div>
-            <div style={{ display: "flex", gap: 4 }}>
-              {["1M", "3M", "6M", "1Y"].map(function(tab) {
-                return <span key={tab} style={{ fontSize: 11, padding: "5px 10px", borderRadius: 6, color: tab === "6M" ? text : textTer, background: tab === "6M" ? tertBg : "transparent", fontWeight: tab === "6M" ? 500 : 400, cursor: "pointer" }}>{tab}</span>;
-              })}
-            </div>
-          </div>
+          <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 16 }}>Price history</div>
           <div style={{ display: "flex", alignItems: "flex-end", gap: 6, height: 160, padding: "0 4px" }}>
             {prices.map(function(price: number, i: number) {
               var h = (price / maxPrice) * 140;
@@ -186,9 +176,7 @@ function CardDetailContent() {
               return (
                 <div key={row.grade} style={{ display: "flex", alignItems: "center", gap: 10 }}>
                   <div style={{ fontSize: 12, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: textSec, width: 56 }}>{row.grade}</div>
-                  <div style={{ flex: 1, height: 20, background: tertBg, borderRadius: 4, overflow: "hidden" }}>
-                    <div style={{ height: "100%", width: pct + "%", borderRadius: 4, background: row.color }}></div>
-                  </div>
+                  <div style={{ flex: 1, height: 20, background: tertBg, borderRadius: 4, overflow: "hidden" }}><div style={{ height: "100%", width: pct + "%", borderRadius: 4, background: row.color }}></div></div>
                   <div style={{ fontSize: 11, fontFamily: "JetBrains Mono, monospace", color: textTer, width: 60, textAlign: "right" as const }}>{row.count.toLocaleString()}</div>
                 </div>
               );
@@ -197,7 +185,7 @@ function CardDetailContent() {
           <div style={{ fontSize: 11, color: textTer, marginTop: 12 }}>Total graded: {totalPop.toLocaleString()}</div>
         </div>
 
-        <div style={{ borderTop: "1px solid " + border, padding: "24px 0", marginTop: 40, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap" as const, gap: 12 }}>
+        <div style={{ borderTop: "1px solid " + border, padding: "24px 0", marginTop: 40 }}>
           <div style={{ fontSize: 12, color: textTer }}>&copy; 2026 GemCheck. Not affiliated with PSA or The Pok&eacute;mon Company.</div>
         </div>
       </div>
