@@ -3,24 +3,25 @@
 import { useState, useEffect } from "react";
 import { supabase } from "./lib/supabase";
 
-var gradients: Record<string, string> = { fire: "linear-gradient(145deg,#7c2d12,#1c1917)", water: "linear-gradient(145deg,#1e3a5f,#0f172a)", electric: "linear-gradient(145deg,#854d0e,#1c1917)", grass: "linear-gradient(145deg,#14532d,#0f172a)", psychic: "linear-gradient(145deg,#581c87,#0f172a)", dragon: "linear-gradient(145deg,#1e3a5f,#581c87)" };
+var gradients: Record<string, string> = { fire: "linear-gradient(145deg,#7c2d12,#1c1917)", water: "linear-gradient(145deg,#1e3a5f,#0f172a)", electric: "linear-gradient(145deg,#854d0e,#1c1917)", grass: "linear-gradient(145deg,#14532d,#0f172a)", psychic: "linear-gradient(145deg,#581c87,#0f172a)", dragon: "linear-gradient(145deg,#1e3a5f,#581c87)", normal: "linear-gradient(145deg,#44403c,#1c1917)" };
 
 const pokeSets = [
-  { name: "Obsidian Flames", code: "SV03", count: 197, color: "#ef4444" },
-  { name: "Paldea Evolved", code: "SV02", count: 193, color: "#8b5cf6" },
-  { name: "Scarlet & Violet", code: "SV01", count: 198, color: "#3b82f6" },
-  { name: "Crown Zenith", code: "SWSH12.5", count: 160, color: "#eab308" },
-  { name: "Evolving Skies", code: "SWSH07", count: 237, color: "#06b6d4" },
-  { name: "Brilliant Stars", code: "SWSH09", count: 186, color: "#f97316" },
+  { name: "Obsidian Flames", code: "SV03", count: 230, color: "#ef4444" },
+  { name: "Paldea Evolved", code: "SV02", count: 279, color: "#8b5cf6" },
+  { name: "Scarlet & Violet", code: "SV01", count: 258, color: "#3b82f6" },
 ];
 
 export default function Home() {
   const [isDark, setIsDark] = useState(true);
   const [cards, setCards] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [totalCards, setTotalCards] = useState(0);
 
   useEffect(function() {
-    supabase.from("cards").select("*").order("grade_score", { ascending: false }).then(function(res) {
+    supabase.from("cards").select("*", { count: "exact", head: true }).then(function(res) {
+      if (res.count) setTotalCards(res.count);
+    });
+    supabase.from("cards").select("*").order("grade_score", { ascending: false }).limit(20).then(function(res) {
       if (res.data) setCards(res.data);
       setLoading(false);
     });
@@ -79,16 +80,15 @@ export default function Home() {
             Instant grading decisions powered by real eBay data, PSA pop reports, and gem rate analysis. Stop guessing, start profiting.
           </p>
           <div style={{ display: "flex", justifyContent: "center", gap: 32 }}>
-            <div style={{ textAlign: "center" }}><div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: green }}>{cards.length > 0 ? cards.length.toLocaleString() : "..."}</div><div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginTop: 2 }}>Cards tracked</div></div>
-            <div style={{ textAlign: "center" }}><div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: green }}>72</div><div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginTop: 2 }}>Sets covered</div></div>
+            <div style={{ textAlign: "center" }}><div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: green }}>{totalCards > 0 ? totalCards.toLocaleString() : "..."}</div><div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginTop: 2 }}>Cards tracked</div></div>
+            <div style={{ textAlign: "center" }}><div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: green }}>3</div><div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginTop: 2 }}>Sets covered</div></div>
             <div style={{ textAlign: "center" }}><div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: green }}>$2.4M</div><div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginTop: 2 }}>Sales analyzed</div></div>
           </div>
         </div>
 
-        {/* Trending Cards from Supabase */}
         <div style={{ marginBottom: 40 }}>
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 16 }}>
-            <h2 style={{ fontSize: 16, fontWeight: 600 }}>Trending cards</h2>
+            <h2 style={{ fontSize: 16, fontWeight: 600 }}>Top rated cards</h2>
             <a href="#" style={{ fontSize: 12, fontWeight: 500, color: green, textDecoration: "none" }}>View all &rarr;</a>
           </div>
           {loading ? (
@@ -108,7 +108,7 @@ export default function Home() {
                   <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 14, cursor: "pointer", position: "relative", overflow: "hidden", transition: "all 0.25s ease" }}>
                     <div style={{ position: "absolute", top: 10, right: 10, zIndex: 2, fontSize: 10, fontWeight: 600, textTransform: "uppercase" as const, letterSpacing: "0.5px", padding: "4px 8px", borderRadius: 6, background: vBg, color: vColor }}>{vLabel}</div>
                     <div style={{ width: "100%", aspectRatio: "0.72", borderRadius: 8, marginBottom: 12, overflow: "hidden" }}>
-                      <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, color: "rgba(255,255,255,0.4)", background: gradients[card.card_type] || gradients.fire }}>{card.name.split(" ")[0]}</div>
+                      <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, color: "rgba(255,255,255,0.4)", background: gradients[card.card_type] || gradients.normal }}>{card.name.split(" ")[0]}</div>
                     </div>
                     <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{card.name}</div>
                     <div style={{ fontSize: 11, color: textTer, marginBottom: 10 }}>{card.set_name}</div>
@@ -124,7 +124,6 @@ export default function Home() {
           )}
         </div>
 
-        {/* Browse Sets */}
         <div style={{ marginBottom: 40 }}>
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 16 }}>
             <h2 style={{ fontSize: 16, fontWeight: 600 }}>Browse sets</h2>
