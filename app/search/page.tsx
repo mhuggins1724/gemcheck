@@ -40,9 +40,8 @@ async function smartSearch(q: string) {
       searchPatterns.push("%" + nameText + "%" + fullPadded + "%");
       searchPatterns.push("%" + nameText + "%" + numStr + "%");
     } else {
-      searchPatterns.push("%" + nameText + "% " + paddedNum + "/%");
-      searchPatterns.push("%" + nameText + "% " + num + "/%");
-      searchPatterns.push("%" + nameText + "%" + paddedNum + "%");
+      searchPatterns.push("%" + nameText + "%" + paddedNum + "/%");
+      searchPatterns.push("%" + nameText + "%" + num + "/%");
     }
     var orFilter = searchPatterns.map(function(p) { return "name.ilike." + p; }).join(",");
     var res = await supabase.from("cards").select("*").or(orFilter).order("grade_score", { ascending: false }).limit(60);
@@ -105,7 +104,6 @@ function SearchContent() {
   var cardBg = isDark ? "#1a1a20" : "#ffffff";
   var border = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.1)";
   var navBg = isDark ? "rgba(12,12,15,0.95)" : "rgba(255,255,255,0.95)";
-  var searchBgVar = isDark ? "#1e1e24" : "#f0f0f4";
   var green = isDark ? "#22c55e" : "#16a34a";
   var greenBg = isDark ? "rgba(34,197,94,0.1)" : "rgba(22,163,74,0.1)";
   var greenText = isDark ? "#4ade80" : "#15803d";
@@ -114,6 +112,7 @@ function SearchContent() {
   var amberBg = isDark ? "rgba(234,179,8,0.1)" : "rgba(202,138,4,0.1)";
   var amberText = isDark ? "#facc15" : "#a16207";
   var amber = isDark ? "#eab308" : "#ca8a04";
+  var tertBg = isDark ? "#1e1e24" : "#e8e8ec";
 
   return (
     <div style={{ background: bg, color: text, minHeight: "100vh", transition: "background 0.3s ease, color 0.3s ease" }}>
@@ -122,6 +121,12 @@ function SearchContent() {
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <div style={{ width: 28, height: 28, borderRadius: 8, background: green, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, color: "#fff", fontWeight: 700 }}>G</div>
             <a href="/" style={{ fontSize: 18, fontWeight: 700, letterSpacing: "-0.5px", textDecoration: "none", color: text }}>GemCheck</a>
+          </div>
+          <div style={{ display: "flex", gap: 4, marginLeft: 16 }}>
+            <a href="/" style={{ padding: "8px 14px", borderRadius: 8, fontSize: 13, fontWeight: 500, color: textSec, textDecoration: "none" }}>Home</a>
+            <a href="/sets" style={{ padding: "8px 14px", borderRadius: 8, fontSize: 13, fontWeight: 500, color: textSec, textDecoration: "none" }}>Sets</a>
+            <a href="#" style={{ padding: "8px 14px", borderRadius: 8, fontSize: 13, fontWeight: 500, color: textSec, textDecoration: "none" }}>Hot Cards</a>
+            <a href="/search" style={{ padding: "8px 14px", borderRadius: 8, fontSize: 13, fontWeight: 500, color: text, background: tertBg, textDecoration: "none" }}>Search</a>
           </div>
           <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 12 }}>
             <button onClick={function() { setIsDark(!isDark); }} style={{ width: 36, height: 36, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", color: textSec, fontSize: 16, border: "1px solid " + border, background: "none", cursor: "pointer" }}>
