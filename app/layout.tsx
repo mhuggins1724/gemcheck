@@ -8,11 +8,15 @@ const jetbrainsMono = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["
 export const metadata: Metadata = {
   title: "GemCheck - Should You Grade It?",
   description: "Instant grading decisions powered by real eBay data, PSA pop reports, and gem rate analysis.",
+  referrer: "no-referrer",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="referrer" content="no-referrer" />
+      </head>
       <body className={dmSans.variable + " " + jetbrainsMono.variable} style={{ fontFamily: "var(--font-dm-sans)", margin: 0, padding: 0 }}>
         {children}
       </body>

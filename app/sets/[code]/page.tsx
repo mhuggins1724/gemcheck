@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { supabase } from "../../lib/supabase";
 
 var gradients: Record<string, string> = { fire: "linear-gradient(145deg,#7c2d12,#1c1917)", water: "linear-gradient(145deg,#1e3a5f,#0f172a)", electric: "linear-gradient(145deg,#854d0e,#1c1917)", grass: "linear-gradient(145deg,#14532d,#0f172a)", psychic: "linear-gradient(145deg,#581c87,#0f172a)", dragon: "linear-gradient(145deg,#1e3a5f,#581c87)", normal: "linear-gradient(145deg,#44403c,#1c1917)" };
+var fallbackImg = "https://rjtwqtpdmmkeknllsuvr.supabase.co/storage/v1/object/public/Logos/NO%20IMAGE%20POKEMON.webp";
 
 var sortOptions = [
   { label: "Price: High to Low", key: "price-desc" },
@@ -26,6 +27,20 @@ function sortCards(cards: any[], sortKey: string) {
   return sorted;
 }
 
+async function fetchAllCards(code: string) {
+  var allCards: any[] = [];
+  var page = 0;
+  var pageSize = 1000;
+  while (true) {
+    var res = await supabase.from("cards").select("*").eq("set_code", code).range(page * pageSize, (page + 1) * pageSize - 1);
+    if (!res.data || res.data.length === 0) break;
+    allCards.push(...res.data);
+    if (res.data.length < pageSize) break;
+    page++;
+  }
+  return allCards;
+}
+
 export default function SetDetailPage() {
   const params = useParams();
   const code = (params.code as string || "").toUpperCase();
@@ -37,10 +52,10 @@ export default function SetDetailPage() {
 
   useEffect(function() {
     Promise.all([
-      supabase.from("cards").select("*").eq("set_code", code),
+      fetchAllCards(code),
       supabase.from("sets").select("*").eq("code", code).single()
     ]).then(function(results) {
-      if (results[0].data) setCards(results[0].data);
+      setCards(results[0]);
       if (results[1].data) setSetInfo(results[1].data);
       setLoading(false);
     });
@@ -64,6 +79,11 @@ export default function SetDetailPage() {
   var amberBg = isDark ? "rgba(234,179,8,0.1)" : "rgba(202,138,4,0.1)";
   var amberText = isDark ? "#facc15" : "#a16207";
   var amber = isDark ? "#eab308" : "#ca8a04";
+
+  function handleImgError(e: any) {
+    e.target.onerror = null;
+    e.target.src = fallbackImg;
+  }
 
   return (
     <div style={{ background: bg, color: text, minHeight: "100vh", transition: "background 0.3s ease, color 0.3s ease" }}>
@@ -127,13 +147,9 @@ export default function SetDetailPage() {
                   <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 14, cursor: "pointer", position: "relative", overflow: "hidden", transition: "all 0.25s ease" }}>
                     <div style={{ position: "absolute", top: 10, right: 10, zIndex: 2, fontSize: 10, fontWeight: 600, textTransform: "uppercase" as const, letterSpacing: "0.5px", padding: "4px 8px", borderRadius: 6, background: vBg, color: vColor }}>{vLabel}</div>
                     <div style={{ width: "100%", aspectRatio: "0.72", borderRadius: 8, marginBottom: 12, overflow: "hidden", background: gradients[card.card_type] || gradients.normal }}>
-                      {card.image_url ? (
-                        <img src={card.image_url} alt={card.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                      ) : (
-                        <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, color: "rgba(255,255,255,0.4)" }}>{card.name.split(" ")[0]}</div>
-                      )}
+                      <img src={card.image_url || fallbackImg} alt={card.name} onError={handleImgError} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                     </div>
-                    <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{card.name}</div>
+                    <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 2, whiteSpace: "normal", overflow: "visible", lineHeight: "1.3", minHeight: "34px" }}>{card.name}</div>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 4 }}>
                       <span style={{ fontSize: 11, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", padding: "3px 8px", borderRadius: 6, background: gemBg2, color: gemColor }}>{card.gem_rate}% gem</span>
                       <span style={{ fontSize: 13, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: greenText }}>${card.psa10_price}</span>

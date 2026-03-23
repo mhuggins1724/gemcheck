@@ -3,8 +3,16 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
 
-var eraOrder = ["Scarlet & Violet", "Sword & Shield", "Sun & Moon", "XY", "Mega Evolution"];
-var eraColors: Record<string, string> = { "Scarlet & Violet": "#e53e3e", "Sword & Shield": "#3182ce", "Sun & Moon": "#dd6b20", "XY": "#805ad5", "Mega Evolution": "#38a169" };
+var eraOrder = ["Mega Evolution", "Scarlet & Violet", "Sword & Shield", "Sun & Moon", "XY", "Black & White", "Call of Legends", "HeartGold SoulSilver", "Platinum", "Diamond & Pearl", "EX Ruby & Sapphire", "Pokemon E-Card", "Neo", "Gym", "Base"];
+var eraColors: Record<string, string> = { "Scarlet & Violet": "#e53e3e", "Sword & Shield": "#3182ce", "Sun & Moon": "#dd6b20", "XY": "#805ad5", "Mega Evolution": "#38a169", "Black & White": "#4a5568", "Call of Legends": "#d69e2e", "HeartGold SoulSilver": "#d69e2e", "Platinum": "#a0aec0", "Diamond & Pearl": "#5b8dd9", "EX Ruby & Sapphire": "#dc2626", "Pokemon E-Card": "#6d28d9", "Neo": "#2563eb", "Gym": "#b45309", "Base": "#b7791f" };
+var eraBgColors: Record<string, string> = { "Scarlet & Violet": "linear-gradient(135deg, #7f1d1d, #991b1b, #b91c1c)", "Sword & Shield": "linear-gradient(135deg, #1e3a5f, #1e40af, #2563eb)", "Sun & Moon": "linear-gradient(135deg, #7c2d12, #c2410c, #ea580c)", "XY": "linear-gradient(135deg, #4c1d95, #6d28d9, #7c3aed)", "Mega Evolution": "linear-gradient(135deg, #14532d, #15803d, #22c55e)", "Black & White": "linear-gradient(135deg, #1a1a2e, #374151, #4b5563)", "Call of Legends": "linear-gradient(135deg, #78350f, #a16207, #d97706)", "HeartGold SoulSilver": "linear-gradient(135deg, #78350f, #a16207, #d97706)", "Platinum": "linear-gradient(135deg, #374151, #6b7280, #9ca3af)", "Diamond & Pearl": "linear-gradient(135deg, #1e3a5f, #3b82f6, #60a5fa)", "EX Ruby & Sapphire": "linear-gradient(135deg, #7f1d1d, #991b1b, #dc2626)", "Pokemon E-Card": "linear-gradient(135deg, #3b0764, #6d28d9, #8b5cf6)", "Neo": "linear-gradient(135deg, #1e3a5f, #2563eb, #3b82f6)", "Gym": "linear-gradient(135deg, #78350f, #92400e, #b45309)", "Base": "linear-gradient(135deg, #713f12, #a16207, #ca8a04)" };
+var eraLogos: Record<string, string> = {
+  "Scarlet & Violet": "https://assets.tcgdex.net/en/sv/sv01/logo.png",
+  "Sword & Shield": "https://assets.tcgdex.net/en/swsh/swsh1/logo.png",
+  "Sun & Moon": "https://assets.tcgdex.net/en/sm/sm1/logo.png",
+  "XY": "https://assets.tcgdex.net/en/xy/xy1/logo.png",
+  "Mega Evolution": "https://assets.tcgdex.net/en/me/me01/logo.png",
+};
 
 export default function SetsPage() {
   const [isDark, setIsDark] = useState(true);
@@ -15,19 +23,38 @@ export default function SetsPage() {
   useEffect(function() {
     Promise.all([
       supabase.from("sets").select("*").order("sort_order", { ascending: true }),
-      supabase.from("cards").select("set_code")
+      supabase.rpc("get_set_card_counts")
     ]).then(function(results) {
       if (results[0].data) setSets(results[0].data);
       if (results[1].data) {
         var counts: Record<string, number> = {};
-        results[1].data.forEach(function(c: any) {
-          counts[c.set_code] = (counts[c.set_code] || 0) + 1;
+        results[1].data.forEach(function(r: any) {
+          counts[r.set_code] = Number(r.card_count);
         });
         setCardCounts(counts);
       }
       setLoading(false);
     });
   }, []);
+
+  function isPromo(name: string) {
+    var n = name.toLowerCase();
+    return n.includes("promo") || n.includes("league") || n.includes("player placement");
+  }
+
+  function PromoIcon() {
+    return (
+      <svg viewBox="0 0 100 100" style={{ width: "100%", height: "100%" }}>
+        <defs>
+          <path id="promoArc" d="M 25,58 A 30,30 0 0,1 75,58" fill="none" />
+        </defs>
+        <polygon points="50,2 63,35 98,35 70,57 82,92 50,72 18,92 30,57 2,35 37,35" fill="#111" />
+        <text fill="white" fontSize="15" fontWeight="900" fontFamily="Arial, sans-serif" fontStyle="italic" letterSpacing="2">
+          <textPath href="#promoArc" startOffset="50%" textAnchor="middle">PROMO</textPath>
+        </text>
+      </svg>
+    );
+  }
 
   var bg = isDark ? "#0c0c0f" : "#f8f8fa";
   var text = isDark ? "#ececf0" : "#1a1a2e";
@@ -72,33 +99,37 @@ export default function SetsPage() {
             var eraSets = sets.filter(function(s) { return s.era === eraName; });
             if (eraSets.length === 0) return null;
             var totalCards = eraSets.reduce(function(sum, s) { return sum + (cardCounts[s.code] || 0); }, 0);
+            var eraLogo = eraLogos[eraName] || "";
             var color = eraColors[eraName] || "#888";
-            var eraLogo = eraSets[0] && eraSets[0].logo_url ? eraSets[0].logo_url.replace(/\/[^\/]+\/logo\.png$/, "") : "";
 
             return (
               <div key={eraName} style={{ marginBottom: 48 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 20, padding: "16px 20px", background: color + "10", borderRadius: 12, border: "1px solid " + color + "30" }}>
-                  <div style={{ width: 48, height: 48, borderRadius: 10, background: color + "25", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, fontWeight: 700, color: color, flexShrink: 0 }}>{eraName.charAt(0)}</div>
-                  <div>
-                    <h2 style={{ fontSize: 20, fontWeight: 700 }}>{eraName}</h2>
-                    <p style={{ fontSize: 12, color: textTer }}>{eraSets.length} sets &middot; {totalCards.toLocaleString()} cards</p>
-                  </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 20, padding: "14px 24px", borderRadius: 12, background: isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)", border: "1px solid " + border }}>
+                  {eraLogo ? (
+                    <img src={eraLogo} alt={eraName} style={{ height: 28, objectFit: "contain" }} onError={function(e: any) { e.target.style.display = "none"; }} />
+                  ) : null}
+                  <span style={{ fontSize: 16, fontWeight: 700, color: color }}>{eraName}</span>
+                  <span style={{ fontSize: 12, color: textTer, marginLeft: "auto" }}>{eraSets.length} sets &middot; {totalCards.toLocaleString()} cards</span>
                 </div>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 12 }}>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 12 }}>
                   {eraSets.map(function(s) {
                     var count = cardCounts[s.code] || 0;
+                    var tileBg = eraBgColors[eraName] || "linear-gradient(135deg, #333, #555)";
+                    var isPromoSet = isPromo(s.name);
                     return (
                       <a key={s.code} href={"/sets/" + s.code.toLowerCase()} style={{ textDecoration: "none", color: "inherit" }}>
                         <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, overflow: "hidden", cursor: "pointer", transition: "all 0.25s ease" }}>
-                          <div style={{ width: "100%", height: 110, overflow: "hidden", background: isDark ? "#15151a" : "#f0f0f4", display: "flex", alignItems: "center", justifyContent: "center", padding: 12 }}>
-                            {s.logo_url ? (
-                              <img src={s.logo_url} alt={s.name} style={{ maxWidth: "85%", maxHeight: "85%", objectFit: "contain" }} onError={function(e: any) { e.target.style.display = "none"; }} />
+                          <div style={{ width: "100%", height: 100, overflow: "hidden", background: tileBg, display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}>
+                            {isPromoSet ? (
+                              <PromoIcon />
+                            ) : s.logo_url ? (
+                              <img src={s.logo_url} alt={s.name} style={{ maxWidth: "90%", maxHeight: "90%", objectFit: "contain", filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.3))" }} onError={function(e: any) { e.target.style.display = "none"; }} />
                             ) : (
-                              <div style={{ fontSize: 13, fontWeight: 600, color: textTer, textAlign: "center" }}>{s.name}</div>
+                              <div style={{ fontSize: 14, fontWeight: 800, color: "#fff", textAlign: "center", textShadow: "0 2px 8px rgba(0,0,0,0.5)", letterSpacing: "0.5px", fontStyle: "italic" }}>{s.name}</div>
                             )}
                           </div>
-                          <div style={{ padding: "10px 14px" }}>
-                            <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{s.name}</div>
+                          <div style={{ padding: "8px 12px" }}>
+                            <div style={{ fontSize: 12, fontWeight: 600, marginBottom: 2, whiteSpace: "normal", lineHeight: "1.3", minHeight: "32px" }}>{s.name}</div>
                             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                               <span style={{ fontSize: 11, color: textTer }}>{s.year}</span>
                               <span style={{ fontSize: 11, color: textTer }}>{count} cards</span>
