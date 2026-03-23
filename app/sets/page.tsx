@@ -12,6 +12,8 @@ var eraLogos: Record<string, string> = {
   "Sun & Moon": "https://assets.tcgdex.net/en/sm/sm1/logo.png",
   "XY": "https://assets.tcgdex.net/en/xy/xy1/logo.png",
   "Mega Evolution": "https://assets.tcgdex.net/en/me/me01/logo.png",
+  "Black & White": "https://images.pokemontcg.io/bw1/logo.png",
+  "Call of Legends": "https://images.pokemontcg.io/col1/logo.png",
   "HeartGold SoulSilver": "https://images.pokemontcg.io/hgss1/logo.png",
   "Platinum": "https://images.pokemontcg.io/pl1/logo.png",
   "Diamond & Pearl": "https://images.pokemontcg.io/dp1/logo.png",
