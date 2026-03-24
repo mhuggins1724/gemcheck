@@ -12,6 +12,7 @@ function CardDetailContent() {
   const id = searchParams.get("id") || "";
   const [isDark, setIsDark] = useState(true);
   const [card, setCard] = useState<any>(null);
+  const [priceTab, setPriceTab] = useState<"raw" | "psa9" | "psa10">("raw");
   const [loading, setLoading] = useState(true);
 
   useEffect(function() {
@@ -114,20 +115,39 @@ function CardDetailContent() {
           </div>
         </div>
 
+        <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 16, padding: 20, marginBottom: 20 }}>
+          <div style={{ display: "flex", gap: 4, marginBottom: 16 }}>
+            {(["raw", "psa9", "psa10"] as const).map(function(tab) {
+              var label = tab === "raw" ? "Raw" : tab === "psa9" ? "PSA 9" : "PSA 10";
+              var active = priceTab === tab;
+              return (
+                <button key={tab} onClick={function() { setPriceTab(tab); }} style={{ padding: "8px 16px", borderRadius: 8, fontSize: 13, fontWeight: active ? 600 : 400, background: active ? green : "transparent", color: active ? "#fff" : textSec, border: active ? "none" : "1px solid " + border, cursor: "pointer", transition: "all 0.2s ease" }}>{label}</button>
+              );
+            })}
+          </div>
+          <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 8 }}>
+            <div style={{ fontSize: 36, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", color: priceTab === "raw" ? blueText : priceTab === "psa10" ? greenText : isDark ? "#eab308" : "#ca8a04" }}>
+              ${priceTab === "raw" ? card.raw_price : priceTab === "psa9" ? card.psa9_price : card.psa10_price}
+            </div>
+            <div style={{ fontSize: 13, color: textSec }}>
+              {priceTab === "raw" ? "Ungraded market price" : priceTab === "psa9" ? "PSA 9 graded value" : "PSA 10 (Gem Mint) value"}
+            </div>
+          </div>
+          <div style={{ fontSize: 11, color: textTer }}>Pricing data from PriceCharting</div>
+        </div>
+
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10, marginBottom: 20 }}>
           <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16 }}>
-            <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>Raw avg (30d)</div>
+            <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>Raw</div>
             <div style={{ fontSize: 24, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText }}>${card.raw_price}</div>
           </div>
           <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16 }}>
-            <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>PSA 10 avg</div>
+            <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>PSA 10</div>
             <div style={{ fontSize: 24, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: greenText }}>${card.psa10_price}</div>
-            <div style={{ fontSize: 11, marginTop: 4, color: card.psa10_trend >= 0 ? greenText : redText }}>{card.psa10_trend >= 0 ? "\u25B2" : "\u25BC"} {Math.abs(card.psa10_trend)}% this month</div>
           </div>
           <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16 }}>
-            <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>PSA 9 avg</div>
-            <div style={{ fontSize: 24, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: redText }}>${card.psa9_price}</div>
-            <div style={{ fontSize: 11, marginTop: 4, color: card.psa9_trend >= 0 ? greenText : redText }}>{card.psa9_trend >= 0 ? "\u25B2" : "\u25BC"} {Math.abs(card.psa9_trend)}% this month</div>
+            <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>PSA 9</div>
+            <div style={{ fontSize: 24, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: isDark ? "#eab308" : "#ca8a04" }}>${card.psa9_price}</div>
           </div>
         </div>
 
