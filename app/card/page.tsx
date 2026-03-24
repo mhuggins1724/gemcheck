@@ -167,6 +167,63 @@ function CardDetailContent() {
         </div>
 
         <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 16, padding: 20, marginBottom: 20 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+            <div style={{ fontSize: 14, fontWeight: 600 }}>Recent Sales</div>
+            <div style={{ display: "flex", gap: 4 }}>
+              {(["raw", "psa9", "psa10"] as const).map(function(tab) {
+                var label = tab === "raw" ? "Raw" : tab === "psa9" ? "PSA 9" : "PSA 10";
+                var active = priceTab === tab;
+                return (
+                  <button key={tab} onClick={function() { setPriceTab(tab); }} style={{ padding: "6px 12px", borderRadius: 6, fontSize: 12, fontWeight: active ? 600 : 400, background: active ? green : "transparent", color: active ? "#fff" : textSec, border: active ? "none" : "1px solid " + border, cursor: "pointer", transition: "all 0.2s ease" }}>{label}</button>
+                );
+              })}
+            </div>
+          </div>
+          {(function() {
+            var salesKey = priceTab === "raw" ? "raw_sales" : priceTab === "psa9" ? "psa9_sales" : "psa10_sales";
+            var sales = card[salesKey] || [];
+            var gradeLabel = priceTab === "raw" ? "Ungraded" : priceTab === "psa9" ? "PSA 9" : "PSA 10";
+            if (sales.length === 0) return (
+              <div style={{ textAlign: "center", padding: 24, color: textTer, fontSize: 13 }}>No {gradeLabel} sales data available yet</div>
+            );
+            return (
+              <div>
+                <div style={{ fontSize: 11, color: textTer, marginBottom: 8 }}>Showing {sales.length} most recent {gradeLabel} sales &middot; Median price based on last 10</div>
+                <div style={{ overflowX: "auto" as const }}>
+                  <table style={{ width: "100%", borderCollapse: "collapse" as const, fontSize: 12 }}>
+                    <thead>
+                      <tr style={{ borderBottom: "1px solid " + border }}>
+                        <th style={{ textAlign: "left" as const, padding: "8px 6px", color: textTer, fontWeight: 500, fontSize: 11 }}>Sale Price</th>
+                        <th style={{ textAlign: "left" as const, padding: "8px 6px", color: textTer, fontWeight: 500, fontSize: 11 }}>Grade</th>
+                        <th style={{ textAlign: "left" as const, padding: "8px 6px", color: textTer, fontWeight: 500, fontSize: 11 }}>Date Sold</th>
+                        <th style={{ textAlign: "left" as const, padding: "8px 6px", color: textTer, fontWeight: 500, fontSize: 11 }}>Listing</th>
+                        <th style={{ textAlign: "left" as const, padding: "8px 6px", color: textTer, fontWeight: 500, fontSize: 11 }}>Title</th>
+                        <th style={{ textAlign: "right" as const, padding: "8px 6px", color: textTer, fontWeight: 500, fontSize: 11 }}></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {sales.map(function(sale: any, idx: number) {
+                        var ebayUrl = sale.source === "ebay" ? "https://www.ebay.com/itm/" + sale.listing_id : "https://www.tcgplayer.com/product/" + sale.listing_id;
+                        return (
+                          <tr key={sale.listing_id + "-" + idx} style={{ borderBottom: "1px solid " + border }}>
+                            <td style={{ padding: "8px 6px", fontFamily: "JetBrains Mono, monospace", fontWeight: 600, color: greenText }}>${sale.price.toFixed(2)}</td>
+                            <td style={{ padding: "8px 6px", color: textSec }}>{gradeLabel}</td>
+                            <td style={{ padding: "8px 6px", color: textSec }}>{sale.date_sold}</td>
+                            <td style={{ padding: "8px 6px" }}><a href={ebayUrl} target="_blank" rel="noopener noreferrer" style={{ color: isDark ? "#60a5fa" : "#2563eb", textDecoration: "none", fontSize: 11 }}>{sale.source === "ebay" ? "eBay" : "TCGPlayer"} #{sale.listing_id.slice(-6)}</a></td>
+                            <td style={{ padding: "8px 6px", color: textSec, maxWidth: 300, overflow: "hidden", textOverflow: "ellipsis" as const, whiteSpace: "nowrap" as const }}>{sale.title}</td>
+                            <td style={{ padding: "8px 6px", textAlign: "right" as const }}><a href={"mailto:support@gemcheck.io?subject=Report Sale " + sale.listing_id + "&body=Card: " + encodeURIComponent(card.name) + "%0ASale ID: " + sale.listing_id + "%0APrice: $" + sale.price + "%0AReason: "} style={{ color: isDark ? "#f87171" : "#dc2626", textDecoration: "none", fontSize: 10, opacity: 0.6 }}>Report</a></td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            );
+          })()}
+        </div>
+
+        <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 16, padding: 20, marginBottom: 20 }}>
           <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 16 }}>Price history</div>
           <div style={{ display: "flex", alignItems: "flex-end", gap: 6, height: 160, padding: "0 4px" }}>
             {prices.map(function(price: number, i: number) {
