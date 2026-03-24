@@ -159,9 +159,24 @@ async function fetchSales(setSlug, cSlug) {
     redirect: "follow",
   });
 
-  if (!res.ok || res.redirected) return null;
+  if (!res.ok || res.redirected) return { sales: [], pop: null };
 
   var html = await res.text();
+
+  // Parse PSA/CGC population data
+  var popData = null;
+  var popMatch = html.match(/VGPC\.pop_data\s*=\s*(\{[\s\S]*?\});/);
+  if (popMatch) {
+    try {
+      var raw = JSON.parse(popMatch[1]);
+      // PSA array: index 0=grade 1, index 9=grade 10
+      // CGC array: same format
+      popData = {
+        psa: raw.psa || [],
+        cgc: raw.cgc || [],
+      };
+    } catch (e) {}
+  }
 
   // Parse all sold listing rows
   var rowRegex = /<tr id="((?:ebay|tcgplayer)-(\d+))">([\s\S]*?)<\/tr>/g;
@@ -195,36 +210,57 @@ async function fetchSales(setSlug, cSlug) {
     });
   }
 
-  return allSales;
+  return { sales: allSales, pop: popData };
 }
 
 // ============================================================
-// Bucket sales into Raw / PSA 9 / PSA 10
+// Filter out non-card listings (sealed product, lots, etc.)
 // ============================================================
-function bucketSales(allSales) {
-  var raw = [];
-  var psa9 = [];
-  var psa10 = [];
+var JUNK_PATTERNS = /\b(SEALED PACK|BOOSTER PACK|BOOSTER BOX|BLISTER|LOT OF|CARD LOT|BULK LOT|MYSTERY BOX|ELITE TRAINER|ETB|TIN |BINDER|ALBUM|SLEEVE|PLAYMAT|DECK BOX|PIN COLLECTION|COLLECTION BOX|CELEBRATIONS COLLECTION|MINI TIN)\b/i;
 
-  for (var sale of allSales) {
-    var t = sale.title.toUpperCase();
+function isJunkListing(title) {
+  return JUNK_PATTERNS.test(title);
+}
 
-    if (t.includes("PSA 10") || t.includes("GEM MINT 10") || t.includes("GEM MT 10")) {
-      psa10.push(sale);
-    } else if (t.includes("PSA 9") || t.includes("MINT 9")) {
-      psa9.push(sale);
-    } else if (t.match(/\b(PSA|CGC|BGS|SGC|TAG|CSG|ACE|GMA)\b/)) {
-      // Other graded — skip, don't put in raw
-    } else {
-      raw.push(sale);
-    }
-  }
+// ============================================================
+// Remove price outliers using IQR method — applied per grade bucket
+// ============================================================
+function removeOutliersFromBucket(sales) {
+  if (sales.length < 4) return sales;
+  var prices = sales.map(function(s) { return s.price; }).sort(function(a, b) { return a - b; });
+  var q1 = prices[Math.floor(prices.length * 0.25)];
+  var q3 = prices[Math.floor(prices.length * 0.75)];
+  var iqr = q3 - q1;
+  var lower = q1 - 2.5 * iqr;
+  var upper = q3 + 2.5 * iqr;
+  return sales.filter(function(s) { return s.price >= lower && s.price <= upper; });
+}
 
-  return {
-    raw: raw.slice(0, 30),
-    psa9: psa9.slice(0, 30),
-    psa10: psa10.slice(0, 30),
-  };
+// ============================================================
+// Clean sales: remove junk, then remove outliers per grade bucket
+// ============================================================
+function cleanAndBucketSales(allSales) {
+  // Remove junk listings
+  var cleaned = allSales.filter(function(s) { return !isJunkListing(s.title); });
+
+  // Group by grade bucket (company + grade, or "raw")
+  var buckets = {};
+  cleaned.forEach(function(s) {
+    var key = s.grade === "raw" ? "raw" : (s.company + " " + s.grade);
+    if (!buckets[key]) buckets[key] = [];
+    buckets[key].push(s);
+  });
+
+  // Apply outlier removal per bucket, then recombine
+  var result = [];
+  Object.keys(buckets).forEach(function(key) {
+    var cleaned2 = removeOutliersFromBucket(buckets[key]);
+    result.push.apply(result, cleaned2);
+  });
+
+  // Sort by date descending
+  result.sort(function(a, b) { return b.date_sold.localeCompare(a.date_sold); });
+  return result;
 }
 
 // ============================================================
@@ -307,27 +343,50 @@ async function main() {
       // Throttle: 1 second between calls
       if (callsMade > 0) await new Promise(function (r) { setTimeout(r, 1050); });
 
-      var sales = await fetchSales(setSlug, cSlug);
+      var result = await fetchSales(setSlug, cSlug);
       callsMade++;
 
-      if (!sales || sales.length === 0) {
+      if (!result || result.sales.length === 0) {
+        // Still update pop data if available even when no sales
+        if (result && result.pop) {
+          var popUpdate = {};
+          var psa = result.pop.psa;
+          if (psa.length >= 10) {
+            popUpdate.pop_10 = psa[9];
+            popUpdate.pop_9 = psa[8];
+            popUpdate.pop_8 = psa[7];
+            popUpdate.pop_7 = psa[6] + psa[5] + psa[4] + psa[3] + psa[2] + psa[1] + psa[0];
+          }
+          if (Object.keys(popUpdate).length > 0) {
+            await supabase.from("cards").update(popUpdate).eq("id", card.id);
+          }
+        }
         setFailed++;
         if (i < 3 || (i % 50 === 0)) process.stdout.write("x");
         continue;
       }
 
-      var buckets = bucketSales(sales);
-      var rawMedian = medianPrice(buckets.raw);
-      var psa9Median = medianPrice(buckets.psa9);
-      var psa10Median = medianPrice(buckets.psa10);
+      // Clean sales: remove junk listings and outliers
+      var cleanedSales = cleanAndBucketSales(result.sales);
 
       var updateData = {
-        raw_sales: buckets.raw,
-        psa9_sales: buckets.psa9,
-        psa10_sales: buckets.psa10,
+        all_sales: cleanedSales,
         last_sales_refresh: new Date().toISOString(),
       };
-      // Update median prices if we have data
+
+      // Store pop data as jsonb arrays
+      if (result.pop) {
+        if (result.pop.psa && result.pop.psa.length > 0) updateData.psa_pop = result.pop.psa;
+        if (result.pop.cgc && result.pop.cgc.length > 0) updateData.cgc_pop = result.pop.cgc;
+      }
+
+      // Calculate median prices from cleaned sales
+      var rawSales = cleanedSales.filter(function(s) { return s.grade === "raw"; });
+      var psa9Sales = cleanedSales.filter(function(s) { return s.company === "PSA" && s.grade === "9"; });
+      var psa10Sales = cleanedSales.filter(function(s) { return s.company === "PSA" && s.grade === "10"; });
+      var rawMedian = medianPrice(rawSales);
+      var psa9Median = medianPrice(psa9Sales);
+      var psa10Median = medianPrice(psa10Sales);
       if (rawMedian !== null) updateData.raw_price = rawMedian;
       if (psa9Median !== null) updateData.psa9_price = psa9Median;
       if (psa10Median !== null) updateData.psa10_price = psa10Median;
