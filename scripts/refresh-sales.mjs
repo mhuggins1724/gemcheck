@@ -244,16 +244,27 @@ function cardSlug(cardName, setName) {
 // ============================================================
 async function fetchSales(setSlug, cSlug) {
   var url = "https://www.pricecharting.com/game/" + setSlug + "/" + cSlug;
-  var res = await fetch(url, {
-    headers: { "User-Agent": "GemCheck/1.0 (card pricing tool)" },
-    redirect: "follow",
-  });
+  var res;
+  for (var attempt = 0; attempt < 3; attempt++) {
+    try {
+      res = await fetch(url, {
+        headers: { "User-Agent": "GemCheck/1.0 (card pricing tool)" },
+        redirect: "follow",
+        signal: AbortSignal.timeout(15000),
+      });
+      break;
+    } catch (e) {
+      if (attempt < 2) { await new Promise(function(r) { setTimeout(r, 3000); }); continue; }
+      return { sales: [], pop: null };
+    }
+  }
 
-  if (!res.ok) return { sales: [], pop: null };
+  if (!res || !res.ok) return { sales: [], pop: null };
   // Only reject redirects to the search page (means card not found)
   if (res.redirected && res.url.includes("search-products")) return { sales: [], pop: null };
 
-  var html = await res.text();
+  var html;
+  try { html = await res.text(); } catch (e) { return { sales: [], pop: null }; }
 
   // Parse PSA/CGC population data
   var popData = null;
