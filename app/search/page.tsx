@@ -99,10 +99,10 @@ function SearchContent() {
 
   var bg = isDark ? "#0c0c0f" : "#f8f8fa";
   var text = isDark ? "#ececf0" : "#1a1a2e";
-  var textSec = isDark ? "#9898a4" : "#6b6b80";
-  var textTer = isDark ? "#5c5c6a" : "#9898a8";
+  var textSec = isDark ? "#9898a4" : "#4a4a5e";
+  var textTer = isDark ? "#5c5c6a" : "#6e6e82";
   var cardBg = isDark ? "#1a1a20" : "#ffffff";
-  var border = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.1)";
+  var border = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.18)";
   var navBg = isDark ? "rgba(12,12,15,0.95)" : "rgba(255,255,255,0.95)";
   var green = isDark ? "#22c55e" : "#16a34a";
   var greenBg = isDark ? "rgba(34,197,94,0.1)" : "rgba(22,163,74,0.1)";

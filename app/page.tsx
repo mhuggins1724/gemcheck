@@ -39,10 +39,10 @@ export default function Home() {
 
   var bg = isDark ? "#0c0c0f" : "#f8f8fa";
   var text = isDark ? "#ececf0" : "#1a1a2e";
-  var textSec = isDark ? "#9898a4" : "#6b6b80";
-  var textTer = isDark ? "#5c5c6a" : "#9898a8";
+  var textSec = isDark ? "#9898a4" : "#4a4a5e";
+  var textTer = isDark ? "#5c5c6a" : "#6e6e82";
   var cardBg = isDark ? "#1a1a20" : "#ffffff";
-  var border = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.1)";
+  var border = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.18)";
   var navBg = isDark ? "rgba(12,12,15,0.95)" : "rgba(255,255,255,0.95)";
   var searchBg = isDark ? "#1e1e24" : "#f0f0f4";
   var tertBg = isDark ? "#1e1e24" : "#e8e8ec";
