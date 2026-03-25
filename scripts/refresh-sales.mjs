@@ -304,12 +304,37 @@ async function fetchSales(setSlug, cSlug) {
     var price = parseFloat(priceM[1].replace(",", ""));
     if (isNaN(price)) continue;
 
+    // Skip Celebrations reprints
+    var tUpper = title.toUpperCase();
+    if (tUpper.includes("CELEBRATION") || tUpper.includes("CLASSIC COLLECTION")) continue;
+
+    // Detect grade and grading company
+    var grade = "raw";
+    var company = null;
+    var psaM = tUpper.match(/\bPSA\s+(\d+\.?\d?)\b/);
+    if (psaM) { company = "PSA"; grade = psaM[1]; }
+    var cgcM = tUpper.match(/\bCGC\s+(\d+\.?\d?)\b/);
+    if (cgcM) { company = "CGC"; grade = cgcM[1]; }
+    var bgsM = tUpper.match(/\bBGS\s+(\d+\.?\d?)\b/);
+    if (bgsM) { company = "BGS"; grade = bgsM[1]; }
+    var sgcM = tUpper.match(/\bSGC\s+(\d+\.?\d?)\b/);
+    if (sgcM) { company = "SGC"; grade = sgcM[1]; }
+    if (!company && tUpper.match(/\b(ACE|TAG|CSG|GMA)\s+\d/)) {
+      var otherM = tUpper.match(/\b(ACE|TAG|CSG|GMA)\s+(\d+\.?\d?)\b/);
+      if (otherM) { company = otherM[1]; grade = otherM[2]; }
+    }
+    if (!company && tUpper.match(/\b(PSA|CGC|BGS|SGC|TAG|CSG|ACE|GMA)\b/)) {
+      company = "OTHER"; grade = "unknown";
+    }
+
     allSales.push({
       listing_id: listingId,
       source: source,
       date_sold: dateM[1],
       title: title,
       price: price,
+      grade: grade,
+      company: company,
     });
   }
 
