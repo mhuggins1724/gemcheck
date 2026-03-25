@@ -131,6 +131,67 @@ const SET_SLUGS = {
   "Fossil": "pokemon-fossil",
   "Team Rocket": "pokemon-team-rocket",
   "Base Set 2": "pokemon-base-set-2",
+  // Promo sets
+  "Mega Evolution Promos": "pokemon-promo",
+  "Scarlet & Violet Promos": "pokemon-promo",
+  "Sword & Shield Promo": "pokemon-promo",
+  "Sun & Moon Black Star Promo": "pokemon-promo",
+  "XY Black Star Promos": "pokemon-promo",
+  "Black and White Promos": "pokemon-promo",
+  "HGSS Promos": "pokemon-promo",
+  "Diamond and Pearl Promos": "pokemon-promo",
+  "WoTC Promo": "pokemon-promo",
+  // McDonald's sets
+  "Mcdonald's Dragon Discovery": "pokemon-mcdonalds-2024",
+  "McDonald's Promos 2023": "pokemon-mcdonalds-2023",
+  "McDonald's Promos 2022": "pokemon-mcdonalds-2022",
+  "McDonald's 25th Anniversary": "pokemon-mcdonalds-2021",
+  "McDonald's Promos 2019": "pokemon-mcdonalds-2019",
+  "McDonald's Promos 2018": "pokemon-mcdonalds-2018",
+  "McDonald's Promos 2017": "pokemon-mcdonalds-2017",
+  "McDonald's Promos 2016": "pokemon-mcdonalds-2016",
+  "McDonald's Promos 2015": "pokemon-mcdonalds-2015",
+  "McDonald's Promos 2014": "pokemon-mcdonalds-2014",
+  "McDonald's Promos 2012": "pokemon-mcdonalds-2012",
+  "McDonald's Promos 2011": "pokemon-mcdonalds-2011",
+  // Trick or Trade
+  "Trick or Trade 2024": "pokemon-trick-or-trade-2024",
+  "Trick or Trade 2023": "pokemon-trick-or-trade-2023",
+  "Trick or Trade 2022": "pokemon-trick-or-trade-2022",
+  // Special sets
+  "Trading Card Game Classic": "pokemon-tcg-classic-charizard-deck",
+  "Celebrations: Classic Collection": "pokemon-celebrations",
+  "Detective Pikachu": "pokemon-detective-pikachu",
+  "Dragon Majesty": "pokemon-dragon-majesty",
+  "Shining Legends": "pokemon-shining-legends",
+  "Double Crisis": "pokemon-double-crisis",
+  "Dragon Vault": "pokemon-dragon-vault",
+  "Generations Radiant Collection": "pokemon-generations",
+  "Legendary Treasures Radiant Collection": "pokemon-legendary-treasures",
+  "Southern Islands": "pokemon-southern-islands",
+  "Rumble": "pokemon-rumble",
+  // POP Series
+  "POP Series 1": "pokemon-pop-series-1",
+  "POP Series 2": "pokemon-pop-series-2",
+  "POP Series 3": "pokemon-pop-series-3",
+  "POP Series 4": "pokemon-pop-series-4",
+  "POP Series 5": "pokemon-pop-series-5",
+  "POP Series 6": "pokemon-pop-series-6",
+  "POP Series 7": "pokemon-pop-series-7",
+  "POP Series 8": "pokemon-pop-series-8",
+  "POP Series 9": "pokemon-pop-series-9",
+  // 1st Edition & Shadowless (same PC page as unlimited, card slugs differ)
+  "Base Set 1st Edition": "pokemon-base-set",
+  "Base Set Shadowless": "pokemon-base-set",
+  "Jungle 1st Edition": "pokemon-jungle",
+  "Fossil 1st Edition": "pokemon-fossil",
+  "Team Rocket 1st Edition": "pokemon-team-rocket",
+  "Gym Heroes 1st Edition": "pokemon-gym-heroes",
+  "Gym Challenge 1st Edition": "pokemon-gym-challenge",
+  "Neo Genesis 1st Edition": "pokemon-neo-genesis",
+  "Neo Discovery 1st Edition": "pokemon-neo-discovery",
+  "Neo Revelation 1st Edition": "pokemon-neo-revelation",
+  "Neo Destiny 1st Edition": "pokemon-neo-destiny",
 };
 
 // ============================================================
@@ -138,14 +199,43 @@ const SET_SLUGS = {
 // "Charizard 004/102" -> "charizard-4"
 // "Erika's Vileplume ex 003/217" -> "erikas-vileplume-ex-3"
 // ============================================================
-function cardSlug(cardName) {
+function cardSlug(cardName, setName) {
+  // Promo cards: extract code like SWSH066, SM158, XY19
+  var codeMatch = cardName.match(/((?:SWSH|SM|XY|BW|HGSS|DP)\d+)/i);
+  if (codeMatch && (setName || "").includes("Promo")) {
+    var baseName = cardName.replace(codeMatch[0], "").replace(/\s+/g, " ").trim()
+      .replace(/Prerelease Staff|Prerelease|Pokemon Center Exclusive|Cosmos Holo|Illustration Contest \d+|World Championship \d+|Staff/g, "").trim();
+    var slug = baseName.toLowerCase()
+      .replace(/[']/g, "%27").replace(/['']/g, "%27")
+      .replace(/[^a-z0-9%]+/g, "-").replace(/^-|-$/g, "");
+    return slug + "-" + codeMatch[1].toLowerCase();
+  }
+
+  // Standard cards: "Name NNN/NNN"
   var m = cardName.match(/^(.+?)\s+(\d+)\/(\d+)$/);
   if (!m) return null;
-  var name = m[1].toLowerCase()
-    .replace(/['']/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
+
+  var rawName = m[1];
+  // Fix Gym set names: "Brocks" -> "Brock's", "Giovannis" -> "Giovanni's", etc.
+  if (setName && (setName.includes("Gym") || setName.includes("Rocket"))) {
+    rawName = rawName.replace(/^(Brocks|Mistys|Lt Surges|Erikas|Kogas|Sabrinas|Blaines|Giovannis|Rockets)(\s)/,
+      function(match, owner, space) { return owner.slice(0, -1) + "'" + owner.slice(-1) + space; });
+  }
+
+  var name = rawName.toLowerCase()
+    .replace(/[']/g, "%27").replace(/['']/g, "%27")
+    .replace(/[^a-z0-9%]+/g, "-").replace(/^-|-$/g, "");
   var num = parseInt(m[2]);
+
+  // 1st Edition variant
+  if (setName && setName.includes("1st Edition")) {
+    return name + "-1st-edition-" + num;
+  }
+  // Shadowless variant
+  if (setName && setName.includes("Shadowless")) {
+    return name + "-shadowless-" + num;
+  }
+
   return name + "-" + num;
 }
 
@@ -159,7 +249,9 @@ async function fetchSales(setSlug, cSlug) {
     redirect: "follow",
   });
 
-  if (!res.ok || res.redirected) return { sales: [], pop: null };
+  if (!res.ok) return { sales: [], pop: null };
+  // Only reject redirects to the search page (means card not found)
+  if (res.redirected && res.url.includes("search-products")) return { sales: [], pop: null };
 
   var html = await res.text();
 
@@ -337,7 +429,7 @@ async function main() {
 
     for (var i = 0; i < allCards.length; i++) {
       var card = allCards[i];
-      var cSlug = cardSlug(card.name);
+      var cSlug = cardSlug(card.name, card.set_name);
       if (!cSlug) { setFailed++; continue; }
 
       // Throttle: 1 second between calls
