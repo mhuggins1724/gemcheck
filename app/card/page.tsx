@@ -14,8 +14,10 @@ function CardDetailContent() {
   const [card, setCard] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState<"pricing" | "population">("pricing");
-  const [chartGrade, setChartGrade] = useState<"raw" | "psa9" | "psa10">("raw");
-  const [salesFilter, setSalesFilter] = useState("raw");
+  const [gradeView, setGradeView] = useState("raw");
+  // Derived values for chart and sales filter
+  var chartGrade = gradeView === "PSA 9" ? "psa9" : gradeView === "PSA 10" ? "psa10" : gradeView === "raw" ? "raw" : "other";
+  var salesFilter = gradeView;
 
   useEffect(function() {
     supabase.from("cards").select("id,name,set_name,set_code,year,card_type,rarity,gem_rate,raw_price,psa10_price,psa9_price,psa10_trend,psa9_trend,grading_fee,pop_10,pop_9,pop_8,pop_7,grade_score,price_history,image_url,tcg_product_id,market_price,low_price,mid_price,high_price,tcg_url,all_sales,psa_pop,cgc_pop,last_sales_refresh").eq("id", id).single().then(function(res) {
@@ -218,11 +220,10 @@ function CardDetailContent() {
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
                 <div style={{ fontSize: 14, fontWeight: 600 }}>Price History</div>
                 <div style={{ display: "flex", gap: 4 }}>
-                  {(["raw", "psa9", "psa10"] as const).map(function(g) {
-                    var label = g === "raw" ? "Raw" : g === "psa9" ? "PSA 9" : "PSA 10";
-                    var active = chartGrade === g;
+                  {["raw", "PSA 9", "PSA 10"].map(function(g) {
+                    var active = gradeView === g;
                     return (
-                      <button key={g} onClick={function() { setChartGrade(g); }} style={{ padding: "4px 10px", borderRadius: 6, fontSize: 11, fontWeight: active ? 600 : 400, background: active ? green : "transparent", color: active ? "#fff" : textSec, border: active ? "none" : "1px solid " + border, cursor: "pointer" }}>{label}</button>
+                      <button key={g} onClick={function() { setGradeView(g); }} style={{ padding: "4px 10px", borderRadius: 6, fontSize: 11, fontWeight: active ? 600 : 400, background: active ? green : "transparent", color: active ? "#fff" : textSec, border: active ? "none" : "1px solid " + border, cursor: "pointer" }}>{g === "raw" ? "Raw" : g}</button>
                     );
                   })}
                 </div>
@@ -283,12 +284,12 @@ function CardDetailContent() {
                 <div style={{ fontSize: 14, fontWeight: 600 }}>Recent Sales</div>
                 <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
                   {["raw", "PSA 9", "PSA 10"].map(function(btn) {
-                    var active = salesFilter === btn;
+                    var active = gradeView === btn;
                     return (
-                      <button key={btn} onClick={function() { setSalesFilter(btn); }} style={{ padding: "4px 10px", borderRadius: 6, fontSize: 11, fontWeight: active ? 600 : 400, background: active ? green : "transparent", color: active ? "#fff" : textSec, border: active ? "none" : "1px solid " + border, cursor: "pointer" }}>{btn === "raw" ? "Raw" : btn}</button>
+                      <button key={btn} onClick={function() { setGradeView(btn); }} style={{ padding: "4px 10px", borderRadius: 6, fontSize: 11, fontWeight: active ? 600 : 400, background: active ? green : "transparent", color: active ? "#fff" : textSec, border: active ? "none" : "1px solid " + border, cursor: "pointer" }}>{btn === "raw" ? "Raw" : btn}</button>
                     );
                   })}
-                  <select value={["raw", "PSA 9", "PSA 10"].includes(salesFilter) ? "" : salesFilter} onChange={function(e) { if (e.target.value) setSalesFilter(e.target.value); }} style={{ padding: "4px 8px", borderRadius: 6, fontSize: 11, background: !["raw", "PSA 9", "PSA 10"].includes(salesFilter) ? green : (isDark ? "#1a1a20" : "#ffffff"), color: !["raw", "PSA 9", "PSA 10"].includes(salesFilter) ? "#fff" : textSec, border: "1px solid " + border, cursor: "pointer", outline: "none" }}>
+                  <select value={["raw", "PSA 9", "PSA 10"].includes(gradeView) ? "" : gradeView} onChange={function(e) { if (e.target.value) setGradeView(e.target.value); }} style={{ padding: "4px 8px", borderRadius: 6, fontSize: 11, background: !["raw", "PSA 9", "PSA 10"].includes(gradeView) ? green : (isDark ? "#1a1a20" : "#ffffff"), color: !["raw", "PSA 9", "PSA 10"].includes(gradeView) ? "#fff" : textSec, border: "1px solid " + border, cursor: "pointer", outline: "none" }}>
                     <option value="">Other Grades</option>
                     <optgroup label="PSA">
                       <option value="PSA 10">PSA 10</option>
