@@ -18,7 +18,7 @@ function CardDetailContent() {
   const [salesFilter, setSalesFilter] = useState("raw");
 
   useEffect(function() {
-    supabase.from("cards").select("*").eq("id", id).single().then(function(res) {
+    supabase.from("cards").select("id,name,set_name,set_code,year,card_type,rarity,gem_rate,raw_price,psa10_price,psa9_price,psa10_trend,psa9_trend,grading_fee,pop_10,pop_9,pop_8,pop_7,grade_score,price_history,image_url,tcg_product_id,market_price,low_price,mid_price,high_price,tcg_url,all_sales,psa_pop,cgc_pop,last_sales_refresh").eq("id", id).single().then(function(res) {
       if (res.data) setCard(res.data);
       setLoading(false);
     });
