@@ -110,7 +110,7 @@ function CardDetailContent() {
       </nav>
 
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 24px 40px" }}>
-        <a href="/" style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 13, color: textSec, marginBottom: 20, padding: "6px 12px", borderRadius: 8, textDecoration: "none" }}>&larr; Back to cards</a>
+        <a href="#" onClick={function(e: any) { e.preventDefault(); window.history.back(); }} style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 13, color: textSec, marginBottom: 20, padding: "6px 12px", borderRadius: 8, textDecoration: "none", cursor: "pointer" }}>&larr; Back</a>
 
         <div style={{ display: "flex", gap: 40, marginBottom: 32, flexWrap: "wrap" as const, justifyContent: "center" }}>
           <div style={{ width: 380, flexShrink: 0 }}>

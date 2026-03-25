@@ -164,10 +164,14 @@ function SearchContent() {
         {!loading && cards.length > 0 && (
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 12 }}>
             {cards.map(function(card) {
+              var pop = card.psa_pop || [];
+              var popTotal = pop.reduce(function(a: number, b: number) { return a + b; }, 0);
+              var pop10 = pop.length >= 10 ? pop[9] : 0;
+              var realGemRate = popTotal > 0 ? Math.round((pop10 / popTotal) * 100) : card.gem_rate;
               var profit = card.psa10_price - card.raw_price - card.grading_fee;
               var verdict = card.grade_score >= 7 ? "grade" : card.grade_score >= 5 ? "hold" : "skip";
-              var gemBg2 = card.gem_rate >= 65 ? greenBg : card.gem_rate >= 45 ? amberBg : redBg;
-              var gemColor = card.gem_rate >= 65 ? greenText : card.gem_rate >= 45 ? amberText : redText;
+              var gemBg2 = realGemRate >= 65 ? greenBg : realGemRate >= 45 ? amberBg : redBg;
+              var gemColor = realGemRate >= 65 ? greenText : realGemRate >= 45 ? amberText : redText;
               var vBg = verdict === "grade" ? green : verdict === "hold" ? amber : "#ef4444";
               var vColor = verdict === "hold" ? "#000" : "#fff";
               var vLabel = verdict === "grade" ? "Grade it" : verdict === "hold" ? "Hold" : "Skip";
@@ -185,7 +189,7 @@ function SearchContent() {
                     <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 2, whiteSpace: "normal", overflow: "visible", lineHeight: "1.3", minHeight: "34px" }}>{card.name}</div>
                     <div style={{ fontSize: 11, color: textTer, marginBottom: 10 }}>{card.set_name}</div>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                      <span style={{ fontSize: 11, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", padding: "3px 8px", borderRadius: 6, background: gemBg2, color: gemColor }}>{card.gem_rate}% gem</span>
+                      <span style={{ fontSize: 11, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", padding: "3px 8px", borderRadius: 6, background: gemBg2, color: gemColor }}>{realGemRate}% gem</span>
                       <span style={{ fontSize: 12, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: profit >= 0 ? greenText : redText }}>{profit >= 0 ? "+" : ""}${profit}</span>
                     </div>
                   </div>
