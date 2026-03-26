@@ -152,12 +152,12 @@ export default function SetDetailPage() {
               var sales = card.all_sales || [];
               var rawSales = sales.filter(function(s: any) { return s.grade === "raw"; }).slice(0, 10);
               var avgPrice = rawSales.length > 0 ? Math.round(rawSales.reduce(function(a: number, s: any) { return a + s.price; }, 0) / rawSales.length) : card.raw_price;
-              var verdict = card.grade_score >= 7 ? "grade" : card.grade_score >= 5 ? "hold" : "skip";
+              var verdict = card.grade_score >= 8 ? "grade" : card.grade_score >= 5 ? "maybe" : "skip";
               var gemBg2 = realGemRate >= 65 ? greenBg : realGemRate >= 45 ? amberBg : redBg;
               var gemColor = realGemRate >= 65 ? greenText : realGemRate >= 45 ? amberText : redText;
-              var vBg = verdict === "grade" ? green : verdict === "hold" ? amber : "#ef4444";
-              var vColor = verdict === "hold" ? "#000" : "#fff";
-              var vLabel = verdict === "grade" ? "Grade it" : verdict === "hold" ? "Hold" : "Skip";
+              var vBg = verdict === "grade" ? green : verdict === "maybe" ? amber : "#ef4444";
+              var vColor = verdict === "maybe" ? "#000" : "#fff";
+              var vLabel = verdict === "grade" ? "Grade it" : verdict === "maybe" ? "Maybe" : "Skip";
               return (
                 <a key={card.id} href={"/card?id=" + card.id} style={{ textDecoration: "none", color: "inherit" }}>
                   <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 14, cursor: "pointer", position: "relative", overflow: "hidden", transition: "all 0.25s ease" }}>

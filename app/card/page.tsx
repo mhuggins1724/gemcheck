@@ -81,7 +81,7 @@ function CardDetailContent() {
   var profit9 = effectivePsa9 - effectiveRaw - card.grading_fee;
   var scoreColor = card.grade_score >= 7 ? green : card.grade_score >= 5 ? "#eab308" : "#ef4444";
   var scoreBg = card.grade_score >= 7 ? greenBg : card.grade_score >= 5 ? amberBg : "rgba(239,68,68,0.1)";
-  var scoreLabel = card.grade_score >= 7 ? "Recommended to grade" : card.grade_score >= 5 ? "Marginal - proceed with caution" : "Not recommended";
+  var scoreLabel = card.grade_score >= 8 ? "Grade it" : card.grade_score >= 5 ? "Maybe — depends on your risk tolerance" : "Skip — not worth grading";
 
   // Last sold for each grade
   function lastSold(filterFn: (s: any) => boolean) {
