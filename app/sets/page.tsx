@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
+import { useTheme } from "../lib/useTheme";
 
 var eraOrder = ["Mega Evolution", "Scarlet & Violet", "Sword & Shield", "Sun & Moon", "XY", "Black & White", "Call of Legends", "HeartGold SoulSilver", "Platinum", "Diamond & Pearl", "EX Ruby & Sapphire", "Pokemon E-Card", "Legendary Collection", "Neo", "Gym", "Base"];
 var eraColors: Record<string, string> = { "Scarlet & Violet": "#e53e3e", "Sword & Shield": "#3182ce", "Sun & Moon": "#dd6b20", "XY": "#805ad5", "Mega Evolution": "#38a169", "Black & White": "#4a5568", "Call of Legends": "#d69e2e", "HeartGold SoulSilver": "#d69e2e", "Platinum": "#a0aec0", "Diamond & Pearl": "#5b8dd9", "EX Ruby & Sapphire": "#dc2626", "Pokemon E-Card": "#6d28d9", "Legendary Collection": "#d97706", "Neo": "#2563eb", "Gym": "#b45309", "Base": "#b7791f" };
@@ -26,7 +27,7 @@ var eraLogos: Record<string, string> = {
 };
 
 export default function SetsPage() {
-  const [isDark, setIsDark] = useState(true);
+  const { isDark, toggleTheme } = useTheme();
   const [sets, setSets] = useState<any[]>([]);
   const [cardCounts, setCardCounts] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
@@ -92,7 +93,7 @@ export default function SetsPage() {
             <a href="/search" style={{ padding: "8px 14px", borderRadius: 8, fontSize: 13, fontWeight: 500, color: textSec, textDecoration: "none" }}>Search</a>
           </div>
           <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 12 }}>
-            <button onClick={function() { setIsDark(!isDark); }} style={{ width: 36, height: 36, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", color: textSec, fontSize: 16, border: "1px solid " + border, background: "none", cursor: "pointer" }}>
+            <button onClick={function() { toggleTheme(); }} style={{ width: 36, height: 36, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", color: textSec, fontSize: 16, border: "1px solid " + border, background: "none", cursor: "pointer" }}>
               {isDark ? "\u2600\uFE0F" : "\uD83C\uDF19"}
             </button>
           </div>
