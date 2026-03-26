@@ -367,9 +367,9 @@ function CardDetailContent() {
                                 <td style={{ padding: "8px 6px", fontFamily: "JetBrains Mono, monospace", fontWeight: 600, color: greenText }}>${sale.price.toFixed(2)}</td>
                                 <td style={{ padding: "8px 6px", color: textSec }}>{gradeDisplay}</td>
                                 <td style={{ padding: "8px 6px", color: textSec }}>{sale.date_sold}</td>
-                                <td style={{ padding: "8px 6px" }}><a href={listingUrl} target="_blank" rel="noopener noreferrer" style={{ color: isDark ? "#60a5fa" : "#2563eb", textDecoration: "none", fontSize: 11 }}>{sale.source === "ebay" ? "eBay" : "TCGPlayer"} #{sale.listing_id.slice(-6)}</a></td>
+                                <td style={{ padding: "8px 6px" }}><a href={listingUrl} target="_blank" rel="noopener noreferrer" style={{ color: isDark ? "#3b82f6" : "#1d4ed8", textDecoration: "none", fontSize: 11, fontWeight: 600 }}>{sale.source === "ebay" ? "eBay" : "TCGPlayer"} #{sale.listing_id.slice(-6)}</a></td>
                                 <td style={{ padding: "8px 6px", color: textSec, maxWidth: 280, overflow: "hidden", textOverflow: "ellipsis" as const, whiteSpace: "nowrap" as const }}>{sale.title}</td>
-                                <td style={{ padding: "8px 6px", textAlign: "right" as const }}><a href={"mailto:support@gemcheck.io?subject=Report Sale " + sale.listing_id + "&body=Card: " + encodeURIComponent(card.name) + "%0ASale ID: " + sale.listing_id + "%0APrice: $" + sale.price + "%0AReason: "} style={{ color: isDark ? "#f87171" : "#b91c1c", textDecoration: "none", fontSize: 10, opacity: 0.6 }}>Report</a></td>
+                                <td style={{ padding: "8px 6px", textAlign: "right" as const }}><a href={"mailto:support@gemcheck.io?subject=Report Sale " + sale.listing_id + "&body=Card: " + encodeURIComponent(card.name) + "%0ASale ID: " + sale.listing_id + "%0APrice: $" + sale.price + "%0AReason: "} style={{ color: isDark ? "#ef4444" : "#dc2626", textDecoration: "none", fontSize: 11, fontWeight: 700 }}>Report</a></td>
                               </tr>
                             );
                           })}
