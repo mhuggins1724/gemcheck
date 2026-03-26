@@ -294,14 +294,21 @@ function CardDetailContent() {
                 var pcData = card.price_chart_data || {};
                 var isAvgData = false;
 
-                if (["1Y", "5Y", "ALL"].includes(chartRange) && pcData[chartGradeKey] && pcData[chartGradeKey].length > 0) {
-                  // Long range: use monthly historical averages
+                if (chartRange === "1M") {
+                  // 1M: use individual sales only
+                  var gradeSales = getAllSalesForGrade(chartGrade);
+                  chartPoints = gradeSales.filter(function(s: any) {
+                    var saleDate = s.date_sold || s.date || "";
+                    return saleDate >= cutoffStr;
+                  }).map(function(s: any) { return { date: s.date_sold || s.date, price: s.price, isAvg: false }; });
+                } else if (pcData[chartGradeKey] && pcData[chartGradeKey].length > 0) {
+                  // 3M+ with chart data: use monthly averages filtered by range
                   chartPoints = pcData[chartGradeKey].filter(function(p: any) { return p.date >= cutoffStr && p.price > 0; }).map(function(p: any) { return { date: p.date, price: p.price, isAvg: true }; });
                   isAvgData = true;
                 } else {
-                  // Short range: use individual sales filtered by date
-                  var gradeSales = getAllSalesForGrade(chartGrade);
-                  chartPoints = gradeSales.filter(function(s: any) {
+                  // Fallback: use individual sales if no chart data
+                  var gradeSales2 = getAllSalesForGrade(chartGrade);
+                  chartPoints = gradeSales2.filter(function(s: any) {
                     var saleDate = s.date_sold || s.date || "";
                     return saleDate >= cutoffStr;
                   }).map(function(s: any) { return { date: s.date_sold || s.date, price: s.price, isAvg: false }; });
