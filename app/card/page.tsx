@@ -287,7 +287,7 @@ function CardDetailContent() {
                 var chartW = 800;
                 var chartH = 200;
                 var marginLeft = 70;
-                var marginRight = 15;
+                var marginRight = 70;
                 var marginTop = 15;
                 var marginBottom = 30;
                 var plotW = chartW - marginLeft - marginRight;
@@ -332,9 +332,13 @@ function CardDetailContent() {
                       {yTicks.map(function(t: any, i: number) {
                         return <line key={i} x1={marginLeft} y1={t.y} x2={chartW - marginRight} y2={t.y} stroke={isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"} strokeWidth="0.5" />;
                       })}
-                      {/* Y-axis labels (right side) */}
+                      {/* Y-axis labels (left) */}
                       {yTicks.map(function(t: any, i: number) {
-                        return <text key={i} x={marginLeft - 8} y={t.y + 3} textAnchor="end" fontSize="10" fill={isDark ? "#5c5c6a" : "#3a3a4e"} fontFamily="JetBrains Mono, monospace">{t.label}</text>;
+                        return <text key={"l" + i} x={marginLeft - 8} y={t.y + 3} textAnchor="end" fontSize="10" fill={isDark ? "#5c5c6a" : "#3a3a4e"} fontFamily="JetBrains Mono, monospace">{t.label}</text>;
+                      })}
+                      {/* Y-axis labels (right) */}
+                      {yTicks.map(function(t: any, i: number) {
+                        return <text key={"r" + i} x={chartW - marginRight + 8} y={t.y + 3} textAnchor="start" fontSize="10" fill={isDark ? "#5c5c6a" : "#3a3a4e"} fontFamily="JetBrains Mono, monospace">{t.label}</text>;
                       })}
                       {/* X-axis labels */}
                       {xTicks.map(function(t: any, i: number) {
