@@ -198,7 +198,7 @@ function SearchContent() {
               var pop10 = pop.length >= 10 ? pop[9] : 0;
               var realGemRate = popTotal > 0 ? Math.round((pop10 / popTotal) * 100) : card.gem_rate;
               var profit = card.psa10_price - card.raw_price - card.grading_fee;
-              var verdict = card.grade_score === 0 ? "nodata" : card.grade_score >= 8 ? "grade" : card.grade_score >= 5 ? "maybe" : "skip";
+              var verdict = card.grade_score === 0 ? "nodata" : card.grade_score >= 7 ? "grade" : card.grade_score >= 5 ? "maybe" : "skip";
               var gemBg2 = realGemRate >= 65 ? greenBg : realGemRate >= 45 ? amberBg : redBg;
               var gemColor = realGemRate >= 65 ? greenText : realGemRate >= 45 ? amberText : redText;
               var vBg = verdict === "nodata" ? (isDark ? "#4a4a5e" : "#9ca3af") : verdict === "grade" ? green : verdict === "maybe" ? amber : "#ef4444";

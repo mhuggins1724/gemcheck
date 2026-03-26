@@ -152,7 +152,7 @@ export default function SetDetailPage() {
               var sales = card.all_sales || [];
               var rawSales = sales.filter(function(s: any) { return s.grade === "raw"; }).slice(0, 10);
               var avgPrice = rawSales.length > 0 ? Math.round(rawSales.reduce(function(a: number, s: any) { return a + s.price; }, 0) / rawSales.length) : card.raw_price;
-              var verdict = card.grade_score === 0 ? "nodata" : card.grade_score >= 8 ? "grade" : card.grade_score >= 5 ? "maybe" : "skip";
+              var verdict = card.grade_score === 0 ? "nodata" : card.grade_score >= 7 ? "grade" : card.grade_score >= 5 ? "maybe" : "skip";
               var gemBg2 = realGemRate >= 65 ? greenBg : realGemRate >= 45 ? amberBg : redBg;
               var gemColor = realGemRate >= 65 ? greenText : realGemRate >= 45 ? amberText : redText;
               var vBg = verdict === "nodata" ? (isDark ? "#4a4a5e" : "#9ca3af") : verdict === "grade" ? green : verdict === "maybe" ? amber : "#ef4444";
