@@ -86,6 +86,11 @@ function calcScore(rawPrice, psa10Price, psa9Price, gemRate, salesCount, year) {
   // Clamp to 1-10
   finalScore = Math.max(1, Math.min(10, Math.round(finalScore * 10) / 10));
 
+  // Gem rate hard cap AFTER rounding — under 15% can never be "Grade It"
+  if (gemRate < 15 && finalScore >= 7) finalScore = 6.9;
+  // Under 5% gem rate caps at "Skip" territory
+  if (gemRate < 5 && finalScore >= 5) finalScore = 4.9;
+
   return {
     score: finalScore,
     roi: Math.round(roi),
@@ -133,8 +138,8 @@ async function main() {
       var result = calcScore(card.raw_price, card.psa10_price, card.psa9_price, gemRate, gradedSales.length, card.year);
       if (!result) { skipped++; continue; }
 
-      // Only update if score changed
-      if (card.grade_score !== result.score) {
+      // Always update to ensure caps are applied
+      if (true) {
         await supabase.from("cards").update({
           grade_score: result.score,
           gem_rate: gemRate,
