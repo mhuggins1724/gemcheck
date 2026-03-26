@@ -212,6 +212,22 @@ function parseSalesFromHtml(html) {
   var psaPop = [], cgcPop = [];
   if (popMatch) { try { var raw = JSON.parse(popMatch[1]); psaPop = raw.psa || []; cgcPop = raw.cgc || []; } catch(e) {} }
 
+  // Parse price chart history
+  var chartData = null;
+  var chartMatch = html.match(/VGPC\.chart_data\s*=\s*(\{[\s\S]*?\});/);
+  if (chartMatch) {
+    try {
+      var rawChart = JSON.parse(chartMatch[1]);
+      chartData = {};
+      var chartKeys = { used: "raw", graded: "psa9", manualonly: "psa10" };
+      Object.keys(chartKeys).forEach(function(pcKey) {
+        if (rawChart[pcKey] && rawChart[pcKey].length > 0) {
+          chartData[chartKeys[pcKey]] = rawChart[pcKey].map(function(p) { return { date: new Date(p[0]).toISOString().slice(0, 10), price: p[1] / 100 }; });
+        }
+      });
+    } catch(e) {}
+  }
+
   var rowRegex = /<tr id="((?:ebay|tcgplayer)-(\d+))">([\s\S]*?)<\/tr>/g;
   var match; var allSales = [];
   while ((match = rowRegex.exec(html)) !== null) {
@@ -244,7 +260,7 @@ function parseSalesFromHtml(html) {
   Object.keys(buckets).forEach(function(key) { cleaned.push.apply(cleaned, removeOutliersFromBucket(buckets[key])); });
   cleaned.sort(function(a, b) { return b.date_sold.localeCompare(a.date_sold); });
 
-  return { sales: cleaned, psaPop: psaPop, cgcPop: cgcPop };
+  return { sales: cleaned, psaPop: psaPop, cgcPop: cgcPop, chartData: chartData };
 }
 
 async function searchPC(cardName, setName) {
@@ -329,6 +345,7 @@ async function main() {
     var updateData = { all_sales: cleanedSales, last_sales_refresh: new Date().toISOString() };
     if (parsed.psaPop.length > 0) updateData.psa_pop = parsed.psaPop;
     if (parsed.cgcPop.length > 0) updateData.cgc_pop = parsed.cgcPop;
+    if (parsed.chartData) updateData.price_chart_data = parsed.chartData;
 
     var rawS = cleanedSales.filter(function(s) { return s.grade === "raw"; });
     var p9S = cleanedSales.filter(function(s) { return s.company === "PSA" && s.grade === "9"; });

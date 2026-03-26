@@ -333,6 +333,25 @@ async function fetchSales(setSlug, cSlug) {
     } catch (e) {}
   }
 
+  // Parse price chart history (monthly averages going back years)
+  var chartData = null;
+  var chartMatch = html.match(/VGPC\.chart_data\s*=\s*(\{[\s\S]*?\});/);
+  if (chartMatch) {
+    try {
+      var rawChart = JSON.parse(chartMatch[1]);
+      // used = raw, graded = PSA 9, manualonly = PSA 10
+      // Format: array of [timestamp_ms, price_in_pennies]
+      chartData = {};
+      var chartKeys = { used: "raw", graded: "psa9", manualonly: "psa10", cib: "cib", "new": "new" };
+      Object.keys(chartKeys).forEach(function(pcKey) {
+        var ourKey = chartKeys[pcKey];
+        if (rawChart[pcKey] && rawChart[pcKey].length > 0) {
+          chartData[ourKey] = rawChart[pcKey].map(function(p) { return { date: new Date(p[0]).toISOString().slice(0, 10), price: p[1] / 100 }; });
+        }
+      });
+    } catch (e) {}
+  }
+
   // Parse all sold listing rows
   var rowRegex = /<tr id="((?:ebay|tcgplayer)-(\d+))">([\s\S]*?)<\/tr>/g;
   var match;
@@ -390,7 +409,7 @@ async function fetchSales(setSlug, cSlug) {
     });
   }
 
-  return { sales: allSales, pop: popData };
+  return { sales: allSales, pop: popData, chartData: chartData };
 }
 
 // ============================================================
@@ -576,6 +595,9 @@ async function main() {
         if (result.pop.psa && result.pop.psa.length > 0) updateData.psa_pop = result.pop.psa;
         if (result.pop.cgc && result.pop.cgc.length > 0) updateData.cgc_pop = result.pop.cgc;
       }
+
+      // Store price chart history
+      if (result.chartData) updateData.price_chart_data = result.chartData;
 
       // Calculate median prices from cleaned sales
       var rawSales = cleanedSales.filter(function(s) { return s.grade === "raw"; });
