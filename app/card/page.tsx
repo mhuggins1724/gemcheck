@@ -125,14 +125,13 @@ function CardDetailContent() {
   }
 
   // Price history from sales for chart
-  function getSalesForChart(grade: string) {
-    var filtered = allSales.filter(function(s: any) {
+  function getAllSalesForGrade(grade: string) {
+    return allSales.filter(function(s: any) {
       if (grade === "raw") return s.grade === "raw";
       if (grade === "psa9") return s.company === "PSA" && s.grade === "9";
       if (grade === "psa10") return s.company === "PSA" && s.grade === "10";
       return false;
-    }).slice(0, 20).reverse();
-    return filtered;
+    }).reverse(); // oldest first for chart
   }
 
   return (
@@ -290,19 +289,22 @@ function CardDetailContent() {
                 else if (chartRange === "5Y") cutoff = new Date(now.getFullYear() - 5, now.getMonth(), now.getDate());
                 var cutoffStr = cutoff.toISOString().slice(0, 10);
 
-                // For short ranges (1M, 3M, 6M), use individual sales
-                // For long ranges (1Y, 5Y, ALL), use price_chart_data monthly averages
                 var chartGradeKey = chartGrade === "psa9" ? "psa9" : chartGrade === "psa10" ? "psa10" : "raw";
                 var chartPoints: any[] = [];
                 var pcData = card.price_chart_data || {};
+                var isAvgData = false;
 
                 if (["1Y", "5Y", "ALL"].includes(chartRange) && pcData[chartGradeKey] && pcData[chartGradeKey].length > 0) {
-                  // Use monthly historical data
-                  chartPoints = pcData[chartGradeKey].filter(function(p: any) { return p.date >= cutoffStr && p.price > 0; });
+                  // Long range: use monthly historical averages
+                  chartPoints = pcData[chartGradeKey].filter(function(p: any) { return p.date >= cutoffStr && p.price > 0; }).map(function(p: any) { return { date: p.date, price: p.price, isAvg: true }; });
+                  isAvgData = true;
                 } else {
-                  // Use individual sales
-                  var chartSalesRaw = getSalesForChart(chartGrade);
-                  chartPoints = chartSalesRaw.filter(function(s: any) { return s.date_sold >= cutoffStr; }).map(function(s: any) { return { date: s.date_sold, price: s.price }; });
+                  // Short range: use individual sales filtered by date
+                  var gradeSales = getAllSalesForGrade(chartGrade);
+                  chartPoints = gradeSales.filter(function(s: any) {
+                    var saleDate = s.date_sold || s.date || "";
+                    return saleDate >= cutoffStr;
+                  }).map(function(s: any) { return { date: s.date_sold || s.date, price: s.price, isAvg: false }; });
                 }
 
                 if (chartPoints.length < 2) return (
@@ -329,7 +331,7 @@ function CardDetailContent() {
                 var points = chartPoints.map(function(s: any, i: number) {
                   var x = marginLeft + (i / (chartPoints.length - 1)) * plotW;
                   var y = marginTop + (1 - (s.price - padMinP) / padRange) * plotH;
-                  return { x: x, y: y, price: s.price, date: s.date || s.date_sold, index: i };
+                  return { x: x, y: y, price: s.price, date: s.date, isAvg: s.isAvg, index: i };
                 });
                 var lineColor = chartGrade === "raw" ? (isDark ? "#60a5fa" : "#1e40af") : chartGrade === "psa10" ? green : amber;
                 var pathD = points.map(function(p: any, i: number) { return (i === 0 ? "M" : "L") + p.x + " " + p.y; }).join(" ");
@@ -399,8 +401,9 @@ function CardDetailContent() {
                     {/* Tooltip */}
                     {chartHover && (
                       <div style={{ position: "absolute" as const, left: (chartHover.x / chartW * 100) + "%", top: (chartHover.y / chartH * 100 - 18) + "%", transform: "translateX(-50%)", background: isDark ? "#2a2a32" : "#ffffff", border: "1px solid " + border, borderRadius: 8, padding: "6px 10px", boxShadow: "0 4px 12px rgba(0,0,0,0.2)", pointerEvents: "none" as const, zIndex: 10, whiteSpace: "nowrap" as const }}>
-                        <div style={{ fontSize: 13, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: lineColor }}>${chartHover.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-                        <div style={{ fontSize: 10, color: textTer }}>{chartHover.date}</div>
+                        <div style={{ fontSize: 13, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: lineColor }}>{chartHover.isAvg ? "Avg: " : ""}${chartHover.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                        <div style={{ fontSize: 10, color: textTer }}>{chartHover.isAvg ? chartHover.date.slice(0, 7) : chartHover.date}</div>
+                        {chartHover.isAvg && <div style={{ fontSize: 9, color: textTer, fontStyle: "italic" as const }}>Monthly average</div>}
                       </div>
                     )}
                   </div>
