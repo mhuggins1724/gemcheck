@@ -1,5 +1,6 @@
 // Health check + email notification after daily scrape
 import { createClient } from "@supabase/supabase-js";
+import { Resend } from "resend";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -105,48 +106,67 @@ async function main() {
     report.recentAlerts.forEach(function(a) { console.log("  " + a); });
   }
 
-  // Send email notification if there are action items
+  // Send email notification
+  var subject = "GemCheck Daily Report - " + new Date().toISOString().slice(0, 10);
   var hasActions = report.pending.imports > 0 || report.pending.saleReports > 0 || report.pending.priceAlerts > 0;
 
-  if (NOTIFY_EMAIL && hasActions) {
-    var subject = "GemCheck Daily Report - " + new Date().toISOString().slice(0, 10);
-    var body = [
-      "GemCheck Daily Health Report",
-      "=" .repeat(40),
-      "",
-      "CARDS",
-      "  Total: " + report.cards.total,
-      "  With sales data: " + report.cards.withSales + " (" + report.cards.coveragePct + "%)",
-      "  No sales data: " + report.cards.noSales,
-      "  Stale (>7 days): " + report.cards.stale,
-      "",
-      "ACTION ITEMS NEEDING YOUR ATTENTION",
-      "  Pending imports to approve: " + report.pending.imports,
-      "  Sale reports to review: " + report.pending.saleReports,
-      "  Price alerts (>20% swing): " + report.pending.priceAlerts,
-      "",
-    ];
+  var htmlBody = [
+    "<h2>GemCheck Daily Health Report</h2>",
+    "<table style='font-family:monospace;font-size:14px;border-collapse:collapse;'>",
+    "<tr><td style='padding:4px 16px 4px 0;color:#888;'>Total Cards</td><td style='font-weight:bold;'>" + report.cards.total.toLocaleString() + "</td></tr>",
+    "<tr><td style='padding:4px 16px 4px 0;color:#888;'>With Sales Data</td><td style='font-weight:bold;'>" + report.cards.withSales.toLocaleString() + " (" + report.cards.coveragePct + "%)</td></tr>",
+    "<tr><td style='padding:4px 16px 4px 0;color:#888;'>No Sales Data</td><td style='font-weight:bold;color:" + (report.cards.noSales > 0 ? "#ef4444" : "#22c55e") + ";'>" + report.cards.noSales.toLocaleString() + "</td></tr>",
+    "<tr><td style='padding:4px 16px 4px 0;color:#888;'>Stale (&gt;7 days)</td><td style='font-weight:bold;'>" + (report.cards.stale || 0).toLocaleString() + "</td></tr>",
+    "<tr><td style='padding:4px 16px 4px 0;color:#888;'>Chart History</td><td style='font-weight:bold;'>" + report.cards.withChartData.toLocaleString() + "</td></tr>",
+    "<tr><td style='padding:4px 16px 4px 0;color:#888;'>Sales History</td><td style='font-weight:bold;'>" + report.cards.withHistory.toLocaleString() + "</td></tr>",
+    "</table>",
+  ];
 
-    if (report.recentAlerts.length > 0) {
-      body.push("TOP PRICE ALERTS");
-      report.recentAlerts.forEach(function(a) { body.push("  " + a); });
-      body.push("");
-    }
-
-    body.push("View admin dashboard: [your-domain]/admin");
-    body.push("");
-    body.push("-- GemCheck Automated Report");
-
-    // For now, log the email content. We'll integrate a mail service later.
-    console.log("\n--- EMAIL NOTIFICATION ---");
-    console.log("To: " + NOTIFY_EMAIL);
-    console.log("Subject: " + subject);
-    console.log("Body:\n" + body.join("\n"));
-    console.log("--- END EMAIL ---");
-    console.log("\nNote: Email sending requires a mail service (SendGrid, Resend, etc.)");
-    console.log("For now, the report is logged above. Set up a mail provider to enable sending.");
+  if (hasActions) {
+    htmlBody.push("<h3 style='color:#ef4444;'>Action Items</h3>");
+    htmlBody.push("<ul>");
+    if (report.pending.imports > 0) htmlBody.push("<li><strong>" + report.pending.imports + "</strong> pending imports to approve</li>");
+    if (report.pending.saleReports > 0) htmlBody.push("<li><strong>" + report.pending.saleReports + "</strong> sale reports to review</li>");
+    if (report.pending.priceAlerts > 0) htmlBody.push("<li><strong>" + report.pending.priceAlerts + "</strong> price alerts (&gt;20% swing)</li>");
+    htmlBody.push("</ul>");
   } else {
-    console.log("\nNo action items — no notification needed.");
+    htmlBody.push("<p style='color:#22c55e;font-weight:bold;'>No action items today.</p>");
+  }
+
+  if (report.recentAlerts.length > 0) {
+    htmlBody.push("<h3>Top Price Alerts</h3><ul>");
+    report.recentAlerts.forEach(function(a) { htmlBody.push("<li>" + a + "</li>"); });
+    htmlBody.push("</ul>");
+  }
+
+  if (report.lastScrape) {
+    htmlBody.push("<h3>Last Scrape</h3>");
+    htmlBody.push("<p>" + report.lastScrape.script + " — " + report.lastScrape.status + " — " + (report.lastScrape.updated || 0) + " updated</p>");
+  }
+
+  htmlBody.push("<br><p style='color:#888;font-size:12px;'>— GemCheck Automated Report</p>");
+
+  // Send via Resend
+  var resendKey = process.env.RESEND_API_KEY;
+  if (NOTIFY_EMAIL && resendKey) {
+    try {
+      var resend = new Resend(resendKey);
+      var { data: emailResult, error: emailError } = await resend.emails.send({
+        from: "GemCheck <onboarding@resend.dev>",
+        to: [NOTIFY_EMAIL],
+        subject: subject,
+        html: htmlBody.join("\n"),
+      });
+      if (emailError) {
+        console.log("\nEmail failed:", emailError.message);
+      } else {
+        console.log("\nEmail sent to " + NOTIFY_EMAIL + " (id: " + emailResult.id + ")");
+      }
+    } catch (err) {
+      console.log("\nEmail error:", err.message);
+    }
+  } else {
+    console.log("\nEmail skipped — missing RESEND_API_KEY or NOTIFY_EMAIL");
   }
 
   // Log the health check
