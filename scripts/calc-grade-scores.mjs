@@ -9,7 +9,7 @@ const supabase = createClient(
 const GRADING_FEE = 32;
 const EBAY_FEE = 0.13; // 13% eBay final value fee
 
-function calcScore(rawPrice, psa10Price, psa9Price, gemRate, salesCount) {
+function calcScore(rawPrice, psa10Price, psa9Price, gemRate, salesCount, year) {
   if (!rawPrice || !psa10Price || !psa9Price) return null;
 
   // Net prices after eBay fees
@@ -74,6 +74,15 @@ function calcScore(rawPrice, psa10Price, psa9Price, gemRate, salesCount) {
   // Weighted average
   var finalScore = (roiScore * 0.25) + (upsideScore * 0.20) + (gemScore * 0.30) + (safetyScore * 0.15) + (liqScore * 0.10);
 
+  // Vintage penalty — older cards are harder to gem
+  var cardYear = parseInt(year) || 2025;
+  var vintagePenalty = 0;
+  if (cardYear <= 2003) vintagePenalty = 2.0;       // Base through E-Card
+  else if (cardYear <= 2006) vintagePenalty = 1.5;   // EX era
+  else if (cardYear <= 2009) vintagePenalty = 1.0;   // DP/Platinum
+  else if (cardYear <= 2014) vintagePenalty = 0.5;   // HGSS/BW/early XY
+  finalScore -= vintagePenalty;
+
   // Clamp to 1-10
   finalScore = Math.max(1, Math.min(10, Math.round(finalScore * 10) / 10));
 
@@ -96,7 +105,7 @@ async function main() {
 
   while (true) {
     var { data: cards } = await supabase.from("cards")
-      .select("id, name, set_name, raw_price, psa10_price, psa9_price, psa_pop, all_sales, grade_score")
+      .select("id, name, set_name, year, raw_price, psa10_price, psa9_price, psa_pop, all_sales, grade_score")
       .range(page * 1000, (page + 1) * 1000 - 1);
     if (!cards || cards.length === 0) break;
 
@@ -121,7 +130,7 @@ async function main() {
       var allSales = card.all_sales || [];
       var gradedSales = allSales.filter(function(s) { return s.company === "PSA" && (s.grade === "10" || s.grade === "9"); });
 
-      var result = calcScore(card.raw_price, card.psa10_price, card.psa9_price, gemRate, gradedSales.length);
+      var result = calcScore(card.raw_price, card.psa10_price, card.psa9_price, gemRate, gradedSales.length, card.year);
       if (!result) { skipped++; continue; }
 
       // Only update if score changed
