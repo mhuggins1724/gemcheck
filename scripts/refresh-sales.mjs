@@ -409,6 +409,11 @@ async function main() {
   var startEra = process.argv[2] || null;
   var maxCalls = parseInt(process.argv[3]) || 5000;
 
+  // Load permanently blocked listing IDs
+  var { data: blockedData } = await supabase.from("blocked_listings").select("listing_id");
+  var blockedSet = new Set((blockedData || []).map(function(r) { return r.listing_id; }));
+  console.log("Blocked listings loaded: " + blockedSet.size);
+
   var { data: sets } = await supabase.from("sets").select("code, name, era").order("sort_order");
   console.log("Total sets: " + sets.length);
   console.log("Max calls: " + maxCalls);
@@ -495,7 +500,7 @@ async function main() {
       }
 
       // Clean sales: remove junk listings and outliers
-      var cleanedSales = cleanAndBucketSales(result.sales);
+      var cleanedSales = cleanAndBucketSales(result.sales).filter(function(s) { return !blockedSet.has(s.listing_id); });
 
       var updateData = {
         all_sales: cleanedSales,

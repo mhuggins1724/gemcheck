@@ -16,11 +16,23 @@ function CardDetailContent() {
   const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState<"pricing" | "population">("pricing");
   const [gradeView, setGradeView] = useState("raw");
+  const [blockedIds, setBlockedIds] = useState<Set<string>>(new Set());
+  const [reportModal, setReportModal] = useState<any>(null);
+  const [reportReason, setReportReason] = useState("Not this card");
+  const [reportDetails, setReportDetails] = useState("");
+  const [reportSubmitting, setReportSubmitting] = useState(false);
   // Derived values for chart and sales filter
   var chartGrade = gradeView === "PSA 9" ? "psa9" : gradeView === "PSA 10" ? "psa10" : gradeView === "raw" ? "raw" : "other";
   var salesFilter = gradeView;
 
   useEffect(function() {
+    // Load blocked listings from DB + localStorage
+    var localBlocked = JSON.parse(localStorage.getItem("gemcheck-blocked-sales") || "[]");
+    supabase.from("blocked_listings").select("listing_id").then(function(blRes) {
+      var dbBlocked = (blRes.data || []).map(function(r: any) { return r.listing_id; });
+      setBlockedIds(new Set([...localBlocked, ...dbBlocked]));
+    });
+
     supabase.from("cards").select("id,name,set_name,set_code,year,card_type,rarity,gem_rate,raw_price,psa10_price,psa9_price,psa10_trend,psa9_trend,grading_fee,pop_10,pop_9,pop_8,pop_7,grade_score,price_history,image_url,tcg_product_id,market_price,low_price,mid_price,high_price,tcg_url,all_sales,psa_pop,cgc_pop,last_sales_refresh").eq("id", id).single().then(function(res) {
       if (res.data) setCard(res.data);
       setLoading(false);
@@ -47,14 +59,8 @@ function CardDetailContent() {
   if (loading) return <div style={{ background: bg, color: text, minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16 }}>Loading card data...</div>;
   if (!card) return <div style={{ background: bg, color: text, minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16 }}>Card not found</div>;
 
-  var profit10 = card.psa10_price - card.raw_price - card.grading_fee;
-  var profit9 = card.psa9_price - card.raw_price - card.grading_fee;
-  var scoreColor = card.grade_score >= 7 ? green : card.grade_score >= 5 ? "#eab308" : "#ef4444";
-  var scoreBg = card.grade_score >= 7 ? greenBg : card.grade_score >= 5 ? amberBg : "rgba(239,68,68,0.1)";
-  var scoreLabel = card.grade_score >= 7 ? "Recommended to grade" : card.grade_score >= 5 ? "Marginal - proceed with caution" : "Not recommended";
-
-  // Calculate avg of last 10 sold for each grade from all_sales
-  var allSales = card.all_sales || [];
+  // Calculate avg of last 10 sold for each grade from all_sales (filtered by blocked)
+  var allSales = (card.all_sales || []).filter(function(s: any) { return !blockedIds.has(s.listing_id); });
   function avgLast10(filterFn: (s: any) => boolean) {
     var filtered = allSales.filter(filterFn).slice(0, 10);
     if (filtered.length === 0) return null;
@@ -64,6 +70,16 @@ function CardDetailContent() {
   var rawAvg = avgLast10(function(s: any) { return s.grade === "raw"; });
   var psa9Avg = avgLast10(function(s: any) { return s.company === "PSA" && s.grade === "9"; });
   var psa10Avg = avgLast10(function(s: any) { return s.company === "PSA" && s.grade === "10"; });
+
+  // Use filtered avgs for profit calc when available
+  var effectiveRaw = rawAvg !== null ? rawAvg : card.raw_price;
+  var effectivePsa9 = psa9Avg !== null ? psa9Avg : card.psa9_price;
+  var effectivePsa10 = psa10Avg !== null ? psa10Avg : card.psa10_price;
+  var profit10 = effectivePsa10 - effectiveRaw - card.grading_fee;
+  var profit9 = effectivePsa9 - effectiveRaw - card.grading_fee;
+  var scoreColor = card.grade_score >= 7 ? green : card.grade_score >= 5 ? "#eab308" : "#ef4444";
+  var scoreBg = card.grade_score >= 7 ? greenBg : card.grade_score >= 5 ? amberBg : "rgba(239,68,68,0.1)";
+  var scoreLabel = card.grade_score >= 7 ? "Recommended to grade" : card.grade_score >= 5 ? "Marginal - proceed with caution" : "Not recommended";
 
   // Last sold for each grade
   function lastSold(filterFn: (s: any) => boolean) {
@@ -81,6 +97,30 @@ function CardDetailContent() {
   var cgcTotal = cgcPop.reduce(function(a: number, b: number) { return a + b; }, 0);
   var psaPop10 = psaPop.length >= 10 ? psaPop[9] : 0;
   var gemRate = psaTotal > 0 ? Math.round((psaPop10 / psaTotal) * 100) : card.gem_rate;
+
+  // Report a sale
+  function submitReport() {
+    if (!reportModal) return;
+    setReportSubmitting(true);
+    // Save to DB
+    supabase.from("sale_reports").insert({
+      card_id: card.id,
+      listing_id: reportModal.listing_id,
+      reason: reportReason,
+      details: reportDetails || null,
+    }).then(function() {
+      // Add to localStorage for instant hide
+      var local = JSON.parse(localStorage.getItem("gemcheck-blocked-sales") || "[]");
+      local.push(reportModal.listing_id);
+      localStorage.setItem("gemcheck-blocked-sales", JSON.stringify(local));
+      // Update state
+      setBlockedIds(function(prev: Set<string>) { var next = new Set(prev); next.add(reportModal.listing_id); return next; });
+      setReportModal(null);
+      setReportReason("Not this card");
+      setReportDetails("");
+      setReportSubmitting(false);
+    });
+  }
 
   // Price history from sales for chart
   function getSalesForChart(grade: string) {
@@ -369,7 +409,7 @@ function CardDetailContent() {
                                 <td style={{ padding: "8px 6px", color: textSec }}>{sale.date_sold}</td>
                                 <td style={{ padding: "8px 6px" }}><a href={listingUrl} target="_blank" rel="noopener noreferrer" style={{ color: isDark ? "#3b82f6" : "#1d4ed8", textDecoration: "none", fontSize: 11, fontWeight: 600 }}>{sale.source === "ebay" ? "eBay" : "TCGPlayer"} #{sale.listing_id.slice(-6)}</a></td>
                                 <td style={{ padding: "8px 6px", color: textSec, maxWidth: 280, overflow: "hidden", textOverflow: "ellipsis" as const, whiteSpace: "nowrap" as const }}>{sale.title}</td>
-                                <td style={{ padding: "8px 6px", textAlign: "right" as const }}><a href={"mailto:support@gemcheck.io?subject=Report Sale " + sale.listing_id + "&body=Card: " + encodeURIComponent(card.name) + "%0ASale ID: " + sale.listing_id + "%0APrice: $" + sale.price + "%0AReason: "} style={{ color: isDark ? "#ef4444" : "#dc2626", textDecoration: "none", fontSize: 11, fontWeight: 700 }}>Report</a></td>
+                                <td style={{ padding: "8px 6px", textAlign: "right" as const }}><button onClick={function() { setReportModal(sale); setReportReason("Not this card"); setReportDetails(""); }} style={{ color: isDark ? "#ef4444" : "#dc2626", background: "none", border: "none", cursor: "pointer", fontSize: 11, fontWeight: 700, padding: 0 }}>Report</button></td>
                               </tr>
                             );
                           })}
@@ -456,6 +496,45 @@ function CardDetailContent() {
           <div style={{ fontSize: 12, color: textTer }}>&copy; 2026 GemCheck. Not affiliated with PSA or The Pok&eacute;mon Company.</div>
         </div>
       </div>
+
+      {/* Report Modal */}
+      {reportModal && (
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 200, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div onClick={function() { setReportModal(null); }} style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(4px)" }}></div>
+          <div style={{ position: "relative", background: cardBg, border: "1px solid " + border, borderRadius: 16, padding: 24, width: 420, maxWidth: "90vw", boxShadow: "0 20px 60px rgba(0,0,0,0.3)" }}>
+            <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 4 }}>Report Incorrect Sale</div>
+            <div style={{ fontSize: 12, color: textSec, marginBottom: 16 }}>This sale will be hidden from your view immediately and sent for review.</div>
+
+            <div style={{ background: isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)", borderRadius: 8, padding: 12, marginBottom: 16, fontSize: 12 }}>
+              <div style={{ color: textTer, marginBottom: 4 }}>Sale being reported:</div>
+              <div style={{ fontWeight: 600 }}>${reportModal.price.toFixed(2)} &middot; {reportModal.date_sold}</div>
+              <div style={{ color: textSec, marginTop: 2, overflow: "hidden", textOverflow: "ellipsis" as const, whiteSpace: "nowrap" as const }}>{reportModal.title}</div>
+            </div>
+
+            <div style={{ marginBottom: 12 }}>
+              <label style={{ fontSize: 12, fontWeight: 500, color: textSec, display: "block", marginBottom: 4 }}>Reason</label>
+              <select value={reportReason} onChange={function(e) { setReportReason(e.target.value); }} style={{ width: "100%", padding: "8px 10px", borderRadius: 8, fontSize: 13, background: isDark ? "#1e1e24" : "#f5f5f7", color: text, border: "1px solid " + border, outline: "none" }}>
+                <option>Not this card</option>
+                <option>Sealed product</option>
+                <option>Wrong grade</option>
+                <option>Duplicate listing</option>
+                <option>Reprint / different version</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div style={{ marginBottom: 20 }}>
+              <label style={{ fontSize: 12, fontWeight: 500, color: textSec, display: "block", marginBottom: 4 }}>Details (optional)</label>
+              <textarea value={reportDetails} onChange={function(e) { setReportDetails(e.target.value); }} placeholder="Any additional context..." rows={2} style={{ width: "100%", padding: "8px 10px", borderRadius: 8, fontSize: 13, background: isDark ? "#1e1e24" : "#f5f5f7", color: text, border: "1px solid " + border, outline: "none", resize: "vertical" as const, fontFamily: "DM Sans, sans-serif" }}></textarea>
+            </div>
+
+            <div style={{ display: "flex", gap: 8 }}>
+              <button onClick={function() { setReportModal(null); }} style={{ flex: 1, padding: 10, borderRadius: 8, fontSize: 13, fontWeight: 500, background: "transparent", border: "1px solid " + border, color: textSec, cursor: "pointer" }}>Cancel</button>
+              <button onClick={submitReport} disabled={reportSubmitting} style={{ flex: 1, padding: 10, borderRadius: 8, fontSize: 13, fontWeight: 600, background: isDark ? "#ef4444" : "#dc2626", color: "#fff", border: "none", cursor: "pointer", opacity: reportSubmitting ? 0.6 : 1 }}>{reportSubmitting ? "Submitting..." : "Report & Remove"}</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
