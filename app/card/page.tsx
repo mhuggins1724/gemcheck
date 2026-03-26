@@ -182,7 +182,7 @@ function CardDetailContent() {
               <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16 }}>
                 <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>PSA 9</div>
                 <div style={{ fontSize: 11, color: textSec, marginBottom: 2 }}>Last Sold</div>
-                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: amber, marginBottom: 8 }}>{psa9Last !== null ? "$" + psa9Last.toLocaleString() : "$" + card.psa9_price}</div>
+                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{psa9Last !== null ? "$" + psa9Last.toLocaleString() : "$" + card.psa9_price}</div>
                 <div style={{ fontSize: 11, color: textSec }}>Avg of last 10 sold</div>
                 <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec }}>{psa9Avg !== null ? "$" + psa9Avg.toLocaleString() : "—"}</div>
               </div>
@@ -190,7 +190,7 @@ function CardDetailContent() {
               <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16 }}>
                 <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>PSA 10</div>
                 <div style={{ fontSize: 11, color: textSec, marginBottom: 2 }}>Last Sold</div>
-                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: greenText, marginBottom: 8 }}>{psa10Last !== null ? "$" + psa10Last.toLocaleString() : "$" + card.psa10_price}</div>
+                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{psa10Last !== null ? "$" + psa10Last.toLocaleString() : "$" + card.psa10_price}</div>
                 <div style={{ fontSize: 11, color: textSec }}>Avg of last 10 sold</div>
                 <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec, marginBottom: 8 }}>{psa10Avg !== null ? "$" + psa10Avg.toLocaleString() : "—"}</div>
                 <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "4px 8px", borderRadius: 6, background: greenBg, width: "fit-content" }}>
