@@ -273,7 +273,7 @@ function CardDetailContent() {
                 </div>
               </div>
               <div style={{ display: "flex", gap: 3, marginBottom: 14 }}>
-                {["1M", "3M", "6M", "1Y", "5Y", "ALL"].map(function(r) {
+                {["1M", "6M", "1Y", "5Y", "ALL"].map(function(r) {
                   var active = chartRange === r;
                   return (
                     <button key={r} onClick={function() { setChartRange(r); setChartHover(null); }} style={{ padding: "3px 8px", borderRadius: 4, fontSize: 10, fontWeight: active ? 600 : 400, background: active ? (isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)") : "transparent", color: active ? text : textTer, border: "none", cursor: "pointer" }}>{r}</button>
@@ -285,7 +285,6 @@ function CardDetailContent() {
                 var now = new Date();
                 var cutoff = new Date("2000-01-01");
                 if (chartRange === "1M") cutoff = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
-                else if (chartRange === "3M") cutoff = new Date(now.getFullYear(), now.getMonth() - 3, now.getDate());
                 else if (chartRange === "6M") cutoff = new Date(now.getFullYear(), now.getMonth() - 6, now.getDate());
                 else if (chartRange === "1Y") cutoff = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate());
                 else if (chartRange === "5Y") cutoff = new Date(now.getFullYear() - 5, now.getMonth(), now.getDate());
@@ -304,7 +303,7 @@ function CardDetailContent() {
                     return saleDate >= cutoffStr;
                   }).map(function(s: any) { return { date: s.date_sold || s.date, price: s.price, isAvg: false }; });
                 } else if (pcData[chartGradeKey] && pcData[chartGradeKey].length > 0) {
-                  // 3M+ with chart data: use monthly averages filtered by range
+                  // 6M+ with chart data: use monthly averages filtered by range
                   chartPoints = pcData[chartGradeKey].filter(function(p: any) { return p.date >= cutoffStr && p.price > 0; }).map(function(p: any) { return { date: p.date, price: p.price, isAvg: true }; });
                   isAvgData = true;
                 } else {
