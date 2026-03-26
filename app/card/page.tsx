@@ -17,6 +17,7 @@ function CardDetailContent() {
   const [viewMode, setViewMode] = useState<"pricing" | "population">("pricing");
   const [gradeView, setGradeView] = useState("raw");
   const [chartHover, setChartHover] = useState<any>(null);
+  const [chartRange, setChartRange] = useState("ALL");
   const [blockedIds, setBlockedIds] = useState<Set<string>>(new Set());
   const [reportModal, setReportModal] = useState<any>(null);
   const [reportReason, setReportReason] = useState("Not this card");
@@ -34,7 +35,7 @@ function CardDetailContent() {
       setBlockedIds(new Set([...localBlocked, ...dbBlocked]));
     });
 
-    supabase.from("cards").select("id,name,set_name,set_code,year,card_type,rarity,gem_rate,raw_price,psa10_price,psa9_price,psa10_trend,psa9_trend,grading_fee,pop_10,pop_9,pop_8,pop_7,grade_score,price_history,image_url,tcg_product_id,market_price,low_price,mid_price,high_price,tcg_url,all_sales,psa_pop,cgc_pop,last_sales_refresh").eq("id", id).single().then(function(res) {
+    supabase.from("cards").select("id,name,set_name,set_code,year,card_type,rarity,gem_rate,raw_price,psa10_price,psa9_price,psa10_trend,psa9_trend,grading_fee,pop_10,pop_9,pop_8,pop_7,grade_score,price_history,image_url,tcg_product_id,market_price,low_price,mid_price,high_price,tcg_url,all_sales,psa_pop,cgc_pop,last_sales_refresh,price_chart_data").eq("id", id).single().then(function(res) {
       if (res.data) setCard(res.data);
       setLoading(false);
     });
@@ -259,7 +260,7 @@ function CardDetailContent() {
 
             {/* Price history chart */}
             <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 14, padding: 20, marginBottom: 20 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12, flexWrap: "wrap" as const, gap: 8 }}>
                 <div style={{ fontSize: 14, fontWeight: 600 }}>Price History</div>
                 <div style={{ display: "flex", gap: 4 }}>
                   {["raw", "PSA 9", "PSA 10"].map(function(g) {
@@ -270,12 +271,44 @@ function CardDetailContent() {
                   })}
                 </div>
               </div>
+              <div style={{ display: "flex", gap: 3, marginBottom: 14 }}>
+                {["1M", "3M", "6M", "1Y", "5Y", "ALL"].map(function(r) {
+                  var active = chartRange === r;
+                  return (
+                    <button key={r} onClick={function() { setChartRange(r); setChartHover(null); }} style={{ padding: "3px 8px", borderRadius: 4, fontSize: 10, fontWeight: active ? 600 : 400, background: active ? (isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)") : "transparent", color: active ? text : textTer, border: "none", cursor: "pointer" }}>{r}</button>
+                  );
+                })}
+              </div>
               {(function() {
-                var chartSales = getSalesForChart(chartGrade);
-                if (chartSales.length < 2) return (
-                  <div style={{ textAlign: "center", padding: 32, color: textTer, fontSize: 13 }}>Not enough sales data for chart</div>
+                // Determine date cutoff based on range
+                var now = new Date();
+                var cutoff = new Date("2000-01-01");
+                if (chartRange === "1M") cutoff = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
+                else if (chartRange === "3M") cutoff = new Date(now.getFullYear(), now.getMonth() - 3, now.getDate());
+                else if (chartRange === "6M") cutoff = new Date(now.getFullYear(), now.getMonth() - 6, now.getDate());
+                else if (chartRange === "1Y") cutoff = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate());
+                else if (chartRange === "5Y") cutoff = new Date(now.getFullYear() - 5, now.getMonth(), now.getDate());
+                var cutoffStr = cutoff.toISOString().slice(0, 10);
+
+                // For short ranges (1M, 3M, 6M), use individual sales
+                // For long ranges (1Y, 5Y, ALL), use price_chart_data monthly averages
+                var chartGradeKey = chartGrade === "psa9" ? "psa9" : chartGrade === "psa10" ? "psa10" : "raw";
+                var chartPoints: any[] = [];
+                var pcData = card.price_chart_data || {};
+
+                if (["1Y", "5Y", "ALL"].includes(chartRange) && pcData[chartGradeKey] && pcData[chartGradeKey].length > 0) {
+                  // Use monthly historical data
+                  chartPoints = pcData[chartGradeKey].filter(function(p: any) { return p.date >= cutoffStr && p.price > 0; });
+                } else {
+                  // Use individual sales
+                  var chartSalesRaw = getSalesForChart(chartGrade);
+                  chartPoints = chartSalesRaw.filter(function(s: any) { return s.date_sold >= cutoffStr; }).map(function(s: any) { return { date: s.date_sold, price: s.price }; });
+                }
+
+                if (chartPoints.length < 2) return (
+                  <div style={{ textAlign: "center", padding: 32, color: textTer, fontSize: 13 }}>Not enough data for this time range</div>
                 );
-                var chartPrices = chartSales.map(function(s: any) { return s.price; });
+                var chartPrices = chartPoints.map(function(s: any) { return s.price; });
                 var minP = Math.min(...chartPrices);
                 var maxP = Math.max(...chartPrices);
                 var range = maxP - minP || 1;
@@ -293,10 +326,10 @@ function CardDetailContent() {
                 var plotW = chartW - marginLeft - marginRight;
                 var plotH = chartH - marginTop - marginBottom;
 
-                var points = chartSales.map(function(s: any, i: number) {
-                  var x = marginLeft + (i / (chartSales.length - 1)) * plotW;
+                var points = chartPoints.map(function(s: any, i: number) {
+                  var x = marginLeft + (i / (chartPoints.length - 1)) * plotW;
                   var y = marginTop + (1 - (s.price - padMinP) / padRange) * plotH;
-                  return { x: x, y: y, price: s.price, date: s.date_sold, index: i };
+                  return { x: x, y: y, price: s.price, date: s.date || s.date_sold, index: i };
                 });
                 var lineColor = chartGrade === "raw" ? (isDark ? "#60a5fa" : "#1e40af") : chartGrade === "psa10" ? green : amber;
                 var pathD = points.map(function(p: any, i: number) { return (i === 0 ? "M" : "L") + p.x + " " + p.y; }).join(" ");
@@ -310,13 +343,18 @@ function CardDetailContent() {
                 });
 
                 // X-axis labels (spread evenly, max 5)
-                var xStep = Math.max(1, Math.floor(chartSales.length / 4));
+                // X-axis: show year for long ranges, month-day for short
+                var showYear = ["1Y", "5Y", "ALL"].includes(chartRange);
+                var xStep = Math.max(1, Math.floor(chartPoints.length / 5));
                 var xTicks: any[] = [];
-                for (var xi = 0; xi < chartSales.length; xi += xStep) {
-                  xTicks.push({ x: points[xi].x, label: chartSales[xi].date_sold.slice(5) });
+                for (var xi = 0; xi < chartPoints.length; xi += xStep) {
+                  var dateStr = chartPoints[xi].date || chartPoints[xi].date_sold || "";
+                  var label = showYear ? dateStr.slice(0, 7) : dateStr.slice(5);
+                  xTicks.push({ x: points[xi].x, label: label });
                 }
-                if (xTicks[xTicks.length - 1].x !== points[points.length - 1].x) {
-                  xTicks.push({ x: points[points.length - 1].x, label: chartSales[chartSales.length - 1].date_sold.slice(5) });
+                if (xTicks.length > 0 && xTicks[xTicks.length - 1].x !== points[points.length - 1].x) {
+                  var lastDate = chartPoints[chartPoints.length - 1].date || chartPoints[chartPoints.length - 1].date_sold || "";
+                  xTicks.push({ x: points[points.length - 1].x, label: showYear ? lastDate.slice(0, 7) : lastDate.slice(5) });
                 }
 
                 return (
