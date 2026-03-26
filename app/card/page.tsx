@@ -16,6 +16,7 @@ function CardDetailContent() {
   const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState<"pricing" | "population">("pricing");
   const [gradeView, setGradeView] = useState("raw");
+  const [chartHover, setChartHover] = useState<any>(null);
   const [blockedIds, setBlockedIds] = useState<Set<string>>(new Set());
   const [reportModal, setReportModal] = useState<any>(null);
   const [reportReason, setReportReason] = useState("Not this card");
@@ -61,15 +62,15 @@ function CardDetailContent() {
 
   // Calculate avg of last 10 sold for each grade from all_sales (filtered by blocked)
   var allSales = (card.all_sales || []).filter(function(s: any) { return !blockedIds.has(s.listing_id); });
-  function avgLast10(filterFn: (s: any) => boolean) {
-    var filtered = allSales.filter(filterFn).slice(0, 10);
+  function avgLast5(filterFn: (s: any) => boolean) {
+    var filtered = allSales.filter(filterFn).slice(0, 5);
     if (filtered.length === 0) return null;
     var sum = filtered.reduce(function(a: number, s: any) { return a + s.price; }, 0);
     return Math.round(sum / filtered.length);
   }
-  var rawAvg = avgLast10(function(s: any) { return s.grade === "raw"; });
-  var psa9Avg = avgLast10(function(s: any) { return s.company === "PSA" && s.grade === "9"; });
-  var psa10Avg = avgLast10(function(s: any) { return s.company === "PSA" && s.grade === "10"; });
+  var rawAvg = avgLast5(function(s: any) { return s.grade === "raw"; });
+  var psa9Avg = avgLast5(function(s: any) { return s.company === "PSA" && s.grade === "9"; });
+  var psa10Avg = avgLast5(function(s: any) { return s.company === "PSA" && s.grade === "10"; });
 
   // Use filtered avgs for profit calc when available
   var effectiveRaw = rawAvg !== null ? rawAvg : card.raw_price;
@@ -215,7 +216,7 @@ function CardDetailContent() {
                 <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>Raw</div>
                 <div style={{ fontSize: 11, color: textSec, marginBottom: 2 }}>Last Sold</div>
                 <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{rawLast !== null ? "$" + rawLast.toLocaleString() : "$" + card.raw_price}</div>
-                <div style={{ fontSize: 11, color: textSec }}>Avg of last 10 sold</div>
+                <div style={{ fontSize: 11, color: textSec }}>Avg of last 5 sold</div>
                 <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec }}>{rawAvg !== null ? "$" + rawAvg.toLocaleString() : "—"}</div>
               </div>
               {/* PSA 9 */}
@@ -223,7 +224,7 @@ function CardDetailContent() {
                 <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>PSA 9</div>
                 <div style={{ fontSize: 11, color: textSec, marginBottom: 2 }}>Last Sold</div>
                 <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{psa9Last !== null ? "$" + psa9Last.toLocaleString() : "$" + card.psa9_price}</div>
-                <div style={{ fontSize: 11, color: textSec }}>Avg of last 10 sold</div>
+                <div style={{ fontSize: 11, color: textSec }}>Avg of last 5 sold</div>
                 <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec }}>{psa9Avg !== null ? "$" + psa9Avg.toLocaleString() : "—"}</div>
               </div>
               {/* PSA 10 */}
@@ -231,7 +232,7 @@ function CardDetailContent() {
                 <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>PSA 10</div>
                 <div style={{ fontSize: 11, color: textSec, marginBottom: 2 }}>Last Sold</div>
                 <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{psa10Last !== null ? "$" + psa10Last.toLocaleString() : "$" + card.psa10_price}</div>
-                <div style={{ fontSize: 11, color: textSec }}>Avg of last 10 sold</div>
+                <div style={{ fontSize: 11, color: textSec }}>Avg of last 5 sold</div>
                 <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec, marginBottom: 8 }}>{psa10Avg !== null ? "$" + psa10Avg.toLocaleString() : "—"}</div>
                 <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "4px 8px", borderRadius: 6, background: greenBg, width: "fit-content" }}>
                   <div style={{ width: 8, height: 8, borderRadius: "50%", background: green }}></div>
@@ -278,42 +279,88 @@ function CardDetailContent() {
                 var minP = Math.min(...chartPrices);
                 var maxP = Math.max(...chartPrices);
                 var range = maxP - minP || 1;
-                var w = 100;
-                var h = 160;
-                var padX = 0;
-                var padY = 10;
+                // Add padding so dots don't clip
+                var padMinP = minP - range * 0.05;
+                var padMaxP = maxP + range * 0.05;
+                var padRange = padMaxP - padMinP || 1;
+
+                var chartW = 800;
+                var chartH = 200;
+                var marginLeft = 70;
+                var marginRight = 15;
+                var marginTop = 15;
+                var marginBottom = 30;
+                var plotW = chartW - marginLeft - marginRight;
+                var plotH = chartH - marginTop - marginBottom;
+
                 var points = chartSales.map(function(s: any, i: number) {
-                  var x = padX + (i / (chartSales.length - 1)) * (w - padX * 2);
-                  var y = padY + (1 - (s.price - minP) / range) * (h - padY * 2);
-                  return { x: x, y: y, price: s.price, date: s.date_sold };
+                  var x = marginLeft + (i / (chartSales.length - 1)) * plotW;
+                  var y = marginTop + (1 - (s.price - padMinP) / padRange) * plotH;
+                  return { x: x, y: y, price: s.price, date: s.date_sold, index: i };
                 });
-                var lineColor = chartGrade === "raw" ? (isDark ? "#60a5fa" : "#2563eb") : chartGrade === "psa10" ? green : amber;
+                var lineColor = chartGrade === "raw" ? (isDark ? "#60a5fa" : "#1e40af") : chartGrade === "psa10" ? green : amber;
                 var pathD = points.map(function(p: any, i: number) { return (i === 0 ? "M" : "L") + p.x + " " + p.y; }).join(" ");
-                var areaD = pathD + " L" + points[points.length - 1].x + " " + h + " L" + points[0].x + " " + h + " Z";
+                var areaD = pathD + " L" + points[points.length - 1].x + " " + (marginTop + plotH) + " L" + points[0].x + " " + (marginTop + plotH) + " Z";
+
+                // Y-axis ticks (4 levels)
+                var yTicks = [0, 0.25, 0.5, 0.75, 1].map(function(pct) {
+                  var val = padMinP + pct * padRange;
+                  var y = marginTop + (1 - pct) * plotH;
+                  return { y: y, label: "$" + Math.round(val).toLocaleString() };
+                });
+
+                // X-axis labels (spread evenly, max 5)
+                var xStep = Math.max(1, Math.floor(chartSales.length / 4));
+                var xTicks: any[] = [];
+                for (var xi = 0; xi < chartSales.length; xi += xStep) {
+                  xTicks.push({ x: points[xi].x, label: chartSales[xi].date_sold.slice(5) });
+                }
+                if (xTicks[xTicks.length - 1].x !== points[points.length - 1].x) {
+                  xTicks.push({ x: points[points.length - 1].x, label: chartSales[chartSales.length - 1].date_sold.slice(5) });
+                }
 
                 return (
-                  <div>
-                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4, fontSize: 10, color: textTer, fontFamily: "JetBrains Mono, monospace" }}>
-                      <span>${maxP.toLocaleString()}</span>
-                      <span>${minP.toLocaleString()}</span>
-                    </div>
-                    <svg viewBox={"0 0 " + w + " " + h} style={{ width: "100%", height: 160 }} preserveAspectRatio="none">
+                  <div style={{ position: "relative" as const }} onMouseLeave={function() { setChartHover(null); }}>
+                    <svg viewBox={"0 0 " + chartW + " " + chartH} style={{ width: "100%", height: "auto" }}>
                       <defs>
                         <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stopColor={lineColor} stopOpacity="0.2" />
+                          <stop offset="0%" stopColor={lineColor} stopOpacity="0.15" />
                           <stop offset="100%" stopColor={lineColor} stopOpacity="0.02" />
                         </linearGradient>
                       </defs>
+                      {/* Grid lines */}
+                      {yTicks.map(function(t: any, i: number) {
+                        return <line key={i} x1={marginLeft} y1={t.y} x2={chartW - marginRight} y2={t.y} stroke={isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"} strokeWidth="0.5" />;
+                      })}
+                      {/* Y-axis labels (right side) */}
+                      {yTicks.map(function(t: any, i: number) {
+                        return <text key={i} x={marginLeft - 8} y={t.y + 3} textAnchor="end" fontSize="10" fill={isDark ? "#5c5c6a" : "#3a3a4e"} fontFamily="JetBrains Mono, monospace">{t.label}</text>;
+                      })}
+                      {/* X-axis labels */}
+                      {xTicks.map(function(t: any, i: number) {
+                        return <text key={i} x={t.x} y={chartH - 5} textAnchor="middle" fontSize="9" fill={isDark ? "#5c5c6a" : "#3a3a4e"} fontFamily="JetBrains Mono, monospace">{t.label}</text>;
+                      })}
+                      {/* Area + line */}
                       <path d={areaD} fill="url(#chartFill)" />
-                      <path d={pathD} fill="none" stroke={lineColor} strokeWidth="0.4" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d={pathD} fill="none" stroke={lineColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      {/* Data points + invisible hover targets */}
                       {points.map(function(p: any, i: number) {
-                        return <circle key={i} cx={p.x} cy={p.y} r="0.8" fill={lineColor} />;
+                        var isHovered = chartHover && chartHover.index === i;
+                        return (
+                          <g key={i}>
+                            <circle cx={p.x} cy={p.y} r={isHovered ? 5 : 3} fill={lineColor} stroke={isDark ? "#1a1a20" : "#ffffff"} strokeWidth={isHovered ? 2 : 1} />
+                            <circle cx={p.x} cy={p.y} r="15" fill="transparent" onMouseEnter={function() { setChartHover(p); }} />
+                          </g>
+                        );
                       })}
                     </svg>
-                    <div style={{ display: "flex", justifyContent: "space-between", marginTop: 4, fontSize: 10, color: textTer }}>
-                      <span>{chartSales[0].date_sold}</span>
-                      <span>{chartSales[chartSales.length - 1].date_sold}</span>
-                    </div>
+                    {/* Tooltip */}
+                    {chartHover && (
+                      <div style={{ position: "absolute" as const, left: (chartHover.x / chartW * 100) + "%", top: (chartHover.y / chartH * 100 - 18) + "%", transform: "translateX(-50%)", background: isDark ? "#2a2a32" : "#ffffff", border: "1px solid " + border, borderRadius: 8, padding: "6px 10px", boxShadow: "0 4px 12px rgba(0,0,0,0.2)", pointerEvents: "none" as const, zIndex: 10, whiteSpace: "nowrap" as const }}>
+                        <div style={{ fontSize: 13, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: lineColor }}>${chartHover.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                        <div style={{ fontSize: 10, color: textTer }}>{chartHover.date}</div>
+                      </div>
+                    )}
                   </div>
                 );
               })()}
