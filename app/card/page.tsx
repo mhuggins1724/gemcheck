@@ -246,13 +246,13 @@ function CardDetailContent() {
                 <div style={{ position: "absolute" as const, top: 0, left: 0, width: 3, height: "100%", background: green }}></div>
                 <div style={{ fontSize: 12, color: textSec, marginBottom: 4, paddingLeft: 8 }}>If PSA 10 ({gemRate}% chance)</div>
                 <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: greenText, paddingLeft: 8 }}>{profit10 >= 0 ? "+" : ""}{profit10 < 0 ? "\u2212" : ""}${Math.abs(profit10)}</div>
-                <div style={{ fontSize: 10, color: textTer, marginTop: 4, lineHeight: 1.5, paddingLeft: 8 }}>${card.psa10_price} sale &minus; ${card.raw_price} raw &minus; ${card.grading_fee} grading</div>
+                <div style={{ fontSize: 10, color: textTer, marginTop: 4, lineHeight: 1.5, paddingLeft: 8 }}>${effectivePsa10.toLocaleString()} avg sale &minus; ${effectiveRaw.toLocaleString()} avg raw &minus; ${card.grading_fee} grading</div>
               </div>
               <div style={{ padding: 14, borderRadius: 12, border: "1px solid " + border, position: "relative" as const, overflow: "hidden" }}>
                 <div style={{ position: "absolute" as const, top: 0, left: 0, width: 3, height: "100%", background: "#ef4444" }}></div>
                 <div style={{ fontSize: 12, color: textSec, marginBottom: 4, paddingLeft: 8 }}>If PSA 9 ({100 - gemRate}% chance)</div>
                 <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: profit9 >= 0 ? greenText : redText, paddingLeft: 8 }}>{profit9 >= 0 ? "+" : ""}{profit9 < 0 ? "\u2212" : ""}${Math.abs(profit9)}</div>
-                <div style={{ fontSize: 10, color: textTer, marginTop: 4, lineHeight: 1.5, paddingLeft: 8 }}>${card.psa9_price} sale &minus; ${card.raw_price} raw &minus; ${card.grading_fee} grading</div>
+                <div style={{ fontSize: 10, color: textTer, marginTop: 4, lineHeight: 1.5, paddingLeft: 8 }}>${effectivePsa9.toLocaleString()} avg sale &minus; ${effectiveRaw.toLocaleString()} avg raw &minus; ${card.grading_fee} grading</div>
               </div>
             </div>
 
