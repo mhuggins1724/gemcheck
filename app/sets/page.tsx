@@ -5,7 +5,7 @@ import { supabase } from "../lib/supabase";
 import { useTheme } from "../lib/useTheme";
 
 var eraOrder = ["Mega Evolution", "Scarlet & Violet", "Sword & Shield", "Sun & Moon", "XY", "Black & White", "Call of Legends", "HeartGold SoulSilver", "Platinum", "Diamond & Pearl", "EX Ruby & Sapphire", "Pokemon E-Card", "Legendary Collection", "Neo", "Gym", "Base"];
-var eraColors: Record<string, string> = { "Scarlet & Violet": "#e53e3e", "Sword & Shield": "#3182ce", "Sun & Moon": "#dd6b20", "XY": "#805ad5", "Mega Evolution": "#38a169", "Black & White": "#4a5568", "Call of Legends": "#d69e2e", "HeartGold SoulSilver": "#d69e2e", "Platinum": "#a0aec0", "Diamond & Pearl": "#5b8dd9", "EX Ruby & Sapphire": "#dc2626", "Pokemon E-Card": "#6d28d9", "Legendary Collection": "#d97706", "Neo": "#2563eb", "Gym": "#b45309", "Base": "#b7791f" };
+var eraColors: Record<string, string> = { "Scarlet & Violet": "#e53e3e", "Sword & Shield": "#3182ce", "Sun & Moon": "#dd6b20", "XY": "#805ad5", "Mega Evolution": "#38a169", "Black & White": "#4a5568", "Call of Legends": "#d69e2e", "HeartGold SoulSilver": "#d69e2e", "Platinum": "#a0aec0", "Diamond & Pearl": "#5b8dd9", "EX Ruby & Sapphire": "#b91c1c", "Pokemon E-Card": "#6d28d9", "Legendary Collection": "#d97706", "Neo": "#2563eb", "Gym": "#b45309", "Base": "#b7791f" };
 var eraBgColors: Record<string, string> = { "Scarlet & Violet": "linear-gradient(135deg, #7f1d1d, #991b1b, #b91c1c)", "Sword & Shield": "linear-gradient(135deg, #1e3a5f, #1e40af, #2563eb)", "Sun & Moon": "linear-gradient(135deg, #7c2d12, #c2410c, #ea580c)", "XY": "linear-gradient(135deg, #4c1d95, #6d28d9, #7c3aed)", "Mega Evolution": "linear-gradient(135deg, #14532d, #15803d, #22c55e)", "Black & White": "linear-gradient(135deg, #1a1a2e, #374151, #4b5563)", "Call of Legends": "linear-gradient(135deg, #78350f, #a16207, #d97706)", "HeartGold SoulSilver": "linear-gradient(135deg, #78350f, #a16207, #d97706)", "Platinum": "linear-gradient(135deg, #374151, #6b7280, #9ca3af)", "Diamond & Pearl": "linear-gradient(135deg, #1e3a5f, #3b82f6, #60a5fa)", "EX Ruby & Sapphire": "linear-gradient(135deg, #7f1d1d, #991b1b, #dc2626)", "Pokemon E-Card": "linear-gradient(135deg, #3b0764, #6d28d9, #8b5cf6)", "Legendary Collection": "linear-gradient(135deg, #78350f, #b45309, #d97706)", "Neo": "linear-gradient(135deg, #1e3a5f, #2563eb, #3b82f6)", "Gym": "linear-gradient(135deg, #78350f, #92400e, #b45309)", "Base": "linear-gradient(135deg, #713f12, #a16207, #ca8a04)" };
 var eraLogos: Record<string, string> = {
   "Scarlet & Violet": "https://assets.tcgdex.net/en/sv/sv01/logo.png",
@@ -70,8 +70,8 @@ export default function SetsPage() {
 
   var bg = isDark ? "#0c0c0f" : "#f8f8fa";
   var text = isDark ? "#ececf0" : "#1a1a2e";
-  var textSec = isDark ? "#9898a4" : "#4a4a5e";
-  var textTer = isDark ? "#5c5c6a" : "#6e6e82";
+  var textSec = isDark ? "#9898a4" : "#1a1a2e";
+  var textTer = isDark ? "#5c5c6a" : "#3a3a4e";
   var cardBg = isDark ? "#1a1a20" : "#ffffff";
   var border = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.18)";
   var navBg = isDark ? "rgba(12,12,15,0.95)" : "rgba(255,255,255,0.95)";

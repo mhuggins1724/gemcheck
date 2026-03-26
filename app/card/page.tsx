@@ -29,8 +29,8 @@ function CardDetailContent() {
 
   var bg = isDark ? "#0c0c0f" : "#f8f8fa";
   var text = isDark ? "#ececf0" : "#1a1a2e";
-  var textSec = isDark ? "#9898a4" : "#4a4a5e";
-  var textTer = isDark ? "#5c5c6a" : "#6e6e82";
+  var textSec = isDark ? "#9898a4" : "#1a1a2e";
+  var textTer = isDark ? "#5c5c6a" : "#3a3a4e";
   var cardBg = isDark ? "#1a1a20" : "#ffffff";
   var border = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.18)";
   var navBg = isDark ? "rgba(12,12,15,0.95)" : "rgba(255,255,255,0.95)";
@@ -38,11 +38,11 @@ function CardDetailContent() {
   var tertBg = isDark ? "#1e1e24" : "#e8e8ec";
   var green = isDark ? "#22c55e" : "#16a34a";
   var greenBg = isDark ? "rgba(34,197,94,0.1)" : "rgba(22,163,74,0.1)";
-  var greenText = isDark ? "#4ade80" : "#15803d";
-  var redText = isDark ? "#f87171" : "#dc2626";
+  var greenText = isDark ? "#4ade80" : "#047857";
+  var redText = isDark ? "#f87171" : "#b91c1c";
   var amberBg = isDark ? "rgba(234,179,8,0.1)" : "rgba(202,138,4,0.1)";
-  var amber = isDark ? "#eab308" : "#ca8a04";
-  var blueText = isDark ? "#60a5fa" : "#1d4ed8";
+  var amber = isDark ? "#eab308" : "#be185d";
+  var blueText = isDark ? "#60a5fa" : "#1e40af";
 
   if (loading) return <div style={{ background: bg, color: text, minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16 }}>Loading card data...</div>;
   if (!card) return <div style={{ background: bg, color: text, minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16 }}>Card not found</div>;
@@ -369,7 +369,7 @@ function CardDetailContent() {
                                 <td style={{ padding: "8px 6px", color: textSec }}>{sale.date_sold}</td>
                                 <td style={{ padding: "8px 6px" }}><a href={listingUrl} target="_blank" rel="noopener noreferrer" style={{ color: isDark ? "#60a5fa" : "#2563eb", textDecoration: "none", fontSize: 11 }}>{sale.source === "ebay" ? "eBay" : "TCGPlayer"} #{sale.listing_id.slice(-6)}</a></td>
                                 <td style={{ padding: "8px 6px", color: textSec, maxWidth: 280, overflow: "hidden", textOverflow: "ellipsis" as const, whiteSpace: "nowrap" as const }}>{sale.title}</td>
-                                <td style={{ padding: "8px 6px", textAlign: "right" as const }}><a href={"mailto:support@gemcheck.io?subject=Report Sale " + sale.listing_id + "&body=Card: " + encodeURIComponent(card.name) + "%0ASale ID: " + sale.listing_id + "%0APrice: $" + sale.price + "%0AReason: "} style={{ color: isDark ? "#f87171" : "#dc2626", textDecoration: "none", fontSize: 10, opacity: 0.6 }}>Report</a></td>
+                                <td style={{ padding: "8px 6px", textAlign: "right" as const }}><a href={"mailto:support@gemcheck.io?subject=Report Sale " + sale.listing_id + "&body=Card: " + encodeURIComponent(card.name) + "%0ASale ID: " + sale.listing_id + "%0APrice: $" + sale.price + "%0AReason: "} style={{ color: isDark ? "#f87171" : "#b91c1c", textDecoration: "none", fontSize: 10, opacity: 0.6 }}>Report</a></td>
                               </tr>
                             );
                           })}

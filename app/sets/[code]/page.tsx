@@ -66,20 +66,20 @@ export default function SetDetailPage() {
 
   var bg = isDark ? "#0c0c0f" : "#f8f8fa";
   var text = isDark ? "#ececf0" : "#1a1a2e";
-  var textSec = isDark ? "#9898a4" : "#4a4a5e";
-  var textTer = isDark ? "#5c5c6a" : "#6e6e82";
+  var textSec = isDark ? "#9898a4" : "#1a1a2e";
+  var textTer = isDark ? "#5c5c6a" : "#3a3a4e";
   var cardBg = isDark ? "#1a1a20" : "#ffffff";
   var border = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.18)";
   var navBg = isDark ? "rgba(12,12,15,0.95)" : "rgba(255,255,255,0.95)";
   var tertBg = isDark ? "#1e1e24" : "#e8e8ec";
   var green = isDark ? "#22c55e" : "#16a34a";
   var greenBg = isDark ? "rgba(34,197,94,0.1)" : "rgba(22,163,74,0.1)";
-  var greenText = isDark ? "#4ade80" : "#15803d";
+  var greenText = isDark ? "#4ade80" : "#047857";
   var redBg = isDark ? "rgba(239,68,68,0.1)" : "rgba(220,38,38,0.1)";
-  var redText = isDark ? "#f87171" : "#dc2626";
+  var redText = isDark ? "#f87171" : "#b91c1c";
   var amberBg = isDark ? "rgba(234,179,8,0.1)" : "rgba(202,138,4,0.1)";
   var amberText = isDark ? "#facc15" : "#a16207";
-  var amber = isDark ? "#eab308" : "#ca8a04";
+  var amber = isDark ? "#eab308" : "#be185d";
 
   function handleImgError(e: any) {
     e.target.onerror = null;
