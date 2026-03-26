@@ -35,7 +35,7 @@ function CardDetailContent() {
       setBlockedIds(new Set([...localBlocked, ...dbBlocked]));
     });
 
-    supabase.from("cards").select("id,name,set_name,set_code,year,card_type,rarity,gem_rate,raw_price,psa10_price,psa9_price,psa10_trend,psa9_trend,grading_fee,pop_10,pop_9,pop_8,pop_7,grade_score,price_history,image_url,tcg_product_id,market_price,low_price,mid_price,high_price,tcg_url,all_sales,psa_pop,cgc_pop,last_sales_refresh,price_chart_data").eq("id", id).single().then(function(res) {
+    supabase.from("cards").select("id,name,set_name,set_code,year,card_type,rarity,gem_rate,raw_price,psa10_price,psa9_price,psa10_trend,psa9_trend,grading_fee,pop_10,pop_9,pop_8,pop_7,grade_score,price_history,image_url,tcg_product_id,market_price,low_price,mid_price,high_price,tcg_url,all_sales,psa_pop,cgc_pop,last_sales_refresh,price_chart_data,sales_history").eq("id", id).single().then(function(res) {
       if (res.data) setCard(res.data);
       setLoading(false);
     });
@@ -125,8 +125,10 @@ function CardDetailContent() {
   }
 
   // Price history from sales for chart
+  // Use sales_history (cumulative) for chart if available, otherwise all_sales
+  var chartSalesSource = (card.sales_history && card.sales_history.length > 0 ? card.sales_history : (card.all_sales || [])).filter(function(s: any) { return !blockedIds.has(s.listing_id); });
   function getAllSalesForGrade(grade: string) {
-    return allSales.filter(function(s: any) {
+    return chartSalesSource.filter(function(s: any) {
       if (grade === "raw") return s.grade === "raw";
       if (grade === "psa9") return s.company === "PSA" && s.grade === "9";
       if (grade === "psa10") return s.company === "PSA" && s.grade === "10";
@@ -321,9 +323,25 @@ function CardDetailContent() {
                 var minP = Math.min(...chartPrices);
                 var maxP = Math.max(...chartPrices);
                 var range = maxP - minP || 1;
-                // Add padding so dots don't clip
-                var padMinP = minP - range * 0.05;
-                var padMaxP = maxP + range * 0.05;
+                // Calculate nice round tick steps
+                function niceStep(r: number) {
+                  var rough = r / 4;
+                  if (rough <= 0) return 1;
+                  var mag = Math.pow(10, Math.floor(Math.log10(rough)));
+                  var norm = rough / mag;
+                  var s;
+                  if (norm < 1.5) s = 1;
+                  else if (norm < 3) s = 2;
+                  else if (norm < 7) s = 5;
+                  else s = 10;
+                  return s * mag;
+                }
+                var step = niceStep(range);
+                var niceMin = Math.floor(minP / step) * step;
+                var niceMax = Math.ceil(maxP / step) * step;
+                if (niceMin === niceMax) niceMax = niceMin + step;
+                var padMinP = niceMin;
+                var padMaxP = niceMax;
                 var padRange = padMaxP - padMinP || 1;
 
                 var chartW = 800;
@@ -344,12 +362,12 @@ function CardDetailContent() {
                 var pathD = points.map(function(p: any, i: number) { return (i === 0 ? "M" : "L") + p.x + " " + p.y; }).join(" ");
                 var areaD = pathD + " L" + points[points.length - 1].x + " " + (marginTop + plotH) + " L" + points[0].x + " " + (marginTop + plotH) + " Z";
 
-                // Y-axis ticks (4 levels)
-                var yTicks = [0, 0.25, 0.5, 0.75, 1].map(function(pct) {
-                  var val = padMinP + pct * padRange;
-                  var y = marginTop + (1 - pct) * plotH;
-                  return { y: y, label: "$" + Math.round(val).toLocaleString() };
-                });
+                // Y-axis ticks at nice round values
+                var yTicks: any[] = [];
+                for (var tickVal = niceMin; tickVal <= niceMax; tickVal += step) {
+                  var tickY = marginTop + (1 - (tickVal - niceMin) / padRange) * plotH;
+                  yTicks.push({ y: tickY, label: "$" + Math.round(tickVal).toLocaleString() });
+                }
 
                 // X-axis labels (spread evenly, max 5)
                 // X-axis: show year for long ranges, month-day for short

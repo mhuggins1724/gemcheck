@@ -513,7 +513,7 @@ async function main() {
     var allCards = [];
     var page = 0;
     while (true) {
-      var { data: cards } = await supabase.from("cards").select("id, name, set_name")
+      var { data: cards } = await supabase.from("cards").select("id, name, set_name, sales_history")
         .eq("set_code", s.code).range(page * 1000, (page + 1) * 1000 - 1);
       if (!cards || cards.length === 0) break;
       allCards.push(...cards);
@@ -598,6 +598,14 @@ async function main() {
 
       // Store price chart history
       if (result.chartData) updateData.price_chart_data = result.chartData;
+
+      // Merge new sales into sales_history (append + dedup by listing_id)
+      var existingHistory = card.sales_history || [];
+      var historyIds = new Set(existingHistory.map(function(s) { return s.listing_id; }));
+      var newEntries = cleanedSales.filter(function(s) { return !historyIds.has(s.listing_id); });
+      if (newEntries.length > 0) {
+        updateData.sales_history = existingHistory.concat(newEntries).sort(function(a, b) { return b.date_sold.localeCompare(a.date_sold); });
+      }
 
       // Calculate median prices from cleaned sales
       var rawSales = cleanedSales.filter(function(s) { return s.grade === "raw"; });
