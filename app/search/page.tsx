@@ -198,12 +198,12 @@ function SearchContent() {
               var pop10 = pop.length >= 10 ? pop[9] : 0;
               var realGemRate = popTotal > 0 ? Math.round((pop10 / popTotal) * 100) : card.gem_rate;
               var profit = card.psa10_price - card.raw_price - card.grading_fee;
-              var verdict = card.grade_score >= 8 ? "grade" : card.grade_score >= 5 ? "maybe" : "skip";
+              var verdict = card.grade_score === 0 ? "nodata" : card.grade_score >= 8 ? "grade" : card.grade_score >= 5 ? "maybe" : "skip";
               var gemBg2 = realGemRate >= 65 ? greenBg : realGemRate >= 45 ? amberBg : redBg;
               var gemColor = realGemRate >= 65 ? greenText : realGemRate >= 45 ? amberText : redText;
-              var vBg = verdict === "grade" ? green : verdict === "maybe" ? amber : "#ef4444";
-              var vColor = verdict === "maybe" ? "#000" : "#fff";
-              var vLabel = verdict === "grade" ? "Grade it" : verdict === "maybe" ? "Maybe" : "Skip";
+              var vBg = verdict === "nodata" ? (isDark ? "#4a4a5e" : "#9ca3af") : verdict === "grade" ? green : verdict === "maybe" ? amber : "#ef4444";
+              var vColor = verdict === "nodata" ? "#fff" : verdict === "maybe" ? "#000" : "#fff";
+              var vLabel = verdict === "nodata" ? "No Data" : verdict === "grade" ? "Grade it" : verdict === "maybe" ? "Maybe" : "Skip";
               return (
                 <a key={card.id} href={"/card?id=" + card.id} style={{ textDecoration: "none", color: "inherit" }}>
                   <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 14, cursor: "pointer", position: "relative", overflow: "hidden", transition: "all 0.25s ease" }}>

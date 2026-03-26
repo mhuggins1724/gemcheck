@@ -81,7 +81,7 @@ function CardDetailContent() {
   var profit9 = effectivePsa9 - effectiveRaw - card.grading_fee;
   var scoreColor = card.grade_score >= 7 ? green : card.grade_score >= 5 ? "#eab308" : "#ef4444";
   var scoreBg = card.grade_score >= 7 ? greenBg : card.grade_score >= 5 ? amberBg : "rgba(239,68,68,0.1)";
-  var scoreLabel = card.grade_score >= 8 ? "Grade it" : card.grade_score >= 5 ? "Maybe — depends on your risk tolerance" : "Skip — not worth grading";
+  var scoreLabel = card.grade_score === 0 ? "Not enough grading data to score this card" : card.grade_score >= 8 ? "Grade it" : card.grade_score >= 5 ? "Maybe — depends on your risk tolerance" : "Skip — not worth grading";
 
   // Last sold for each grade
   function lastSold(filterFn: (s: any) => boolean) {
@@ -180,7 +180,7 @@ function CardDetailContent() {
 
             <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 14, padding: 16, marginBottom: 16 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 12 }}>
-                <div style={{ width: 56, height: 56, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", flexShrink: 0, background: scoreBg, color: scoreColor }}>{card.grade_score}</div>
+                <div style={{ width: 56, height: 56, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: card.grade_score === 0 ? 12 : 20, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", flexShrink: 0, background: card.grade_score === 0 ? (isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)") : scoreBg, color: card.grade_score === 0 ? textTer : scoreColor }}>{card.grade_score === 0 ? "N/A" : card.grade_score}</div>
                 <div>
                   <h3 style={{ fontSize: 14, fontWeight: 600, marginBottom: 2 }}>{scoreLabel}</h3>
                   <p style={{ fontSize: 12, color: textSec, lineHeight: 1.4 }}>{gemRate}% gem rate &middot; {profit10 >= 0 ? "+$" + profit10 : "-$" + Math.abs(profit10)} expected on PSA 10</p>

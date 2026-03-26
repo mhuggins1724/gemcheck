@@ -105,7 +105,17 @@ async function main() {
       var psaPop = card.psa_pop || [];
       var psaTotal = psaPop.reduce(function(a, b) { return a + b; }, 0);
       var pop10 = psaPop.length >= 10 ? psaPop[9] : 0;
-      var gemRate = psaTotal > 0 ? Math.round((pop10 / psaTotal) * 100) : 50; // default 50% if no pop data
+      var hasPop = psaTotal > 0;
+      var gemRate = hasPop ? Math.round((pop10 / psaTotal) * 100) : 0;
+
+      // No pop data = score 0 (displayed as "No Data")
+      if (!hasPop) {
+        if (card.grade_score !== 0) {
+          await supabase.from("cards").update({ grade_score: 0, gem_rate: 0 }).eq("id", card.id);
+          updated++;
+        } else { skipped++; }
+        continue;
+      }
 
       // Count recent graded sales for liquidity
       var allSales = card.all_sales || [];
