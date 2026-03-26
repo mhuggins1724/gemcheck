@@ -67,6 +67,7 @@ function SearchContent() {
   const [loading, setLoading] = useState(false);
   const [searchInput, setSearchInput] = useState(initialQuery);
   const [hasSearched, setHasSearched] = useState(false);
+  const [sort, setSort] = useState("best-match");
   const timerRef = useRef<any>(null);
 
   useEffect(function() {
@@ -149,8 +150,17 @@ function SearchContent() {
         )}
 
         {hasSearched && !loading && (
-          <div style={{ marginBottom: 20 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
             <h2 style={{ fontSize: 16, fontWeight: 600, color: textSec }}>{cards.length} results {searchInput ? "for \"" + searchInput + "\"" : ""}</h2>
+            <select value={sort} onChange={function(e) { setSort(e.target.value); }} style={{ padding: "8px 14px", borderRadius: 8, fontSize: 12, fontWeight: 500, background: isDark ? "#1a1a20" : "#ffffff", color: text, border: "1px solid " + border, cursor: "pointer", outline: "none" }}>
+              <option value="best-match">Best Match</option>
+              <option value="value-desc">Value High to Low</option>
+              <option value="value-asc">Value Low to High</option>
+              <option value="name-asc">A-Z</option>
+              <option value="name-desc">Z-A</option>
+              <option value="number-asc">Card Number Lo-Hi</option>
+              <option value="number-desc">Card Number Hi-Lo</option>
+            </select>
           </div>
         )}
 
@@ -164,7 +174,25 @@ function SearchContent() {
 
         {!loading && cards.length > 0 && (
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 12 }}>
-            {cards.map(function(card) {
+            {(function() {
+              var sorted = [...cards];
+              if (sort === "value-desc") sorted.sort(function(a, b) { return b.raw_price - a.raw_price; });
+              else if (sort === "value-asc") sorted.sort(function(a, b) { return a.raw_price - b.raw_price; });
+              else if (sort === "name-asc") sorted.sort(function(a, b) { return a.name.localeCompare(b.name); });
+              else if (sort === "name-desc") sorted.sort(function(a, b) { return b.name.localeCompare(a.name); });
+              else if (sort === "number-asc") sorted.sort(function(a, b) {
+                var numA = parseInt((a.name.match(/(\d+)\//) || ["","0"])[1]);
+                var numB = parseInt((b.name.match(/(\d+)\//) || ["","0"])[1]);
+                return numA - numB;
+              });
+              else if (sort === "number-desc") sorted.sort(function(a, b) {
+                var numA = parseInt((a.name.match(/(\d+)\//) || ["","0"])[1]);
+                var numB = parseInt((b.name.match(/(\d+)\//) || ["","0"])[1]);
+                return numB - numA;
+              });
+              // best-match: keep original order from Supabase (grade_score desc)
+              return sorted;
+            })().map(function(card) {
               var pop = card.psa_pop || [];
               var popTotal = pop.reduce(function(a: number, b: number) { return a + b; }, 0);
               var pop10 = pop.length >= 10 ? pop[9] : 0;

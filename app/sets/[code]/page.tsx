@@ -9,21 +9,29 @@ var gradients: Record<string, string> = { fire: "linear-gradient(145deg,#7c2d12,
 var fallbackImg = "https://rjtwqtpdmmkeknllsuvr.supabase.co/storage/v1/object/public/Logos/NO%20IMAGE%20POKEMON.webp";
 
 var sortOptions = [
-  { label: "Price: High to Low", key: "price-desc" },
-  { label: "Price: Low to High", key: "price-asc" },
-  { label: "Name: A-Z", key: "name-asc" },
-  { label: "Number: Low to High", key: "number-asc" },
+  { label: "Value High to Low", key: "value-desc" },
+  { label: "Value Low to High", key: "value-asc" },
+  { label: "A-Z", key: "name-asc" },
+  { label: "Z-A", key: "name-desc" },
+  { label: "Card Number Lo-Hi", key: "number-asc" },
+  { label: "Card Number Hi-Lo", key: "number-desc" },
 ];
 
 function sortCards(cards: any[], sortKey: string) {
   var sorted = [...cards];
-  if (sortKey === "price-desc") sorted.sort(function(a, b) { return b.psa10_price - a.psa10_price; });
-  else if (sortKey === "price-asc") sorted.sort(function(a, b) { return a.psa10_price - b.psa10_price; });
+  if (sortKey === "value-desc") sorted.sort(function(a, b) { return b.raw_price - a.raw_price; });
+  else if (sortKey === "value-asc") sorted.sort(function(a, b) { return a.raw_price - b.raw_price; });
   else if (sortKey === "name-asc") sorted.sort(function(a, b) { return a.name.localeCompare(b.name); });
+  else if (sortKey === "name-desc") sorted.sort(function(a, b) { return b.name.localeCompare(a.name); });
   else if (sortKey === "number-asc") sorted.sort(function(a, b) {
     var numA = parseInt((a.name.match(/(\d+)\//) || ["","0"])[1]);
     var numB = parseInt((b.name.match(/(\d+)\//) || ["","0"])[1]);
     return numA - numB;
+  });
+  else if (sortKey === "number-desc") sorted.sort(function(a, b) {
+    var numA = parseInt((a.name.match(/(\d+)\//) || ["","0"])[1]);
+    var numB = parseInt((b.name.match(/(\d+)\//) || ["","0"])[1]);
+    return numB - numA;
   });
   return sorted;
 }
@@ -49,7 +57,7 @@ export default function SetDetailPage() {
   const [cards, setCards] = useState<any[]>([]);
   const [setInfo, setSetInfo] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [sort, setSort] = useState("price-desc");
+  const [sort, setSort] = useState("value-desc");
 
   useEffect(function() {
     Promise.all([
@@ -120,13 +128,12 @@ export default function SetDetailPage() {
         <h1 style={{ fontSize: 28, fontWeight: 700, letterSpacing: "-0.5px", marginBottom: 4, textAlign: "center" }}>{setInfo ? setInfo.name : code}</h1>
         <p style={{ fontSize: 14, color: textSec, marginBottom: 24, textAlign: "center" }}>{setInfo ? setInfo.era + " \u00B7 " + setInfo.year + " \u00B7 " : ""}{cards.length} cards</p>
 
-        <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16, gap: 6, flexWrap: "wrap" as const }}>
-          {sortOptions.map(function(opt) {
-            var active = sort === opt.key;
-            return (
-              <button key={opt.key} onClick={function() { setSort(opt.key); }} style={{ padding: "6px 14px", borderRadius: 8, fontSize: 12, fontWeight: active ? 600 : 400, background: active ? green : "transparent", color: active ? "#fff" : textSec, border: active ? "none" : "1px solid " + border, cursor: "pointer", transition: "all 0.2s ease" }}>{opt.label}</button>
-            );
-          })}
+        <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
+          <select value={sort} onChange={function(e) { setSort(e.target.value); }} style={{ padding: "8px 14px", borderRadius: 8, fontSize: 12, fontWeight: 500, background: isDark ? "#1a1a20" : "#ffffff", color: text, border: "1px solid " + border, cursor: "pointer", outline: "none" }}>
+            {sortOptions.map(function(opt) {
+              return <option key={opt.key} value={opt.key}>{opt.label}</option>;
+            })}
+          </select>
         </div>
 
         {loading ? (
