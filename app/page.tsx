@@ -21,6 +21,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [totalCards, setTotalCards] = useState(0);
   const [totalSets, setTotalSets] = useState(0);
+  const [homeSort, setHomeSort] = useState("grade-desc");
 
   useEffect(function() {
     supabase.from("cards").select("*", { count: "exact", head: true }).then(function(res) {
@@ -32,7 +33,7 @@ export default function Home() {
         setTotalSets(unique.size);
       }
     });
-    supabase.from("cards").select("*").order("grade_score", { ascending: false }).limit(20).then(function(res) {
+    supabase.from("cards").select("*").order("grade_score", { ascending: false }).limit(100).then(function(res) {
       if (res.data) setCards(res.data);
       setLoading(false);
     });
@@ -98,15 +99,39 @@ export default function Home() {
         </div>
 
         <div style={{ marginBottom: 40 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 16 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
             <h2 style={{ fontSize: 16, fontWeight: 600 }}>Top rated cards</h2>
-            <a href="#" style={{ fontSize: 12, fontWeight: 500, color: green, textDecoration: "none" }}>View all &rarr;</a>
+            <select value={homeSort} onChange={function(e) { setHomeSort(e.target.value); }} style={{ padding: "8px 14px", borderRadius: 8, fontSize: 12, fontWeight: 500, background: isDark ? "#1a1a20" : "#ffffff", color: text, border: "1px solid " + border, cursor: "pointer", outline: "none" }}>
+              <option value="grade-desc">Grade Score High to Low</option>
+              <option value="grade-asc">Grade Score Low to High</option>
+              <option value="grade-it">Grade It Only</option>
+              <option value="maybe-only">Maybe Only</option>
+              <option value="skip-only">Skip Only</option>
+              <option value="nodata-only">No Data Only</option>
+              <option value="value-desc">Value High to Low</option>
+              <option value="value-asc">Value Low to High</option>
+              <option value="gem-desc">Gem Rate High to Low</option>
+              <option value="gem-asc">Gem Rate Low to High</option>
+            </select>
           </div>
           {loading ? (
             <div style={{ textAlign: "center", padding: 40, color: textTer }}>Loading cards from database...</div>
           ) : (
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 12 }}>
-            {cards.map(function(card) {
+            {(function() {
+              var sorted = [...cards];
+              if (homeSort === "grade-desc") sorted.sort(function(a, b) { return b.grade_score - a.grade_score; });
+              else if (homeSort === "grade-asc") sorted.sort(function(a, b) { return a.grade_score - b.grade_score; });
+              else if (homeSort === "grade-it") sorted = sorted.filter(function(c) { return c.grade_score >= 7; }).sort(function(a, b) { return b.grade_score - a.grade_score; });
+              else if (homeSort === "maybe-only") sorted = sorted.filter(function(c) { return c.grade_score >= 5 && c.grade_score < 7; }).sort(function(a, b) { return b.grade_score - a.grade_score; });
+              else if (homeSort === "skip-only") sorted = sorted.filter(function(c) { return c.grade_score > 0 && c.grade_score < 5; }).sort(function(a, b) { return b.grade_score - a.grade_score; });
+              else if (homeSort === "nodata-only") sorted = sorted.filter(function(c) { return c.grade_score === 0; });
+              else if (homeSort === "value-desc") sorted.sort(function(a, b) { return b.raw_price - a.raw_price; });
+              else if (homeSort === "value-asc") sorted.sort(function(a, b) { return a.raw_price - b.raw_price; });
+              else if (homeSort === "gem-desc") sorted.sort(function(a, b) { return (b.gem_rate || 0) - (a.gem_rate || 0); });
+              else if (homeSort === "gem-asc") sorted.sort(function(a, b) { return (a.gem_rate || 0) - (b.gem_rate || 0); });
+              return sorted;
+            })().map(function(card) {
               var pop = card.psa_pop || [];
               var popTotal = pop.reduce(function(a: number, b: number) { return a + b; }, 0);
               var pop10 = pop.length >= 10 ? pop[9] : 0;
