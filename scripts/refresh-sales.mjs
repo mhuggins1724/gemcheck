@@ -5,6 +5,8 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
+const PC_TOKEN = process.env.PRICECHARTING_TOKEN;
+
 const TOKEN = process.env.PRICECHARTING_TOKEN;
 
 // ============================================================
@@ -216,11 +218,18 @@ function cardSlug(cardName, setName) {
   if (!m) return null;
 
   var rawName = m[1];
-  // Fix Gym set names: "Brocks" -> "Brock's", "Giovannis" -> "Giovanni's", etc.
-  if (setName && (setName.includes("Gym") || setName.includes("Rocket"))) {
-    rawName = rawName.replace(/^(Brocks|Mistys|Lt Surges|Erikas|Kogas|Sabrinas|Blaines|Giovannis|Rockets)(\s)/,
-      function(match, owner, space) { return owner.slice(0, -1) + "'" + owner.slice(-1) + space; });
-  }
+  // Fix possessive names: "Brocks" -> "Brock's", "Cynthias" -> "Cynthia's", "Team Rockets" -> "Team Rocket's", etc.
+  // Match any word ending in 's' that looks possessive (before another capitalized word)
+  rawName = rawName.replace(/\b([A-Z][a-z]+s)\s+(?=[A-Z])/g, function(match, word) {
+    // Common possessives: strip trailing 's', add "'s"
+    return word.slice(0, -1) + "'" + word.slice(-1) + " ";
+  });
+  // Handle "Team Rockets" specifically
+  rawName = rawName.replace(/Team Rockets\b/, "Team Rocket's");
+  // Handle "Professors" -> "Professor's"
+  rawName = rawName.replace(/Professors\b/, "Professor's");
+  // Handle "Explorers" -> "Explorer's"
+  rawName = rawName.replace(/Explorers\b/, "Explorer's");
 
   var name = rawName.toLowerCase()
     .replace(/[']/g, "%27").replace(/['']/g, "%27")
@@ -237,6 +246,48 @@ function cardSlug(cardName, setName) {
   }
 
   return name + "-" + num;
+}
+
+// ============================================================
+// Search API fallback: find the right PriceCharting page by name
+// ============================================================
+async function searchFallback(cardName, setName) {
+  if (!PC_TOKEN) return null;
+  // Build search query: card base name + number + set name
+  var m = cardName.match(/^(.+?)\s+(\d+)\/(\d+)$/);
+  var query;
+  if (m) {
+    query = m[1] + " " + m[2] + " " + setName;
+  } else {
+    // Promo: extract code or trailing number
+    var code = cardName.match(/((?:SWSH|SM|XY|BW|HGSS|DP)\d+)/i);
+    if (code) {
+      var baseName = cardName.replace(code[0], "").replace(/Prerelease Staff|Prerelease|Pokemon Center Exclusive|Cosmos Holo|Illustration Contest \d+|World Championship \d+|Staff/g, "").replace(/\s+/g, " ").trim();
+      query = baseName + " " + code[1];
+    } else {
+      query = cardName;
+    }
+  }
+
+  try {
+    var res = await fetch("https://www.pricecharting.com/api/product?t=" + PC_TOKEN + "&q=" + encodeURIComponent(query), {
+      signal: AbortSignal.timeout(10000),
+    });
+    if (!res.ok) return null;
+    var json = await res.json();
+    if (!json.id || !json["console-name"]) return null;
+
+    // Build the URL from the console-name and product-name
+    var consoleName = json["console-name"].toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    var productName = json["product-name"].replace(/\[.*?\]/g, "").replace(/#.*$/, "").trim().toLowerCase().replace(/[']/g, "%27").replace(/[^a-z0-9%]+/g, "-").replace(/^-|-$/g, "");
+    var num = json["product-name"].match(/#([A-Za-z]*\d+)$/);
+    var slug = productName + (num ? "-" + num[1].toLowerCase() : "");
+    var setSlug = consoleName;
+
+    return { setSlug: setSlug, cardSlug: slug };
+  } catch (e) {
+    return null;
+  }
 }
 
 // ============================================================
@@ -259,9 +310,10 @@ async function fetchSales(setSlug, cSlug) {
     }
   }
 
-  if (!res || !res.ok) return { sales: [], pop: null };
-  // Only reject redirects to the search page (means card not found)
-  if (res.redirected && res.url.includes("search-products")) return { sales: [], pop: null };
+  if (!res || !res.ok || (res.redirected && res.url.includes("search-products"))) {
+    // Slug failed — try search API fallback
+    return { sales: [], pop: null, slugFailed: true };
+  }
 
   var html;
   try { html = await res.text(); } catch (e) { return { sales: [], pop: null }; }
@@ -478,6 +530,18 @@ async function main() {
 
       var result = await fetchSales(setSlug, cSlug);
       callsMade++;
+
+      // If slug failed, try search API fallback
+      if (result && result.slugFailed) {
+        await new Promise(function (r) { setTimeout(r, 1050); });
+        var fallback = await searchFallback(card.name, s.name);
+        callsMade++;
+        if (fallback) {
+          await new Promise(function (r) { setTimeout(r, 1050); });
+          result = await fetchSales(fallback.setSlug, fallback.cardSlug);
+          callsMade++;
+        }
+      }
 
       if (!result || result.sales.length === 0) {
         // Still update pop data if available even when no sales
