@@ -72,7 +72,7 @@ function calcScore(rawPrice, psa10Price, psa9Price, gemRate, salesCount) {
   else liqScore = 0;
 
   // Weighted average
-  var finalScore = (roiScore * 0.30) + (upsideScore * 0.25) + (gemScore * 0.20) + (safetyScore * 0.15) + (liqScore * 0.10);
+  var finalScore = (roiScore * 0.25) + (upsideScore * 0.20) + (gemScore * 0.30) + (safetyScore * 0.15) + (liqScore * 0.10);
 
   // Clamp to 1-10
   finalScore = Math.max(1, Math.min(10, Math.round(finalScore * 10) / 10));
