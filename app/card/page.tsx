@@ -511,21 +511,21 @@ function CardDetailContent() {
                             <th style={{ textAlign: "left" as const, padding: "8px 6px", color: textTer, fontWeight: 500, fontSize: 11 }}>Sale Price</th>
                             <th style={{ textAlign: "left" as const, padding: "8px 6px", color: textTer, fontWeight: 500, fontSize: 11 }}>Grade</th>
                             <th style={{ textAlign: "left" as const, padding: "8px 6px", color: textTer, fontWeight: 500, fontSize: 11 }}>Date Sold</th>
-                            <th style={{ textAlign: "left" as const, padding: "8px 6px", color: textTer, fontWeight: 500, fontSize: 11 }}>Listing</th>
+                            <th style={{ textAlign: "left" as const, padding: "8px 6px", color: textTer, fontWeight: 500, fontSize: 11 }}>Source</th>
                             <th style={{ textAlign: "left" as const, padding: "8px 6px", color: textTer, fontWeight: 500, fontSize: 11 }}>Title</th>
                             <th style={{ textAlign: "right" as const, padding: "8px 6px", color: textTer, fontWeight: 500, fontSize: 11 }}></th>
                           </tr>
                         </thead>
                         <tbody>
                           {filtered.map(function(sale: any, idx: number) {
-                            var listingUrl = sale.source === "ebay" ? "https://www.ebay.com/itm/" + sale.listing_id : "https://www.tcgplayer.com/product/" + sale.listing_id;
                             var gradeDisplay = sale.grade === "raw" ? "Ungraded" : (sale.company + " " + sale.grade);
+                            var marketplace = sale.source === "ebay" ? "eBay" : "TCGPlayer";
                             return (
                               <tr key={sale.listing_id + "-" + idx} style={{ borderBottom: "1px solid " + border }}>
                                 <td style={{ padding: "8px 6px", fontFamily: "JetBrains Mono, monospace", fontWeight: 600, color: greenText }}>${sale.price.toFixed(2)}</td>
                                 <td style={{ padding: "8px 6px", color: textSec }}>{gradeDisplay}</td>
                                 <td style={{ padding: "8px 6px", color: textSec }}>{sale.date_sold}</td>
-                                <td style={{ padding: "8px 6px" }}><a href={listingUrl} target="_blank" rel="noopener noreferrer" style={{ color: isDark ? "#3b82f6" : "#1d4ed8", textDecoration: "none", fontSize: 11, fontWeight: 600 }}>{sale.source === "ebay" ? "eBay" : "TCGPlayer"} #{sale.listing_id.slice(-6)}</a></td>
+                                <td style={{ padding: "8px 6px", fontSize: 11, color: textSec }}>{marketplace}</td>
                                 <td style={{ padding: "8px 6px", color: textSec, maxWidth: 280, overflow: "hidden", textOverflow: "ellipsis" as const, whiteSpace: "nowrap" as const }}>{sale.title}</td>
                                 <td style={{ padding: "8px 6px", textAlign: "right" as const }}><button onClick={function() { setReportModal(sale); setReportReason("Not this card"); setReportDetails(""); }} style={{ color: isDark ? "#ef4444" : "#dc2626", background: "none", border: "none", cursor: "pointer", fontSize: 11, fontWeight: 700, padding: 0 }}>Report</button></td>
                               </tr>
