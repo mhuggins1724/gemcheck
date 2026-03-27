@@ -61,22 +61,42 @@ function CardDetailContent() {
   if (loading) return <div style={{ background: bg, color: text, minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16 }}>Loading card data...</div>;
   if (!card) return <div style={{ background: bg, color: text, minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16 }}>Card not found</div>;
 
-  // Calculate avg of last 10 sold for each grade from all_sales (filtered by blocked)
+  // Split sales by marketplace
   var allSales = (card.all_sales || []).filter(function(s: any) { return !blockedIds.has(s.listing_id); });
-  function avgLast5(filterFn: (s: any) => boolean) {
-    var filtered = allSales.filter(filterFn).slice(0, 5);
+  var ebaySales = allSales.filter(function(s: any) { return s.source === "ebay"; });
+  var tcgSales = allSales.filter(function(s: any) { return s.source === "tcgplayer"; });
+
+  function avgLast5(salesArr: any[], filterFn: (s: any) => boolean) {
+    var filtered = salesArr.filter(filterFn).slice(0, 5);
     if (filtered.length === 0) return null;
     var sum = filtered.reduce(function(a: number, s: any) { return a + s.price; }, 0);
     return Math.round(sum / filtered.length);
   }
-  var rawAvg = avgLast5(function(s: any) { return s.grade === "raw"; });
-  var psa9Avg = avgLast5(function(s: any) { return s.company === "PSA" && s.grade === "9"; });
-  var psa10Avg = avgLast5(function(s: any) { return s.company === "PSA" && s.grade === "10"; });
+  function lastSoldPrice(salesArr: any[], filterFn: (s: any) => boolean) {
+    var filtered = salesArr.filter(filterFn);
+    return filtered.length > 0 ? Math.round(filtered[0].price) : null;
+  }
 
-  // Use filtered avgs for profit calc when available
-  var effectiveRaw = rawAvg !== null ? rawAvg : card.raw_price;
-  var effectivePsa9 = psa9Avg !== null ? psa9Avg : card.psa9_price;
-  var effectivePsa10 = psa10Avg !== null ? psa10Avg : card.psa10_price;
+  // eBay pricing
+  var ebayRawAvg = avgLast5(ebaySales, function(s: any) { return s.grade === "raw"; });
+  var ebayPsa9Avg = avgLast5(ebaySales, function(s: any) { return s.company === "PSA" && s.grade === "9"; });
+  var ebayPsa10Avg = avgLast5(ebaySales, function(s: any) { return s.company === "PSA" && s.grade === "10"; });
+  var ebayRawLast = lastSoldPrice(ebaySales, function(s: any) { return s.grade === "raw"; });
+  var ebayPsa9Last = lastSoldPrice(ebaySales, function(s: any) { return s.company === "PSA" && s.grade === "9"; });
+  var ebayPsa10Last = lastSoldPrice(ebaySales, function(s: any) { return s.company === "PSA" && s.grade === "10"; });
+
+  // TCGPlayer pricing
+  var tcgRawAvg = avgLast5(tcgSales, function(s: any) { return s.grade === "raw"; });
+  var tcgPsa9Avg = avgLast5(tcgSales, function(s: any) { return s.company === "PSA" && s.grade === "9"; });
+  var tcgPsa10Avg = avgLast5(tcgSales, function(s: any) { return s.company === "PSA" && s.grade === "10"; });
+  var tcgRawLast = lastSoldPrice(tcgSales, function(s: any) { return s.grade === "raw"; });
+  var tcgPsa9Last = lastSoldPrice(tcgSales, function(s: any) { return s.company === "PSA" && s.grade === "9"; });
+  var tcgPsa10Last = lastSoldPrice(tcgSales, function(s: any) { return s.company === "PSA" && s.grade === "10"; });
+
+  // eBay profit calc (with 13% fee)
+  var effectiveRaw = ebayRawAvg !== null ? ebayRawAvg : card.raw_price;
+  var effectivePsa9 = ebayPsa9Avg !== null ? ebayPsa9Avg : card.psa9_price;
+  var effectivePsa10 = ebayPsa10Avg !== null ? ebayPsa10Avg : card.psa10_price;
   var ebayFeePct = 0.13;
   var netPsa10 = Math.round(effectivePsa10 * (1 - ebayFeePct));
   var netPsa9 = Math.round(effectivePsa9 * (1 - ebayFeePct));
@@ -85,14 +105,12 @@ function CardDetailContent() {
   var profit10 = netPsa10 - effectiveRaw - card.grading_fee;
   var profit9 = netPsa9 - effectiveRaw - card.grading_fee;
 
-  // Last sold for each grade
-  function lastSold(filterFn: (s: any) => boolean) {
-    var filtered = allSales.filter(filterFn);
-    return filtered.length > 0 ? Math.round(filtered[0].price) : null;
-  }
-  var rawLast = lastSold(function(s: any) { return s.grade === "raw"; });
-  var psa9Last = lastSold(function(s: any) { return s.company === "PSA" && s.grade === "9"; });
-  var psa10Last = lastSold(function(s: any) { return s.company === "PSA" && s.grade === "10"; });
+  // TCGPlayer profit calc (no marketplace fee for sellers)
+  var tcgEffectiveRaw = tcgRawAvg !== null ? tcgRawAvg : card.raw_price;
+  var tcgEffectivePsa9 = tcgPsa9Avg !== null ? tcgPsa9Avg : card.psa9_price;
+  var tcgEffectivePsa10 = tcgPsa10Avg !== null ? tcgPsa10Avg : card.psa10_price;
+  var tcgProfit10 = tcgEffectivePsa10 - tcgEffectiveRaw - card.grading_fee;
+  var tcgProfit9 = tcgEffectivePsa9 - tcgEffectiveRaw - card.grading_fee;
 
   // Gem rate from population data
   var psaPop = card.psa_pop || [];
@@ -199,31 +217,29 @@ function CardDetailContent() {
 
         {viewMode === "pricing" && (
           <div>
-            {/* Three price boxes */}
+            {/* Price boxes — eBay */}
+            <div style={{ fontSize: 12, fontWeight: 600, color: textSec, marginBottom: 8 }}>eBay Pricing</div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginBottom: 16 }}>
-              {/* Raw */}
               <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16 }}>
                 <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>Raw</div>
                 <div style={{ fontSize: 11, color: textSec, marginBottom: 2 }}>Avg of last 5 sold</div>
-                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{rawAvg !== null ? "$" + rawAvg.toLocaleString() : "$" + card.raw_price}</div>
+                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{ebayRawAvg !== null ? "$" + ebayRawAvg.toLocaleString() : "—"}</div>
                 <div style={{ fontSize: 11, color: textSec }}>Last Sold</div>
-                <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec }}>{rawLast !== null ? "$" + rawLast.toLocaleString() : "—"}</div>
+                <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec }}>{ebayRawLast !== null ? "$" + ebayRawLast.toLocaleString() : "—"}</div>
               </div>
-              {/* PSA 9 */}
               <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16 }}>
                 <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>PSA 9</div>
                 <div style={{ fontSize: 11, color: textSec, marginBottom: 2 }}>Avg of last 5 sold</div>
-                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{psa9Avg !== null ? "$" + psa9Avg.toLocaleString() : "$" + card.psa9_price}</div>
+                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{ebayPsa9Avg !== null ? "$" + ebayPsa9Avg.toLocaleString() : "—"}</div>
                 <div style={{ fontSize: 11, color: textSec }}>Last Sold</div>
-                <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec }}>{psa9Last !== null ? "$" + psa9Last.toLocaleString() : "—"}</div>
+                <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec }}>{ebayPsa9Last !== null ? "$" + ebayPsa9Last.toLocaleString() : "—"}</div>
               </div>
-              {/* PSA 10 */}
               <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16 }}>
                 <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>PSA 10</div>
                 <div style={{ fontSize: 11, color: textSec, marginBottom: 2 }}>Avg of last 5 sold</div>
-                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{psa10Avg !== null ? "$" + psa10Avg.toLocaleString() : "$" + card.psa10_price}</div>
+                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{ebayPsa10Avg !== null ? "$" + ebayPsa10Avg.toLocaleString() : "—"}</div>
                 <div style={{ fontSize: 11, color: textSec }}>Last Sold</div>
-                <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec, marginBottom: 8 }}>{psa10Last !== null ? "$" + psa10Last.toLocaleString() : "—"}</div>
+                <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec, marginBottom: 8 }}>{ebayPsa10Last !== null ? "$" + ebayPsa10Last.toLocaleString() : "—"}</div>
                 <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "4px 8px", borderRadius: 6, background: greenBg, width: "fit-content" }}>
                   <div style={{ width: 8, height: 8, borderRadius: "50%", background: green }}></div>
                   <span style={{ fontSize: 11, fontWeight: 600, color: greenText }}>{gemRate}% Gem Rate</span>
@@ -231,14 +247,41 @@ function CardDetailContent() {
               </div>
             </div>
 
-            {/* Profit calculator */}
+            {/* Price boxes — TCGPlayer */}
+            <div style={{ fontSize: 12, fontWeight: 600, color: textSec, marginBottom: 8 }}>TCGPlayer Pricing</div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginBottom: 16 }}>
+              <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16 }}>
+                <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>Raw</div>
+                <div style={{ fontSize: 11, color: textSec, marginBottom: 2 }}>Avg of last 5 sold</div>
+                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{tcgRawAvg !== null ? "$" + tcgRawAvg.toLocaleString() : "—"}</div>
+                <div style={{ fontSize: 11, color: textSec }}>Last Sold</div>
+                <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec }}>{tcgRawLast !== null ? "$" + tcgRawLast.toLocaleString() : "—"}</div>
+              </div>
+              <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16 }}>
+                <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>PSA 9</div>
+                <div style={{ fontSize: 11, color: textSec, marginBottom: 2 }}>Avg of last 5 sold</div>
+                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{tcgPsa9Avg !== null ? "$" + tcgPsa9Avg.toLocaleString() : "—"}</div>
+                <div style={{ fontSize: 11, color: textSec }}>Last Sold</div>
+                <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec }}>{tcgPsa9Last !== null ? "$" + tcgPsa9Last.toLocaleString() : "—"}</div>
+              </div>
+              <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16 }}>
+                <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>PSA 10</div>
+                <div style={{ fontSize: 11, color: textSec, marginBottom: 2 }}>Avg of last 5 sold</div>
+                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{tcgPsa10Avg !== null ? "$" + tcgPsa10Avg.toLocaleString() : "—"}</div>
+                <div style={{ fontSize: 11, color: textSec }}>Last Sold</div>
+                <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec }}>{tcgPsa10Last !== null ? "$" + tcgPsa10Last.toLocaleString() : "—"}</div>
+              </div>
+            </div>
+
+            {/* eBay Profit calculator */}
+            <div style={{ fontSize: 12, fontWeight: 600, color: textSec, marginBottom: 8 }}>eBay Grading Profit/Loss</div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 20 }}>
               <div style={{ padding: 14, borderRadius: 12, border: "1px solid " + border, position: "relative" as const, overflow: "hidden" }}>
                 <div style={{ position: "absolute" as const, top: 0, left: 0, width: 3, height: "100%", background: green }}></div>
                 <div style={{ fontSize: 12, color: textSec, marginBottom: 4, paddingLeft: 8 }}>If PSA 10 ({gemRate}% chance)</div>
                 <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: profit10 >= 0 ? greenText : redText, paddingLeft: 8 }}>{profit10 >= 0 ? "+" : ""}{profit10 < 0 ? "\u2212" : ""}${Math.abs(profit10).toLocaleString()}</div>
                 <div style={{ fontSize: 10, color: textTer, marginTop: 4, lineHeight: 1.6, paddingLeft: 8 }}>
-                  ${effectivePsa10.toLocaleString()} avg sale<br/>
+                  ${effectivePsa10.toLocaleString()} avg eBay sale<br/>
                   &minus; ${ebayFee10.toLocaleString()} eBay fee (13%)<br/>
                   &minus; ${effectiveRaw.toLocaleString()} avg raw cost<br/>
                   &minus; ${card.grading_fee} grading fee
@@ -249,9 +292,34 @@ function CardDetailContent() {
                 <div style={{ fontSize: 12, color: textSec, marginBottom: 4, paddingLeft: 8 }}>If PSA 9 ({100 - gemRate}% chance)</div>
                 <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: profit9 >= 0 ? greenText : redText, paddingLeft: 8 }}>{profit9 >= 0 ? "+" : ""}{profit9 < 0 ? "\u2212" : ""}${Math.abs(profit9).toLocaleString()}</div>
                 <div style={{ fontSize: 10, color: textTer, marginTop: 4, lineHeight: 1.6, paddingLeft: 8 }}>
-                  ${effectivePsa9.toLocaleString()} avg sale<br/>
+                  ${effectivePsa9.toLocaleString()} avg eBay sale<br/>
                   &minus; ${ebayFee9.toLocaleString()} eBay fee (13%)<br/>
                   &minus; ${effectiveRaw.toLocaleString()} avg raw cost<br/>
+                  &minus; ${card.grading_fee} grading fee
+                </div>
+              </div>
+            </div>
+
+            {/* TCGPlayer Profit calculator */}
+            <div style={{ fontSize: 12, fontWeight: 600, color: textSec, marginBottom: 8 }}>TCGPlayer Grading Profit/Loss</div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 20 }}>
+              <div style={{ padding: 14, borderRadius: 12, border: "1px solid " + border, position: "relative" as const, overflow: "hidden" }}>
+                <div style={{ position: "absolute" as const, top: 0, left: 0, width: 3, height: "100%", background: green }}></div>
+                <div style={{ fontSize: 12, color: textSec, marginBottom: 4, paddingLeft: 8 }}>If PSA 10 ({gemRate}% chance)</div>
+                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: tcgProfit10 >= 0 ? greenText : redText, paddingLeft: 8 }}>{tcgProfit10 >= 0 ? "+" : ""}{tcgProfit10 < 0 ? "\u2212" : ""}${Math.abs(tcgProfit10).toLocaleString()}</div>
+                <div style={{ fontSize: 10, color: textTer, marginTop: 4, lineHeight: 1.6, paddingLeft: 8 }}>
+                  ${tcgEffectivePsa10.toLocaleString()} avg TCG sale<br/>
+                  &minus; ${tcgEffectiveRaw.toLocaleString()} avg raw cost<br/>
+                  &minus; ${card.grading_fee} grading fee
+                </div>
+              </div>
+              <div style={{ padding: 14, borderRadius: 12, border: "1px solid " + border, position: "relative" as const, overflow: "hidden" }}>
+                <div style={{ position: "absolute" as const, top: 0, left: 0, width: 3, height: "100%", background: "#ef4444" }}></div>
+                <div style={{ fontSize: 12, color: textSec, marginBottom: 4, paddingLeft: 8 }}>If PSA 9 ({100 - gemRate}% chance)</div>
+                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: tcgProfit9 >= 0 ? greenText : redText, paddingLeft: 8 }}>{tcgProfit9 >= 0 ? "+" : ""}{tcgProfit9 < 0 ? "\u2212" : ""}${Math.abs(tcgProfit9).toLocaleString()}</div>
+                <div style={{ fontSize: 10, color: textTer, marginTop: 4, lineHeight: 1.6, paddingLeft: 8 }}>
+                  ${tcgEffectivePsa9.toLocaleString()} avg TCG sale<br/>
+                  &minus; ${tcgEffectiveRaw.toLocaleString()} avg raw cost<br/>
                   &minus; ${card.grading_fee} grading fee
                 </div>
               </div>
@@ -260,7 +328,7 @@ function CardDetailContent() {
             {/* Price history chart */}
             <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 14, padding: 20, marginBottom: 20 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12, flexWrap: "wrap" as const, gap: 8 }}>
-                <div style={{ fontSize: 14, fontWeight: 600 }}>Price History</div>
+                <div><div style={{ fontSize: 14, fontWeight: 600 }}>Price History</div><div style={{ fontSize: 10, color: textTer }}>eBay sales data</div></div>
                 <div style={{ display: "flex", gap: 4 }}>
                   {["raw", "PSA 9", "PSA 10"].map(function(g) {
                     var active = gradeView === g;
