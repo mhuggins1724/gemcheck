@@ -87,12 +87,41 @@ export default function Home() {
       </nav>
 
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "82px 24px 40px" }}>
-        {/* Hero section with gradient glow */}
-        <div style={{ textAlign: "center", padding: "56px 0 48px", position: "relative" as const }}>
-          <div style={{ position: "absolute" as const, top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: 600, height: 300, background: isDark ? "radial-gradient(ellipse, rgba(34,197,94,0.08) 0%, transparent 70%)" : "radial-gradient(ellipse, rgba(34,197,94,0.06) 0%, transparent 70%)", pointerEvents: "none" as const }}></div>
-          <h1 style={{ fontSize: 42, fontWeight: 700, letterSpacing: "-1.5px", marginBottom: 14, lineHeight: 1.1 }}>
-            Should you <span style={{ background: "linear-gradient(135deg, #22c55e, #3b82f6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>gem check it</span>?
-          </h1>
+        {/* Hero section with logo */}
+        <div style={{ textAlign: "center", padding: "48px 0 40px", position: "relative" as const }}>
+          <div style={{ position: "absolute" as const, top: "40%", left: "50%", transform: "translate(-50%, -50%)", width: 700, height: 350, background: isDark ? "radial-gradient(ellipse, rgba(34,197,94,0.1) 0%, rgba(59,130,246,0.05) 40%, transparent 70%)" : "radial-gradient(ellipse, rgba(34,197,94,0.08) 0%, rgba(59,130,246,0.03) 40%, transparent 70%)", pointerEvents: "none" as const }}></div>
+
+          {/* GEM CHECK Logo */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, marginBottom: 20 }}>
+            <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+              <defs>
+                <linearGradient id="gemGrad" x1="0" y1="0" x2="56" y2="56">
+                  <stop offset="0%" stopColor="#22c55e" />
+                  <stop offset="50%" stopColor="#3b82f6" />
+                  <stop offset="100%" stopColor="#8b5cf6" />
+                </linearGradient>
+                <linearGradient id="gemShine" x1="0" y1="0" x2="56" y2="56">
+                  <stop offset="0%" stopColor="#ffffff" stopOpacity="0.3" />
+                  <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+              {/* Diamond shape */}
+              <path d="M28 4L52 24L28 52L4 24Z" fill="url(#gemGrad)" />
+              {/* Top facet */}
+              <path d="M28 4L52 24L28 28L4 24Z" fill="url(#gemShine)" />
+              {/* Left facet highlight */}
+              <path d="M28 4L4 24L28 28Z" fill="rgba(255,255,255,0.15)" />
+              {/* Inner line details */}
+              <path d="M28 4L52 24L28 52L4 24Z" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
+              <path d="M4 24L28 28L52 24" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="0.5" />
+              <path d="M28 4L28 28L28 52" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="0.5" />
+            </svg>
+            <div>
+              <div style={{ fontSize: 48, fontWeight: 800, letterSpacing: "-2px", lineHeight: 1, background: "linear-gradient(135deg, #22c55e, #3b82f6, #8b5cf6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>GEM CHECK</div>
+              <div style={{ fontSize: 13, letterSpacing: "6px", textTransform: "uppercase" as const, color: textTer, marginTop: 2 }}>POKEMON CARD DATA</div>
+            </div>
+          </div>
+
           <p style={{ fontSize: 17, color: textSec, maxWidth: 540, margin: "0 auto 32px", lineHeight: 1.6 }}>
             Real eBay sales data, PSA pop reports, and grading profit analysis for every Pokemon card.
           </p>
