@@ -56,6 +56,7 @@ export default function Home() {
   var amberBg = isDark ? "rgba(234,179,8,0.1)" : "rgba(202,138,4,0.1)";
   var amberText = isDark ? "#facc15" : "#a16207";
   var amber = isDark ? "#eab308" : "#be185d";
+  var blueText = isDark ? "#60a5fa" : "#1e40af";
 
   return (
     <div style={{ background: bg, color: text, minHeight: "100vh", transition: "background 0.3s ease, color 0.3s ease" }}>

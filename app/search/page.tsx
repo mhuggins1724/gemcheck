@@ -114,6 +114,7 @@ function SearchContent() {
   var amberBg = isDark ? "rgba(234,179,8,0.1)" : "rgba(202,138,4,0.1)";
   var amberText = isDark ? "#facc15" : "#a16207";
   var amber = isDark ? "#eab308" : "#be185d";
+  var blueText = isDark ? "#60a5fa" : "#1e40af";
   var tertBg = isDark ? "#1e1e24" : "#e8e8ec";
 
   return (
