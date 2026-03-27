@@ -204,26 +204,26 @@ function CardDetailContent() {
               {/* Raw */}
               <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16 }}>
                 <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>Raw</div>
-                <div style={{ fontSize: 11, color: textSec, marginBottom: 2 }}>Last Sold</div>
-                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{rawLast !== null ? "$" + rawLast.toLocaleString() : "$" + card.raw_price}</div>
-                <div style={{ fontSize: 11, color: textSec }}>Avg of last 5 sold</div>
-                <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec }}>{rawAvg !== null ? "$" + rawAvg.toLocaleString() : "—"}</div>
+                <div style={{ fontSize: 11, color: textSec, marginBottom: 2 }}>Avg of last 5 sold</div>
+                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{rawAvg !== null ? "$" + rawAvg.toLocaleString() : "$" + card.raw_price}</div>
+                <div style={{ fontSize: 11, color: textSec }}>Last Sold</div>
+                <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec }}>{rawLast !== null ? "$" + rawLast.toLocaleString() : "—"}</div>
               </div>
               {/* PSA 9 */}
               <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16 }}>
                 <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>PSA 9</div>
-                <div style={{ fontSize: 11, color: textSec, marginBottom: 2 }}>Last Sold</div>
-                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{psa9Last !== null ? "$" + psa9Last.toLocaleString() : "$" + card.psa9_price}</div>
-                <div style={{ fontSize: 11, color: textSec }}>Avg of last 5 sold</div>
-                <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec }}>{psa9Avg !== null ? "$" + psa9Avg.toLocaleString() : "—"}</div>
+                <div style={{ fontSize: 11, color: textSec, marginBottom: 2 }}>Avg of last 5 sold</div>
+                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{psa9Avg !== null ? "$" + psa9Avg.toLocaleString() : "$" + card.psa9_price}</div>
+                <div style={{ fontSize: 11, color: textSec }}>Last Sold</div>
+                <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec }}>{psa9Last !== null ? "$" + psa9Last.toLocaleString() : "—"}</div>
               </div>
               {/* PSA 10 */}
               <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16 }}>
                 <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>PSA 10</div>
-                <div style={{ fontSize: 11, color: textSec, marginBottom: 2 }}>Last Sold</div>
-                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{psa10Last !== null ? "$" + psa10Last.toLocaleString() : "$" + card.psa10_price}</div>
-                <div style={{ fontSize: 11, color: textSec }}>Avg of last 5 sold</div>
-                <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec, marginBottom: 8 }}>{psa10Avg !== null ? "$" + psa10Avg.toLocaleString() : "—"}</div>
+                <div style={{ fontSize: 11, color: textSec, marginBottom: 2 }}>Avg of last 5 sold</div>
+                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{psa10Avg !== null ? "$" + psa10Avg.toLocaleString() : "$" + card.psa10_price}</div>
+                <div style={{ fontSize: 11, color: textSec }}>Last Sold</div>
+                <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec, marginBottom: 8 }}>{psa10Last !== null ? "$" + psa10Last.toLocaleString() : "—"}</div>
                 <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "4px 8px", borderRadius: 6, background: greenBg, width: "fit-content" }}>
                   <div style={{ width: 8, height: 8, borderRadius: "50%", background: green }}></div>
                   <span style={{ fontSize: 11, fontWeight: 600, color: greenText }}>{gemRate}% Gem Rate</span>

@@ -148,9 +148,9 @@ export default function SetDetailPage() {
               var popTotal = pop.reduce(function(a: number, b: number) { return a + b; }, 0);
               var pop10 = pop.length >= 10 ? pop[9] : 0;
               var realGemRate = popTotal > 0 ? Math.round((pop10 / popTotal) * 100) : card.gem_rate;
-              // Calculate avg last 10 sold price (same as card detail page)
+              // Calculate avg last 5 sold price (same as card detail page)
               var sales = card.all_sales || [];
-              var rawSales = sales.filter(function(s: any) { return s.grade === "raw"; }).slice(0, 10);
+              var rawSales = sales.filter(function(s: any) { return s.grade === "raw"; }).slice(0, 5);
               var avgPrice = rawSales.length > 0 ? Math.round(rawSales.reduce(function(a: number, s: any) { return a + s.price; }, 0) / rawSales.length) : card.raw_price;
               
               var gemBg2 = realGemRate >= 65 ? greenBg : realGemRate >= 45 ? amberBg : redBg;

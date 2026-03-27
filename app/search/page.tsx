@@ -197,7 +197,9 @@ function SearchContent() {
               var popTotal = pop.reduce(function(a: number, b: number) { return a + b; }, 0);
               var pop10 = pop.length >= 10 ? pop[9] : 0;
               var realGemRate = popTotal > 0 ? Math.round((pop10 / popTotal) * 100) : card.gem_rate;
-              var profit = card.psa10_price - card.raw_price - card.grading_fee;
+              var cardSales = card.all_sales || [];
+              var rawSales5 = cardSales.filter(function(s: any) { return s.grade === "raw"; }).slice(0, 5);
+              var rawAvgPrice = rawSales5.length > 0 ? Math.round(rawSales5.reduce(function(a: number, s: any) { return a + s.price; }, 0) / rawSales5.length) : card.raw_price;
               
               var gemBg2 = realGemRate >= 65 ? greenBg : realGemRate >= 45 ? amberBg : redBg;
               var gemColor = realGemRate >= 65 ? greenText : realGemRate >= 45 ? amberText : redText;
@@ -216,7 +218,7 @@ function SearchContent() {
                     <div style={{ fontSize: 11, color: textTer, marginBottom: 10 }}>{card.set_name}</div>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                       <span style={{ fontSize: 11, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", padding: "3px 8px", borderRadius: 6, background: gemBg2, color: gemColor }}>{realGemRate}% gem</span>
-                      <span style={{ fontSize: 12, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: profit >= 0 ? greenText : redText }}>{profit >= 0 ? "+" : ""}${profit}</span>
+                      <span style={{ fontSize: 12, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText }}>${rawAvgPrice.toLocaleString()}</span>
                     </div>
                   </div>
                 </a>
