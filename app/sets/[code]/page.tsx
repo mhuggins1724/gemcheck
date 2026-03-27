@@ -157,9 +157,8 @@ export default function SetDetailPage() {
               var gemColor = realGemRate >= 65 ? greenText : realGemRate >= 45 ? amberText : redText;
               return (
                 <a key={card.id} href={"/card?id=" + card.id} style={{ textDecoration: "none", color: "inherit" }}>
-                  <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 14, cursor: "pointer", position: "relative", overflow: "hidden", transition: "all 0.25s ease" }}>
-                    
-                    <div style={{ width: "100%", aspectRatio: "0.72", borderRadius: 8, marginBottom: 12, overflow: "hidden", background: gradients[card.card_type] || gradients.normal }}>
+                  <div className="card-tile" style={{ background: cardBg, border: "1px solid " + border, borderRadius: 14, padding: 14, cursor: "pointer", position: "relative", overflow: "hidden", boxShadow: isDark ? "0 2px 8px rgba(0,0,0,0.2)" : "0 2px 8px rgba(0,0,0,0.06)" }}>
+                    <div style={{ width: "100%", aspectRatio: "0.72", borderRadius: 10, marginBottom: 12, overflow: "hidden", background: gradients[card.card_type] || gradients.normal }}>
                       <img src={card.image_url || fallbackImg} alt={card.name} onError={handleImgError} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                     </div>
                     <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 2, whiteSpace: "normal", overflow: "visible", lineHeight: "1.3", minHeight: "34px" }}>{card.name}</div>

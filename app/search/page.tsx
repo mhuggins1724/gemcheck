@@ -206,7 +206,7 @@ function SearchContent() {
               var gemColor = realGemRate >= 65 ? greenText : realGemRate >= 45 ? amberText : redText;
               return (
                 <a key={card.id} href={"/card?id=" + card.id} style={{ textDecoration: "none", color: "inherit" }}>
-                  <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 14, cursor: "pointer", position: "relative", overflow: "hidden", transition: "all 0.25s ease" }}>
+                  <div className="card-tile" style={{ background: cardBg, border: "1px solid " + border, borderRadius: 14, padding: 14, cursor: "pointer", position: "relative", overflow: "hidden", boxShadow: isDark ? "0 2px 8px rgba(0,0,0,0.2)" : "0 2px 8px rgba(0,0,0,0.06)" }}>
                     
                     <div style={{ width: "100%", aspectRatio: "0.72", borderRadius: 8, marginBottom: 12, overflow: "hidden", background: gradients[card.card_type] || gradients.normal }}>
                       {card.image_url ? (

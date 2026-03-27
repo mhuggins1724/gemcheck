@@ -60,10 +60,12 @@ export default function Home() {
 
   return (
     <div style={{ background: bg, color: text, minHeight: "100vh", transition: "background 0.3s ease, color 0.3s ease" }}>
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: navBg, backdropFilter: "blur(20px)", borderBottom: "1px solid " + border }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", height: 60, display: "flex", alignItems: "center", gap: 24 }}>
+      {/* Accent line at top */}
+      <div style={{ position: "fixed", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg, #22c55e, #3b82f6, #8b5cf6, #22c55e)", backgroundSize: "200% 100%", zIndex: 200 }}></div>
+      <nav style={{ position: "fixed", top: 2, left: 0, right: 0, zIndex: 100, background: navBg, backdropFilter: "blur(20px)", borderBottom: "1px solid " + border }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", height: 58, display: "flex", alignItems: "center", gap: 24 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <div style={{ width: 28, height: 28, borderRadius: 8, background: green, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, color: "#fff", fontWeight: 700 }}>G</div>
+            <div style={{ width: 30, height: 30, borderRadius: 8, background: "linear-gradient(135deg, #22c55e, #16a34a)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15, color: "#fff", fontWeight: 700, boxShadow: "0 2px 8px rgba(34,197,94,0.3)" }}>G</div>
             <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: "-0.5px" }}>GemCheck</span>
           </div>
           <div style={{ display: "flex", gap: 4, marginLeft: 16 }}>
@@ -84,24 +86,35 @@ export default function Home() {
         </div>
       </nav>
 
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 24px 40px" }}>
-        <div style={{ textAlign: "center", padding: "48px 0 40px" }}>
-          <h1 style={{ fontSize: 38, fontWeight: 700, letterSpacing: "-1.5px", marginBottom: 12 }}>
-            Should you <span style={{ color: green }}>gem check it</span>?
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "82px 24px 40px" }}>
+        {/* Hero section with gradient glow */}
+        <div style={{ textAlign: "center", padding: "56px 0 48px", position: "relative" as const }}>
+          <div style={{ position: "absolute" as const, top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: 600, height: 300, background: isDark ? "radial-gradient(ellipse, rgba(34,197,94,0.08) 0%, transparent 70%)" : "radial-gradient(ellipse, rgba(34,197,94,0.06) 0%, transparent 70%)", pointerEvents: "none" as const }}></div>
+          <h1 style={{ fontSize: 42, fontWeight: 700, letterSpacing: "-1.5px", marginBottom: 14, lineHeight: 1.1 }}>
+            Should you <span style={{ background: "linear-gradient(135deg, #22c55e, #3b82f6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>gem check it</span>?
           </h1>
-          <p style={{ fontSize: 16, color: textSec, maxWidth: 520, margin: "0 auto 28px" }}>
-            Instant grading decisions powered by real eBay data, PSA pop reports, and gem rate analysis. Stop guessing, start profiting.
+          <p style={{ fontSize: 17, color: textSec, maxWidth: 540, margin: "0 auto 32px", lineHeight: 1.6 }}>
+            Real eBay sales data, PSA pop reports, and grading profit analysis for every Pokemon card.
           </p>
-          <div style={{ display: "flex", justifyContent: "center", gap: 32 }}>
-            <div style={{ textAlign: "center" }}><div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: green }}>{totalCards > 0 ? totalCards.toLocaleString() : "..."}</div><div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginTop: 2 }}>Cards tracked</div></div>
-            <div style={{ textAlign: "center" }}><div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: green }}>{totalSets > 0 ? totalSets : "..."}</div><div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginTop: 2 }}>Sets covered</div></div>
-            <div style={{ textAlign: "center" }}><div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: green }}>$2.4M</div><div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginTop: 2 }}>Sales analyzed</div></div>
+          <div style={{ display: "flex", justifyContent: "center", gap: 40 }}>
+            {[
+              { value: totalCards > 0 ? totalCards.toLocaleString() : "...", label: "Cards tracked" },
+              { value: totalSets > 0 ? String(totalSets) : "...", label: "Sets covered" },
+              { value: "$2.4M", label: "Sales analyzed" },
+            ].map(function(stat, i) {
+              return (
+                <div key={i} style={{ textAlign: "center" }}>
+                  <div style={{ fontSize: 26, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", background: "linear-gradient(135deg, #22c55e, #3b82f6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{stat.value}</div>
+                  <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "1px", marginTop: 4 }}>{stat.label}</div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
         <div style={{ marginBottom: 40 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-            <h2 style={{ fontSize: 16, fontWeight: 600 }}>Top rated cards</h2>
+            <h2 style={{ fontSize: 18, fontWeight: 700, letterSpacing: "-0.3px" }}>Top Cards</h2>
             <select value={homeSort} onChange={function(e) { setHomeSort(e.target.value); }} style={{ padding: "8px 14px", borderRadius: 8, fontSize: 12, fontWeight: 500, background: isDark ? "#1a1a20" : "#ffffff", color: text, border: "1px solid " + border, cursor: "pointer", outline: "none" }}>
               <option value="value-desc">Value High to Low</option>
               <option value="value-asc">Value Low to High</option>
@@ -133,9 +146,8 @@ export default function Home() {
               var gemColor = realGemRate >= 65 ? greenText : realGemRate >= 45 ? amberText : redText;
               return (
                 <a key={card.id} href={"/card?id=" + card.id} style={{ textDecoration: "none", color: "inherit" }}>
-                  <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 14, cursor: "pointer", position: "relative", overflow: "hidden", transition: "all 0.25s ease" }}>
-                    
-                    <div style={{ width: "100%", aspectRatio: "0.72", borderRadius: 8, marginBottom: 12, overflow: "hidden", background: gradients[card.card_type] || gradients.normal }}>
+                  <div className="card-tile" style={{ background: cardBg, border: "1px solid " + border, borderRadius: 14, padding: 14, cursor: "pointer", position: "relative", overflow: "hidden", boxShadow: isDark ? "0 2px 8px rgba(0,0,0,0.2)" : "0 2px 8px rgba(0,0,0,0.06)" }}>
+                    <div style={{ width: "100%", aspectRatio: "0.72", borderRadius: 10, marginBottom: 12, overflow: "hidden", background: gradients[card.card_type] || gradients.normal }}>
                       {card.image_url ? (
                         <img src={card.image_url} alt={card.name} style={{ width: "100%", height: "100%", objectFit: "cover", referrerPolicy: "no-referrer" } as any} />
                       ) : (
@@ -157,18 +169,20 @@ export default function Home() {
         </div>
 
         <div style={{ marginBottom: 40 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 16 }}>
-            <h2 style={{ fontSize: 16, fontWeight: 600 }}>Browse sets</h2>
-            <a href="#" style={{ fontSize: 12, fontWeight: 500, color: green, textDecoration: "none" }}>All sets &rarr;</a>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+            <h2 style={{ fontSize: 18, fontWeight: 700, letterSpacing: "-0.3px" }}>Browse Sets</h2>
+            <a href="/sets" style={{ fontSize: 12, fontWeight: 600, color: green, textDecoration: "none" }}>View all &rarr;</a>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 10 }}>
             {pokeSets.map(function(s) {
               return (
-                <div key={s.code} style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16, cursor: "pointer", textAlign: "center" as const, transition: "all 0.25s ease" }}>
-                  <div style={{ width: 48, height: 48, borderRadius: 10, margin: "0 auto 10px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 700, background: s.color + "20", color: s.color }}>{s.code}</div>
-                  <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 2 }}>{s.name}</div>
-                  <div style={{ fontSize: 11, color: textTer }}>{s.count} cards</div>
-                </div>
+                <a key={s.code} href={"/sets/" + s.code.toLowerCase()} style={{ textDecoration: "none", color: "inherit" }}>
+                  <div className="card-tile" style={{ background: cardBg, border: "1px solid " + border, borderRadius: 14, padding: 16, cursor: "pointer", textAlign: "center" as const, boxShadow: isDark ? "0 2px 8px rgba(0,0,0,0.2)" : "0 2px 8px rgba(0,0,0,0.06)" }}>
+                    <div style={{ width: 48, height: 48, borderRadius: 12, margin: "0 auto 10px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 700, background: s.color + "18", color: s.color, border: "1px solid " + s.color + "30" }}>{s.code}</div>
+                    <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 2 }}>{s.name}</div>
+                    <div style={{ fontSize: 11, color: textTer }}>{s.count} cards</div>
+                  </div>
+                </a>
               );
             })}
           </div>
