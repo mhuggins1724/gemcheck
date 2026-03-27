@@ -366,19 +366,23 @@ function CardDetailContent() {
                   yTicks.push({ y: tickY, label: "$" + Math.round(tickVal).toLocaleString() });
                 }
 
-                // X-axis labels (spread evenly, max 5)
-                // X-axis: show year for long ranges, month-day for short
-                var showYear = ["1Y", "5Y", "ALL"].includes(chartRange);
-                var xStep = Math.max(1, Math.floor(chartPoints.length / 5));
+                // X-axis labels — evenly spaced, max 5, no overlap
+                var showYear = ["6M", "1Y", "5Y", "ALL"].includes(chartRange);
+                var maxTicks = 5;
                 var xTicks: any[] = [];
-                for (var xi = 0; xi < chartPoints.length; xi += xStep) {
-                  var dateStr = chartPoints[xi].date || chartPoints[xi].date_sold || "";
-                  var label = showYear ? dateStr.slice(0, 7) : dateStr.slice(5);
-                  xTicks.push({ x: points[xi].x, label: label });
-                }
-                if (xTicks.length > 0 && xTicks[xTicks.length - 1].x !== points[points.length - 1].x) {
-                  var lastDate = chartPoints[chartPoints.length - 1].date || chartPoints[chartPoints.length - 1].date_sold || "";
-                  xTicks.push({ x: points[points.length - 1].x, label: showYear ? lastDate.slice(0, 7) : lastDate.slice(5) });
+                if (chartPoints.length <= maxTicks) {
+                  // Few points — show all
+                  for (var xi2 = 0; xi2 < chartPoints.length; xi2++) {
+                    var d = chartPoints[xi2].date || chartPoints[xi2].date_sold || "";
+                    xTicks.push({ x: points[xi2].x, label: showYear ? d.slice(0, 7) : d.slice(5, 10) });
+                  }
+                } else {
+                  // Spread evenly across the range
+                  for (var ti = 0; ti < maxTicks; ti++) {
+                    var idx = Math.round(ti * (chartPoints.length - 1) / (maxTicks - 1));
+                    var d2 = chartPoints[idx].date || chartPoints[idx].date_sold || "";
+                    xTicks.push({ x: points[idx].x, label: showYear ? d2.slice(0, 7) : d2.slice(5, 10) });
+                  }
                 }
 
                 return (
