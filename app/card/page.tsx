@@ -77,11 +77,13 @@ function CardDetailContent() {
   var effectiveRaw = rawAvg !== null ? rawAvg : card.raw_price;
   var effectivePsa9 = psa9Avg !== null ? psa9Avg : card.psa9_price;
   var effectivePsa10 = psa10Avg !== null ? psa10Avg : card.psa10_price;
-  var profit10 = effectivePsa10 - effectiveRaw - card.grading_fee;
-  var profit9 = effectivePsa9 - effectiveRaw - card.grading_fee;
-  var scoreColor = card.grade_score >= 7 ? green : card.grade_score >= 5 ? "#eab308" : "#ef4444";
-  var scoreBg = card.grade_score >= 7 ? greenBg : card.grade_score >= 5 ? amberBg : "rgba(239,68,68,0.1)";
-  var scoreLabel = card.grade_score === 0 ? "Not enough grading data to score this card" : card.grade_score >= 7 ? "Strong grading candidate" : card.grade_score >= 5 ? "Moderate — depends on your risk tolerance" : "Low return — not recommended";
+  var ebayFeePct = 0.13;
+  var netPsa10 = Math.round(effectivePsa10 * (1 - ebayFeePct));
+  var netPsa9 = Math.round(effectivePsa9 * (1 - ebayFeePct));
+  var ebayFee10 = Math.round(effectivePsa10 * ebayFeePct);
+  var ebayFee9 = Math.round(effectivePsa9 * ebayFeePct);
+  var profit10 = netPsa10 - effectiveRaw - card.grading_fee;
+  var profit9 = netPsa9 - effectiveRaw - card.grading_fee;
 
   // Last sold for each grade
   function lastSold(filterFn: (s: any) => boolean) {
@@ -178,20 +180,6 @@ function CardDetailContent() {
               <span style={{ fontSize: 11, fontWeight: 600, padding: "4px 10px", borderRadius: 6, textTransform: "uppercase" as const, background: "rgba(139,92,246,0.15)", color: "#a78bfa" }}>{card.rarity}</span>
             </div>
 
-            <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 14, padding: 16, marginBottom: 16 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 12 }}>
-                <div style={{ width: 56, height: 56, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: card.grade_score === 0 ? 12 : 20, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", flexShrink: 0, background: card.grade_score === 0 ? (isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)") : scoreBg, color: card.grade_score === 0 ? textTer : scoreColor }}>{card.grade_score === 0 ? "N/A" : card.grade_score}</div>
-                <div>
-                  <h3 style={{ fontSize: 14, fontWeight: 600, marginBottom: 2 }}>{scoreLabel}</h3>
-                  <p style={{ fontSize: 12, color: textSec, lineHeight: 1.4 }}>{gemRate}% gem rate &middot; {profit10 >= 0 ? "+$" + profit10 : "-$" + Math.abs(profit10)} expected on PSA 10</p>
-                </div>
-              </div>
-              <div>
-                <div style={{ display: "flex", justifyContent: "space-between", fontSize: 10, color: textTer, marginBottom: 3 }}><span>0%</span><span>Gem rate: {gemRate}%</span><span>100%</span></div>
-                <div style={{ height: 5, background: tertBg, borderRadius: 3, overflow: "hidden" }}><div style={{ height: "100%", width: gemRate + "%", borderRadius: 3, background: green }}></div></div>
-              </div>
-            </div>
-
             <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
               <button style={{ flex: 1, padding: 12, borderRadius: 10, fontSize: 13, fontWeight: 600, background: green, color: "#fff", border: "none", cursor: "pointer" }}>Add to watchlist</button>
               <button style={{ flex: 1, padding: 12, borderRadius: 10, fontSize: 13, fontWeight: 600, background: "transparent", border: "1px solid " + border, color: textSec, cursor: "pointer" }}>View on eBay</button>
@@ -248,14 +236,24 @@ function CardDetailContent() {
               <div style={{ padding: 14, borderRadius: 12, border: "1px solid " + border, position: "relative" as const, overflow: "hidden" }}>
                 <div style={{ position: "absolute" as const, top: 0, left: 0, width: 3, height: "100%", background: green }}></div>
                 <div style={{ fontSize: 12, color: textSec, marginBottom: 4, paddingLeft: 8 }}>If PSA 10 ({gemRate}% chance)</div>
-                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: greenText, paddingLeft: 8 }}>{profit10 >= 0 ? "+" : ""}{profit10 < 0 ? "\u2212" : ""}${Math.abs(profit10)}</div>
-                <div style={{ fontSize: 10, color: textTer, marginTop: 4, lineHeight: 1.5, paddingLeft: 8 }}>${effectivePsa10.toLocaleString()} avg sale &minus; ${effectiveRaw.toLocaleString()} avg raw &minus; ${card.grading_fee} grading</div>
+                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: profit10 >= 0 ? greenText : redText, paddingLeft: 8 }}>{profit10 >= 0 ? "+" : ""}{profit10 < 0 ? "\u2212" : ""}${Math.abs(profit10).toLocaleString()}</div>
+                <div style={{ fontSize: 10, color: textTer, marginTop: 4, lineHeight: 1.6, paddingLeft: 8 }}>
+                  ${effectivePsa10.toLocaleString()} avg sale<br/>
+                  &minus; ${ebayFee10.toLocaleString()} eBay fee (13%)<br/>
+                  &minus; ${effectiveRaw.toLocaleString()} avg raw cost<br/>
+                  &minus; ${card.grading_fee} grading fee
+                </div>
               </div>
               <div style={{ padding: 14, borderRadius: 12, border: "1px solid " + border, position: "relative" as const, overflow: "hidden" }}>
                 <div style={{ position: "absolute" as const, top: 0, left: 0, width: 3, height: "100%", background: "#ef4444" }}></div>
                 <div style={{ fontSize: 12, color: textSec, marginBottom: 4, paddingLeft: 8 }}>If PSA 9 ({100 - gemRate}% chance)</div>
-                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: profit9 >= 0 ? greenText : redText, paddingLeft: 8 }}>{profit9 >= 0 ? "+" : ""}{profit9 < 0 ? "\u2212" : ""}${Math.abs(profit9)}</div>
-                <div style={{ fontSize: 10, color: textTer, marginTop: 4, lineHeight: 1.5, paddingLeft: 8 }}>${effectivePsa9.toLocaleString()} avg sale &minus; ${effectiveRaw.toLocaleString()} avg raw &minus; ${card.grading_fee} grading</div>
+                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: profit9 >= 0 ? greenText : redText, paddingLeft: 8 }}>{profit9 >= 0 ? "+" : ""}{profit9 < 0 ? "\u2212" : ""}${Math.abs(profit9).toLocaleString()}</div>
+                <div style={{ fontSize: 10, color: textTer, marginTop: 4, lineHeight: 1.6, paddingLeft: 8 }}>
+                  ${effectivePsa9.toLocaleString()} avg sale<br/>
+                  &minus; ${ebayFee9.toLocaleString()} eBay fee (13%)<br/>
+                  &minus; ${effectiveRaw.toLocaleString()} avg raw cost<br/>
+                  &minus; ${card.grading_fee} grading fee
+                </div>
               </div>
             </div>
 

@@ -201,13 +201,10 @@ function SearchContent() {
               
               var gemBg2 = realGemRate >= 65 ? greenBg : realGemRate >= 45 ? amberBg : redBg;
               var gemColor = realGemRate >= 65 ? greenText : realGemRate >= 45 ? amberText : redText;
-              var vBg = card.grade_score === 0 ? (isDark ? "#4a4a5e" : "#9ca3af") : card.grade_score >= 7 ? green : card.grade_score >= 5 ? amber : "#ef4444";
-              var vColor = card.grade_score >= 5 && card.grade_score < 7 ? "#000" : "#fff";
-              var vLabel = card.grade_score === 0 ? "N/A" : String(card.grade_score);
               return (
                 <a key={card.id} href={"/card?id=" + card.id} style={{ textDecoration: "none", color: "inherit" }}>
                   <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 14, cursor: "pointer", position: "relative", overflow: "hidden", transition: "all 0.25s ease" }}>
-                    <div style={{ position: "absolute", top: 10, right: 10, zIndex: 2, fontSize: 10, fontWeight: 600, textTransform: "uppercase" as const, letterSpacing: "0.5px", padding: "4px 8px", borderRadius: 6, background: vBg, color: vColor }}>{vLabel}</div>
+                    
                     <div style={{ width: "100%", aspectRatio: "0.72", borderRadius: 8, marginBottom: 12, overflow: "hidden", background: gradients[card.card_type] || gradients.normal }}>
                       {card.image_url ? (
                         <img src={card.image_url} alt={card.name} style={{ width: "100%", height: "100%", objectFit: "cover", referrerPolicy: "no-referrer" } as any} />

@@ -21,7 +21,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [totalCards, setTotalCards] = useState(0);
   const [totalSets, setTotalSets] = useState(0);
-  const [homeSort, setHomeSort] = useState("grade-desc");
+  const [homeSort, setHomeSort] = useState("value-desc");
 
   useEffect(function() {
     supabase.from("cards").select("*", { count: "exact", head: true }).then(function(res) {
@@ -102,12 +102,6 @@ export default function Home() {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
             <h2 style={{ fontSize: 16, fontWeight: 600 }}>Top rated cards</h2>
             <select value={homeSort} onChange={function(e) { setHomeSort(e.target.value); }} style={{ padding: "8px 14px", borderRadius: 8, fontSize: 12, fontWeight: 500, background: isDark ? "#1a1a20" : "#ffffff", color: text, border: "1px solid " + border, cursor: "pointer", outline: "none" }}>
-              <option value="grade-desc">Grade Score High to Low</option>
-              <option value="grade-asc">Grade Score Low to High</option>
-              <option value="grade-it">Grade It Only</option>
-              <option value="maybe-only">Maybe Only</option>
-              <option value="skip-only">Skip Only</option>
-              <option value="nodata-only">No Data Only</option>
               <option value="value-desc">Value High to Low</option>
               <option value="value-asc">Value Low to High</option>
               <option value="gem-desc">Gem Rate High to Low</option>
@@ -120,13 +114,7 @@ export default function Home() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 12 }}>
             {(function() {
               var sorted = [...cards];
-              if (homeSort === "grade-desc") sorted.sort(function(a, b) { return b.grade_score - a.grade_score; });
-              else if (homeSort === "grade-asc") sorted.sort(function(a, b) { return a.grade_score - b.grade_score; });
-              else if (homeSort === "grade-it") sorted = sorted.filter(function(c) { return c.grade_score >= 7; }).sort(function(a, b) { return b.grade_score - a.grade_score; });
-              else if (homeSort === "maybe-only") sorted = sorted.filter(function(c) { return c.grade_score >= 5 && c.grade_score < 7; }).sort(function(a, b) { return b.grade_score - a.grade_score; });
-              else if (homeSort === "skip-only") sorted = sorted.filter(function(c) { return c.grade_score > 0 && c.grade_score < 5; }).sort(function(a, b) { return b.grade_score - a.grade_score; });
-              else if (homeSort === "nodata-only") sorted = sorted.filter(function(c) { return c.grade_score === 0; });
-              else if (homeSort === "value-desc") sorted.sort(function(a, b) { return b.raw_price - a.raw_price; });
+              if (homeSort === "value-desc") sorted.sort(function(a, b) { return b.raw_price - a.raw_price; });
               else if (homeSort === "value-asc") sorted.sort(function(a, b) { return a.raw_price - b.raw_price; });
               else if (homeSort === "gem-desc") sorted.sort(function(a, b) { return (b.gem_rate || 0) - (a.gem_rate || 0); });
               else if (homeSort === "gem-asc") sorted.sort(function(a, b) { return (a.gem_rate || 0) - (b.gem_rate || 0); });
@@ -140,13 +128,10 @@ export default function Home() {
               
               var gemBg2 = realGemRate >= 65 ? greenBg : realGemRate >= 45 ? amberBg : redBg;
               var gemColor = realGemRate >= 65 ? greenText : realGemRate >= 45 ? amberText : redText;
-              var vBg = card.grade_score === 0 ? (isDark ? "#4a4a5e" : "#9ca3af") : card.grade_score >= 7 ? green : card.grade_score >= 5 ? amber : "#ef4444";
-              var vColor = card.grade_score >= 5 && card.grade_score < 7 ? "#000" : "#fff";
-              var vLabel = card.grade_score === 0 ? "N/A" : String(card.grade_score);
               return (
                 <a key={card.id} href={"/card?id=" + card.id} style={{ textDecoration: "none", color: "inherit" }}>
                   <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 14, cursor: "pointer", position: "relative", overflow: "hidden", transition: "all 0.25s ease" }}>
-                    <div style={{ position: "absolute", top: 10, right: 10, zIndex: 2, fontSize: 10, fontWeight: 600, textTransform: "uppercase" as const, letterSpacing: "0.5px", padding: "4px 8px", borderRadius: 6, background: vBg, color: vColor }}>{vLabel}</div>
+                    
                     <div style={{ width: "100%", aspectRatio: "0.72", borderRadius: 8, marginBottom: 12, overflow: "hidden", background: gradients[card.card_type] || gradients.normal }}>
                       {card.image_url ? (
                         <img src={card.image_url} alt={card.name} style={{ width: "100%", height: "100%", objectFit: "cover", referrerPolicy: "no-referrer" } as any} />
