@@ -63,7 +63,7 @@ export default function SetsPage() {
           <path id="promoArc" d="M 20,60 A 32,32 0 0,1 80,60" fill="none" />
         </defs>
         <polygon points="50,5 62,35 95,35 68,55 78,88 50,70 22,88 32,55 5,35 38,35" fill="#111" />
-        <text fill="white" fontSize="13" fontWeight="700" fontFamily="Inter, sans-serif" letterSpacing="2">
+        <text fill="white" fontSize="16" fontWeight="700" fontFamily="Inter, sans-serif" letterSpacing="3">
           <textPath href="#promoArc" startOffset="50%" textAnchor="middle">PROMO</textPath>
         </text>
       </svg>
