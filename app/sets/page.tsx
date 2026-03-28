@@ -58,11 +58,15 @@ export default function SetsPage() {
 
   function PromoIcon() {
     return (
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "100%", height: "100%" }}>
-        <div style={{ padding: "4px 12px", borderRadius: 6, background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.2)", backdropFilter: "blur(4px)" }}>
-          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase" as const, color: "#fff" }}>PROMO</span>
-        </div>
-      </div>
+      <svg viewBox="0 0 100 100" style={{ width: 56, height: 56 }}>
+        <defs>
+          <path id="promoArc" d="M 20,60 A 32,32 0 0,1 80,60" fill="none" />
+        </defs>
+        <polygon points="50,5 62,35 95,35 68,55 78,88 50,70 22,88 32,55 5,35 38,35" fill="#111" />
+        <text fill="white" fontSize="13" fontWeight="700" fontFamily="Inter, sans-serif" letterSpacing="2">
+          <textPath href="#promoArc" startOffset="50%" textAnchor="middle">PROMO</textPath>
+        </text>
+      </svg>
     );
   }
 
