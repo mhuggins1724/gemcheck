@@ -58,15 +58,11 @@ export default function SetsPage() {
 
   function PromoIcon() {
     return (
-      <svg viewBox="0 0 100 100" style={{ width: "100%", height: "100%" }}>
-        <defs>
-          <path id="promoArc" d="M 25,58 A 30,30 0 0,1 75,58" fill="none" />
-        </defs>
-        <polygon points="50,2 63,35 98,35 70,57 82,92 50,72 18,92 30,57 2,35 37,35" fill="#111" />
-        <text fill="white" fontSize="15" fontWeight="900" fontFamily="Arial, sans-serif" fontStyle="italic" letterSpacing="2">
-          <textPath href="#promoArc" startOffset="50%" textAnchor="middle">PROMO</textPath>
-        </text>
-      </svg>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "100%", height: "100%" }}>
+        <div style={{ padding: "4px 12px", borderRadius: 6, background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.2)", backdropFilter: "blur(4px)" }}>
+          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase" as const, color: "#fff" }}>PROMO</span>
+        </div>
+      </div>
     );
   }
 
@@ -131,10 +127,10 @@ export default function SetsPage() {
                             {(s.pack_image_url || s.logo_url) ? (
                               <div style={{ position: "absolute" as const, inset: 0, backgroundImage: "url(" + (s.pack_image_url || s.logo_url) + ")", backgroundSize: "cover", backgroundPosition: "center", filter: "blur(" + (s.pack_image_url ? "4px" : "8px") + ") saturate(1.4)", transform: "scale(1.15)", opacity: s.pack_image_url ? 0.85 : 0.7 }}></div>
                             ) : null}
-                            <div style={{ position: "absolute" as const, inset: 0, background: (s.pack_image_url || s.logo_url) ? (isDark ? "rgba(0,0,0,0.35)" : "rgba(0,0,0,0.2)") : co.surface }}></div>
+                            <div style={{ position: "absolute" as const, inset: 0, background: (s.pack_image_url || s.logo_url) ? (isDark ? "rgba(0,0,0,0.35)" : "rgba(0,0,0,0.2)") : (isDark ? "linear-gradient(135deg, #1a1a2e, #2d2d44)" : "linear-gradient(135deg, #e8e8f0, #d0d0e0)") }}></div>
                             {/* Crisp logo on top */}
-                            <div style={{ position: "relative" as const, zIndex: 1, padding: 12 }}>
-                              {isPromoSet ? (
+                            <div style={{ position: "relative" as const, zIndex: 1, padding: 10, display: "flex", alignItems: "center", justifyContent: "center", width: "100%", height: "100%" }}>
+                              {isPromoSet && !s.logo_url ? (
                                 <PromoIcon />
                               ) : s.logo_url ? (
                                 <img src={s.logo_url} alt={s.name} style={{ maxWidth: "90%", maxHeight: 60, objectFit: "contain", filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.4))" }} onError={function(e: any) { e.target.style.display = "none"; }} />
