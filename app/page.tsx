@@ -91,35 +91,28 @@ export default function Home() {
         <div style={{ textAlign: "center", padding: "48px 0 40px", position: "relative" as const }}>
           <div style={{ position: "absolute" as const, top: "40%", left: "50%", transform: "translate(-50%, -50%)", width: 700, height: 350, background: isDark ? "radial-gradient(ellipse, rgba(34,197,94,0.1) 0%, rgba(59,130,246,0.05) 40%, transparent 70%)" : "radial-gradient(ellipse, rgba(34,197,94,0.08) 0%, rgba(59,130,246,0.03) 40%, transparent 70%)", pointerEvents: "none" as const }}></div>
 
-          {/* GEM CHECK Logo */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, marginBottom: 20 }}>
-            <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
-              <defs>
-                <linearGradient id="gemGrad" x1="0" y1="0" x2="56" y2="56">
-                  <stop offset="0%" stopColor="#22c55e" />
-                  <stop offset="50%" stopColor="#3b82f6" />
-                  <stop offset="100%" stopColor="#8b5cf6" />
-                </linearGradient>
-                <linearGradient id="gemShine" x1="0" y1="0" x2="56" y2="56">
-                  <stop offset="0%" stopColor="#ffffff" stopOpacity="0.3" />
-                  <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
-                </linearGradient>
-              </defs>
-              {/* Diamond shape */}
-              <path d="M28 4L52 24L28 52L4 24Z" fill="url(#gemGrad)" />
-              {/* Top facet */}
-              <path d="M28 4L52 24L28 28L4 24Z" fill="url(#gemShine)" />
-              {/* Left facet highlight */}
-              <path d="M28 4L4 24L28 28Z" fill="rgba(255,255,255,0.15)" />
-              {/* Inner line details */}
-              <path d="M28 4L52 24L28 52L4 24Z" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
-              <path d="M4 24L28 28L52 24" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="0.5" />
-              <path d="M28 4L28 28L28 52" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="0.5" />
-            </svg>
-            <div>
-              <div style={{ fontSize: 48, fontWeight: 800, letterSpacing: "-2px", lineHeight: 1, background: "linear-gradient(135deg, #22c55e, #3b82f6, #8b5cf6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>GEM CHECK</div>
-              <div style={{ fontSize: 13, letterSpacing: "6px", textTransform: "uppercase" as const, color: textTer, marginTop: 2 }}>POKEMON CARD DATA</div>
+          {/* GEM CHECK Logo — Shield + Checkmark with gradient coloring + gradient line */}
+          <div style={{ display: "inline-block", marginBottom: 20 }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
+              <svg width="56" height="64" viewBox="0 0 52 60" fill="none">
+                <defs>
+                  <linearGradient id="shieldGrad" x1="0" y1="0" x2="52" y2="60">
+                    <stop offset="0%" stopColor="#22c55e" />
+                    <stop offset="50%" stopColor="#3b82f6" />
+                    <stop offset="100%" stopColor="#8b5cf6" />
+                  </linearGradient>
+                </defs>
+                <path d="M26 2L50 14V34C50 46 38 54 26 58C14 54 2 46 2 34V14L26 2Z" fill="url(#shieldGrad)" />
+                <path d="M26 2L50 14V34C50 46 38 54 26 58C14 54 2 46 2 34V14L26 2Z" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" />
+                <path d="M26 2L50 14V20L26 8L2 20V14L26 2Z" fill="rgba(255,255,255,0.15)" />
+                <path d="M16 30L23 37L36 22" fill="none" stroke="#fff" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <div>
+                <div style={{ fontSize: 48, fontWeight: 800, letterSpacing: "-2px", lineHeight: 1, background: "linear-gradient(135deg, #22c55e, #3b82f6, #8b5cf6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>GEM CHECK</div>
+                <div style={{ fontSize: 13, letterSpacing: "6px", textTransform: "uppercase" as const, color: textTer, marginTop: 4 }}>POKEMON CARD DATA</div>
+              </div>
             </div>
+            <div style={{ width: "100%", height: 2, background: "linear-gradient(90deg, transparent, #22c55e, #3b82f6, #8b5cf6, transparent)", marginTop: 12, borderRadius: 1 }}></div>
           </div>
 
           <p style={{ fontSize: 17, color: textSec, maxWidth: 540, margin: "0 auto 32px", lineHeight: 1.6 }}>
