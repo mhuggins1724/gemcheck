@@ -109,12 +109,15 @@ export default function SetDetailPage() {
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 24px 40px" }}>
         <a href="/sets" style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 13, color: textSec, marginBottom: 20, padding: "6px 12px", borderRadius: 8, textDecoration: "none" }}>&larr; Back to sets</a>
 
-        {/* Set header with blurred logo background */}
+        {/* Set header with blurred pack/logo background */}
         <div style={{ position: "relative" as const, borderRadius: 16, overflow: "hidden", marginBottom: 24, padding: "32px 24px", textAlign: "center" }}>
-          {setInfo && setInfo.logo_url ? (
-            <div style={{ position: "absolute" as const, inset: 0, backgroundImage: "url(" + setInfo.logo_url + ")", backgroundSize: "cover", backgroundPosition: "center", filter: "blur(20px) saturate(1.3)", transform: "scale(1.3)", opacity: 0.5 }}></div>
-          ) : null}
-          <div style={{ position: "absolute" as const, inset: 0, background: setInfo && setInfo.logo_url ? (isDark ? "rgba(0,0,0,0.55)" : "rgba(0,0,0,0.35)") : co.surface }}></div>
+          {(function() {
+            var bgImg = (setInfo && setInfo.pack_image_url) || (setInfo && setInfo.logo_url);
+            var isPack = setInfo && setInfo.pack_image_url;
+            if (!bgImg) return null;
+            return <div style={{ position: "absolute" as const, inset: 0, backgroundImage: "url(" + bgImg + ")", backgroundSize: "cover", backgroundPosition: "center", filter: "blur(" + (isPack ? "14px" : "20px") + ") saturate(1.3)", transform: "scale(1.3)", opacity: isPack ? 0.6 : 0.5 }}></div>;
+          })()}
+          <div style={{ position: "absolute" as const, inset: 0, background: (setInfo && (setInfo.pack_image_url || setInfo.logo_url)) ? (isDark ? "rgba(0,0,0,0.5)" : "rgba(0,0,0,0.3)") : co.surface }}></div>
           <div style={{ position: "relative" as const, zIndex: 1 }}>
             {setInfo && setInfo.logo_url && (
               <div style={{ display: "flex", justifyContent: "center", marginBottom: 16 }}>
