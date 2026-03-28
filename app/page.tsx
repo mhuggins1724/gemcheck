@@ -91,8 +91,9 @@ export default function Home() {
         <div style={{ textAlign: "center", padding: "48px 0 40px", position: "relative" as const }}>
           <div style={{ position: "absolute" as const, top: "40%", left: "50%", transform: "translate(-50%, -50%)", width: 700, height: 350, background: isDark ? "radial-gradient(ellipse, rgba(34,197,94,0.1) 0%, rgba(59,130,246,0.05) 40%, transparent 70%)" : "radial-gradient(ellipse, rgba(34,197,94,0.08) 0%, rgba(59,130,246,0.03) 40%, transparent 70%)", pointerEvents: "none" as const }}></div>
 
-          {/* GEM CHECK Logo — Shield + Checkmark with gradient coloring + gradient line */}
-          <div style={{ display: "inline-block", marginBottom: 20 }}>
+          {/* GEM CHECK Logo — Shield + Checkmark with gradient coloring + gradient line + neon glow */}
+          <div style={{ display: "inline-block", marginBottom: 20, position: "relative" as const }}>
+            <div style={{ position: "absolute" as const, top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: 500, height: 120, background: "radial-gradient(ellipse, rgba(34,197,94,0.2) 0%, rgba(59,130,246,0.12) 30%, rgba(139,92,246,0.08) 50%, transparent 70%)", filter: "blur(20px)", pointerEvents: "none" as const }}></div>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
               <svg width="56" height="64" viewBox="0 0 52 60" fill="none">
                 <defs>
