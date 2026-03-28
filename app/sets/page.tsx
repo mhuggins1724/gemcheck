@@ -5,7 +5,8 @@ import { supabase } from "../lib/supabase";
 import { useTheme } from "../lib/useTheme";
 
 var eraOrder = ["Mega Evolution", "Scarlet & Violet", "Sword & Shield", "Sun & Moon", "XY", "Black & White", "Call of Legends", "HeartGold SoulSilver", "Platinum", "Diamond & Pearl", "EX Ruby & Sapphire", "Pokemon E-Card", "Legendary Collection", "Neo", "Gym", "Base"];
-var eraColors: Record<string, string> = { "Scarlet & Violet": "#e53e3e", "Sword & Shield": "#3182ce", "Sun & Moon": "#dd6b20", "XY": "#805ad5", "Mega Evolution": "#38a169", "Black & White": "#4a5568", "Call of Legends": "#d69e2e", "HeartGold SoulSilver": "#d69e2e", "Platinum": "#a0aec0", "Diamond & Pearl": "#5b8dd9", "EX Ruby & Sapphire": "#b91c1c", "Pokemon E-Card": "#6d28d9", "Legendary Collection": "#d97706", "Neo": "#2563eb", "Gym": "#b45309", "Base": "#b7791f" };
+var jpEraOrder = ["Japanese Scarlet & Violet", "Japanese Sword & Shield", "Japanese Sun & Moon", "Japanese XY", "Japanese Black & White", "Japanese HeartGold & SoulSilver", "Japanese Platinum", "Japanese Diamond & Pearl", "Japanese EX", "Japanese E-Card", "Japanese Neo", "Japanese Gym", "Japanese Base & Classic", "Japanese Promos & Decks", "Japanese Other"];
+var eraColors: Record<string, string> = { "Scarlet & Violet": "#e53e3e", "Sword & Shield": "#3182ce", "Sun & Moon": "#dd6b20", "XY": "#805ad5", "Mega Evolution": "#38a169", "Black & White": "#4a5568", "Call of Legends": "#d69e2e", "HeartGold SoulSilver": "#d69e2e", "Platinum": "#a0aec0", "Diamond & Pearl": "#5b8dd9", "EX Ruby & Sapphire": "#b91c1c", "Pokemon E-Card": "#6d28d9", "Legendary Collection": "#d97706", "Neo": "#2563eb", "Gym": "#b45309", "Base": "#b7791f", "Japanese Scarlet & Violet": "#e53e3e", "Japanese Sword & Shield": "#3182ce", "Japanese Sun & Moon": "#dd6b20", "Japanese XY": "#805ad5", "Japanese Black & White": "#4a5568", "Japanese HeartGold & SoulSilver": "#d69e2e", "Japanese Platinum": "#a0aec0", "Japanese Diamond & Pearl": "#5b8dd9", "Japanese EX": "#b91c1c", "Japanese E-Card": "#6d28d9", "Japanese Neo": "#2563eb", "Japanese Gym": "#b45309", "Japanese Base & Classic": "#b7791f", "Japanese Promos & Decks": "#888", "Japanese Other": "#666" };
 var eraBgColors: Record<string, string> = { "Scarlet & Violet": "linear-gradient(135deg, #7f1d1d, #991b1b, #b91c1c)", "Sword & Shield": "linear-gradient(135deg, #1e3a5f, #1e40af, #2563eb)", "Sun & Moon": "linear-gradient(135deg, #7c2d12, #c2410c, #ea580c)", "XY": "linear-gradient(135deg, #4c1d95, #6d28d9, #7c3aed)", "Mega Evolution": "linear-gradient(135deg, #14532d, #15803d, #22c55e)", "Black & White": "linear-gradient(135deg, #1a1a2e, #374151, #4b5563)", "Call of Legends": "linear-gradient(135deg, #78350f, #a16207, #d97706)", "HeartGold SoulSilver": "linear-gradient(135deg, #78350f, #a16207, #d97706)", "Platinum": "linear-gradient(135deg, #374151, #6b7280, #9ca3af)", "Diamond & Pearl": "linear-gradient(135deg, #1e3a5f, #3b82f6, #60a5fa)", "EX Ruby & Sapphire": "linear-gradient(135deg, #7f1d1d, #991b1b, #dc2626)", "Pokemon E-Card": "linear-gradient(135deg, #3b0764, #6d28d9, #8b5cf6)", "Legendary Collection": "linear-gradient(135deg, #78350f, #b45309, #d97706)", "Neo": "linear-gradient(135deg, #1e3a5f, #2563eb, #3b82f6)", "Gym": "linear-gradient(135deg, #78350f, #92400e, #b45309)", "Base": "linear-gradient(135deg, #713f12, #a16207, #ca8a04)" };
 var eraLogos: Record<string, string> = {
   "Scarlet & Violet": "https://assets.tcgdex.net/en/sv/sv01/logo.png",
@@ -31,6 +32,7 @@ export default function SetsPage() {
   const [sets, setSets] = useState<any[]>([]);
   const [cardCounts, setCardCounts] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
+  const [language, setLanguage] = useState<"english" | "japanese">("english");
 
   useEffect(function() {
     Promise.all([
@@ -101,13 +103,19 @@ export default function SetsPage() {
       </nav>
 
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 24px 40px" }}>
-        <h1 style={{ fontSize: 28, fontWeight: 700, letterSpacing: "-0.5px", marginBottom: 8 }}>Browse Sets</h1>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+          <h1 style={{ fontSize: 28, fontWeight: 700, letterSpacing: "-0.5px" }}>Browse Sets</h1>
+          <div style={{ display: "flex", gap: 4, background: tertBg, borderRadius: 10, padding: 3 }}>
+            <button onClick={function() { setLanguage("english"); }} style={{ padding: "8px 20px", borderRadius: 8, fontSize: 13, fontWeight: language === "english" ? 600 : 400, background: language === "english" ? (isDark ? "#2a2a32" : "#ffffff") : "transparent", color: language === "english" ? text : textSec, border: "none", cursor: "pointer", boxShadow: language === "english" ? (isDark ? "0 1px 3px rgba(0,0,0,0.3)" : "0 1px 3px rgba(0,0,0,0.1)") : "none" }}>English</button>
+            <button onClick={function() { setLanguage("japanese"); }} style={{ padding: "8px 20px", borderRadius: 8, fontSize: 13, fontWeight: language === "japanese" ? 600 : 400, background: language === "japanese" ? (isDark ? "#2a2a32" : "#ffffff") : "transparent", color: language === "japanese" ? text : textSec, border: "none", cursor: "pointer", boxShadow: language === "japanese" ? (isDark ? "0 1px 3px rgba(0,0,0,0.3)" : "0 1px 3px rgba(0,0,0,0.1)") : "none" }}>Japanese</button>
+          </div>
+        </div>
         <p style={{ fontSize: 14, color: textSec, marginBottom: 32 }}>Explore cards by set across every era of Pokemon TCG</p>
 
         {loading ? (
           <div style={{ textAlign: "center", padding: 40, color: textTer }}>Loading sets...</div>
         ) : (
-          eraOrder.map(function(eraName) {
+          (language === "english" ? eraOrder : jpEraOrder).map(function(eraName) {
             var eraSets = sets.filter(function(s) { return s.era === eraName; });
             if (eraSets.length === 0) return null;
             var totalCards = eraSets.reduce(function(sum, s) { return sum + (cardCounts[s.code] || 0); }, 0);
