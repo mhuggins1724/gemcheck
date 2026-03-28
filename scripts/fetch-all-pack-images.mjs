@@ -29,8 +29,8 @@ async function findPackImage(setName) {
     if (!pageRes.ok) return null;
     var html = await pageRes.text();
 
-    var coverImg = html.match(/class="cover"[\s\S]*?src="([^"]+)"/);
-    if (coverImg && coverImg[1].includes("storage.googleapis.com")) {
+    var coverImg = html.match(/itemprop="image"\s+src="(https:\/\/storage\.googleapis\.com\/images\.pricecharting\.com\/[^"]+)"/);
+    if (coverImg) {
       return coverImg[1].replace("/120.jpg", "/400.jpg");
     }
 
