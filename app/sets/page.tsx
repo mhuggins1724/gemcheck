@@ -32,7 +32,6 @@ export default function SetsPage() {
   const [sets, setSets] = useState<any[]>([]);
   const [cardCounts, setCardCounts] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
-  const [language, setLanguage] = useState<"english" | "japanese">("english");
 
   useEffect(function() {
     Promise.all([
@@ -103,19 +102,13 @@ export default function SetsPage() {
       </nav>
 
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 24px 40px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-          <h1 style={{ fontSize: 28, fontWeight: 700, letterSpacing: "-0.5px" }}>Browse Sets</h1>
-          <div style={{ display: "flex", gap: 4, background: tertBg, borderRadius: 10, padding: 3 }}>
-            <button onClick={function() { setLanguage("english"); }} style={{ padding: "8px 20px", borderRadius: 8, fontSize: 13, fontWeight: language === "english" ? 600 : 400, background: language === "english" ? (isDark ? "#2a2a32" : "#ffffff") : "transparent", color: language === "english" ? text : textSec, border: "none", cursor: "pointer", boxShadow: language === "english" ? (isDark ? "0 1px 3px rgba(0,0,0,0.3)" : "0 1px 3px rgba(0,0,0,0.1)") : "none" }}>English</button>
-            <button onClick={function() { setLanguage("japanese"); }} style={{ padding: "8px 20px", borderRadius: 8, fontSize: 13, fontWeight: language === "japanese" ? 600 : 400, background: language === "japanese" ? (isDark ? "#2a2a32" : "#ffffff") : "transparent", color: language === "japanese" ? text : textSec, border: "none", cursor: "pointer", boxShadow: language === "japanese" ? (isDark ? "0 1px 3px rgba(0,0,0,0.3)" : "0 1px 3px rgba(0,0,0,0.1)") : "none" }}>Japanese</button>
-          </div>
-        </div>
+        <h1 style={{ fontSize: 28, fontWeight: 700, letterSpacing: "-0.5px", marginBottom: 8 }}>Browse Sets</h1>
         <p style={{ fontSize: 14, color: textSec, marginBottom: 32 }}>Explore cards by set across every era of Pokemon TCG</p>
 
         {loading ? (
           <div style={{ textAlign: "center", padding: 40, color: textTer }}>Loading sets...</div>
         ) : (
-          (language === "english" ? eraOrder : jpEraOrder).map(function(eraName) {
+          eraOrder.map(function(eraName) {
             var eraSets = sets.filter(function(s) { return s.era === eraName; });
             if (eraSets.length === 0) return null;
             var totalCards = eraSets.reduce(function(sum, s) { return sum + (cardCounts[s.code] || 0); }, 0);
