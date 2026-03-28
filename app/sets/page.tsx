@@ -126,14 +126,22 @@ export default function SetsPage() {
                     return (
                       <a key={s.code} href={"/sets/" + s.code.toLowerCase()} style={{ textDecoration: "none", color: "inherit" }}>
                         <div className="card-tile" style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, overflow: "hidden", cursor: "pointer", boxShadow: co.shadow }}>
-                          <div style={{ width: "100%", height: 80, overflow: "hidden", background: co.surface, display: "flex", alignItems: "center", justifyContent: "center", padding: 12 }}>
-                            {isPromoSet ? (
-                              <PromoIcon />
-                            ) : s.logo_url ? (
-                              <img src={s.logo_url} alt={s.name} style={{ maxWidth: "85%", maxHeight: "85%", objectFit: "contain" }} onError={function(e: any) { e.target.style.display = "none"; }} />
-                            ) : (
-                              <div style={{ fontSize: 13, fontWeight: 700, color: textSec, textAlign: "center", letterSpacing: "-0.3px" }}>{s.name}</div>
-                            )}
+                          <div style={{ width: "100%", height: 90, overflow: "hidden", position: "relative" as const, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            {/* Blurred logo background */}
+                            {s.logo_url ? (
+                              <div style={{ position: "absolute" as const, inset: 0, backgroundImage: "url(" + s.logo_url + ")", backgroundSize: "cover", backgroundPosition: "center", filter: "blur(12px) saturate(1.3)", transform: "scale(1.2)", opacity: 0.6 }}></div>
+                            ) : null}
+                            <div style={{ position: "absolute" as const, inset: 0, background: s.logo_url ? (isDark ? "rgba(0,0,0,0.45)" : "rgba(0,0,0,0.3)") : co.surface }}></div>
+                            {/* Crisp logo on top */}
+                            <div style={{ position: "relative" as const, zIndex: 1, padding: 12 }}>
+                              {isPromoSet ? (
+                                <PromoIcon />
+                              ) : s.logo_url ? (
+                                <img src={s.logo_url} alt={s.name} style={{ maxWidth: "90%", maxHeight: 60, objectFit: "contain", filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.4))" }} onError={function(e: any) { e.target.style.display = "none"; }} />
+                              ) : (
+                                <div style={{ fontSize: 13, fontWeight: 700, color: "#fff", textAlign: "center", textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}>{s.name}</div>
+                              )}
+                            </div>
                           </div>
                           <div style={{ padding: "10px 12px 12px" }}>
                             <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 4, whiteSpace: "normal", lineHeight: "1.3", minHeight: "34px" }}>{s.name}</div>

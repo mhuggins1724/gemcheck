@@ -109,14 +109,22 @@ export default function SetDetailPage() {
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 24px 40px" }}>
         <a href="/sets" style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 13, color: textSec, marginBottom: 20, padding: "6px 12px", borderRadius: 8, textDecoration: "none" }}>&larr; Back to sets</a>
 
-        {setInfo && setInfo.logo_url && (
-          <div style={{ display: "flex", justifyContent: "center", marginBottom: 20 }}>
-            <img src={setInfo.logo_url} alt={setInfo.name} style={{ maxHeight: 60, objectFit: "contain" }} />
+        {/* Set header with blurred logo background */}
+        <div style={{ position: "relative" as const, borderRadius: 16, overflow: "hidden", marginBottom: 24, padding: "32px 24px", textAlign: "center" }}>
+          {setInfo && setInfo.logo_url ? (
+            <div style={{ position: "absolute" as const, inset: 0, backgroundImage: "url(" + setInfo.logo_url + ")", backgroundSize: "cover", backgroundPosition: "center", filter: "blur(20px) saturate(1.3)", transform: "scale(1.3)", opacity: 0.5 }}></div>
+          ) : null}
+          <div style={{ position: "absolute" as const, inset: 0, background: setInfo && setInfo.logo_url ? (isDark ? "rgba(0,0,0,0.55)" : "rgba(0,0,0,0.35)") : co.surface }}></div>
+          <div style={{ position: "relative" as const, zIndex: 1 }}>
+            {setInfo && setInfo.logo_url && (
+              <div style={{ display: "flex", justifyContent: "center", marginBottom: 16 }}>
+                <img src={setInfo.logo_url} alt={setInfo.name} style={{ maxHeight: 56, objectFit: "contain", filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.4))" }} />
+              </div>
+            )}
+            <h1 style={{ fontSize: 26, fontWeight: 700, letterSpacing: "-0.5px", marginBottom: 4, color: "#fff", textShadow: "0 1px 4px rgba(0,0,0,0.3)" }}>{setInfo ? setInfo.name : code}</h1>
+            <p style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", marginBottom: 0 }}>{setInfo ? setInfo.era + " \u00B7 " + setInfo.year + " \u00B7 " : ""}{cards.length} cards</p>
           </div>
-        )}
-
-        <h1 style={{ fontSize: 28, fontWeight: 700, letterSpacing: "-0.5px", marginBottom: 4, textAlign: "center" }}>{setInfo ? setInfo.name : code}</h1>
-        <p style={{ fontSize: 14, color: textSec, marginBottom: 24, textAlign: "center" }}>{setInfo ? setInfo.era + " \u00B7 " + setInfo.year + " \u00B7 " : ""}{cards.length} cards</p>
+        </div>
 
         <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
           <select value={sort} onChange={function(e) { setSort(e.target.value); }} style={{ padding: "8px 14px", borderRadius: 8, fontSize: 12, fontWeight: 500, background: isDark ? "#1a1a20" : "#ffffff", color: text, border: "1px solid " + border, cursor: "pointer", outline: "none" }}>
