@@ -129,7 +129,7 @@ export default function SetsPage() {
                           <div style={{ width: "100%", height: 90, overflow: "hidden", position: "relative" as const, display: "flex", alignItems: "center", justifyContent: "center" }}>
                             {/* Blurred pack image or logo background */}
                             {(s.pack_image_url || s.logo_url) ? (
-                              <div style={{ position: "absolute" as const, inset: 0, backgroundImage: "url(" + (s.pack_image_url || s.logo_url) + ")", backgroundSize: "cover", backgroundPosition: "center", filter: "blur(" + (s.pack_image_url ? "4px" : "8px") + ") saturate(1.4)", transform: "scale(1.15)", opacity: s.pack_image_url ? 0.85 : 0.7 }}></div>
+                              <div style={{ position: "absolute" as const, inset: 0, backgroundImage: "url(" + (s.pack_image_url || s.logo_url) + ")", backgroundSize: "cover", backgroundPosition: "center", filter: "blur(" + (s.pack_image_url ? "2px" : "6px") + ") saturate(1.4)", transform: "scale(1.1)", opacity: s.pack_image_url ? 0.9 : 0.75 }}></div>
                             ) : null}
                             <div style={{ position: "absolute" as const, inset: 0, background: (s.pack_image_url || s.logo_url) ? (isDark ? "rgba(0,0,0,0.35)" : "rgba(0,0,0,0.2)") : (isDark ? "linear-gradient(135deg, #1a1a2e, #2d2d44)" : "linear-gradient(135deg, #e8e8f0, #d0d0e0)") }}></div>
                             {/* Crisp logo on top */}
