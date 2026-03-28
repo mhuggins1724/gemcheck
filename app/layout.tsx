@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { DM_Sans, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const dmSans = DM_Sans({ variable: "--font-dm-sans", subsets: ["latin"], weight: ["400", "500", "600", "700"] });
+const inter = Inter({ variable: "--font-inter", subsets: ["latin"], weight: ["400", "500", "600", "700", "800"] });
 const jetbrainsMono = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["latin"], weight: ["400", "500"] });
 
 export const metadata: Metadata = {
-  title: "GemCheck - Should You Grade It?",
-  description: "Instant grading decisions powered by real eBay data, PSA pop reports, and gem rate analysis.",
+  title: "GemCheck — Pokemon Card Grading Data",
+  description: "Real eBay sales data, PSA pop reports, and grading profit analysis for every Pokemon card.",
   referrer: "no-referrer",
 };
 
@@ -17,7 +17,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <head>
         <meta name="referrer" content="no-referrer" />
       </head>
-      <body className={dmSans.variable + " " + jetbrainsMono.variable} style={{ fontFamily: "var(--font-dm-sans)", margin: 0, padding: 0 }}>
+      <body className={inter.variable + " " + jetbrainsMono.variable} style={{ fontFamily: "var(--font-inter)", margin: 0, padding: 0 }}>
         {children}
       </body>
     </html>
