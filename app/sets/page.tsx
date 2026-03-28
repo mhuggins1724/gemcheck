@@ -129,9 +129,9 @@ export default function SetsPage() {
                           <div style={{ width: "100%", height: 90, overflow: "hidden", position: "relative" as const, display: "flex", alignItems: "center", justifyContent: "center" }}>
                             {/* Blurred pack image or logo background */}
                             {(s.pack_image_url || s.logo_url) ? (
-                              <div style={{ position: "absolute" as const, inset: 0, backgroundImage: "url(" + (s.pack_image_url || s.logo_url) + ")", backgroundSize: "cover", backgroundPosition: "center", filter: "blur(" + (s.pack_image_url ? "8px" : "12px") + ") saturate(1.3)", transform: "scale(1.2)", opacity: s.pack_image_url ? 0.7 : 0.6 }}></div>
+                              <div style={{ position: "absolute" as const, inset: 0, backgroundImage: "url(" + (s.pack_image_url || s.logo_url) + ")", backgroundSize: "cover", backgroundPosition: "center", filter: "blur(" + (s.pack_image_url ? "4px" : "8px") + ") saturate(1.4)", transform: "scale(1.15)", opacity: s.pack_image_url ? 0.85 : 0.7 }}></div>
                             ) : null}
-                            <div style={{ position: "absolute" as const, inset: 0, background: (s.pack_image_url || s.logo_url) ? (isDark ? "rgba(0,0,0,0.4)" : "rgba(0,0,0,0.25)") : co.surface }}></div>
+                            <div style={{ position: "absolute" as const, inset: 0, background: (s.pack_image_url || s.logo_url) ? (isDark ? "rgba(0,0,0,0.35)" : "rgba(0,0,0,0.2)") : co.surface }}></div>
                             {/* Crisp logo on top */}
                             <div style={{ position: "relative" as const, zIndex: 1, padding: 12 }}>
                               {isPromoSet ? (

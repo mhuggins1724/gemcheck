@@ -115,9 +115,9 @@ export default function SetDetailPage() {
             var bgImg = (setInfo && setInfo.pack_image_url) || (setInfo && setInfo.logo_url);
             var isPack = setInfo && setInfo.pack_image_url;
             if (!bgImg) return null;
-            return <div style={{ position: "absolute" as const, inset: 0, backgroundImage: "url(" + bgImg + ")", backgroundSize: "cover", backgroundPosition: "center", filter: "blur(" + (isPack ? "14px" : "20px") + ") saturate(1.3)", transform: "scale(1.3)", opacity: isPack ? 0.6 : 0.5 }}></div>;
+            return <div style={{ position: "absolute" as const, inset: 0, backgroundImage: "url(" + bgImg + ")", backgroundSize: "cover", backgroundPosition: "center", filter: "blur(" + (isPack ? "6px" : "14px") + ") saturate(1.4)", transform: "scale(1.2)", opacity: isPack ? 0.8 : 0.6 }}></div>;
           })()}
-          <div style={{ position: "absolute" as const, inset: 0, background: (setInfo && (setInfo.pack_image_url || setInfo.logo_url)) ? (isDark ? "rgba(0,0,0,0.5)" : "rgba(0,0,0,0.3)") : co.surface }}></div>
+          <div style={{ position: "absolute" as const, inset: 0, background: (setInfo && (setInfo.pack_image_url || setInfo.logo_url)) ? (isDark ? "rgba(0,0,0,0.4)" : "rgba(0,0,0,0.25)") : co.surface }}></div>
           <div style={{ position: "relative" as const, zIndex: 1 }}>
             {setInfo && setInfo.logo_url && (
               <div style={{ display: "flex", justifyContent: "center", marginBottom: 16 }}>
