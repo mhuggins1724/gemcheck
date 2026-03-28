@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
 import { useTheme } from "../lib/useTheme";
+import { getColors } from "../lib/design";
 
 var eraOrder = ["Mega Evolution", "Scarlet & Violet", "Sword & Shield", "Sun & Moon", "XY", "Black & White", "Call of Legends", "HeartGold SoulSilver", "Platinum", "Diamond & Pearl", "EX Ruby & Sapphire", "Pokemon E-Card", "Legendary Collection", "Neo", "Gym", "Base"];
 var jpEraOrder = ["Japanese Scarlet & Violet", "Japanese Sword & Shield", "Japanese Sun & Moon", "Japanese XY", "Japanese Black & White", "Japanese HeartGold & SoulSilver", "Japanese Platinum", "Japanese Diamond & Pearl", "Japanese EX", "Japanese E-Card", "Japanese Neo", "Japanese Gym", "Japanese Base & Classic", "Japanese Promos & Decks", "Japanese Other"];
@@ -69,32 +70,25 @@ export default function SetsPage() {
     );
   }
 
-  var bg = isDark ? "#0c0c0f" : "#f8f8fa";
-  var text = isDark ? "#ececf0" : "#1a1a2e";
-  var textSec = isDark ? "#9898a4" : "#1a1a2e";
-  var textTer = isDark ? "#5c5c6a" : "#3a3a4e";
-  var cardBg = isDark ? "#1a1a20" : "#ffffff";
-  var border = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.18)";
-  var navBg = isDark ? "rgba(12,12,15,0.95)" : "rgba(255,255,255,0.95)";
-  var tertBg = isDark ? "#1e1e24" : "#e8e8ec";
-  var green = isDark ? "#22c55e" : "#16a34a";
+  var co = getColors(isDark);
+  var bg = co.bg; var text = co.text; var textSec = co.textSecondary; var textTer = co.textTertiary;
+  var cardBg = co.card; var border = co.border; var navBg = co.nav; var tertBg = co.surface; var green = co.accent;
 
   return (
     <div style={{ background: bg, color: text, minHeight: "100vh", transition: "background 0.3s ease, color 0.3s ease" }}>
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: navBg, backdropFilter: "blur(20px)", borderBottom: "1px solid " + border }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", height: 60, display: "flex", alignItems: "center", gap: 24 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <div style={{ width: 28, height: 28, borderRadius: 8, background: green, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, color: "#fff", fontWeight: 700 }}>G</div>
-            <a href="/" style={{ fontSize: 18, fontWeight: 700, letterSpacing: "-0.5px", textDecoration: "none", color: text }}>GemCheck</a>
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: navBg, backdropFilter: "blur(16px)", borderBottom: "1px solid " + border }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", height: 56, display: "flex", alignItems: "center", gap: 32 }}>
+          <a href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none", color: text }}>
+            <svg width="28" height="32" viewBox="0 0 52 60" fill="none"><defs><linearGradient id="ns" x1="0" y1="0" x2="52" y2="60"><stop offset="0%" stopColor="#10b981"/><stop offset="100%" stopColor="#3b82f6"/></linearGradient></defs><path d="M26 2L50 14V34C50 46 38 54 26 58C14 54 2 46 2 34V14L26 2Z" fill="url(#ns)"/><path d="M16 30L23 37L36 22" fill="none" stroke="#fff" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            <span style={{ fontSize: 17, fontWeight: 700, letterSpacing: "-0.5px" }}>GemCheck</span>
+          </a>
+          <div style={{ display: "flex", gap: 2 }}>
+            <a href="/" style={{ padding: "6px 14px", borderRadius: 6, fontSize: 13, fontWeight: 400, color: textSec, textDecoration: "none" }}>Home</a>
+            <a href="/sets" style={{ padding: "6px 14px", borderRadius: 6, fontSize: 13, fontWeight: 600, color: text, background: tertBg, textDecoration: "none" }}>Sets</a>
+            <a href="/search" style={{ padding: "6px 14px", borderRadius: 6, fontSize: 13, fontWeight: 400, color: textSec, textDecoration: "none" }}>Search</a>
           </div>
-          <div style={{ display: "flex", gap: 4, marginLeft: 16 }}>
-            <a href="/" style={{ padding: "8px 14px", borderRadius: 8, fontSize: 13, fontWeight: 500, color: textSec, textDecoration: "none" }}>Home</a>
-            <a href="/sets" style={{ padding: "8px 14px", borderRadius: 8, fontSize: 13, fontWeight: 500, color: text, background: tertBg, textDecoration: "none" }}>Sets</a>
-            <a href="#" style={{ padding: "8px 14px", borderRadius: 8, fontSize: 13, fontWeight: 500, color: textSec, textDecoration: "none" }}>Hot Cards</a>
-            <a href="/search" style={{ padding: "8px 14px", borderRadius: 8, fontSize: 13, fontWeight: 500, color: textSec, textDecoration: "none" }}>Search</a>
-          </div>
-          <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 12 }}>
-            <button onClick={function() { toggleTheme(); }} style={{ width: 36, height: 36, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", color: textSec, fontSize: 16, border: "1px solid " + border, background: "none", cursor: "pointer" }}>
+          <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 8 }}>
+            <button onClick={function() { toggleTheme(); }} style={{ width: 32, height: 32, borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center", color: textSec, fontSize: 14, border: "1px solid " + border, background: "none", cursor: "pointer" }}>
               {isDark ? "\u2600\uFE0F" : "\uD83C\uDF19"}
             </button>
           </div>
@@ -117,12 +111,12 @@ export default function SetsPage() {
 
             return (
               <div key={eraName} style={{ marginBottom: 48 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 20, padding: "14px 24px", borderRadius: 12, background: isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)", border: "1px solid " + border }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16, paddingBottom: 12, borderBottom: "1px solid " + border }}>
                   {eraLogo ? (
-                    <img src={eraLogo} alt={eraName} style={{ height: 28, objectFit: "contain" }} onError={function(e: any) { e.target.style.display = "none"; }} />
+                    <img src={eraLogo} alt={eraName} style={{ height: 24, objectFit: "contain" }} onError={function(e: any) { e.target.style.display = "none"; }} />
                   ) : null}
-                  <span style={{ fontSize: 16, fontWeight: 700, color: color }}>{eraName}</span>
-                  <span style={{ fontSize: 12, color: textTer, marginLeft: "auto" }}>{eraSets.length} sets &middot; {totalCards.toLocaleString()} cards</span>
+                  <span style={{ fontSize: 16, fontWeight: 700 }}>{eraName}</span>
+                  <span style={{ fontSize: 12, color: textTer, marginLeft: "auto", fontFamily: "var(--font-jetbrains)" }}>{eraSets.length} sets &middot; {totalCards.toLocaleString()} cards</span>
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 12 }}>
                   {eraSets.map(function(s) {
@@ -131,21 +125,21 @@ export default function SetsPage() {
                     var isPromoSet = isPromo(s.name);
                     return (
                       <a key={s.code} href={"/sets/" + s.code.toLowerCase()} style={{ textDecoration: "none", color: "inherit" }}>
-                        <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, overflow: "hidden", cursor: "pointer", transition: "all 0.25s ease" }}>
-                          <div style={{ width: "100%", height: 100, overflow: "hidden", background: tileBg, display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}>
+                        <div className="card-tile" style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, overflow: "hidden", cursor: "pointer", boxShadow: co.shadow }}>
+                          <div style={{ width: "100%", height: 80, overflow: "hidden", background: co.surface, display: "flex", alignItems: "center", justifyContent: "center", padding: 12 }}>
                             {isPromoSet ? (
                               <PromoIcon />
                             ) : s.logo_url ? (
-                              <img src={s.logo_url} alt={s.name} style={{ maxWidth: "90%", maxHeight: "90%", objectFit: "contain", filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.3))" }} onError={function(e: any) { e.target.style.display = "none"; }} />
+                              <img src={s.logo_url} alt={s.name} style={{ maxWidth: "85%", maxHeight: "85%", objectFit: "contain" }} onError={function(e: any) { e.target.style.display = "none"; }} />
                             ) : (
-                              <div style={{ fontSize: 14, fontWeight: 800, color: "#fff", textAlign: "center", textShadow: "0 2px 8px rgba(0,0,0,0.5)", letterSpacing: "0.5px", fontStyle: "italic" }}>{s.name}</div>
+                              <div style={{ fontSize: 13, fontWeight: 700, color: textSec, textAlign: "center", letterSpacing: "-0.3px" }}>{s.name}</div>
                             )}
                           </div>
-                          <div style={{ padding: "8px 12px" }}>
-                            <div style={{ fontSize: 12, fontWeight: 600, marginBottom: 2, whiteSpace: "normal", lineHeight: "1.3", minHeight: "32px" }}>{s.name}</div>
+                          <div style={{ padding: "10px 12px 12px" }}>
+                            <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 4, whiteSpace: "normal", lineHeight: "1.3", minHeight: "34px" }}>{s.name}</div>
                             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                               <span style={{ fontSize: 11, color: textTer }}>{s.year}</span>
-                              <span style={{ fontSize: 11, color: textTer }}>{count} cards</span>
+                              <span style={{ fontSize: 11, color: textTer, fontFamily: "var(--font-jetbrains)" }}>{count}</span>
                             </div>
                           </div>
                         </div>

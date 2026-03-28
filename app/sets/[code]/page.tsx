@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { supabase } from "../../lib/supabase";
 import { useTheme } from "../../lib/useTheme";
+import { getColors } from "../../lib/design";
 
 var gradients: Record<string, string> = { fire: "linear-gradient(145deg,#7c2d12,#1c1917)", water: "linear-gradient(145deg,#1e3a5f,#0f172a)", electric: "linear-gradient(145deg,#854d0e,#1c1917)", grass: "linear-gradient(145deg,#14532d,#0f172a)", psychic: "linear-gradient(145deg,#581c87,#0f172a)", dragon: "linear-gradient(145deg,#1e3a5f,#581c87)", normal: "linear-gradient(145deg,#44403c,#1c1917)" };
 var fallbackImg = "https://rjtwqtpdmmkeknllsuvr.supabase.co/storage/v1/object/public/Logos/NO%20IMAGE%20POKEMON.webp";
@@ -72,22 +73,11 @@ export default function SetDetailPage() {
 
   var sortedCards = sortCards(cards, sort);
 
-  var bg = isDark ? "#0c0c0f" : "#f8f8fa";
-  var text = isDark ? "#ececf0" : "#1a1a2e";
-  var textSec = isDark ? "#9898a4" : "#1a1a2e";
-  var textTer = isDark ? "#5c5c6a" : "#3a3a4e";
-  var cardBg = isDark ? "#1a1a20" : "#ffffff";
-  var border = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.18)";
-  var navBg = isDark ? "rgba(12,12,15,0.95)" : "rgba(255,255,255,0.95)";
-  var tertBg = isDark ? "#1e1e24" : "#e8e8ec";
-  var green = isDark ? "#22c55e" : "#16a34a";
-  var greenBg = isDark ? "rgba(34,197,94,0.1)" : "rgba(22,163,74,0.1)";
-  var greenText = isDark ? "#4ade80" : "#047857";
-  var redBg = isDark ? "rgba(239,68,68,0.1)" : "rgba(220,38,38,0.1)";
-  var redText = isDark ? "#f87171" : "#b91c1c";
-  var amberBg = isDark ? "rgba(234,179,8,0.1)" : "rgba(202,138,4,0.1)";
-  var amberText = isDark ? "#facc15" : "#a16207";
-  var amber = isDark ? "#eab308" : "#be185d";
+  var co = getColors(isDark);
+  var bg = co.bg; var text = co.text; var textSec = co.textSecondary; var textTer = co.textTertiary;
+  var cardBg = co.card; var border = co.border; var navBg = co.nav; var tertBg = co.surface;
+  var green = co.accent; var greenBg = co.accentBg; var greenText = co.accentText;
+  var redBg = co.redBg; var redText = co.red; var amberBg = co.amberBg; var amberText = co.amber; var amber = co.amber;
 
   function handleImgError(e: any) {
     e.target.onerror = null;
