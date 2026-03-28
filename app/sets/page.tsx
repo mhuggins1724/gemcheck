@@ -58,7 +58,7 @@ export default function SetsPage() {
 
   function PromoIcon() {
     return (
-      <svg viewBox="0 0 100 100" style={{ width: 56, height: 56 }}>
+      <svg viewBox="0 0 100 100" style={{ width: 80, height: 80 }}>
         <defs>
           <path id="promoArc" d="M 20,60 A 32,32 0 0,1 80,60" fill="none" />
         </defs>
