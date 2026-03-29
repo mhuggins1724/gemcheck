@@ -163,7 +163,7 @@ function CardDetailContent() {
 
           <div style={{ flex: 1, minWidth: 300 }}>
             <h1 style={{ fontSize: 26, fontWeight: 700, letterSpacing: "-0.5px", marginBottom: 4 }}>{card.name}</h1>
-            <p style={{ fontSize: 13, color: textSec, marginBottom: 16 }}>{card.set_name} &middot; {card.set_code} &middot; {card.year}</p>
+            <p style={{ fontSize: 13, fontWeight: 600, color: textSec, marginBottom: 16 }}>{card.set_name} &middot; {card.set_code} &middot; {card.year}</p>
 
             <div style={{ display: "flex", gap: 6, flexWrap: "wrap" as const, marginBottom: 16 }}>
               <span style={{ fontSize: 11, fontWeight: 600, padding: "4px 10px", borderRadius: 6, textTransform: "uppercase" as const, background: "rgba(239,68,68,0.15)", color: "#f87171" }}>{card.card_type}</span>
@@ -192,28 +192,30 @@ function CardDetailContent() {
             {/* Three price boxes */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginBottom: 16 }}>
               <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16 }}>
-                <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>Raw</div>
-                <div style={{ fontSize: 11, color: textSec, marginBottom: 2 }}>Avg of last 5 sold</div>
-                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{rawAvg !== null ? "$" + rawAvg.toLocaleString() : "$" + card.raw_price}</div>
-                <div style={{ fontSize: 11, color: textSec }}>Last Sold</div>
-                <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec }}>{rawLast !== null ? "$" + rawLast.toLocaleString() : "—"}</div>
+                <div style={{ fontSize: 14, fontWeight: 800, color: isDark ? "#ffffff" : "#18181b", textTransform: "uppercase" as const, letterSpacing: "1px", marginBottom: 6 }}>Raw</div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: isDark ? "#e4e4e7" : "#27272a", marginBottom: 2 }}>Avg of last 5 sold</div>
+                <div style={{ fontSize: 24, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{rawAvg !== null ? "$" + rawAvg.toLocaleString() : "$" + card.raw_price}</div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: isDark ? "#e4e4e7" : "#27272a" }}>Last Sold</div>
+                <div style={{ fontSize: 16, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", color: isDark ? "#e4e4e7" : "#27272a" }}>{rawLast !== null ? "$" + rawLast.toLocaleString() : "—"}</div>
               </div>
               <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16 }}>
-                <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>PSA 9</div>
-                <div style={{ fontSize: 11, color: textSec, marginBottom: 2 }}>Avg of last 5 sold</div>
-                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{psa9Avg !== null ? "$" + psa9Avg.toLocaleString() : "$" + card.psa9_price}</div>
-                <div style={{ fontSize: 11, color: textSec }}>Last Sold</div>
-                <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec }}>{psa9Last !== null ? "$" + psa9Last.toLocaleString() : "—"}</div>
+                <div style={{ fontSize: 14, fontWeight: 800, color: isDark ? "#ffffff" : "#18181b", textTransform: "uppercase" as const, letterSpacing: "1px", marginBottom: 6 }}>PSA 9</div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: isDark ? "#e4e4e7" : "#27272a", marginBottom: 2 }}>Avg of last 5 sold</div>
+                <div style={{ fontSize: 24, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{psa9Avg !== null ? "$" + psa9Avg.toLocaleString() : "$" + card.psa9_price}</div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: isDark ? "#e4e4e7" : "#27272a" }}>Last Sold</div>
+                <div style={{ fontSize: 16, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", color: isDark ? "#e4e4e7" : "#27272a" }}>{psa9Last !== null ? "$" + psa9Last.toLocaleString() : "—"}</div>
               </div>
-              <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16 }}>
-                <div style={{ fontSize: 11, color: textTer, textTransform: "uppercase" as const, letterSpacing: "0.5px", marginBottom: 6 }}>PSA 10</div>
-                <div style={{ fontSize: 11, color: textSec, marginBottom: 2 }}>Avg of last 5 sold</div>
-                <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{psa10Avg !== null ? "$" + psa10Avg.toLocaleString() : "$" + card.psa10_price}</div>
-                <div style={{ fontSize: 11, color: textSec }}>Last Sold</div>
-                <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "JetBrains Mono, monospace", color: textSec, marginBottom: 8 }}>{psa10Last !== null ? "$" + psa10Last.toLocaleString() : "—"}</div>
-                <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "4px 8px", borderRadius: 6, background: greenBg, width: "fit-content" }}>
-                  <div style={{ width: 8, height: 8, borderRadius: "50%", background: green }}></div>
-                  <span style={{ fontSize: 11, fontWeight: 600, color: greenText }}>{gemRate}% Gem Rate</span>
+              <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16, display: "flex", gap: 16 }}>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: 14, fontWeight: 800, color: isDark ? "#ffffff" : "#18181b", textTransform: "uppercase" as const, letterSpacing: "1px", marginBottom: 6 }}>PSA 10</div>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: isDark ? "#e4e4e7" : "#27272a", marginBottom: 2 }}>Avg of last 5 sold</div>
+                  <div style={{ fontSize: 24, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{psa10Avg !== null ? "$" + psa10Avg.toLocaleString() : "$" + card.psa10_price}</div>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: isDark ? "#e4e4e7" : "#27272a" }}>Last Sold</div>
+                  <div style={{ fontSize: 16, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", color: isDark ? "#e4e4e7" : "#27272a" }}>{psa10Last !== null ? "$" + psa10Last.toLocaleString() : "—"}</div>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "center", justifyContent: "center", padding: "8px 12px", borderRadius: 12, background: green, minWidth: 80 }}>
+                  <div style={{ fontSize: 28, fontWeight: 800, fontFamily: "JetBrains Mono, monospace", color: "#ffffff", lineHeight: 1 }}>{gemRate}%</div>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: "#ffffff", marginTop: 4, textTransform: "uppercase" as const, letterSpacing: "0.5px" }}>Gem Rate</div>
                 </div>
               </div>
             </div>
@@ -222,9 +224,9 @@ function CardDetailContent() {
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 20 }}>
               <div style={{ padding: 14, borderRadius: 12, border: "1px solid " + border, position: "relative" as const, overflow: "hidden" }}>
                 <div style={{ position: "absolute" as const, top: 0, left: 0, width: 3, height: "100%", background: green }}></div>
-                <div style={{ fontSize: 12, color: textSec, marginBottom: 4, paddingLeft: 8 }}>If PSA 10 ({gemRate}% chance)</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: textSec, marginBottom: 4, paddingLeft: 8 }}>If PSA 10 ({gemRate}% chance)</div>
                 <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: profit10 >= 0 ? greenText : redText, paddingLeft: 8 }}>{profit10 >= 0 ? "+" : ""}{profit10 < 0 ? "\u2212" : ""}${Math.abs(profit10).toLocaleString()}</div>
-                <div style={{ fontSize: 10, color: textTer, marginTop: 4, lineHeight: 1.6, paddingLeft: 8 }}>
+                <div style={{ fontSize: 10, fontWeight: 600, color: textTer, marginTop: 4, lineHeight: 1.6, paddingLeft: 8 }}>
                   ${effectivePsa10.toLocaleString()} avg sale<br/>
                   &minus; ${ebayFee10.toLocaleString()} eBay fee (13%)<br/>
                   &minus; ${effectiveRaw.toLocaleString()} avg raw cost<br/>
@@ -233,9 +235,9 @@ function CardDetailContent() {
               </div>
               <div style={{ padding: 14, borderRadius: 12, border: "1px solid " + border, position: "relative" as const, overflow: "hidden" }}>
                 <div style={{ position: "absolute" as const, top: 0, left: 0, width: 3, height: "100%", background: "#ef4444" }}></div>
-                <div style={{ fontSize: 12, color: textSec, marginBottom: 4, paddingLeft: 8 }}>If PSA 9 ({100 - gemRate}% chance)</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: textSec, marginBottom: 4, paddingLeft: 8 }}>If PSA 9 ({100 - gemRate}% chance)</div>
                 <div style={{ fontSize: 22, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: profit9 >= 0 ? greenText : redText, paddingLeft: 8 }}>{profit9 >= 0 ? "+" : ""}{profit9 < 0 ? "\u2212" : ""}${Math.abs(profit9).toLocaleString()}</div>
-                <div style={{ fontSize: 10, color: textTer, marginTop: 4, lineHeight: 1.6, paddingLeft: 8 }}>
+                <div style={{ fontSize: 10, fontWeight: 600, color: textTer, marginTop: 4, lineHeight: 1.6, paddingLeft: 8 }}>
                   ${effectivePsa9.toLocaleString()} avg sale<br/>
                   &minus; ${ebayFee9.toLocaleString()} eBay fee (13%)<br/>
                   &minus; ${effectiveRaw.toLocaleString()} avg raw cost<br/>
@@ -247,7 +249,7 @@ function CardDetailContent() {
             {/* Price history chart */}
             <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 14, padding: 20, marginBottom: 20 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12, flexWrap: "wrap" as const, gap: 8 }}>
-                <div><div style={{ fontSize: 14, fontWeight: 600 }}>Price History</div><div style={{ fontSize: 10, color: textTer }}>eBay sales data</div></div>
+                <div><div style={{ fontSize: 14, fontWeight: 600 }}>Price History</div><div style={{ fontSize: 10, fontWeight: 600, color: textTer }}>eBay sales data</div></div>
                 <div style={{ display: "flex", gap: 4 }}>
                   {["raw", "PSA 9", "PSA 10"].map(function(g) {
                     var active = gradeView === g;
@@ -495,12 +497,12 @@ function CardDetailContent() {
                       <table style={{ width: "100%", borderCollapse: "collapse" as const, fontSize: 12 }}>
                         <thead>
                           <tr style={{ borderBottom: "1px solid " + border }}>
-                            <th style={{ textAlign: "left" as const, padding: "8px 6px", color: textTer, fontWeight: 500, fontSize: 11 }}>Sale Price</th>
-                            <th style={{ textAlign: "left" as const, padding: "8px 6px", color: textTer, fontWeight: 500, fontSize: 11 }}>Grade</th>
-                            <th style={{ textAlign: "left" as const, padding: "8px 6px", color: textTer, fontWeight: 500, fontSize: 11 }}>Date Sold</th>
-                            <th style={{ textAlign: "left" as const, padding: "8px 6px", color: textTer, fontWeight: 500, fontSize: 11 }}>Source</th>
-                            <th style={{ textAlign: "left" as const, padding: "8px 6px", color: textTer, fontWeight: 500, fontSize: 11 }}>Title</th>
-                            <th style={{ textAlign: "right" as const, padding: "8px 6px", color: textTer, fontWeight: 500, fontSize: 11 }}></th>
+                            <th style={{ textAlign: "left" as const, padding: "8px 6px", color: textTer, fontWeight: 600, fontSize: 11 }}>Sale Price</th>
+                            <th style={{ textAlign: "left" as const, padding: "8px 6px", color: textTer, fontWeight: 600, fontSize: 11 }}>Grade</th>
+                            <th style={{ textAlign: "left" as const, padding: "8px 6px", color: textTer, fontWeight: 600, fontSize: 11 }}>Date Sold</th>
+                            <th style={{ textAlign: "left" as const, padding: "8px 6px", color: textTer, fontWeight: 600, fontSize: 11 }}>Source</th>
+                            <th style={{ textAlign: "left" as const, padding: "8px 6px", color: textTer, fontWeight: 600, fontSize: 11 }}>Title</th>
+                            <th style={{ textAlign: "right" as const, padding: "8px 6px", color: textTer, fontWeight: 600, fontSize: 11 }}></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -563,8 +565,8 @@ function CardDetailContent() {
                     <table style={{ width: "100%", borderCollapse: "collapse" as const, fontSize: 12 }}>
                       <thead>
                         <tr style={{ background: isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.02)" }}>
-                          <th style={{ textAlign: "left" as const, padding: "10px 12px", color: textTer, fontWeight: 500, fontSize: 11, minWidth: 50 }}>Grader</th>
-                          {grades.map(function(g) { return <th key={g} style={{ textAlign: "center" as const, padding: "10px 6px", color: textTer, fontWeight: 500, fontSize: 11, minWidth: 40 }}>{g}</th>; })}
+                          <th style={{ textAlign: "left" as const, padding: "10px 12px", color: textTer, fontWeight: 600, fontSize: 11, minWidth: 50 }}>Grader</th>
+                          {grades.map(function(g) { return <th key={g} style={{ textAlign: "center" as const, padding: "10px 6px", color: textTer, fontWeight: 600, fontSize: 11, minWidth: 40 }}>{g}</th>; })}
                           <th style={{ textAlign: "center" as const, padding: "10px 8px", color: textSec, fontWeight: 600, fontSize: 11, borderLeft: "1px solid " + border }}>Total</th>
                         </tr>
                       </thead>

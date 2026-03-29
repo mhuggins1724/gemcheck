@@ -8,10 +8,10 @@ export function getColors(isDark: boolean) {
     borderStrong: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.12)",
     nav: isDark ? "rgba(9,9,11,0.9)" : "rgba(255,255,255,0.9)",
 
-    text: isDark ? "#fafafa" : "#09090b",
-    textSecondary: isDark ? "#a1a1aa" : "#52525b",
-    textTertiary: isDark ? "#71717a" : "#a1a1aa",
-    textMuted: isDark ? "#52525b" : "#d4d4d8",
+    text: isDark ? "#ffffff" : "#09090b",
+    textSecondary: isDark ? "#e4e4e7" : "#3f3f46",
+    textTertiary: isDark ? "#c4c4cc" : "#52525b",
+    textMuted: isDark ? "#a1a1aa" : "#a1a1aa",
 
     accent: "#10b981", // emerald-500
     accentLight: isDark ? "#34d399" : "#059669",

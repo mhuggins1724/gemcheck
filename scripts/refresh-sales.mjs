@@ -293,7 +293,8 @@ async function searchFallback(cardName, setName) {
 // ============================================================
 // Fetch and parse sold listings from a PriceCharting card page
 // ============================================================
-async function fetchSales(setSlug, cSlug) {
+async function fetchSales(setSlug, cSlug, opts) {
+  var isCelebrations = (opts && opts.isCelebrations) || setSlug.includes("celebration");
   var url = "https://www.pricecharting.com/game/" + setSlug + "/" + cSlug;
   var res;
   for (var attempt = 0; attempt < 3; attempt++) {
@@ -375,9 +376,13 @@ async function fetchSales(setSlug, cSlug) {
     var price = parseFloat(priceM[1].replace(",", ""));
     if (isNaN(price)) continue;
 
-    // Skip Celebrations reprints
+    // Skip Celebrations reprints (but not when scraping Celebrations set itself)
     var tUpper = title.toUpperCase();
-    if (tUpper.includes("CELEBRATION") || tUpper.includes("CLASSIC COLLECTION")) continue;
+    if (!isCelebrations && (tUpper.includes("CELEBRATION") || tUpper.includes("CLASSIC COLLECTION"))) continue;
+
+    // Skip Japanese listings for English cards
+    var isJpTitle = tUpper.includes("JAPANESE") || tUpper.includes("JAPAN ") || tUpper.includes(" JP ") || tUpper.includes(" JPN ") || tUpper.includes(" JPN)") || tUpper.includes("(JP)") || /\bSV2A\b/.test(tUpper) || /\bSV3[A-Z]\b/.test(tUpper) || /\bSV4[A-Z]\b/.test(tUpper) || /\bSV5[A-Z]\b/.test(tUpper) || /\bSV6[A-Z]\b/.test(tUpper) || /\bSV7[A-Z]\b/.test(tUpper) || /\b(XY|SM|BW|DP|S|SV)-?P\b/.test(tUpper) || /[\u3000-\u9FFF\u30A0-\u30FF\u3040-\u309F]/.test(title);
+    if (isJpTitle) continue;
 
     // Detect grade and grading company
     var grade = "raw";
@@ -417,8 +422,13 @@ async function fetchSales(setSlug, cSlug) {
 // ============================================================
 var JUNK_PATTERNS = /\b(SEALED PACK|BOOSTER PACK|BOOSTER BOX|BLISTER|LOT OF|CARD LOT|BULK LOT|MYSTERY BOX|ELITE TRAINER|ETB|TIN |BINDER|ALBUM|SLEEVE|PLAYMAT|DECK BOX|PIN COLLECTION|COLLECTION BOX|CELEBRATIONS COLLECTION|MINI TIN)\b/i;
 
+function isJapaneseListing(title) {
+  var t = (title || "").toUpperCase();
+  return t.includes("JAPANESE") || t.includes("JAPAN ") || t.includes(" JP ") || t.includes(" JPN ") || t.includes(" JPN)") || t.includes("(JP)") || /\bSV2A\b/.test(t) || /\bSV3[A-Z]\b/.test(t) || /\bSV4[A-Z]\b/.test(t) || /\bSV5[A-Z]\b/.test(t) || /\bSV6[A-Z]\b/.test(t) || /\bSV7[A-Z]\b/.test(t) || /\b(XY|SM|BW|DP|S|SV)-?P\b/.test(t) || /[\u3000-\u9FFF\u30A0-\u30FF\u3040-\u309F]/.test(title);
+}
+
 function isJunkListing(title) {
-  return JUNK_PATTERNS.test(title);
+  return JUNK_PATTERNS.test(title) || isJapaneseListing(title);
 }
 
 // ============================================================
