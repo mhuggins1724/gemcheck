@@ -12,48 +12,61 @@ export default function Home() {
   const { isDark, toggleTheme } = useTheme();
   const [cards, setCards] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [totalCards, setTotalCards] = useState(0);
-  const [totalSets, setTotalSets] = useState(0);
+  const [totalCards, setTotalCards] = useState(21878);
+  const [totalSets, setTotalSets] = useState(175);
   const [homeSort, setHomeSort] = useState("value-desc");
   var c = getColors(isDark);
 
-  useEffect(function() {
-    supabase.from("cards").select("*", { count: "exact", head: true }).then(function(res) {
-      if (res.count) setTotalCards(res.count);
+  function processCards(data: any[]) {
+    var grading_fee = 18;
+    return data.map(function(card: any) {
+      var pop = card.psa_pop || [];
+      var popTotal = pop.reduce(function(a: number, b: number) { return a + b; }, 0);
+      var pop10 = pop.length >= 10 ? pop[9] : 0;
+      var gemRate = popTotal > 0 ? (pop10 / popTotal) * 100 : (card.gem_rate || 0);
+      var profit10 = card.psa10_price > 0 ? Math.round(card.psa10_price * 0.87) - card.raw_price - grading_fee : 0;
+      return Object.assign({}, card, { _gemRate: gemRate, _profit10: profit10 });
     });
-    supabase.from("cards").select("set_code").then(function(res) {
-      if (res.data) {
-        var unique = new Set(res.data.map(function(r: any) { return r.set_code; }));
-        setTotalSets(unique.size);
-      }
-    });
-    // Fetch all cards for Top 50 lists
-    (async function() {
-      var allCards: any[] = [];
-      var page = 0;
-      var pageSize = 1000;
-      while (true) {
-        var res = await supabase.from("cards").select("id,name,set_name,set_code,card_type,image_url,raw_price,psa10_price,psa9_price,gem_rate,psa_pop").range(page * pageSize, (page + 1) * pageSize - 1);
-        if (!res.data || res.data.length === 0) break;
-        allCards.push(...res.data);
-        if (res.data.length < pageSize) break;
-        page++;
-      }
+  }
 
-      // Pre-calculate gem rate and profit for each card
-      var grading_fee = 18;
-      var processed = allCards.map(function(card: any) {
-        var pop = card.psa_pop || [];
-        var popTotal = pop.reduce(function(a: number, b: number) { return a + b; }, 0);
-        var pop10 = pop.length >= 10 ? pop[9] : 0;
-        var gemRate = popTotal > 0 ? (pop10 / popTotal) * 100 : (card.gem_rate || 0);
-        var profit10 = card.psa10_price > 0 ? Math.round(card.psa10_price * 0.87) - card.raw_price - grading_fee : 0;
-        return Object.assign({}, card, { _gemRate: gemRate, _profit10: profit10 });
+  function fetchTopCards(sortKey: string) {
+    setLoading(true);
+    var lightFields = "id,name,set_name,set_code,card_type,image_url,raw_price,psa10_price,psa9_price,gem_rate";
+    var fullFields = lightFields + ",psa_pop";
+    if (sortKey === "value-desc") {
+      // Fast: no psa_pop needed, just sort by raw_price
+      supabase.from("cards").select(lightFields).order("raw_price", { ascending: false }).gt("raw_price", 0).limit(100).then(function(res) {
+        if (res.data) setCards(processCards(res.data));
+        setLoading(false);
       });
+    } else if (sortKey === "gem-desc") {
+      supabase.from("cards").select(fullFields).order("gem_rate", { ascending: false }).gt("gem_rate", 40).limit(500).then(function(res) {
+        if (res.data) {
+          var processed = processCards(res.data);
+          var filtered = processed.filter(function(c: any) {
+            var pop = c.psa_pop || [];
+            var popTotal = pop.reduce(function(a: number, b: number) { return a + b; }, 0);
+            return popTotal >= 500 && (c._profit10 || 0) >= 120;
+          });
+          filtered.sort(function(a: any, b: any) { return (b._gemRate || 0) - (a._gemRate || 0); });
+          setCards(filtered.slice(0, 100));
+        }
+        setLoading(false);
+      });
+    } else if (sortKey === "profit-desc") {
+      supabase.from("cards").select(lightFields).gt("psa10_price", 0).gt("raw_price", 0).order("psa10_price", { ascending: false }).limit(500).then(function(res) {
+        if (res.data) {
+          var processed = processCards(res.data).filter(function(c: any) { return (c._profit10 || 0) > 0; });
+          processed.sort(function(a: any, b: any) { return ((b._profit10 || 0) / b.raw_price) - ((a._profit10 || 0) / a.raw_price); });
+          setCards(processed.slice(0, 100));
+        }
+        setLoading(false);
+      });
+    }
+  }
 
-      setCards(processed);
-      setLoading(false);
-    })();
+  useEffect(function() {
+    fetchTopCards("value-desc");
   }, []);
 
   return (
@@ -133,7 +146,7 @@ export default function Home() {
         <div id="top-cards" style={{ marginBottom: 48, scrollMarginTop: 80 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
             <h2 style={{ fontSize: 20, fontWeight: 700, letterSpacing: "-0.3px" }}>Top 100</h2>
-            <select value={homeSort} onChange={function(e) { setHomeSort(e.target.value); }} style={{ padding: "6px 12px", borderRadius: 8, fontSize: 13, fontWeight: 500, background: c.surface, color: c.text, border: "1px solid " + c.border, cursor: "pointer", fontFamily: "inherit" }}>
+            <select value={homeSort} onChange={function(e) { setHomeSort(e.target.value); fetchTopCards(e.target.value); }} style={{ padding: "6px 12px", borderRadius: 8, fontSize: 13, fontWeight: 500, background: c.surface, color: c.text, border: "1px solid " + c.border, cursor: "pointer", fontFamily: "inherit" }}>
               <option value="value-desc">Value High to Low</option>
               <option value="gem-desc">Gem Rate High to Low</option>
               <option value="profit-desc">Profit High to Low</option>
@@ -143,24 +156,7 @@ export default function Home() {
             <div style={{ textAlign: "center", padding: 48, color: c.textTertiary }}>Loading...</div>
           ) : (
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 16 }}>
-            {(function() {
-              var sorted = [...cards];
-              if (homeSort === "value-desc") {
-                sorted.sort(function(a, b) { return b.raw_price - a.raw_price; });
-              } else if (homeSort === "gem-desc") {
-                sorted = sorted.filter(function(c) {
-                  var pop = c.psa_pop || [];
-                  var popTotal = pop.reduce(function(a: number, b: number) { return a + b; }, 0);
-                  return popTotal >= 500 && (c._profit10 || 0) >= 120;
-                });
-                sorted.sort(function(a, b) { return (b._gemRate || 0) - (a._gemRate || 0); });
-              } else if (homeSort === "profit-desc") {
-                // Profit to loss ratio: profit10 / raw_price
-                sorted = sorted.filter(function(c) { return c.raw_price > 0 && (c._profit10 || 0) > 0; });
-                sorted.sort(function(a, b) { return ((b._profit10 || 0) / b.raw_price) - ((a._profit10 || 0) / a.raw_price); });
-              }
-              return sorted.slice(0, 100);
-            })().map(function(card) {
+            {cards.map(function(card) {
               var realGemRate = Math.round(card._gemRate || card.gem_rate || 0);
               var avgPrice = card._rawAvg || card.raw_price;
 

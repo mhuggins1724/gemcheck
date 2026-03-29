@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { supabase } from "../lib/supabase";
 import { useTheme } from "../lib/useTheme";
 import { getColors } from "../lib/design";
@@ -27,6 +27,36 @@ var eraLogos: Record<string, string> = {
   "Gym": "https://images.pokemontcg.io/gym1/logo.png",
   "Base": "https://images.pokemontcg.io/base1/logo.png",
 };
+
+function LazyBg({ src, blur, opacity, children }: { src: string; blur: string; opacity: number; children?: any }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(function() {
+    if (!ref.current) return;
+    var observer = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) { setVisible(true); observer.disconnect(); }
+    }, { rootMargin: "200px" });
+    observer.observe(ref.current);
+    return function() { observer.disconnect(); };
+  }, []);
+  return (
+    <div ref={ref} style={{ position: "absolute" as const, inset: 0, backgroundImage: visible ? "url(" + src + ")" : "none", backgroundSize: "cover", backgroundPosition: "center", filter: visible ? "blur(" + blur + ") saturate(1.5)" : "none", transform: "scale(1.08)", opacity: opacity }}></div>
+  );
+}
+
+function LazyImg({ src, alt, style, onError }: { src: string; alt: string; style: any; onError?: any }) {
+  const ref = useRef<HTMLImageElement>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(function() {
+    if (!ref.current) return;
+    var observer = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) { setVisible(true); observer.disconnect(); }
+    }, { rootMargin: "200px" });
+    observer.observe(ref.current);
+    return function() { observer.disconnect(); };
+  }, []);
+  return <img ref={ref} src={visible ? src : undefined} alt={alt} style={style} onError={onError} />;
+}
 
 export default function SetsPage() {
   const { isDark, toggleTheme } = useTheme();
@@ -130,7 +160,7 @@ export default function SetsPage() {
               <div key={eraName} style={{ marginBottom: 48 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16, paddingBottom: 12, borderBottom: "1px solid " + border }}>
                   {eraLogo ? (
-                    <img src={eraLogo} alt={eraName} style={{ height: 24, objectFit: "contain" }} onError={function(e: any) { e.target.style.display = "none"; }} />
+                    <LazyImg src={eraLogo} alt={eraName} style={{ height: 24, objectFit: "contain" }} onError={function(e: any) { e.target.style.display = "none"; }} />
                   ) : null}
                   <span style={{ fontSize: 16, fontWeight: 700 }}>{eraName}</span>
                   <span style={{ fontSize: 12, color: textTer, marginLeft: "auto", fontFamily: "var(--font-jetbrains)" }}>{eraSets.length} sets &middot; {totalCards.toLocaleString()} cards</span>
@@ -144,9 +174,9 @@ export default function SetsPage() {
                       <a key={s.code} href={"/sets/" + s.code.toLowerCase()} style={{ textDecoration: "none", color: "inherit" }}>
                         <div className="card-tile" style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, overflow: "hidden", cursor: "pointer", boxShadow: co.shadow }}>
                           <div style={{ width: "100%", height: 90, overflow: "hidden", position: "relative" as const, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                            {/* Blurred pack image or logo background */}
+                            {/* Blurred pack image or logo background (lazy loaded) */}
                             {(s.pack_image_url || s.logo_url) ? (
-                              <div style={{ position: "absolute" as const, inset: 0, backgroundImage: "url(" + (s.pack_image_url || s.logo_url) + ")", backgroundSize: "cover", backgroundPosition: "center", filter: "blur(" + (s.pack_image_url ? "1px" : "5px") + ") saturate(1.5)", transform: "scale(1.08)", opacity: s.pack_image_url ? 0.95 : 0.8 }}></div>
+                              <LazyBg src={s.pack_image_url || s.logo_url} blur={s.pack_image_url ? "1px" : "5px"} opacity={s.pack_image_url ? 0.95 : 0.8} />
                             ) : null}
                             <div style={{ position: "absolute" as const, inset: 0, background: (s.pack_image_url || s.logo_url) ? (isDark ? "rgba(0,0,0,0.35)" : "rgba(0,0,0,0.2)") : (isDark ? "linear-gradient(135deg, #1a1a2e, #2d2d44)" : "linear-gradient(135deg, #e8e8f0, #d0d0e0)") }}></div>
                             {/* Crisp logo on top */}
@@ -154,7 +184,7 @@ export default function SetsPage() {
                               {isPromoSet && !s.logo_url ? (
                                 <PromoIcon />
                               ) : s.logo_url ? (
-                                <img src={s.logo_url} alt={s.name} style={{ maxWidth: "90%", maxHeight: 60, objectFit: "contain", filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.4))" }} onError={function(e: any) { e.target.style.display = "none"; }} />
+                                <LazyImg src={s.logo_url} alt={s.name} style={{ maxWidth: "90%", maxHeight: 60, objectFit: "contain", filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.4))" }} onError={function(e: any) { e.target.style.display = "none"; }} />
                               ) : (
                                 <div style={{ fontSize: 13, fontWeight: 700, color: "#fff", textAlign: "center", textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}>{s.name}</div>
                               )}
