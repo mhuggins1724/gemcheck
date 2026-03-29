@@ -12,8 +12,6 @@ var fallbackImg = "https://rjtwqtpdmmkeknllsuvr.supabase.co/storage/v1/object/pu
 var sortOptions = [
   { label: "Value High to Low", key: "value-desc" },
   { label: "Value Low to High", key: "value-asc" },
-  { label: "Gem Rate High to Low", key: "gem-desc" },
-  { label: "Gem Rate Low to High", key: "gem-asc" },
   { label: "A-Z", key: "name-asc" },
   { label: "Z-A", key: "name-desc" },
   { label: "Card Number Lo-Hi", key: "number-asc" },
@@ -36,33 +34,6 @@ function sortCards(cards: any[], sortKey: string) {
     var numB = parseInt((b.name.match(/(\d+)\//) || ["","0"])[1]);
     return numB - numA;
   });
-  else if (sortKey === "gem-desc" || sortKey === "gem-asc") {
-    // Find max pop in this set for relative threshold
-    var maxPop = 0;
-    sorted.forEach(function(c) {
-      var pop = c.psa_pop || [];
-      var total = pop.reduce(function(x: number, y: number) { return x + y; }, 0);
-      if (total > maxPop) maxPop = total;
-    });
-    var minPop = Math.max(10, Math.floor(maxPop * 0.1));
-    // Split into qualifying and non-qualifying
-    var qualifying: any[] = [];
-    var rest: any[] = [];
-    sorted.forEach(function(c) {
-      var pop = c.psa_pop || [];
-      var total = pop.reduce(function(x: number, y: number) { return x + y; }, 0);
-      if (total >= minPop && c.raw_price >= 10) qualifying.push(c);
-      else rest.push(c);
-    });
-    function getGem(c: any) {
-      var pop = c.psa_pop || []; var total = pop.reduce(function(x: number, y: number) { return x + y; }, 0);
-      return total > 0 ? (pop.length >= 10 ? pop[9] : 0) / total * 100 : (c.gem_rate || 0);
-    }
-    var dir = sortKey === "gem-desc" ? -1 : 1;
-    qualifying.sort(function(a, b) { return dir * (getGem(a) - getGem(b)); });
-    rest.sort(function(a, b) { return dir * (getGem(a) - getGem(b)); });
-    sorted = qualifying.concat(rest);
-  }
   return sorted;
 }
 
