@@ -31,30 +31,20 @@ export default function Home() {
 
   function fetchTopCards(sortKey: string) {
     setLoading(true);
-    var lightFields = "id,name,set_name,set_code,card_type,image_url,raw_price,psa10_price,psa9_price,gem_rate";
-    var fullFields = lightFields + ",psa_pop";
+    var fields = "id,name,set_name,set_code,card_type,image_url,raw_price,psa10_price,psa9_price,gem_rate";
     if (sortKey === "value-desc") {
-      // Fast: no psa_pop needed, just sort by raw_price
-      supabase.from("cards").select(lightFields).order("raw_price", { ascending: false }).gt("raw_price", 0).limit(100).then(function(res) {
+      supabase.from("cards").select(fields).order("raw_price", { ascending: false }).gt("raw_price", 0).limit(100).then(function(res) {
         if (res.data) setCards(processCards(res.data));
         setLoading(false);
       });
     } else if (sortKey === "gem-desc") {
-      supabase.from("cards").select(fullFields).order("gem_rate", { ascending: false }).gt("gem_rate", 40).limit(500).then(function(res) {
-        if (res.data) {
-          var processed = processCards(res.data);
-          var filtered = processed.filter(function(c: any) {
-            var pop = c.psa_pop || [];
-            var popTotal = pop.reduce(function(a: number, b: number) { return a + b; }, 0);
-            return popTotal >= 500 && (c._profit10 || 0) >= 120;
-          });
-          filtered.sort(function(a: any, b: any) { return (b._gemRate || 0) - (a._gemRate || 0); });
-          setCards(filtered.slice(0, 100));
-        }
+      // gem_rate is pre-calculated by scraper, use it directly. Filter 1000+ graded via gem_rate > 0 (cards with no pop have gem_rate 0)
+      supabase.from("cards").select(fields).order("gem_rate", { ascending: false }).gt("gem_rate", 0).gt("raw_price", 9).limit(100).then(function(res) {
+        if (res.data) setCards(processCards(res.data));
         setLoading(false);
       });
     } else if (sortKey === "profit-desc") {
-      supabase.from("cards").select(lightFields).gt("psa10_price", 0).gt("raw_price", 0).order("psa10_price", { ascending: false }).limit(500).then(function(res) {
+      supabase.from("cards").select(fields).gt("psa10_price", 0).gt("raw_price", 0).order("psa10_price", { ascending: false }).limit(100).then(function(res) {
         if (res.data) {
           var processed = processCards(res.data).filter(function(c: any) { return (c._profit10 || 0) > 0; });
           processed.sort(function(a: any, b: any) { return ((b._profit10 || 0) / b.raw_price) - ((a._profit10 || 0) / a.raw_price); });

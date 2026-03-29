@@ -138,11 +138,14 @@ async function main() {
       var result = calcScore(card.raw_price, card.psa10_price, card.psa9_price, gemRate, gradedSales.length, card.year);
       if (!result) { skipped++; continue; }
 
+      // Only store gem_rate if 1000+ total graded (meaningful sample size)
+      var storedGemRate = psaTotal >= 1000 ? gemRate : 0;
+
       // Always update to ensure caps are applied
       if (true) {
         await supabase.from("cards").update({
           grade_score: result.score,
-          gem_rate: gemRate,
+          gem_rate: storedGemRate,
         }).eq("id", card.id);
         updated++;
       } else {
