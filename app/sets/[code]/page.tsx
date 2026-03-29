@@ -51,7 +51,7 @@ async function fetchAllCards(code: string) {
   var page = 0;
   var pageSize = 1000;
   while (true) {
-    var res = await supabase.from("cards").select("*").eq("set_code", code).range(page * pageSize, (page + 1) * pageSize - 1);
+    var res = await supabase.from("cards").select("id,name,set_code,card_type,image_url,raw_price,gem_rate,psa_pop").eq("set_code", code).range(page * pageSize, (page + 1) * pageSize - 1);
     if (!res.data || res.data.length === 0) break;
     allCards.push(...res.data);
     if (res.data.length < pageSize) break;
@@ -176,10 +176,7 @@ export default function SetDetailPage() {
               var popTotal = pop.reduce(function(a: number, b: number) { return a + b; }, 0);
               var pop10 = pop.length >= 10 ? pop[9] : 0;
               var realGemRate = popTotal > 0 ? Math.round((pop10 / popTotal) * 100) : card.gem_rate;
-              // Calculate avg last 5 sold price (same as card detail page)
-              var sales = card.all_sales || [];
-              var rawSales = sales.filter(function(s: any) { return s.grade === "raw"; }).slice(0, 5);
-              var avgPrice = rawSales.length > 0 ? Math.round(rawSales.reduce(function(a: number, s: any) { return a + s.price; }, 0) / rawSales.length) : card.raw_price;
+              var avgPrice = card.raw_price;
               
               var gemBg2 = realGemRate >= 65 ? greenBg : realGemRate >= 45 ? amberBg : redBg;
               var gemColor = realGemRate >= 65 ? greenText : realGemRate >= 45 ? amberText : redText;
