@@ -36,13 +36,33 @@ function sortCards(cards: any[], sortKey: string) {
     var numB = parseInt((b.name.match(/(\d+)\//) || ["","0"])[1]);
     return numB - numA;
   });
-  else if (sortKey === "gem-desc" || sortKey === "gem-asc") sorted.sort(function(a, b) {
-    var popA = a.psa_pop || []; var popTotalA = popA.reduce(function(x: number, y: number) { return x + y; }, 0);
-    var gemA = popTotalA > 0 ? (popA.length >= 10 ? popA[9] : 0) / popTotalA * 100 : (a.gem_rate || 0);
-    var popB = b.psa_pop || []; var popTotalB = popB.reduce(function(x: number, y: number) { return x + y; }, 0);
-    var gemB = popTotalB > 0 ? (popB.length >= 10 ? popB[9] : 0) / popTotalB * 100 : (b.gem_rate || 0);
-    return sortKey === "gem-desc" ? gemB - gemA : gemA - gemB;
-  });
+  else if (sortKey === "gem-desc" || sortKey === "gem-asc") {
+    // Find max pop in this set for relative threshold
+    var maxPop = 0;
+    sorted.forEach(function(c) {
+      var pop = c.psa_pop || [];
+      var total = pop.reduce(function(x: number, y: number) { return x + y; }, 0);
+      if (total > maxPop) maxPop = total;
+    });
+    var minPop = Math.max(10, Math.floor(maxPop * 0.1));
+    // Split into qualifying and non-qualifying
+    var qualifying: any[] = [];
+    var rest: any[] = [];
+    sorted.forEach(function(c) {
+      var pop = c.psa_pop || [];
+      var total = pop.reduce(function(x: number, y: number) { return x + y; }, 0);
+      if (total >= minPop && c.raw_price >= 10) qualifying.push(c);
+      else rest.push(c);
+    });
+    function getGem(c: any) {
+      var pop = c.psa_pop || []; var total = pop.reduce(function(x: number, y: number) { return x + y; }, 0);
+      return total > 0 ? (pop.length >= 10 ? pop[9] : 0) / total * 100 : (c.gem_rate || 0);
+    }
+    var dir = sortKey === "gem-desc" ? -1 : 1;
+    qualifying.sort(function(a, b) { return dir * (getGem(a) - getGem(b)); });
+    rest.sort(function(a, b) { return dir * (getGem(a) - getGem(b)); });
+    sorted = qualifying.concat(rest);
+  }
   return sorted;
 }
 
