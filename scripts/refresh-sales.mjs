@@ -473,14 +473,13 @@ function cleanAndBucketSales(allSales) {
 }
 
 // ============================================================
-// Calculate median from most recent 10 sales
+// Calculate average from most recent 5 sales
 // ============================================================
-function medianPrice(sales) {
+function avgLast5(sales) {
   if (sales.length === 0) return null;
-  var recent = sales.slice(0, 10).map(function (s) { return s.price; }).sort(function (a, b) { return a - b; });
-  var mid = Math.floor(recent.length / 2);
-  if (recent.length % 2 === 0) return Math.round((recent[mid - 1] + recent[mid]) / 2);
-  return Math.round(recent[mid]);
+  var recent = sales.slice(0, 5);
+  var sum = recent.reduce(function(a, s) { return a + s.price; }, 0);
+  return Math.round(sum / recent.length);
 }
 
 // ============================================================
@@ -617,16 +616,16 @@ async function main() {
         updateData.sales_history = existingHistory.concat(newEntries).sort(function(a, b) { return b.date_sold.localeCompare(a.date_sold); });
       }
 
-      // Calculate median prices from cleaned sales
+      // Calculate avg last 5 sold prices from cleaned sales
       var rawSales = cleanedSales.filter(function(s) { return s.grade === "raw"; });
       var psa9Sales = cleanedSales.filter(function(s) { return s.company === "PSA" && s.grade === "9"; });
       var psa10Sales = cleanedSales.filter(function(s) { return s.company === "PSA" && s.grade === "10"; });
-      var rawMedian = medianPrice(rawSales);
-      var psa9Median = medianPrice(psa9Sales);
-      var psa10Median = medianPrice(psa10Sales);
-      if (rawMedian !== null) updateData.raw_price = rawMedian;
-      if (psa9Median !== null) updateData.psa9_price = psa9Median;
-      if (psa10Median !== null) updateData.psa10_price = psa10Median;
+      var rawAvg = avgLast5(rawSales);
+      var psa9Avg = avgLast5(psa9Sales);
+      var psa10Avg = avgLast5(psa10Sales);
+      if (rawAvg !== null) updateData.raw_price = rawAvg;
+      if (psa9Avg !== null) updateData.psa9_price = psa9Avg;
+      if (psa10Avg !== null) updateData.psa10_price = psa10Avg;
 
       await supabase.from("cards").update(updateData).eq("id", card.id);
       setUpdated++;

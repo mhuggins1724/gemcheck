@@ -66,9 +66,10 @@ function CardDetailContent() {
     return filtered.length > 0 ? Math.round(filtered[0].price) : null;
   }
 
-  var rawAvg = avgLast5(function(s: any) { return s.grade === "raw"; });
-  var psa9Avg = avgLast5(function(s: any) { return s.company === "PSA" && s.grade === "9"; });
-  var psa10Avg = avgLast5(function(s: any) { return s.company === "PSA" && s.grade === "10"; });
+  // Use stored avg last 5 prices (calculated by scraper, same as set tiles)
+  var rawAvg = card.raw_price || null;
+  var psa9Avg = card.psa9_price || null;
+  var psa10Avg = card.psa10_price || null;
   var rawLast = lastSoldPrice(function(s: any) { return s.grade === "raw"; });
   var psa9Last = lastSoldPrice(function(s: any) { return s.company === "PSA" && s.grade === "9"; });
   var psa10Last = lastSoldPrice(function(s: any) { return s.company === "PSA" && s.grade === "10"; });
