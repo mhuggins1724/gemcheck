@@ -195,11 +195,11 @@ export default function Home() {
 
         {/* Footer */}
         <div style={{ borderTop: "1px solid " + c.border, padding: "24px 0", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap" as const, gap: 12 }}>
-          <div style={{ fontSize: 12, color: c.textTertiary }}>&copy; 2026 GemCheck. Not affiliated with PSA or The Pok&eacute;mon Company.</div>
-          <div style={{ fontSize: 12, color: c.textTertiary, display: "flex", gap: 16 }}>
-            <a href="#" style={{ color: "inherit", textDecoration: "none" }}>About</a>
-            <a href="#" style={{ color: "inherit", textDecoration: "none" }}>FAQ</a>
-            <a href="#" style={{ color: "inherit", textDecoration: "none" }}>Contact</a>
+          <div style={{ fontSize: 12, fontWeight: 600, background: "linear-gradient(135deg, #3b82f6, #7c3aed)", backgroundClip: "text", WebkitBackgroundClip: "text", color: "transparent", WebkitTextFillColor: "transparent" }}>&copy; 2026 GemCheck. Not affiliated with PSA or The Pok&eacute;mon Company.</div>
+          <div style={{ fontSize: 12, fontWeight: 600, display: "flex", gap: 16 }}>
+            <a href="#" style={{ background: "linear-gradient(135deg, #3b82f6, #7c3aed)", backgroundClip: "text", WebkitBackgroundClip: "text", color: "transparent", WebkitTextFillColor: "transparent", textDecoration: "none" }}>About</a>
+            <a href="#" style={{ background: "linear-gradient(135deg, #3b82f6, #7c3aed)", backgroundClip: "text", WebkitBackgroundClip: "text", color: "transparent", WebkitTextFillColor: "transparent", textDecoration: "none" }}>FAQ</a>
+            <a href="#" style={{ background: "linear-gradient(135deg, #3b82f6, #7c3aed)", backgroundClip: "text", WebkitBackgroundClip: "text", color: "transparent", WebkitTextFillColor: "transparent", textDecoration: "none" }}>Contact</a>
           </div>
         </div>
       </div>

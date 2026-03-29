@@ -33,6 +33,8 @@ export default function SetsPage() {
   const [sets, setSets] = useState<any[]>([]);
   const [cardCounts, setCardCounts] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [cardSearch, setCardSearch] = useState("");
 
   useEffect(function() {
     Promise.all([
@@ -79,8 +81,8 @@ export default function SetsPage() {
       <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: navBg, backdropFilter: "blur(16px)", borderBottom: "1px solid " + border }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", height: 56, display: "flex", alignItems: "center", gap: 32 }}>
           <a href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none", color: text }}>
-            <svg width="28" height="32" viewBox="0 0 52 60" fill="none"><defs><linearGradient id="ns" x1="0" y1="0" x2="52" y2="60"><stop offset="0%" stopColor="#10b981"/><stop offset="100%" stopColor="#3b82f6"/></linearGradient></defs><path d="M26 2L50 14V34C50 46 38 54 26 58C14 54 2 46 2 34V14L26 2Z" fill="url(#ns)"/><path d="M16 30L23 37L36 22" fill="none" stroke="#fff" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            <span style={{ fontSize: 17, fontWeight: 700, letterSpacing: "-0.5px" }}>GemCheck</span>
+            <svg width="34" height="38" viewBox="0 0 52 60" fill="none"><defs><linearGradient id="ns" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#3b82f6"/><stop offset="100%" stopColor="#7c3aed"/></linearGradient></defs><path d="M26 2L50 14V34C50 46 38 54 26 58C14 54 2 46 2 34V14L26 2Z" fill="url(#ns)"/><path d="M16 30L23 37L36 22" fill="none" stroke="#fff" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            <span style={{ fontSize: 20, fontWeight: 800, letterSpacing: "-0.5px", background: "linear-gradient(135deg, #3b82f6, #7c3aed)", backgroundClip: "text", WebkitBackgroundClip: "text", color: "transparent", WebkitTextFillColor: "transparent" }}>GemCheck</span>
           </a>
           <div style={{ display: "flex", gap: 2 }}>
             <a href="/" style={{ padding: "6px 14px", borderRadius: 6, fontSize: 13, fontWeight: 400, color: textSec, textDecoration: "none" }}>Home</a>
@@ -97,13 +99,28 @@ export default function SetsPage() {
 
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 24px 40px" }}>
         <h1 style={{ fontSize: 28, fontWeight: 700, letterSpacing: "-0.5px", marginBottom: 8 }}>Browse Sets</h1>
-        <p style={{ fontSize: 14, color: textSec, marginBottom: 32 }}>Explore cards by set across every era of Pokemon TCG</p>
+        <p style={{ fontSize: 14, color: textSec, marginBottom: 20 }}>Explore cards by set across every era of Pokemon TCG</p>
+
+        <div style={{ display: "flex", gap: 12, marginBottom: 32, flexWrap: "wrap" as const }}>
+          <div style={{ position: "relative", flex: "1", minWidth: 200, maxWidth: 400 }}>
+            <svg style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", width: 16, height: 16, color: textTer }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input value={search} onChange={function(e) { setSearch(e.target.value); }} placeholder="Search sets..." style={{ width: "100%", padding: "10px 14px 10px 38px", borderRadius: 10, fontSize: 14, fontWeight: 500, background: isDark ? "#1a1a20" : "#ffffff", color: text, border: "1px solid " + border, outline: "none" }} />
+          </div>
+          <div style={{ position: "relative", flex: "1", minWidth: 200, maxWidth: 400 }}>
+            <svg style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", width: 16, height: 16, color: textTer }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input value={cardSearch} onChange={function(e) { setCardSearch(e.target.value); }} onKeyDown={function(e: any) { if (e.key === "Enter" && cardSearch.trim()) { window.location.href = "/search?q=" + encodeURIComponent(cardSearch.trim()); }}} placeholder="Search cards..." style={{ width: "100%", padding: "10px 14px 10px 38px", borderRadius: 10, fontSize: 14, fontWeight: 500, background: isDark ? "#1a1a20" : "#ffffff", color: text, border: "1px solid " + border, outline: "none" }} />
+          </div>
+        </div>
 
         {loading ? (
           <div style={{ textAlign: "center", padding: 40, color: textTer }}>Loading sets...</div>
         ) : (
           eraOrder.map(function(eraName) {
             var eraSets = sets.filter(function(s) { return s.era === eraName; });
+            if (search.trim()) {
+              var q = search.trim().toLowerCase();
+              eraSets = eraSets.filter(function(s) { return s.name.toLowerCase().includes(q) || s.code.toLowerCase().includes(q) || (s.year && s.year.includes(q)) || eraName.toLowerCase().includes(q); });
+            }
             if (eraSets.length === 0) return null;
             var totalCards = eraSets.reduce(function(sum, s) { return sum + (cardCounts[s.code] || 0); }, 0);
             var eraLogo = eraLogos[eraName] || "";
@@ -161,7 +178,7 @@ export default function SetsPage() {
         )}
 
         <div style={{ borderTop: "1px solid " + border, padding: "24px 0", marginTop: 40 }}>
-          <div style={{ fontSize: 12, color: textTer }}>&copy; 2026 GemCheck. Not affiliated with PSA or The Pok&eacute;mon Company.</div>
+          <div style={{ fontSize: 12, fontWeight: 600, background: "linear-gradient(135deg, #3b82f6, #7c3aed)", backgroundClip: "text", WebkitBackgroundClip: "text", color: "transparent", WebkitTextFillColor: "transparent" }}>&copy; 2026 GemCheck. Not affiliated with PSA or The Pok&eacute;mon Company.</div>
         </div>
       </div>
     </div>
