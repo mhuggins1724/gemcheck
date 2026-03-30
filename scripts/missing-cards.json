@@ -1,0 +1,4250 @@
+[
+  {
+    "pcId": "762775",
+    "pcName": "Espeon [Gold Star] #16",
+    "consoleName": "Pokemon POP Series 5",
+    "setCode": "1439",
+    "rawPrice": 4300,
+    "psa10Price": 15876
+  },
+  {
+    "pcId": "888125",
+    "pcName": "Latias [Gold Star] #105",
+    "consoleName": "Pokemon Deoxys",
+    "setCode": "1404",
+    "rawPrice": 2256,
+    "psa10Price": 13000
+  },
+  {
+    "pcId": "888125",
+    "pcName": "Latias [Gold Star] #105",
+    "consoleName": "Pokemon Deoxys",
+    "setCode": "1404",
+    "rawPrice": 2256,
+    "psa10Price": 13000
+  },
+  {
+    "pcId": "5810759",
+    "pcName": "Gengar [Prerelease Staff] #SWSH241",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 2000,
+    "psa10Price": 3025
+  },
+  {
+    "pcId": "962968",
+    "pcName": "Latias & Latios GX #170",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 1840,
+    "psa10Price": 3767
+  },
+  {
+    "pcId": "962968",
+    "pcName": "Latias & Latios GX #170",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 1840,
+    "psa10Price": 3767
+  },
+  {
+    "pcId": "888021",
+    "pcName": "Gengar #H9",
+    "consoleName": "Pokemon Skyridge",
+    "setCode": "1372",
+    "rawPrice": 1530,
+    "psa10Price": 6592
+  },
+  {
+    "pcId": "762776",
+    "pcName": "Umbreon [Gold Star] #17",
+    "consoleName": "Pokemon POP Series 5",
+    "setCode": "1439",
+    "rawPrice": 1521,
+    "psa10Price": 10189
+  },
+  {
+    "pcId": "962963",
+    "pcName": "Gengar & Mimikyu GX #165",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 1200,
+    "psa10Price": 1476
+  },
+  {
+    "pcId": "962963",
+    "pcName": "Gengar & Mimikyu GX #165",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 1200,
+    "psa10Price": 1476
+  },
+  {
+    "pcId": "888126",
+    "pcName": "Latios [Gold Star] #106",
+    "consoleName": "Pokemon Deoxys",
+    "setCode": "1404",
+    "rawPrice": 1100,
+    "psa10Price": 7781
+  },
+  {
+    "pcId": "888126",
+    "pcName": "Latios [Gold Star] #106",
+    "consoleName": "Pokemon Deoxys",
+    "setCode": "1404",
+    "rawPrice": 1100,
+    "psa10Price": 7781
+  },
+  {
+    "pcId": "2347886",
+    "pcName": "Machamp [Trainer Deck A] #8",
+    "consoleName": "Pokemon Base Set",
+    "setCode": "604",
+    "rawPrice": 1081,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "889386",
+    "pcName": "Alakazam [Gold Star] #99",
+    "consoleName": "Pokemon Crystal Guardians",
+    "setCode": "1395",
+    "rawPrice": 930,
+    "psa10Price": 4438
+  },
+  {
+    "pcId": "5834844",
+    "pcName": "Pikachu with Grey Felt Hat #85",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 804,
+    "psa10Price": 912
+  },
+  {
+    "pcId": "4050103",
+    "pcName": "Giratina V #186",
+    "consoleName": "Pokemon Lost Origin",
+    "setCode": "3118",
+    "rawPrice": 651,
+    "psa10Price": 726
+  },
+  {
+    "pcId": "887990",
+    "pcName": "Alakazam #H1",
+    "consoleName": "Pokemon Skyridge",
+    "setCode": "1372",
+    "rawPrice": 600,
+    "psa10Price": 1270
+  },
+  {
+    "pcId": "963361",
+    "pcName": "Gardevoir & Sylveon GX #205",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 562,
+    "psa10Price": 658
+  },
+  {
+    "pcId": "963361",
+    "pcName": "Gardevoir & Sylveon GX #205",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 562,
+    "psa10Price": 658
+  },
+  {
+    "pcId": "964133",
+    "pcName": "Charizard GX #SV49",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 531,
+    "psa10Price": 575
+  },
+  {
+    "pcId": "1656603",
+    "pcName": "Special Delivery Pikachu #SWSH074",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 455,
+    "psa10Price": 459
+  },
+  {
+    "pcId": "959116",
+    "pcName": "M Rayquaza EX #98",
+    "consoleName": "Pokemon Ancient Origins",
+    "setCode": "1576",
+    "rawPrice": 436,
+    "psa10Price": 1652
+  },
+  {
+    "pcId": "888001",
+    "pcName": "Arcanine #H2",
+    "consoleName": "Pokemon Skyridge",
+    "setCode": "1372",
+    "rawPrice": 409,
+    "psa10Price": 1000
+  },
+  {
+    "pcId": "964459",
+    "pcName": "Arceus & Dialga & Palkia GX #221",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 405,
+    "psa10Price": 453
+  },
+  {
+    "pcId": "964459",
+    "pcName": "Arceus & Dialga & Palkia GX #221",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 405,
+    "psa10Price": 453
+  },
+  {
+    "pcId": "964459",
+    "pcName": "Arceus & Dialga & Palkia GX #221",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 405,
+    "psa10Price": 453
+  },
+  {
+    "pcId": "964460",
+    "pcName": "Reshiram & Zekrom GX #222",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 394,
+    "psa10Price": 392
+  },
+  {
+    "pcId": "964460",
+    "pcName": "Reshiram & Zekrom GX #222",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 394,
+    "psa10Price": 392
+  },
+  {
+    "pcId": "888012",
+    "pcName": "Articuno #H3",
+    "consoleName": "Pokemon Skyridge",
+    "setCode": "1372",
+    "rawPrice": 370,
+    "psa10Price": 1300
+  },
+  {
+    "pcId": "2513001",
+    "pcName": "Dragonite V #192",
+    "consoleName": "Pokemon Evolving Skies",
+    "setCode": "2848",
+    "rawPrice": 366,
+    "psa10Price": 380
+  },
+  {
+    "pcId": "7845148",
+    "pcName": "Lucario [Staff] #SWSH186",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 351,
+    "psa10Price": 386
+  },
+  {
+    "pcId": "956931",
+    "pcName": "Lugia EX #134",
+    "consoleName": "Pokemon Plasma Storm",
+    "setCode": "1413",
+    "rawPrice": 330,
+    "psa10Price": 1864
+  },
+  {
+    "pcId": "963808",
+    "pcName": "Mewtwo & Mew GX #242",
+    "consoleName": "Pokemon Unified Minds",
+    "setCode": "2464",
+    "rawPrice": 320,
+    "psa10Price": 283
+  },
+  {
+    "pcId": "963808",
+    "pcName": "Mewtwo & Mew GX #242",
+    "consoleName": "Pokemon Unified Minds",
+    "setCode": "2464",
+    "rawPrice": 320,
+    "psa10Price": 283
+  },
+  {
+    "pcId": "926348",
+    "pcName": "Rayquaza #SL10",
+    "consoleName": "Pokemon Call of Legends",
+    "setCode": "1415",
+    "rawPrice": 300,
+    "psa10Price": 1499
+  },
+  {
+    "pcId": "962984",
+    "pcName": "Gengar & Mimikyu GX #186",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 297,
+    "psa10Price": 363
+  },
+  {
+    "pcId": "962984",
+    "pcName": "Gengar & Mimikyu GX #186",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 297,
+    "psa10Price": 363
+  },
+  {
+    "pcId": "844725",
+    "pcName": "Gyarados #XY60",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 294,
+    "psa10Price": 700
+  },
+  {
+    "pcId": "4768896",
+    "pcName": "Machamp [National Championships Staff] #9",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 294,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "963792",
+    "pcName": "Mega Sableye & Tyranitar GX #226",
+    "consoleName": "Pokemon Unified Minds",
+    "setCode": "2464",
+    "rawPrice": 285,
+    "psa10Price": 348
+  },
+  {
+    "pcId": "964453",
+    "pcName": "Blastoise & Piplup GX #215",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 280,
+    "psa10Price": 391
+  },
+  {
+    "pcId": "643511",
+    "pcName": "Birthday Pikachu #24",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 278,
+    "psa10Price": 700
+  },
+  {
+    "pcId": "964454",
+    "pcName": "Solgaleo & Lunala GX #216",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 275,
+    "psa10Price": 323
+  },
+  {
+    "pcId": "964454",
+    "pcName": "Solgaleo & Lunala GX #216",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 275,
+    "psa10Price": 323
+  },
+  {
+    "pcId": "925507",
+    "pcName": "Snorlax LV.X #111",
+    "consoleName": "Pokemon Rising Rivals",
+    "setCode": "1367",
+    "rawPrice": 272,
+    "psa10Price": 1900
+  },
+  {
+    "pcId": "2771296",
+    "pcName": "Espeon VMAX #270",
+    "consoleName": "Pokemon Fusion Strike",
+    "setCode": "2906",
+    "rawPrice": 269,
+    "psa10Price": 270
+  },
+  {
+    "pcId": "963357",
+    "pcName": "Greninja & Zoroark GX #201",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 265,
+    "psa10Price": 285
+  },
+  {
+    "pcId": "4034095",
+    "pcName": "Giratina [Prerelease Staff] #SM151",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 252,
+    "psa10Price": 235
+  },
+  {
+    "pcId": "926355",
+    "pcName": "Lugia #SL7",
+    "consoleName": "Pokemon Call of Legends",
+    "setCode": "1415",
+    "rawPrice": 251,
+    "psa10Price": 2488
+  },
+  {
+    "pcId": "962962",
+    "pcName": "Gengar & Mimikyu GX #164",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 251,
+    "psa10Price": 338
+  },
+  {
+    "pcId": "962962",
+    "pcName": "Gengar & Mimikyu GX #164",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 251,
+    "psa10Price": 338
+  },
+  {
+    "pcId": "887968",
+    "pcName": "Espeon #H9",
+    "consoleName": "Pokemon Aquapolis",
+    "setCode": "1397",
+    "rawPrice": 245,
+    "psa10Price": 1433
+  },
+  {
+    "pcId": "844767",
+    "pcName": "Mewtwo & Mew GX #SM191",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 226,
+    "psa10Price": 329
+  },
+  {
+    "pcId": "844767",
+    "pcName": "Mewtwo & Mew GX #SM191",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 226,
+    "psa10Price": 329
+  },
+  {
+    "pcId": "1563492",
+    "pcName": "Eevee #BW97",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 223,
+    "psa10Price": 1204
+  },
+  {
+    "pcId": "6791478",
+    "pcName": "Shadow Lugia [Jumbo]",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 221,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "887948",
+    "pcName": "Arcanine #H2",
+    "consoleName": "Pokemon Aquapolis",
+    "setCode": "1397",
+    "rawPrice": 215,
+    "psa10Price": 1202
+  },
+  {
+    "pcId": "957165",
+    "pcName": "Deoxys EX #111",
+    "consoleName": "Pokemon Plasma Freeze",
+    "setCode": "1382",
+    "rawPrice": 215,
+    "psa10Price": 943
+  },
+  {
+    "pcId": "4559495",
+    "pcName": "Tyranitar [Prerelease Staff] #XY130",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 212,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "964155",
+    "pcName": "Umbreon GX #SV69",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 210,
+    "psa10Price": 193
+  },
+  {
+    "pcId": "4637125",
+    "pcName": "Giratina VSTAR #GG69",
+    "consoleName": "Pokemon Crown Zenith",
+    "setCode": "17688",
+    "rawPrice": 210,
+    "psa10Price": 217
+  },
+  {
+    "pcId": "3232419",
+    "pcName": "Lugia [Staff] #SWSH069",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 209,
+    "psa10Price": 224
+  },
+  {
+    "pcId": "926353",
+    "pcName": "Ho-Oh #SL5",
+    "consoleName": "Pokemon Call of Legends",
+    "setCode": "1415",
+    "rawPrice": 208,
+    "psa10Price": 788
+  },
+  {
+    "pcId": "957855",
+    "pcName": "M Charizard EX #108",
+    "consoleName": "Pokemon Flashfire",
+    "setCode": "1464",
+    "rawPrice": 206,
+    "psa10Price": 1161
+  },
+  {
+    "pcId": "956378",
+    "pcName": "Giratina EX #124",
+    "consoleName": "Pokemon Dragons Exalted",
+    "setCode": "1394",
+    "rawPrice": 203,
+    "psa10Price": 825
+  },
+  {
+    "pcId": "963355",
+    "pcName": "Marshadow & Machamp GX #199",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 203,
+    "psa10Price": 221
+  },
+  {
+    "pcId": "962851",
+    "pcName": "Gengar & Mimikyu GX #53",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 201,
+    "psa10Price": 325
+  },
+  {
+    "pcId": "962851",
+    "pcName": "Gengar & Mimikyu GX #53",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 201,
+    "psa10Price": 325
+  },
+  {
+    "pcId": "836945",
+    "pcName": "Charizard V #79",
+    "consoleName": "Pokemon Champion's Path",
+    "setCode": "2685",
+    "rawPrice": 200,
+    "psa10Price": 217
+  },
+  {
+    "pcId": "1656604",
+    "pcName": "Special Delivery Charizard #SWSH075",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 200,
+    "psa10Price": 210
+  },
+  {
+    "pcId": "4034100",
+    "pcName": "Arcanine [Prerelease Staff] #12",
+    "consoleName": "Pokemon Next Destinies",
+    "setCode": "1412",
+    "rawPrice": 199,
+    "psa10Price": 345
+  },
+  {
+    "pcId": "926349",
+    "pcName": "Suicune #SL11",
+    "consoleName": "Pokemon Call of Legends",
+    "setCode": "1415",
+    "rawPrice": 197,
+    "psa10Price": 829
+  },
+  {
+    "pcId": "4637100",
+    "pcName": "Mewtwo VSTAR #GG44",
+    "consoleName": "Pokemon Crown Zenith",
+    "setCode": "17688",
+    "rawPrice": 191,
+    "psa10Price": 221
+  },
+  {
+    "pcId": "957402",
+    "pcName": "Palkia EX #100",
+    "consoleName": "Pokemon Plasma Blast",
+    "setCode": "1370",
+    "rawPrice": 188,
+    "psa10Price": 770
+  },
+  {
+    "pcId": "844587",
+    "pcName": "Pikachu EX #XY124",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 184,
+    "psa10Price": 1456
+  },
+  {
+    "pcId": "963373",
+    "pcName": "Reshiram & Charizard GX #217",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 184,
+    "psa10Price": 185
+  },
+  {
+    "pcId": "2618172",
+    "pcName": "Charizard #4",
+    "consoleName": "Pokemon Celebrations",
+    "setCode": "2867",
+    "rawPrice": 169,
+    "psa10Price": 207
+  },
+  {
+    "pcId": "964497",
+    "pcName": "Reshiram & Zekrom GX #259",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 166,
+    "psa10Price": 169
+  },
+  {
+    "pcId": "964497",
+    "pcName": "Reshiram & Zekrom GX #259",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 166,
+    "psa10Price": 169
+  },
+  {
+    "pcId": "956929",
+    "pcName": "Articuno EX #132",
+    "consoleName": "Pokemon Plasma Storm",
+    "setCode": "1413",
+    "rawPrice": 166,
+    "psa10Price": 509
+  },
+  {
+    "pcId": "844917",
+    "pcName": "Armored Mewtwo #SM228",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 165,
+    "psa10Price": 568
+  },
+  {
+    "pcId": "836944",
+    "pcName": "Charizard VMAX #74",
+    "consoleName": "Pokemon Champion's Path",
+    "setCode": "2685",
+    "rawPrice": 162,
+    "psa10Price": 142
+  },
+  {
+    "pcId": "844585",
+    "pcName": "Blastoise EX #XY122",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 156,
+    "psa10Price": 726
+  },
+  {
+    "pcId": "964163",
+    "pcName": "Sylveon GX #SV76",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 156,
+    "psa10Price": 155
+  },
+  {
+    "pcId": "962982",
+    "pcName": "Pikachu & Zekrom GX #184",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 155,
+    "psa10Price": 175
+  },
+  {
+    "pcId": "962989",
+    "pcName": "Eevee & Snorlax GX #191",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 152,
+    "psa10Price": 247
+  },
+  {
+    "pcId": "962989",
+    "pcName": "Eevee & Snorlax GX #191",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 152,
+    "psa10Price": 247
+  },
+  {
+    "pcId": "962969",
+    "pcName": "Eevee & Snorlax GX #171",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 150,
+    "psa10Price": 198
+  },
+  {
+    "pcId": "962969",
+    "pcName": "Eevee & Snorlax GX #171",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 150,
+    "psa10Price": 198
+  },
+  {
+    "pcId": "957401",
+    "pcName": "Dialga EX #99",
+    "consoleName": "Pokemon Plasma Blast",
+    "setCode": "1370",
+    "rawPrice": 150,
+    "psa10Price": 1000
+  },
+  {
+    "pcId": "887967",
+    "pcName": "Entei #H8",
+    "consoleName": "Pokemon Aquapolis",
+    "setCode": "1397",
+    "rawPrice": 148,
+    "psa10Price": 517
+  },
+  {
+    "pcId": "844856",
+    "pcName": "Pikachu & Zekrom GX #SM168",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 145,
+    "psa10Price": 220
+  },
+  {
+    "pcId": "844856",
+    "pcName": "Pikachu & Zekrom GX #SM168",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 145,
+    "psa10Price": 220
+  },
+  {
+    "pcId": "844586",
+    "pcName": "Venusaur EX #XY123",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 144,
+    "psa10Price": 767
+  },
+  {
+    "pcId": "1287434",
+    "pcName": "Raikou & Suicune [Legend] #92",
+    "consoleName": "Pokemon Unleashed",
+    "setCode": "1399",
+    "rawPrice": 144,
+    "psa10Price": 225
+  },
+  {
+    "pcId": "1287434",
+    "pcName": "Raikou & Suicune [Legend] #92",
+    "consoleName": "Pokemon Unleashed",
+    "setCode": "1399",
+    "rawPrice": 144,
+    "psa10Price": 225
+  },
+  {
+    "pcId": "1563468",
+    "pcName": "Giratina #BW74",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 143,
+    "psa10Price": 1237
+  },
+  {
+    "pcId": "2291217",
+    "pcName": "Umbreon & Darkrai GX #SM241",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 138,
+    "psa10Price": 231
+  },
+  {
+    "pcId": "844634",
+    "pcName": "Mega Gengar EX #XY166",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 138,
+    "psa10Price": 800
+  },
+  {
+    "pcId": "643552",
+    "pcName": "Venusaur #13",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 136,
+    "psa10Price": 455
+  },
+  {
+    "pcId": "4135463",
+    "pcName": "Salamence [Winner] #19",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 131,
+    "psa10Price": 105
+  },
+  {
+    "pcId": "6149127",
+    "pcName": "Rayquaza ex #39",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 130,
+    "psa10Price": 1461
+  },
+  {
+    "pcId": "2291217",
+    "pcName": "Umbreon & Darkrai GX #SM241",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 130,
+    "psa10Price": 231
+  },
+  {
+    "pcId": "4637126",
+    "pcName": "Arceus VSTAR #GG70",
+    "consoleName": "Pokemon Crown Zenith",
+    "setCode": "17688",
+    "rawPrice": 125,
+    "psa10Price": 130
+  },
+  {
+    "pcId": "7641036",
+    "pcName": "Moltres [Staff] #SWSH185",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 124,
+    "psa10Price": 159
+  },
+  {
+    "pcId": "1563480",
+    "pcName": "Lucario #BW85",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 123,
+    "psa10Price": 675
+  },
+  {
+    "pcId": "957816",
+    "pcName": "M Charizard EX #69",
+    "consoleName": "Pokemon Flashfire",
+    "setCode": "1464",
+    "rawPrice": 122,
+    "psa10Price": 555
+  },
+  {
+    "pcId": "1563488",
+    "pcName": "Umbreon #BW93",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 122,
+    "psa10Price": 823
+  },
+  {
+    "pcId": "926347",
+    "pcName": "Deoxys #SL1",
+    "consoleName": "Pokemon Call of Legends",
+    "setCode": "1415",
+    "rawPrice": 122,
+    "psa10Price": 800
+  },
+  {
+    "pcId": "4707970",
+    "pcName": "Suicune [Prerelease Staff] #SM149",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 121,
+    "psa10Price": 247
+  },
+  {
+    "pcId": "962960",
+    "pcName": "Pikachu & Zekrom GX #162",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 119,
+    "psa10Price": 140
+  },
+  {
+    "pcId": "1341657",
+    "pcName": "Charizard VMAX #SV107",
+    "consoleName": "Pokemon Shining Fates",
+    "setCode": "2754",
+    "rawPrice": 118,
+    "psa10Price": 122
+  },
+  {
+    "pcId": "963788",
+    "pcName": "Mewtwo & Mew GX #222",
+    "consoleName": "Pokemon Unified Minds",
+    "setCode": "2464",
+    "rawPrice": 117,
+    "psa10Price": 155
+  },
+  {
+    "pcId": "10496258",
+    "pcName": "Entei [Prerelease Staff] #SM219",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 116,
+    "psa10Price": 228
+  },
+  {
+    "pcId": "962988",
+    "pcName": "Latias & Latios GX #190",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 114,
+    "psa10Price": 165
+  },
+  {
+    "pcId": "962988",
+    "pcName": "Latias & Latios GX #190",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 114,
+    "psa10Price": 165
+  },
+  {
+    "pcId": "2390421",
+    "pcName": "Rayquaza GX #177a",
+    "consoleName": "Pokemon Celestial Storm",
+    "setCode": "2278",
+    "rawPrice": 112,
+    "psa10Price": 135
+  },
+  {
+    "pcId": "1563467",
+    "pcName": "Darkrai #BW73",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 112,
+    "psa10Price": 620
+  },
+  {
+    "pcId": "963381",
+    "pcName": "Gardevoir & Sylveon GX #225",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 111,
+    "psa10Price": 136
+  },
+  {
+    "pcId": "963381",
+    "pcName": "Gardevoir & Sylveon GX #225",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 111,
+    "psa10Price": 136
+  },
+  {
+    "pcId": "925976",
+    "pcName": "Rayquaza & Deoxys LEGEND #89",
+    "consoleName": "Pokemon Undaunted",
+    "setCode": "1403",
+    "rawPrice": 106,
+    "psa10Price": 650
+  },
+  {
+    "pcId": "925976",
+    "pcName": "Rayquaza & Deoxys LEGEND #89",
+    "consoleName": "Pokemon Undaunted",
+    "setCode": "1403",
+    "rawPrice": 106,
+    "psa10Price": 650
+  },
+  {
+    "pcId": "964146",
+    "pcName": "Espeon GX #SV60",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 105,
+    "psa10Price": 108
+  },
+  {
+    "pcId": "964492",
+    "pcName": "Solgaleo & Lunala GX #254",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 105,
+    "psa10Price": 105
+  },
+  {
+    "pcId": "964492",
+    "pcName": "Solgaleo & Lunala GX #254",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 105,
+    "psa10Price": 105
+  },
+  {
+    "pcId": "959818",
+    "pcName": "Sylveon EX #RC32",
+    "consoleName": "Pokemon Generations",
+    "setCode": "1728",
+    "rawPrice": 104,
+    "psa10Price": 312
+  },
+  {
+    "pcId": "844898",
+    "pcName": "Moltres & Zapdos & Articuno GX #SM210",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 104,
+    "psa10Price": 115
+  },
+  {
+    "pcId": "844898",
+    "pcName": "Moltres & Zapdos & Articuno GX #SM210",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 104,
+    "psa10Price": 115
+  },
+  {
+    "pcId": "844898",
+    "pcName": "Moltres & Zapdos & Articuno GX #SM210",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 104,
+    "psa10Price": 115
+  },
+  {
+    "pcId": "4277108",
+    "pcName": "Rayquaza VMAX #TG20",
+    "consoleName": "Pokemon Silver Tempest",
+    "setCode": "3170",
+    "rawPrice": 103,
+    "psa10Price": 111
+  },
+  {
+    "pcId": "2618210",
+    "pcName": "Pikachu V #SWSH145",
+    "consoleName": "Pokemon Celebrations",
+    "setCode": "2867",
+    "rawPrice": 102,
+    "psa10Price": 85
+  },
+  {
+    "pcId": "844857",
+    "pcName": "Eevee & Snorlax GX #SM169",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 101,
+    "psa10Price": 150
+  },
+  {
+    "pcId": "844857",
+    "pcName": "Eevee & Snorlax GX #SM169",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 101,
+    "psa10Price": 150
+  },
+  {
+    "pcId": "4953924",
+    "pcName": "Zorua and Celebi [Jumbo]",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 100,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "2254028",
+    "pcName": "Snorlax #224",
+    "consoleName": "Pokemon Chilling Reign",
+    "setCode": "2807",
+    "rawPrice": 100,
+    "psa10Price": 108
+  },
+  {
+    "pcId": "957626",
+    "pcName": "Mew EX #RC24",
+    "consoleName": "Pokemon Legendary Treasures",
+    "setCode": "1409",
+    "rawPrice": 99,
+    "psa10Price": 564
+  },
+  {
+    "pcId": "844850",
+    "pcName": "Pikachu #SM162",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 98,
+    "psa10Price": 187
+  },
+  {
+    "pcId": "964144",
+    "pcName": "Mewtwo GX #SV59",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 98,
+    "psa10Price": 98
+  },
+  {
+    "pcId": "925499",
+    "pcName": "Alakazam LV.X #103",
+    "consoleName": "Pokemon Rising Rivals",
+    "setCode": "1367",
+    "rawPrice": 97,
+    "psa10Price": 815
+  },
+  {
+    "pcId": "926350",
+    "pcName": "Dialga #SL2",
+    "consoleName": "Pokemon Call of Legends",
+    "setCode": "1415",
+    "rawPrice": 96,
+    "psa10Price": 400
+  },
+  {
+    "pcId": "844572",
+    "pcName": "Mew #XY110",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 95,
+    "psa10Price": 331
+  },
+  {
+    "pcId": "962980",
+    "pcName": "Celebi & Venusaur GX #182",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 95,
+    "psa10Price": 88
+  },
+  {
+    "pcId": "962980",
+    "pcName": "Celebi & Venusaur GX #182",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 95,
+    "psa10Price": 88
+  },
+  {
+    "pcId": "962967",
+    "pcName": "Latias & Latios GX #169",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 93,
+    "psa10Price": 112
+  },
+  {
+    "pcId": "962967",
+    "pcName": "Latias & Latios GX #169",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 93,
+    "psa10Price": 112
+  },
+  {
+    "pcId": "925977",
+    "pcName": "Rayquaza & Deoxys LEGEND #90",
+    "consoleName": "Pokemon Undaunted",
+    "setCode": "1403",
+    "rawPrice": 91,
+    "psa10Price": 550
+  },
+  {
+    "pcId": "963813",
+    "pcName": "Garchomp & Giratina GX #247",
+    "consoleName": "Pokemon Unified Minds",
+    "setCode": "2464",
+    "rawPrice": 91,
+    "psa10Price": 95
+  },
+  {
+    "pcId": "925977",
+    "pcName": "Rayquaza & Deoxys LEGEND #90",
+    "consoleName": "Pokemon Undaunted",
+    "setCode": "1403",
+    "rawPrice": 91,
+    "psa10Price": 550
+  },
+  {
+    "pcId": "844584",
+    "pcName": "Charizard EX #XY121",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 90,
+    "psa10Price": 480
+  },
+  {
+    "pcId": "2250694",
+    "pcName": "Espeon & Deoxys GX #SM240",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 90,
+    "psa10Price": 181
+  },
+  {
+    "pcId": "4637124",
+    "pcName": "Origin Forme Dialga VSTAR #GG68",
+    "consoleName": "Pokemon Crown Zenith",
+    "setCode": "17688",
+    "rawPrice": 90,
+    "psa10Price": 94
+  },
+  {
+    "pcId": "2250694",
+    "pcName": "Espeon & Deoxys GX #SM240",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 90,
+    "psa10Price": 181
+  },
+  {
+    "pcId": "926351",
+    "pcName": "Entei #SL3",
+    "consoleName": "Pokemon Call of Legends",
+    "setCode": "1415",
+    "rawPrice": 89,
+    "psa10Price": 961
+  },
+  {
+    "pcId": "5830380",
+    "pcName": "Ho-oh [Pokemon Center NY] #52",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 88,
+    "psa10Price": 90
+  },
+  {
+    "pcId": "1287433",
+    "pcName": "Entei & Raikou [Legend] #91",
+    "consoleName": "Pokemon Unleashed",
+    "setCode": "1399",
+    "rawPrice": 88,
+    "psa10Price": 270
+  },
+  {
+    "pcId": "926357",
+    "pcName": "Raikou #SL9",
+    "consoleName": "Pokemon Call of Legends",
+    "setCode": "1415",
+    "rawPrice": 88,
+    "psa10Price": 609
+  },
+  {
+    "pcId": "1287433",
+    "pcName": "Entei & Raikou [Legend] #91",
+    "consoleName": "Pokemon Unleashed",
+    "setCode": "1399",
+    "rawPrice": 88,
+    "psa10Price": 270
+  },
+  {
+    "pcId": "4637123",
+    "pcName": "Origin Forme Palkia VSTAR #GG67",
+    "consoleName": "Pokemon Crown Zenith",
+    "setCode": "17688",
+    "rawPrice": 85,
+    "psa10Price": 88
+  },
+  {
+    "pcId": "926356",
+    "pcName": "Palkia #SL8",
+    "consoleName": "Pokemon Call of Legends",
+    "setCode": "1415",
+    "rawPrice": 85,
+    "psa10Price": 872
+  },
+  {
+    "pcId": "959815",
+    "pcName": "Pikachu #RC29",
+    "consoleName": "Pokemon Generations",
+    "setCode": "1728",
+    "rawPrice": 84,
+    "psa10Price": 285
+  },
+  {
+    "pcId": "964491",
+    "pcName": "Blastoise & Piplup GX #253",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 84,
+    "psa10Price": 84
+  },
+  {
+    "pcId": "959111",
+    "pcName": "Giratina EX #93",
+    "consoleName": "Pokemon Ancient Origins",
+    "setCode": "1576",
+    "rawPrice": 84,
+    "psa10Price": 288
+  },
+  {
+    "pcId": "844891",
+    "pcName": "Reshiram & Charizard GX #SM201",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 82,
+    "psa10Price": 268
+  },
+  {
+    "pcId": "1958438",
+    "pcName": "Ancient Mew",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 82,
+    "psa10Price": 208
+  },
+  {
+    "pcId": "1656583",
+    "pcName": "Gengar #SWSH052",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 82,
+    "psa10Price": 149
+  },
+  {
+    "pcId": "844891",
+    "pcName": "Reshiram & Charizard GX #SM201",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 82,
+    "psa10Price": 268
+  },
+  {
+    "pcId": "4652249",
+    "pcName": "Arceus Spring 2022 Collector's Chest",
+    "consoleName": "Pokemon Brilliant Stars",
+    "setCode": "2948",
+    "rawPrice": 80,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "1287432",
+    "pcName": "Entei & Raikou [Legend] #90",
+    "consoleName": "Pokemon Unleashed",
+    "setCode": "1399",
+    "rawPrice": 80,
+    "psa10Price": 264
+  },
+  {
+    "pcId": "1287432",
+    "pcName": "Entei & Raikou [Legend] #90",
+    "consoleName": "Pokemon Unleashed",
+    "setCode": "1399",
+    "rawPrice": 80,
+    "psa10Price": 264
+  },
+  {
+    "pcId": "844588",
+    "pcName": "Mewtwo EX #XY125",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 77,
+    "psa10Price": 362
+  },
+  {
+    "pcId": "959817",
+    "pcName": "M Gardevoir EX #RC31",
+    "consoleName": "Pokemon Generations",
+    "setCode": "1728",
+    "rawPrice": 77,
+    "psa10Price": 204
+  },
+  {
+    "pcId": "963637",
+    "pcName": "Mewtwo & Mew GX #71",
+    "consoleName": "Pokemon Unified Minds",
+    "setCode": "2464",
+    "rawPrice": 76,
+    "psa10Price": 125
+  },
+  {
+    "pcId": "963637",
+    "pcName": "Mewtwo & Mew GX #71",
+    "consoleName": "Pokemon Unified Minds",
+    "setCode": "2464",
+    "rawPrice": 76,
+    "psa10Price": 125
+  },
+  {
+    "pcId": "2618188",
+    "pcName": "Umbreon #17",
+    "consoleName": "Pokemon Celebrations",
+    "setCode": "2867",
+    "rawPrice": 76,
+    "psa10Price": 95
+  },
+  {
+    "pcId": "3187781",
+    "pcName": "Umbreon VMAX #TG23",
+    "consoleName": "Pokemon Brilliant Stars",
+    "setCode": "2948",
+    "rawPrice": 76,
+    "psa10Price": 72
+  },
+  {
+    "pcId": "845034",
+    "pcName": "Articuno EX #32",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 76,
+    "psa10Price": 300
+  },
+  {
+    "pcId": "4080768",
+    "pcName": "Pikachu V #TG16",
+    "consoleName": "Pokemon Lost Origin",
+    "setCode": "3118",
+    "rawPrice": 75,
+    "psa10Price": 78
+  },
+  {
+    "pcId": "4080769",
+    "pcName": "Pikachu VMAX #TG17",
+    "consoleName": "Pokemon Lost Origin",
+    "setCode": "3118",
+    "rawPrice": 75,
+    "psa10Price": 84
+  },
+  {
+    "pcId": "964496",
+    "pcName": "Arceus & Dialga & Palkia GX #258",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 75,
+    "psa10Price": 95
+  },
+  {
+    "pcId": "957624",
+    "pcName": "Reshiram #RC22",
+    "consoleName": "Pokemon Legendary Treasures",
+    "setCode": "1409",
+    "rawPrice": 75,
+    "psa10Price": 386
+  },
+  {
+    "pcId": "8361228",
+    "pcName": "Greninja-GX Case File",
+    "consoleName": "Pokemon Detective Pikachu",
+    "setCode": "2409",
+    "rawPrice": 75,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "964496",
+    "pcName": "Arceus & Dialga & Palkia GX #258",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 75,
+    "psa10Price": 95
+  },
+  {
+    "pcId": "964496",
+    "pcName": "Arceus & Dialga & Palkia GX #258",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 75,
+    "psa10Price": 95
+  },
+  {
+    "pcId": "961798",
+    "pcName": "Lucario-GX #135",
+    "consoleName": "Pokemon Forbidden Light",
+    "setCode": "2209",
+    "rawPrice": 74,
+    "psa10Price": 119
+  },
+  {
+    "pcId": "964141",
+    "pcName": "Greninja GX #SV56",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 74,
+    "psa10Price": 72
+  },
+  {
+    "pcId": "963378",
+    "pcName": "Greninja & Zoroark GX #222",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 74,
+    "psa10Price": 75
+  },
+  {
+    "pcId": "4793322",
+    "pcName": "Eevee on the Ball #2",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 73,
+    "psa10Price": 73
+  },
+  {
+    "pcId": "963360",
+    "pcName": "Gardevoir & Sylveon GX #204",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 73,
+    "psa10Price": 79
+  },
+  {
+    "pcId": "963360",
+    "pcName": "Gardevoir & Sylveon GX #204",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 73,
+    "psa10Price": 79
+  },
+  {
+    "pcId": "2313440",
+    "pcName": "Mew #9",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 71,
+    "psa10Price": 250
+  },
+  {
+    "pcId": "963350",
+    "pcName": "Reshiram & Charizard GX #194",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 71,
+    "psa10Price": 90
+  },
+  {
+    "pcId": "844985",
+    "pcName": "Shining Lugia #SM82",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 70,
+    "psa10Price": 167
+  },
+  {
+    "pcId": "844843",
+    "pcName": "Dragonite GX #SM156",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 70,
+    "psa10Price": 84
+  },
+  {
+    "pcId": "1287435",
+    "pcName": "Raikou & Suicune [Legend] #93",
+    "consoleName": "Pokemon Unleashed",
+    "setCode": "1399",
+    "rawPrice": 70,
+    "psa10Price": 279
+  },
+  {
+    "pcId": "1287435",
+    "pcName": "Raikou & Suicune [Legend] #93",
+    "consoleName": "Pokemon Unleashed",
+    "setCode": "1399",
+    "rawPrice": 70,
+    "psa10Price": 279
+  },
+  {
+    "pcId": "844768",
+    "pcName": "Garchomp & Giratina GX #SM193",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 69,
+    "psa10Price": 92
+  },
+  {
+    "pcId": "963811",
+    "pcName": "Mega Sableye & Tyranitar GX #245",
+    "consoleName": "Pokemon Unified Minds",
+    "setCode": "2464",
+    "rawPrice": 68,
+    "psa10Price": 71
+  },
+  {
+    "pcId": "10721114",
+    "pcName": "Alakazam [Pokemon Center] #9",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 68,
+    "psa10Price": 67
+  },
+  {
+    "pcId": "964395",
+    "pcName": "Reshiram & Zekrom GX #157",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 66,
+    "psa10Price": 94
+  },
+  {
+    "pcId": "964395",
+    "pcName": "Reshiram & Zekrom GX #157",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 66,
+    "psa10Price": 94
+  },
+  {
+    "pcId": "1287436",
+    "pcName": "Suicune & Entei [Legend] #94",
+    "consoleName": "Pokemon Unleashed",
+    "setCode": "1399",
+    "rawPrice": 65,
+    "psa10Price": 292
+  },
+  {
+    "pcId": "1287436",
+    "pcName": "Suicune & Entei [Legend] #94",
+    "consoleName": "Pokemon Unleashed",
+    "setCode": "1399",
+    "rawPrice": 65,
+    "psa10Price": 292
+  },
+  {
+    "pcId": "4246447",
+    "pcName": "Charizard VStar #SWSH262",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 64,
+    "psa10Price": 97
+  },
+  {
+    "pcId": "1098357",
+    "pcName": "Pikachu #SWSH020",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 64,
+    "psa10Price": 78
+  },
+  {
+    "pcId": "844762",
+    "pcName": "Umbreon #XY96",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 64,
+    "psa10Price": 405
+  },
+  {
+    "pcId": "2418286",
+    "pcName": "M Lucario EX #55a",
+    "consoleName": "Pokemon Furious Fists",
+    "setCode": "1481",
+    "rawPrice": 64,
+    "psa10Price": 252
+  },
+  {
+    "pcId": "10851273",
+    "pcName": "League Battle Deck: Zacian V",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 63,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "844923",
+    "pcName": "Eevee GX #SM233",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 62,
+    "psa10Price": 180
+  },
+  {
+    "pcId": "2386850",
+    "pcName": "Articuno #48",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 62,
+    "psa10Price": 84
+  },
+  {
+    "pcId": "2771271",
+    "pcName": "Celebi V #245",
+    "consoleName": "Pokemon Fusion Strike",
+    "setCode": "2906",
+    "rawPrice": 61,
+    "psa10Price": 72
+  },
+  {
+    "pcId": "963691",
+    "pcName": "Umbreon & Darkrai GX #125",
+    "consoleName": "Pokemon Unified Minds",
+    "setCode": "2464",
+    "rawPrice": 60,
+    "psa10Price": 69
+  },
+  {
+    "pcId": "844918",
+    "pcName": "Venusaur & Snivy GX #SM229",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 60,
+    "psa10Price": 93
+  },
+  {
+    "pcId": "964150",
+    "pcName": "Lucario GX #SV64",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 60,
+    "psa10Price": 59
+  },
+  {
+    "pcId": "963380",
+    "pcName": "Lucario & Melmetal GX #224",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 60,
+    "psa10Price": 65
+  },
+  {
+    "pcId": "963691",
+    "pcName": "Umbreon & Darkrai GX #125",
+    "consoleName": "Pokemon Unified Minds",
+    "setCode": "2464",
+    "rawPrice": 60,
+    "psa10Price": 69
+  },
+  {
+    "pcId": "1287437",
+    "pcName": "Suicune & Entei [Legend] #95",
+    "consoleName": "Pokemon Unleashed",
+    "setCode": "1399",
+    "rawPrice": 60,
+    "psa10Price": 193
+  },
+  {
+    "pcId": "1287437",
+    "pcName": "Suicune & Entei [Legend] #95",
+    "consoleName": "Pokemon Unleashed",
+    "setCode": "1399",
+    "rawPrice": 60,
+    "psa10Price": 193
+  },
+  {
+    "pcId": "963794",
+    "pcName": "Garchomp & Giratina GX #228",
+    "consoleName": "Pokemon Unified Minds",
+    "setCode": "2464",
+    "rawPrice": 58,
+    "psa10Price": 75
+  },
+  {
+    "pcId": "844745",
+    "pcName": "Latios #XY79",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 57,
+    "psa10Price": 825
+  },
+  {
+    "pcId": "844744",
+    "pcName": "Latias #XY78",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 56,
+    "psa10Price": 500
+  },
+  {
+    "pcId": "964157",
+    "pcName": "Darkrai GX #SV70",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 56,
+    "psa10Price": 58
+  },
+  {
+    "pcId": "3216319",
+    "pcName": "Mimikyu V #TG16",
+    "consoleName": "Pokemon Brilliant Stars",
+    "setCode": "2948",
+    "rawPrice": 55,
+    "psa10Price": 56
+  },
+  {
+    "pcId": "715699",
+    "pcName": "Machamp [Shadowless] #8",
+    "consoleName": "Pokemon Base Set",
+    "setCode": "604",
+    "rawPrice": 55,
+    "psa10Price": 600
+  },
+  {
+    "pcId": "845033",
+    "pcName": "Moltres EX #31",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 55,
+    "psa10Price": 383
+  },
+  {
+    "pcId": "844525",
+    "pcName": "Lugia #HGSS02",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 54,
+    "psa10Price": 188
+  },
+  {
+    "pcId": "962918",
+    "pcName": "Eevee & Snorlax GX #120",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 54,
+    "psa10Price": 88
+  },
+  {
+    "pcId": "962957",
+    "pcName": "Celebi & Venusaur GX #159",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 54,
+    "psa10Price": 51
+  },
+  {
+    "pcId": "962957",
+    "pcName": "Celebi & Venusaur GX #159",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 54,
+    "psa10Price": 51
+  },
+  {
+    "pcId": "962918",
+    "pcName": "Eevee & Snorlax GX #120",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 54,
+    "psa10Price": 88
+  },
+  {
+    "pcId": "962911",
+    "pcName": "Latias & Latios GX #113",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 53,
+    "psa10Price": 69
+  },
+  {
+    "pcId": "962911",
+    "pcName": "Latias & Latios GX #113",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 53,
+    "psa10Price": 69
+  },
+  {
+    "pcId": "964458",
+    "pcName": "Arceus & Dialga & Palkia GX #220",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 53,
+    "psa10Price": 53
+  },
+  {
+    "pcId": "963356",
+    "pcName": "Greninja & Zoroark GX #200",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 53,
+    "psa10Price": 65
+  },
+  {
+    "pcId": "963377",
+    "pcName": "Marshadow & Machamp GX #221",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 53,
+    "psa10Price": 50
+  },
+  {
+    "pcId": "964458",
+    "pcName": "Arceus & Dialga & Palkia GX #220",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 53,
+    "psa10Price": 53
+  },
+  {
+    "pcId": "964458",
+    "pcName": "Arceus & Dialga & Palkia GX #220",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 53,
+    "psa10Price": 53
+  },
+  {
+    "pcId": "959816",
+    "pcName": "Gardevoir EX #RC30",
+    "consoleName": "Pokemon Generations",
+    "setCode": "1728",
+    "rawPrice": 52,
+    "psa10Price": 164
+  },
+  {
+    "pcId": "4637066",
+    "pcName": "Mew #GG10",
+    "consoleName": "Pokemon Crown Zenith",
+    "setCode": "17688",
+    "rawPrice": 51,
+    "psa10Price": 60
+  },
+  {
+    "pcId": "964276",
+    "pcName": "Blastoise & Piplup GX #38",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 51,
+    "psa10Price": 76
+  },
+  {
+    "pcId": "964452",
+    "pcName": "Blastoise & Piplup GX #214",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 51,
+    "psa10Price": 92
+  },
+  {
+    "pcId": "4637106",
+    "pcName": "Darkrai VStar #GG50",
+    "consoleName": "Pokemon Crown Zenith",
+    "setCode": "17688",
+    "rawPrice": 51,
+    "psa10Price": 51
+  },
+  {
+    "pcId": "3188406",
+    "pcName": "Umbreon V #TG22",
+    "consoleName": "Pokemon Brilliant Stars",
+    "setCode": "2948",
+    "rawPrice": 50,
+    "psa10Price": 56
+  },
+  {
+    "pcId": "844855",
+    "pcName": "Celebi & Venusaur GX #SM167",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 50,
+    "psa10Price": 80
+  },
+  {
+    "pcId": "643514",
+    "pcName": "Celebi #50",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 50,
+    "psa10Price": 98
+  },
+  {
+    "pcId": "3188403",
+    "pcName": "Sylveon VMAX #TG15",
+    "consoleName": "Pokemon Brilliant Stars",
+    "setCode": "2948",
+    "rawPrice": 50,
+    "psa10Price": 54
+  },
+  {
+    "pcId": "4442257",
+    "pcName": "Dragonite [EB Games Stamped] #131",
+    "consoleName": "Pokemon Silver Tempest",
+    "setCode": "3170",
+    "rawPrice": 49,
+    "psa10Price": 86
+  },
+  {
+    "pcId": "844855",
+    "pcName": "Celebi & Venusaur GX #SM167",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 49,
+    "psa10Price": 80
+  },
+  {
+    "pcId": "844882",
+    "pcName": "Lucario & Melmetal GX #SM192",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 49,
+    "psa10Price": 67
+  },
+  {
+    "pcId": "845054",
+    "pcName": "Lucario LV.X #DP12",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 49,
+    "psa10Price": 440
+  },
+  {
+    "pcId": "3188402",
+    "pcName": "Sylveon V #TG14",
+    "consoleName": "Pokemon Brilliant Stars",
+    "setCode": "2948",
+    "rawPrice": 49,
+    "psa10Price": 50
+  },
+  {
+    "pcId": "3228699",
+    "pcName": "Mimikyu VMAX #TG17",
+    "consoleName": "Pokemon Brilliant Stars",
+    "setCode": "2948",
+    "rawPrice": 48,
+    "psa10Price": 45
+  },
+  {
+    "pcId": "4637101",
+    "pcName": "Deoxys VMAX #GG45",
+    "consoleName": "Pokemon Crown Zenith",
+    "setCode": "17688",
+    "rawPrice": 48,
+    "psa10Price": 55
+  },
+  {
+    "pcId": "964487",
+    "pcName": "Venusaur & Snivy GX #249",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 47,
+    "psa10Price": 54
+  },
+  {
+    "pcId": "7532487",
+    "pcName": "Machamp [1999-2000] #8",
+    "consoleName": "Pokemon Base Set",
+    "setCode": "604",
+    "rawPrice": 47,
+    "psa10Price": 302
+  },
+  {
+    "pcId": "845061",
+    "pcName": "Darkrai LV.X #DP19",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 46,
+    "psa10Price": 711
+  },
+  {
+    "pcId": "845089",
+    "pcName": "Rayquaza C LV.X #DP47",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 45,
+    "psa10Price": 1926
+  },
+  {
+    "pcId": "844742",
+    "pcName": "Zekrom #XY76",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 45,
+    "psa10Price": 408
+  },
+  {
+    "pcId": "643529",
+    "pcName": "Machamp #43",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 45,
+    "psa10Price": 50
+  },
+  {
+    "pcId": "844570",
+    "pcName": "Gyarados #XY109",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 44,
+    "psa10Price": 348
+  },
+  {
+    "pcId": "4637094",
+    "pcName": "Suicune V #GG38",
+    "consoleName": "Pokemon Crown Zenith",
+    "setCode": "17688",
+    "rawPrice": 44,
+    "psa10Price": 48
+  },
+  {
+    "pcId": "10991712",
+    "pcName": "Sealed Mega Battle Deck: Mega Gengar Ex",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 43,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "959807",
+    "pcName": "Sylveon EX #RC21",
+    "consoleName": "Pokemon Generations",
+    "setCode": "1728",
+    "rawPrice": 43,
+    "psa10Price": 158
+  },
+  {
+    "pcId": "963791",
+    "pcName": "Mega Sableye & Tyranitar GX #225",
+    "consoleName": "Pokemon Unified Minds",
+    "setCode": "2464",
+    "rawPrice": 42,
+    "psa10Price": 54
+  },
+  {
+    "pcId": "963286",
+    "pcName": "Gardevoir & Sylveon GX #130",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 42,
+    "psa10Price": 67
+  },
+  {
+    "pcId": "963286",
+    "pcName": "Gardevoir & Sylveon GX #130",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 42,
+    "psa10Price": 67
+  },
+  {
+    "pcId": "961535",
+    "pcName": "Lunala GX #172",
+    "consoleName": "Pokemon Ultra Prism",
+    "setCode": "2178",
+    "rawPrice": 42,
+    "psa10Price": 42
+  },
+  {
+    "pcId": "4637056",
+    "pcName": "Pikachu #160",
+    "consoleName": "Pokemon Crown Zenith",
+    "setCode": "17688",
+    "rawPrice": 41,
+    "psa10Price": 50
+  },
+  {
+    "pcId": "4863679",
+    "pcName": "Greninja #SWSH305",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 41,
+    "psa10Price": 34
+  },
+  {
+    "pcId": "844741",
+    "pcName": "Palkia #XY75",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 41,
+    "psa10Price": 180
+  },
+  {
+    "pcId": "11197498",
+    "pcName": "Mega Charizard X EX #23",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 40,
+    "psa10Price": 53
+  },
+  {
+    "pcId": "963176",
+    "pcName": "Reshiram & Charizard GX #20",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 40,
+    "psa10Price": 56
+  },
+  {
+    "pcId": "1563489",
+    "pcName": "Eevee #BW94",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 40,
+    "psa10Price": 265
+  },
+  {
+    "pcId": "7752408",
+    "pcName": "Gyarados [Cosmos Holo] #21",
+    "consoleName": "Pokemon Ancient Origins",
+    "setCode": "1576",
+    "rawPrice": 40,
+    "psa10Price": 582
+  },
+  {
+    "pcId": "964162",
+    "pcName": "Gardevoir GX #SV75",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 40,
+    "psa10Price": 40
+  },
+  {
+    "pcId": "5165855",
+    "pcName": "Lucario [1st Place Pokemon League] #63",
+    "consoleName": "Pokemon Fates Collide",
+    "setCode": "1780",
+    "rawPrice": 40,
+    "psa10Price": 103
+  },
+  {
+    "pcId": "963176",
+    "pcName": "Reshiram & Charizard GX #20",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 40,
+    "psa10Price": 56
+  },
+  {
+    "pcId": "964483",
+    "pcName": "Mimikyu #245",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 40,
+    "psa10Price": 55
+  },
+  {
+    "pcId": "10048725",
+    "pcName": "League Battle Deck: Gardevoir Ex",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 39,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "5964237",
+    "pcName": "Umbreon & Darkrai GX [Jumbo] #SM241",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 39,
+    "psa10Price": 239
+  },
+  {
+    "pcId": "10796041",
+    "pcName": "Umbreon Ex #176",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 38,
+    "psa10Price": 52
+  },
+  {
+    "pcId": "844939",
+    "pcName": "Umbreon GX #SM36",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 38,
+    "psa10Price": 183
+  },
+  {
+    "pcId": "4863629",
+    "pcName": "Arcanine #SWSH304",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 38,
+    "psa10Price": 25
+  },
+  {
+    "pcId": "964064",
+    "pcName": "Moltres & Zapdos & Articuno GX #44",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 38,
+    "psa10Price": 51
+  },
+  {
+    "pcId": "964064",
+    "pcName": "Moltres & Zapdos & Articuno GX #44",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 38,
+    "psa10Price": 51
+  },
+  {
+    "pcId": "964064",
+    "pcName": "Moltres & Zapdos & Articuno GX #44",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 38,
+    "psa10Price": 51
+  },
+  {
+    "pcId": "10809821",
+    "pcName": "Raikou, Entei & Suicune [Jumbo] #65",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 38,
+    "psa10Price": 65
+  },
+  {
+    "pcId": "4637092",
+    "pcName": "Entei V #GG36",
+    "consoleName": "Pokemon Crown Zenith",
+    "setCode": "17688",
+    "rawPrice": 38,
+    "psa10Price": 43
+  },
+  {
+    "pcId": "10809821",
+    "pcName": "Raikou, Entei & Suicune [Jumbo] #65",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 38,
+    "psa10Price": 65
+  },
+  {
+    "pcId": "10809821",
+    "pcName": "Raikou, Entei & Suicune [Jumbo] #65",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 38,
+    "psa10Price": 65
+  },
+  {
+    "pcId": "4246446",
+    "pcName": "Charizard VMax #SWSH261",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 37,
+    "psa10Price": 54
+  },
+  {
+    "pcId": "4246445",
+    "pcName": "Charizard V #SWSH260",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 37,
+    "psa10Price": 55
+  },
+  {
+    "pcId": "4080758",
+    "pcName": "Gengar #TG06",
+    "consoleName": "Pokemon Lost Origin",
+    "setCode": "3118",
+    "rawPrice": 37,
+    "psa10Price": 63
+  },
+  {
+    "pcId": "844594",
+    "pcName": "Tyranitar #XY130",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 37,
+    "psa10Price": 88
+  },
+  {
+    "pcId": "961536",
+    "pcName": "Solgaleo GX #173",
+    "consoleName": "Pokemon Ultra Prism",
+    "setCode": "2178",
+    "rawPrice": 37,
+    "psa10Price": 98
+  },
+  {
+    "pcId": "4916255",
+    "pcName": "Arcanine [Prerelease] #12",
+    "consoleName": "Pokemon Next Destinies",
+    "setCode": "1412",
+    "rawPrice": 37,
+    "psa10Price": 50
+  },
+  {
+    "pcId": "845059",
+    "pcName": "Dialga LV.X #DP17",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 37,
+    "psa10Price": 646
+  },
+  {
+    "pcId": "4196806",
+    "pcName": "Mewtwo V-Union [Set]",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 36,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "2618191",
+    "pcName": "M Rayquaza EX #76",
+    "consoleName": "Pokemon Celebrations",
+    "setCode": "2867",
+    "rawPrice": 36,
+    "psa10Price": 52
+  },
+  {
+    "pcId": "5420697",
+    "pcName": "M Rayquaza EX [Jumbo] #98",
+    "consoleName": "Pokemon Ancient Origins",
+    "setCode": "1576",
+    "rawPrice": 36,
+    "psa10Price": 133
+  },
+  {
+    "pcId": "844749",
+    "pcName": "Arceus #XY83",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 36,
+    "psa10Price": 295
+  },
+  {
+    "pcId": "964138",
+    "pcName": "Alolan Ninetales GX #SV53",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 36,
+    "psa10Price": 32
+  },
+  {
+    "pcId": "964089",
+    "pcName": "Moltres & Zapdos & Articuno GX #69",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 36,
+    "psa10Price": 44
+  },
+  {
+    "pcId": "964089",
+    "pcName": "Moltres & Zapdos & Articuno GX #69",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 36,
+    "psa10Price": 44
+  },
+  {
+    "pcId": "964089",
+    "pcName": "Moltres & Zapdos & Articuno GX #69",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 36,
+    "psa10Price": 44
+  },
+  {
+    "pcId": "643547",
+    "pcName": "Suicune #53",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 36,
+    "psa10Price": 111
+  },
+  {
+    "pcId": "4637097",
+    "pcName": "Raikou V #GG41",
+    "consoleName": "Pokemon Crown Zenith",
+    "setCode": "17688",
+    "rawPrice": 36,
+    "psa10Price": 50
+  },
+  {
+    "pcId": "845070",
+    "pcName": "Mewtwo LV.X #DP28",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 35,
+    "psa10Price": 462
+  },
+  {
+    "pcId": "962799",
+    "pcName": "Celebi & Venusaur GX #1",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 35,
+    "psa10Price": 50
+  },
+  {
+    "pcId": "1563487",
+    "pcName": "Espeon #BW92",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 35,
+    "psa10Price": 202
+  },
+  {
+    "pcId": "962799",
+    "pcName": "Celebi & Venusaur GX #1",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 35,
+    "psa10Price": 50
+  },
+  {
+    "pcId": "844640",
+    "pcName": "M Salamence EX #XY171",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 35,
+    "psa10Price": 118
+  },
+  {
+    "pcId": "844576",
+    "pcName": "Darkrai #XY114",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 35,
+    "psa10Price": 173
+  },
+  {
+    "pcId": "964136",
+    "pcName": "Reshiram GX #SV51",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 35,
+    "psa10Price": 42
+  },
+  {
+    "pcId": "844740",
+    "pcName": "Reshiram #XY74",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 35,
+    "psa10Price": 588
+  },
+  {
+    "pcId": "963263",
+    "pcName": "Greninja & Zoroark GX #107",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 35,
+    "psa10Price": 43
+  },
+  {
+    "pcId": "844851",
+    "pcName": "Mimikyu #SM163",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 35,
+    "psa10Price": 81
+  },
+  {
+    "pcId": "963354",
+    "pcName": "Marshadow & Machamp GX #198",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 35,
+    "psa10Price": 50
+  },
+  {
+    "pcId": "957118",
+    "pcName": "Umbreon #64",
+    "consoleName": "Pokemon Plasma Freeze",
+    "setCode": "1382",
+    "rawPrice": 34,
+    "psa10Price": 373
+  },
+  {
+    "pcId": "844735",
+    "pcName": "Rayquaza EX #XY69",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 34,
+    "psa10Price": 643
+  },
+  {
+    "pcId": "844790",
+    "pcName": "Ash's Pikachu #SM108",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 33,
+    "psa10Price": 46
+  },
+  {
+    "pcId": "957632",
+    "pcName": "Pikachu #RC7",
+    "consoleName": "Pokemon Legendary Treasures",
+    "setCode": "1409",
+    "rawPrice": 33,
+    "psa10Price": 172
+  },
+  {
+    "pcId": "964448",
+    "pcName": "Venusaur & Snivy GX #210",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 33,
+    "psa10Price": 56
+  },
+  {
+    "pcId": "963692",
+    "pcName": "Mega Sableye & Tyranitar GX #126",
+    "consoleName": "Pokemon Unified Minds",
+    "setCode": "2464",
+    "rawPrice": 33,
+    "psa10Price": 53
+  },
+  {
+    "pcId": "3366436",
+    "pcName": "Articuno [Corrected] #22",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 33,
+    "psa10Price": 41
+  },
+  {
+    "pcId": "4637102",
+    "pcName": "Deoxys VSTAR #GG46",
+    "consoleName": "Pokemon Crown Zenith",
+    "setCode": "17688",
+    "rawPrice": 33,
+    "psa10Price": 34
+  },
+  {
+    "pcId": "2741858",
+    "pcName": "Reshiram & Charizard GX #SM247",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 32,
+    "psa10Price": 56
+  },
+  {
+    "pcId": "2741858",
+    "pcName": "Reshiram & Charizard GX #SM247",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 32,
+    "psa10Price": 56
+  },
+  {
+    "pcId": "2618209",
+    "pcName": "Greninja [Gold Star] #SWSH144",
+    "consoleName": "Pokemon Celebrations",
+    "setCode": "2867",
+    "rawPrice": 32,
+    "psa10Price": 57
+  },
+  {
+    "pcId": "844590",
+    "pcName": "Moltres #XY127",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 32,
+    "psa10Price": 151
+  },
+  {
+    "pcId": "4080757",
+    "pcName": "Pikachu #TG05",
+    "consoleName": "Pokemon Lost Origin",
+    "setCode": "3118",
+    "rawPrice": 31,
+    "psa10Price": 41
+  },
+  {
+    "pcId": "4637086",
+    "pcName": "Pikachu #GG30",
+    "consoleName": "Pokemon Crown Zenith",
+    "setCode": "17688",
+    "rawPrice": 31,
+    "psa10Price": 41
+  },
+  {
+    "pcId": "962831",
+    "pcName": "Pikachu & Zekrom GX #33",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 31,
+    "psa10Price": 46
+  },
+  {
+    "pcId": "956905",
+    "pcName": "Lugia EX #108",
+    "consoleName": "Pokemon Plasma Storm",
+    "setCode": "1413",
+    "rawPrice": 31,
+    "psa10Price": 81
+  },
+  {
+    "pcId": "963359",
+    "pcName": "Lucario & Melmetal GX #203",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 31,
+    "psa10Price": 42
+  },
+  {
+    "pcId": "962831",
+    "pcName": "Pikachu & Zekrom GX #33",
+    "consoleName": "Pokemon Team Up",
+    "setCode": "2377",
+    "rawPrice": 31,
+    "psa10Price": 46
+  },
+  {
+    "pcId": "964086",
+    "pcName": "Moltres & Zapdos & Articuno GX #66",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 31,
+    "psa10Price": 47
+  },
+  {
+    "pcId": "964086",
+    "pcName": "Moltres & Zapdos & Articuno GX #66",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 31,
+    "psa10Price": 47
+  },
+  {
+    "pcId": "964086",
+    "pcName": "Moltres & Zapdos & Articuno GX #66",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 31,
+    "psa10Price": 47
+  },
+  {
+    "pcId": "2618178",
+    "pcName": "Pikachu Birthday #24",
+    "consoleName": "Pokemon Celebrations",
+    "setCode": "2867",
+    "rawPrice": 30,
+    "psa10Price": 48
+  },
+  {
+    "pcId": "2755745",
+    "pcName": "Pikachu & Zekrom GX #SM248",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 30,
+    "psa10Price": 44
+  },
+  {
+    "pcId": "964125",
+    "pcName": "Eevee #SV41",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 30,
+    "psa10Price": 30
+  },
+  {
+    "pcId": "963638",
+    "pcName": "Espeon & Deoxys GX #72",
+    "consoleName": "Pokemon Unified Minds",
+    "setCode": "2464",
+    "rawPrice": 30,
+    "psa10Price": 46
+  },
+  {
+    "pcId": "964135",
+    "pcName": "Ho-Oh GX #SV50",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 30,
+    "psa10Price": 30
+  },
+  {
+    "pcId": "844526",
+    "pcName": "Ho-Oh #HGSS01",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 30,
+    "psa10Price": 102
+  },
+  {
+    "pcId": "844573",
+    "pcName": "Celebi #XY111",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 30,
+    "psa10Price": 150
+  },
+  {
+    "pcId": "844724",
+    "pcName": "Salamence #XY59",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 30,
+    "psa10Price": 112
+  },
+  {
+    "pcId": "2755745",
+    "pcName": "Pikachu & Zekrom GX #SM248",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 30,
+    "psa10Price": 44
+  },
+  {
+    "pcId": "964139",
+    "pcName": "Articuno GX #SV54",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 30,
+    "psa10Price": 32
+  },
+  {
+    "pcId": "844743",
+    "pcName": "Dialga #XY77",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 30,
+    "psa10Price": 278
+  },
+  {
+    "pcId": "963638",
+    "pcName": "Espeon & Deoxys GX #72",
+    "consoleName": "Pokemon Unified Minds",
+    "setCode": "2464",
+    "rawPrice": 30,
+    "psa10Price": 46
+  },
+  {
+    "pcId": "6072751",
+    "pcName": "Espeon & Deoxys GX [Jumbo] #SM240",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 29,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "6072751",
+    "pcName": "Espeon & Deoxys GX [Jumbo] #SM240",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 29,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "4252222",
+    "pcName": "Gengar #SWSH241",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 28,
+    "psa10Price": 37
+  },
+  {
+    "pcId": "643525",
+    "pcName": "Ho-Oh #52",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 28,
+    "psa10Price": 85
+  },
+  {
+    "pcId": "844982",
+    "pcName": "Shining Celebi #SM79",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 28,
+    "psa10Price": 61
+  },
+  {
+    "pcId": "845031",
+    "pcName": "Celebi #29",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 28,
+    "psa10Price": 166
+  },
+  {
+    "pcId": "963712",
+    "pcName": "Garchomp & Giratina GX #146",
+    "consoleName": "Pokemon Unified Minds",
+    "setCode": "2464",
+    "rawPrice": 28,
+    "psa10Price": 48
+  },
+  {
+    "pcId": "959791",
+    "pcName": "Charizard #RC5",
+    "consoleName": "Pokemon Generations",
+    "setCode": "1728",
+    "rawPrice": 27,
+    "psa10Price": 79
+  },
+  {
+    "pcId": "9123364",
+    "pcName": "Latios [Cracked Ice] #HGSS11",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 27,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "1656597",
+    "pcName": "Snorlax #SWSH068",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 27,
+    "psa10Price": 114
+  },
+  {
+    "pcId": "964260",
+    "pcName": "Charizard & Braixen GX #22",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 26,
+    "psa10Price": 45
+  },
+  {
+    "pcId": "961785",
+    "pcName": "Lucario GX #122",
+    "consoleName": "Pokemon Forbidden Light",
+    "setCode": "2209",
+    "rawPrice": 26,
+    "psa10Price": 45
+  },
+  {
+    "pcId": "845080",
+    "pcName": "Giratina LV.X #DP38",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 26,
+    "psa10Price": 291
+  },
+  {
+    "pcId": "844578",
+    "pcName": "Arceus #XY116",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 26,
+    "psa10Price": 150
+  },
+  {
+    "pcId": "6769220",
+    "pcName": "Reshiram & Charizard GX [Jumbo] #SM201",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 26,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "844597",
+    "pcName": "Ash-Greninja EX #XY133",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 26,
+    "psa10Price": 846
+  },
+  {
+    "pcId": "9353505",
+    "pcName": "Articuno & Moltres & Zapdos [Jumbo]",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 26,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "9353505",
+    "pcName": "Articuno & Moltres & Zapdos [Jumbo]",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 26,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "9353505",
+    "pcName": "Articuno & Moltres & Zapdos [Jumbo]",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 26,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "2513000",
+    "pcName": "Dragonite V #191",
+    "consoleName": "Pokemon Evolving Skies",
+    "setCode": "2848",
+    "rawPrice": 25,
+    "psa10Price": 38
+  },
+  {
+    "pcId": "963276",
+    "pcName": "Lucario & Melmetal GX #120",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 25,
+    "psa10Price": 37
+  },
+  {
+    "pcId": "844689",
+    "pcName": "Greninja #XY24",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 25,
+    "psa10Price": 198
+  },
+  {
+    "pcId": "964313",
+    "pcName": "Solgaleo & Lunala GX #75",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 25,
+    "psa10Price": 38
+  },
+  {
+    "pcId": "964313",
+    "pcName": "Solgaleo & Lunala GX #75",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 25,
+    "psa10Price": 38
+  },
+  {
+    "pcId": "963238",
+    "pcName": "Marshadow & Machamp GX #82",
+    "consoleName": "Pokemon Unbroken Bonds",
+    "setCode": "2420",
+    "rawPrice": 25,
+    "psa10Price": 37
+  },
+  {
+    "pcId": "844534",
+    "pcName": "Latias #HGSS10",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 24,
+    "psa10Price": 410
+  },
+  {
+    "pcId": "4602697",
+    "pcName": "Salamence Premium Checklane Blister",
+    "consoleName": "Pokemon Brilliant Stars",
+    "setCode": "2948",
+    "rawPrice": 24,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "4050118",
+    "pcName": "Giratina VSTAR #201",
+    "consoleName": "Pokemon Lost Origin",
+    "setCode": "3118",
+    "rawPrice": 24,
+    "psa10Price": 35
+  },
+  {
+    "pcId": "844838",
+    "pcName": "Giratina #SM151",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 24,
+    "psa10Price": 70
+  },
+  {
+    "pcId": "957596",
+    "pcName": "Lugia EX #102",
+    "consoleName": "Pokemon Legendary Treasures",
+    "setCode": "1409",
+    "rawPrice": 23,
+    "psa10Price": 57
+  },
+  {
+    "pcId": "643519",
+    "pcName": "Dragonite #5",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 23,
+    "psa10Price": 145
+  },
+  {
+    "pcId": "10305352",
+    "pcName": "Darkrai [Jumbo] #BW73",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 23,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "4562547",
+    "pcName": "Mimikyu [Jumbo] #SWSH136",
+    "consoleName": "Pokemon Celebrations",
+    "setCode": "2867",
+    "rawPrice": 23,
+    "psa10Price": 95
+  },
+  {
+    "pcId": "845002",
+    "pcName": "Mimikyu #SM99",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 23,
+    "psa10Price": 29
+  },
+  {
+    "pcId": "10792618",
+    "pcName": "Alakazam [Stamped] #3",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 23,
+    "psa10Price": 42
+  },
+  {
+    "pcId": "845079",
+    "pcName": "Dialga LV.X #DP37",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 23,
+    "psa10Price": 410
+  },
+  {
+    "pcId": "6658917",
+    "pcName": "Pikachu Berkemeja Batik #101/SV-P",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 22,
+    "psa10Price": 27
+  },
+  {
+    "pcId": "1656598",
+    "pcName": "Lugia #SWSH069",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 22,
+    "psa10Price": 26
+  },
+  {
+    "pcId": "10338306",
+    "pcName": "Greninja V-Union [Set]",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 22,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "4637104",
+    "pcName": "Zacian V #GG48",
+    "consoleName": "Pokemon Crown Zenith",
+    "setCode": "17688",
+    "rawPrice": 22,
+    "psa10Price": 26
+  },
+  {
+    "pcId": "1563461",
+    "pcName": "Ninetales #BW66",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 22,
+    "psa10Price": 125
+  },
+  {
+    "pcId": "844545",
+    "pcName": "Suicune #HGSS21",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 22,
+    "psa10Price": 392
+  },
+  {
+    "pcId": "11239141",
+    "pcName": "Mega Lucario EX #33",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 21,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "845098",
+    "pcName": "Arceus LV.X #DP56",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 21,
+    "psa10Price": 710
+  },
+  {
+    "pcId": "4080755",
+    "pcName": "Charizard #TG03",
+    "consoleName": "Pokemon Lost Origin",
+    "setCode": "3118",
+    "rawPrice": 20,
+    "psa10Price": 32
+  },
+  {
+    "pcId": "4080782",
+    "pcName": "Mew VMAX #TG30",
+    "consoleName": "Pokemon Lost Origin",
+    "setCode": "3118",
+    "rawPrice": 20,
+    "psa10Price": 30
+  },
+  {
+    "pcId": "4277117",
+    "pcName": "Rayquaza VMAX #TG29",
+    "consoleName": "Pokemon Silver Tempest",
+    "setCode": "3170",
+    "rawPrice": 20,
+    "psa10Price": 33
+  },
+  {
+    "pcId": "957615",
+    "pcName": "Eevee #RC14",
+    "consoleName": "Pokemon Legendary Treasures",
+    "setCode": "1409",
+    "rawPrice": 20,
+    "psa10Price": 115
+  },
+  {
+    "pcId": "1656631",
+    "pcName": "Venusaur VMAX #SWSH102",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 20,
+    "psa10Price": 35
+  },
+  {
+    "pcId": "4360386",
+    "pcName": "Dragonite [Stamped] #131",
+    "consoleName": "Pokemon Silver Tempest",
+    "setCode": "3170",
+    "rawPrice": 20,
+    "psa10Price": 32
+  },
+  {
+    "pcId": "844973",
+    "pcName": "Shining Ho-Oh #SM70",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 20,
+    "psa10Price": 55
+  },
+  {
+    "pcId": "11239140",
+    "pcName": "Mega Gardevior EX #32",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 20,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "964394",
+    "pcName": "Arceus & Dialga & Palkia GX #156",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 20,
+    "psa10Price": 38
+  },
+  {
+    "pcId": "845095",
+    "pcName": "Arceus LV.X #DP53",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 20,
+    "psa10Price": 332
+  },
+  {
+    "pcId": "3366470",
+    "pcName": "Moltres [Corrected] #21",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 20,
+    "psa10Price": 40
+  },
+  {
+    "pcId": "844544",
+    "pcName": "Entei #HGSS20",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 20,
+    "psa10Price": 150
+  },
+  {
+    "pcId": "844543",
+    "pcName": "Raikou #HGSS19",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 20,
+    "psa10Price": 146
+  },
+  {
+    "pcId": "964394",
+    "pcName": "Arceus & Dialga & Palkia GX #156",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 20,
+    "psa10Price": 38
+  },
+  {
+    "pcId": "957367",
+    "pcName": "Dialga EX #65",
+    "consoleName": "Pokemon Plasma Blast",
+    "setCode": "1370",
+    "rawPrice": 20,
+    "psa10Price": 49
+  },
+  {
+    "pcId": "964394",
+    "pcName": "Arceus & Dialga & Palkia GX #156",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 20,
+    "psa10Price": 38
+  },
+  {
+    "pcId": "3684161",
+    "pcName": "Radiant Eevee #SWSH230",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 19,
+    "psa10Price": 25
+  },
+  {
+    "pcId": "2245570",
+    "pcName": "Eevee GX #SM242",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 19,
+    "psa10Price": 41
+  },
+  {
+    "pcId": "964239",
+    "pcName": "Venusaur & Snivy GX #1",
+    "consoleName": "Pokemon Cosmic Eclipse",
+    "setCode": "2534",
+    "rawPrice": 19,
+    "psa10Price": 36
+  },
+  {
+    "pcId": "956346",
+    "pcName": "Giratina EX #92",
+    "consoleName": "Pokemon Dragons Exalted",
+    "setCode": "1394",
+    "rawPrice": 19,
+    "psa10Price": 89
+  },
+  {
+    "pcId": "3404922",
+    "pcName": "Arceus V #SWSH204",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 19,
+    "psa10Price": 38
+  },
+  {
+    "pcId": "4686316",
+    "pcName": "Reshiram Zekrom & Kyurem [Jumbo]",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 19,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "4686316",
+    "pcName": "Reshiram Zekrom & Kyurem [Jumbo]",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 19,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "10908888",
+    "pcName": "League Battle Deck: Shadow Rider Calyrex VMAX",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 19,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "5923985",
+    "pcName": "Snorlax [Stamped] #131",
+    "consoleName": "Pokemon Vivid Voltage",
+    "setCode": "2701",
+    "rawPrice": 19,
+    "psa10Price": 56
+  },
+  {
+    "pcId": "4080781",
+    "pcName": "Pikachu VMAX #TG29",
+    "consoleName": "Pokemon Lost Origin",
+    "setCode": "3118",
+    "rawPrice": 18,
+    "psa10Price": 30
+  },
+  {
+    "pcId": "1563478",
+    "pcName": "Lugia EX #BW83",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 18,
+    "psa10Price": 203
+  },
+  {
+    "pcId": "844535",
+    "pcName": "Latios #HGSS11",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 18,
+    "psa10Price": 89
+  },
+  {
+    "pcId": "845094",
+    "pcName": "Darkrai #DP52",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 18,
+    "psa10Price": 144
+  },
+  {
+    "pcId": "844823",
+    "pcName": "Zekrom GX #SM138",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 18,
+    "psa10Price": 32
+  },
+  {
+    "pcId": "4637110",
+    "pcName": "Zamazenta V #GG54",
+    "consoleName": "Pokemon Crown Zenith",
+    "setCode": "17688",
+    "rawPrice": 18,
+    "psa10Price": 23
+  },
+  {
+    "pcId": "2618183",
+    "pcName": "Mew EX #88",
+    "consoleName": "Pokemon Celebrations",
+    "setCode": "2867",
+    "rawPrice": 17,
+    "psa10Price": 25
+  },
+  {
+    "pcId": "1656632",
+    "pcName": "Blastoise VMAX #SWSH103",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 17,
+    "psa10Price": 36
+  },
+  {
+    "pcId": "844983",
+    "pcName": "Ho-Oh GX #SM80",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 17,
+    "psa10Price": 39
+  },
+  {
+    "pcId": "3508413",
+    "pcName": "Zacian V #TG21",
+    "consoleName": "Pokemon Astral Radiance",
+    "setCode": "3040",
+    "rawPrice": 17,
+    "psa10Price": 20
+  },
+  {
+    "pcId": "844907",
+    "pcName": "Entei #SM219",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 17,
+    "psa10Price": 153
+  },
+  {
+    "pcId": "844731",
+    "pcName": "Rayquaza EX #XY66",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 16,
+    "psa10Price": 381
+  },
+  {
+    "pcId": "844729",
+    "pcName": "Rayquaza #XY64",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 16,
+    "psa10Price": 469
+  },
+  {
+    "pcId": "844879",
+    "pcName": "Blastoise GX #SM189",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 16,
+    "psa10Price": 35
+  },
+  {
+    "pcId": "845017",
+    "pcName": "Latios #015",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 16,
+    "psa10Price": 175
+  },
+  {
+    "pcId": "10678920",
+    "pcName": "Salamence GX [Jumbo] #SM139",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 16,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "959075",
+    "pcName": "Giratina EX #57",
+    "consoleName": "Pokemon Ancient Origins",
+    "setCode": "1576",
+    "rawPrice": 16,
+    "psa10Price": 45
+  },
+  {
+    "pcId": "2396693",
+    "pcName": "Sylveon GX #92a",
+    "consoleName": "Pokemon Guardians Rising",
+    "setCode": "1919",
+    "rawPrice": 16,
+    "psa10Price": 35
+  },
+  {
+    "pcId": "844554",
+    "pcName": "Sylveon #XY04",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 16,
+    "psa10Price": 183
+  },
+  {
+    "pcId": "844538",
+    "pcName": "Lapras #HGSS14",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 16,
+    "psa10Price": 51
+  },
+  {
+    "pcId": "4117561",
+    "pcName": "Snorlax #TG10",
+    "consoleName": "Pokemon Lost Origin",
+    "setCode": "3118",
+    "rawPrice": 16,
+    "psa10Price": 32
+  },
+  {
+    "pcId": "3508412",
+    "pcName": "Galarian Moltres V #TG20",
+    "consoleName": "Pokemon Astral Radiance",
+    "setCode": "3040",
+    "rawPrice": 16,
+    "psa10Price": 21
+  },
+  {
+    "pcId": "845060",
+    "pcName": "Palkia LV.X #DP18",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 16,
+    "psa10Price": 650
+  },
+  {
+    "pcId": "844885",
+    "pcName": "Mewtwo GX #SM196",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 15,
+    "psa10Price": 40
+  },
+  {
+    "pcId": "2581749",
+    "pcName": "Umbreon #SWSH129",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 15,
+    "psa10Price": 41
+  },
+  {
+    "pcId": "3206546",
+    "pcName": "Eevee #TG11",
+    "consoleName": "Pokemon Brilliant Stars",
+    "setCode": "2948",
+    "rawPrice": 15,
+    "psa10Price": 25
+  },
+  {
+    "pcId": "2618175",
+    "pcName": "Blastoise #2",
+    "consoleName": "Pokemon Celebrations",
+    "setCode": "2867",
+    "rawPrice": 15,
+    "psa10Price": 35
+  },
+  {
+    "pcId": "844567",
+    "pcName": "Gyarados EX #XY106",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 15,
+    "psa10Price": 62
+  },
+  {
+    "pcId": "10796040",
+    "pcName": "Espeon Ex #175",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 15,
+    "psa10Price": 27
+  },
+  {
+    "pcId": "11838517",
+    "pcName": "M Salamence EX [Jumbo] #XY171",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 15,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "5550811",
+    "pcName": "Reshiram & Charizard GX [Jumbo] #SM247",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 15,
+    "psa10Price": 105
+  },
+  {
+    "pcId": "11210392",
+    "pcName": "Zacian [Stamped] #15",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 15,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "4637061",
+    "pcName": "Lapras #GG05",
+    "consoleName": "Pokemon Crown Zenith",
+    "setCode": "17688",
+    "rawPrice": 15,
+    "psa10Price": 23
+  },
+  {
+    "pcId": "4895794",
+    "pcName": "Galarian Moltres #SWSH284",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 15,
+    "psa10Price": 23
+  },
+  {
+    "pcId": "845032",
+    "pcName": "Suicune #030",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 15,
+    "psa10Price": 79
+  },
+  {
+    "pcId": "844835",
+    "pcName": "Suicune #SM149",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 15,
+    "psa10Price": 93
+  },
+  {
+    "pcId": "924932",
+    "pcName": "Deoxys #1",
+    "consoleName": "Pokemon Legends Awakened",
+    "setCode": "1417",
+    "rawPrice": 15,
+    "psa10Price": 101
+  },
+  {
+    "pcId": "844980",
+    "pcName": "Mewtwo #SM77",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 14,
+    "psa10Price": 99
+  },
+  {
+    "pcId": "844739",
+    "pcName": "Rayquaza EX #XY73",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 14,
+    "psa10Price": 75
+  },
+  {
+    "pcId": "806528",
+    "pcName": "Mega Blastoise EX #30",
+    "consoleName": "Pokemon XY",
+    "setCode": "1387",
+    "rawPrice": 14,
+    "psa10Price": 42
+  },
+  {
+    "pcId": "4637076",
+    "pcName": "Latias #GG20",
+    "consoleName": "Pokemon Crown Zenith",
+    "setCode": "17688",
+    "rawPrice": 14,
+    "psa10Price": 22
+  },
+  {
+    "pcId": "964104",
+    "pcName": "Lucario #SV22",
+    "consoleName": "Pokemon Hidden Fates",
+    "setCode": "2480",
+    "rawPrice": 14,
+    "psa10Price": 23
+  },
+  {
+    "pcId": "4636553",
+    "pcName": "M Lucario ex [Jumbo] #55a",
+    "consoleName": "Pokemon Furious Fists",
+    "setCode": "1481",
+    "rawPrice": 14,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "4050129",
+    "pcName": "Giratina VSTAR #212",
+    "consoleName": "Pokemon Lost Origin",
+    "setCode": "3118",
+    "rawPrice": 14,
+    "psa10Price": 27
+  },
+  {
+    "pcId": "961421",
+    "pcName": "Giratina Prism Star #58",
+    "consoleName": "Pokemon Ultra Prism",
+    "setCode": "2178",
+    "rawPrice": 14,
+    "psa10Price": 60
+  },
+  {
+    "pcId": "2386847",
+    "pcName": "Lunala GX #SM103a",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 14,
+    "psa10Price": 20
+  },
+  {
+    "pcId": "3216307",
+    "pcName": "Galarian Moltres V #183",
+    "consoleName": "Pokemon Brilliant Stars",
+    "setCode": "2948",
+    "rawPrice": 14,
+    "psa10Price": 26
+  },
+  {
+    "pcId": "643522",
+    "pcName": "Entei #34",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 14,
+    "psa10Price": 67
+  },
+  {
+    "pcId": "1368342",
+    "pcName": "Charizard V #SWSH050",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 13,
+    "psa10Price": 26
+  },
+  {
+    "pcId": "2618182",
+    "pcName": "Mewtwo EX #54",
+    "consoleName": "Pokemon Celebrations",
+    "setCode": "2867",
+    "rawPrice": 13,
+    "psa10Price": 24
+  },
+  {
+    "pcId": "2728517",
+    "pcName": "Rayquaza V #SWSH147",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 13,
+    "psa10Price": 40
+  },
+  {
+    "pcId": "844606",
+    "pcName": "Rayquaza #XY141",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 13,
+    "psa10Price": 165
+  },
+  {
+    "pcId": "7638572",
+    "pcName": "Latios [Cosmos Holo] #73",
+    "consoleName": "Pokemon Paradox Rift",
+    "setCode": "23286",
+    "rawPrice": 13,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "844824",
+    "pcName": "Salamence GX #SM139",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 13,
+    "psa10Price": 40
+  },
+  {
+    "pcId": "844668",
+    "pcName": "Arceus #XY197",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 13,
+    "psa10Price": 105
+  },
+  {
+    "pcId": "3188399",
+    "pcName": "Zekrom #TG05",
+    "consoleName": "Pokemon Brilliant Stars",
+    "setCode": "2948",
+    "rawPrice": 13,
+    "psa10Price": 25
+  },
+  {
+    "pcId": "5917448",
+    "pcName": "Greninja V-Union [Jumbo] #swsh155",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 13,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "9058691",
+    "pcName": "Hop's Snorlax #184",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 13,
+    "psa10Price": 110
+  },
+  {
+    "pcId": "956898",
+    "pcName": "Snorlax #101",
+    "consoleName": "Pokemon Plasma Storm",
+    "setCode": "1413",
+    "rawPrice": 13,
+    "psa10Price": 198
+  },
+  {
+    "pcId": "3508408",
+    "pcName": "Galarian Articuno V #TG16",
+    "consoleName": "Pokemon Astral Radiance",
+    "setCode": "3040",
+    "rawPrice": 13,
+    "psa10Price": 21
+  },
+  {
+    "pcId": "643536",
+    "pcName": "Moltres #21",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 13,
+    "psa10Price": 29
+  },
+  {
+    "pcId": "2870992",
+    "pcName": "Galarian Moltres #SWSH125",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 13,
+    "psa10Price": 34
+  },
+  {
+    "pcId": "844837",
+    "pcName": "Raikou #SM150",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 13,
+    "psa10Price": 99
+  },
+  {
+    "pcId": "845091",
+    "pcName": "Dialga #DP49",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 13,
+    "psa10Price": 170
+  },
+  {
+    "pcId": "1563495",
+    "pcName": "Rayquaza EX #BW47",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 12,
+    "psa10Price": 124
+  },
+  {
+    "pcId": "844623",
+    "pcName": "Lugia #XY156",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 12,
+    "psa10Price": 223
+  },
+  {
+    "pcId": "4357957",
+    "pcName": "Dragonite [GameStop Stamped] #131",
+    "consoleName": "Pokemon Silver Tempest",
+    "setCode": "3170",
+    "rawPrice": 12,
+    "psa10Price": 28
+  },
+  {
+    "pcId": "844938",
+    "pcName": "Espeon GX #SM35",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 12,
+    "psa10Price": 51
+  },
+  {
+    "pcId": "844621",
+    "pcName": "Ho-Oh BREAK #XY154",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 12,
+    "psa10Price": 225
+  },
+  {
+    "pcId": "844639",
+    "pcName": "Salamence EX #XY170",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 12,
+    "psa10Price": 58
+  },
+  {
+    "pcId": "4644175",
+    "pcName": "Lucario VSTAR #SWSH291",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 12,
+    "psa10Price": 24
+  },
+  {
+    "pcId": "4050102",
+    "pcName": "Giratina V #185",
+    "consoleName": "Pokemon Lost Origin",
+    "setCode": "3118",
+    "rawPrice": 12,
+    "psa10Price": 30
+  },
+  {
+    "pcId": "845092",
+    "pcName": "Arceus #DP50",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 12,
+    "psa10Price": 137
+  },
+  {
+    "pcId": "844886",
+    "pcName": "Greninja GX #SM197",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 12,
+    "psa10Price": 43
+  },
+  {
+    "pcId": "10809568",
+    "pcName": "Greninja V-UNION [Jumbo] #155",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 12,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "2383369",
+    "pcName": "Solgaleo GX #SM104a",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 12,
+    "psa10Price": 22
+  },
+  {
+    "pcId": "1656605",
+    "pcName": "Zacian V #SWSH076",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 12,
+    "psa10Price": 19
+  },
+  {
+    "pcId": "844651",
+    "pcName": "Arcanine BREAK #XY180",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 12,
+    "psa10Price": 138
+  },
+  {
+    "pcId": "844776",
+    "pcName": "Snorlax GX #SM05",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 12,
+    "psa10Price": 47
+  },
+  {
+    "pcId": "643513",
+    "pcName": "Articuno #22",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 12,
+    "psa10Price": 41
+  },
+  {
+    "pcId": "3268926",
+    "pcName": "Moltres #SWSH185",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 12,
+    "psa10Price": 25
+  },
+  {
+    "pcId": "957368",
+    "pcName": "Palkia EX #66",
+    "consoleName": "Pokemon Plasma Blast",
+    "setCode": "1370",
+    "rawPrice": 12,
+    "psa10Price": 45
+  },
+  {
+    "pcId": "4637068",
+    "pcName": "Deoxys #GG12",
+    "consoleName": "Pokemon Crown Zenith",
+    "setCode": "17688",
+    "rawPrice": 12,
+    "psa10Price": 24
+  },
+  {
+    "pcId": "957107",
+    "pcName": "Deoxys EX #53",
+    "consoleName": "Pokemon Plasma Freeze",
+    "setCode": "1382",
+    "rawPrice": 12,
+    "psa10Price": 70
+  },
+  {
+    "pcId": "2618171",
+    "pcName": "Venusaur #15",
+    "consoleName": "Pokemon Celebrations",
+    "setCode": "2867",
+    "rawPrice": 11,
+    "psa10Price": 35
+  },
+  {
+    "pcId": "2390424",
+    "pcName": "Darkrai GX #88a",
+    "consoleName": "Pokemon Burning Shadows",
+    "setCode": "1957",
+    "rawPrice": 11,
+    "psa10Price": 25
+  },
+  {
+    "pcId": "845066",
+    "pcName": "Darkrai #DP24",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 11,
+    "psa10Price": 109
+  },
+  {
+    "pcId": "844665",
+    "pcName": "Darkrai #XY194",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 11,
+    "psa10Price": 95
+  },
+  {
+    "pcId": "961759",
+    "pcName": "Arceus #96",
+    "consoleName": "Pokemon Forbidden Light",
+    "setCode": "2209",
+    "rawPrice": 11,
+    "psa10Price": 43
+  },
+  {
+    "pcId": "2720044",
+    "pcName": "Greninja V-Union #SWSH155",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 11,
+    "psa10Price": 0
+  },
+  {
+    "pcId": "844785",
+    "pcName": "Lunala GX #SM103",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 11,
+    "psa10Price": 43
+  },
+  {
+    "pcId": "2618201",
+    "pcName": "Mimikyu #SWSH136",
+    "consoleName": "Pokemon Celebrations",
+    "setCode": "2867",
+    "rawPrice": 11,
+    "psa10Price": 27
+  },
+  {
+    "pcId": "715597",
+    "pcName": "Machamp [1st Edition] #8",
+    "consoleName": "Pokemon Base Set",
+    "setCode": "604",
+    "rawPrice": 11,
+    "psa10Price": 220
+  },
+  {
+    "pcId": "844649",
+    "pcName": "Snorlax #XY179",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 11,
+    "psa10Price": 53
+  },
+  {
+    "pcId": "3216306",
+    "pcName": "Galarian Articuno V #181",
+    "consoleName": "Pokemon Brilliant Stars",
+    "setCode": "2948",
+    "rawPrice": 11,
+    "psa10Price": 24
+  },
+  {
+    "pcId": "3508411",
+    "pcName": "Galarian Zapdos V #TG19",
+    "consoleName": "Pokemon Astral Radiance",
+    "setCode": "3040",
+    "rawPrice": 11,
+    "psa10Price": 23
+  },
+  {
+    "pcId": "3206620",
+    "pcName": "Galarian Zapdos V #182",
+    "consoleName": "Pokemon Brilliant Stars",
+    "setCode": "2948",
+    "rawPrice": 11,
+    "psa10Price": 20
+  },
+  {
+    "pcId": "1341572",
+    "pcName": "Suicune #SV022",
+    "consoleName": "Pokemon Shining Fates",
+    "setCode": "2754",
+    "rawPrice": 11,
+    "psa10Price": 25
+  },
+  {
+    "pcId": "844899",
+    "pcName": "Charizard GX #SM211",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 10,
+    "psa10Price": 29
+  },
+  {
+    "pcId": "844568",
+    "pcName": "Mewtwo EX #XY107",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 10,
+    "psa10Price": 31
+  },
+  {
+    "pcId": "806499",
+    "pcName": "Mega Venusaur EX #2",
+    "consoleName": "Pokemon XY",
+    "setCode": "1387",
+    "rawPrice": 10,
+    "psa10Price": 16
+  },
+  {
+    "pcId": "2782822",
+    "pcName": "Espeon #SWSH174",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 10,
+    "psa10Price": 50
+  },
+  {
+    "pcId": "844620",
+    "pcName": "Ho-Oh #XY153",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 10,
+    "psa10Price": 176
+  },
+  {
+    "pcId": "844759",
+    "pcName": "Celebi #XY93",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 10,
+    "psa10Price": 48
+  },
+  {
+    "pcId": "4658442",
+    "pcName": "Pikachu & Zekrom GX [Jumbo] #SM248",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 10,
+    "psa10Price": 70
+  },
+  {
+    "pcId": "10809571",
+    "pcName": "Zacian V-UNION [Jumbo] #163",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 10,
+    "psa10Price": 25
+  },
+  {
+    "pcId": "3508410",
+    "pcName": "Shadow Rider Calyrex VMAX #TG18",
+    "consoleName": "Pokemon Astral Radiance",
+    "setCode": "3040",
+    "rawPrice": 10,
+    "psa10Price": 16
+  },
+  {
+    "pcId": "10690127",
+    "pcName": "Alakazam #9",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 10,
+    "psa10Price": 23
+  },
+  {
+    "pcId": "956823",
+    "pcName": "Articuno EX #25",
+    "consoleName": "Pokemon Plasma Storm",
+    "setCode": "1413",
+    "rawPrice": 10,
+    "psa10Price": 64
+  },
+  {
+    "pcId": "844830",
+    "pcName": "Articuno #SM144",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 10,
+    "psa10Price": 43
+  },
+  {
+    "pcId": "2736634",
+    "pcName": "Galarian Zapdos #SWSH124",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 10,
+    "psa10Price": 31
+  },
+  {
+    "pcId": "1563477",
+    "pcName": "Deoxys EX #BW82",
+    "consoleName": "Pokemon Promo",
+    "setCode": "22872",
+    "rawPrice": 10,
+    "psa10Price": 90
+  }
+]
