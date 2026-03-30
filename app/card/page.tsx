@@ -195,14 +195,14 @@ function CardDetailContent() {
               <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16 }}>
                 <div style={{ fontSize: 14, fontWeight: 800, color: isDark ? "#ffffff" : "#18181b", textTransform: "uppercase" as const, letterSpacing: "1px", marginBottom: 6 }}>Raw</div>
                 <div style={{ fontSize: 12, fontWeight: 700, color: isDark ? "#e4e4e7" : "#27272a", marginBottom: 2 }}>Avg of last 5 sold</div>
-                <div style={{ fontSize: 24, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{rawAvg !== null ? "$" + rawAvg.toLocaleString() : "$" + card.raw_price}</div>
+                <div style={{ fontSize: 24, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", color: rawAvg ? blueText : textTer, marginBottom: 8 }}>{rawAvg ? "$" + rawAvg.toLocaleString() : "Low Data"}</div>
                 <div style={{ fontSize: 12, fontWeight: 700, color: isDark ? "#e4e4e7" : "#27272a" }}>Last Sold</div>
                 <div style={{ fontSize: 16, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", color: isDark ? "#e4e4e7" : "#27272a" }}>{rawLast !== null ? "$" + rawLast.toLocaleString() : "—"}</div>
               </div>
               <div style={{ background: cardBg, border: "1px solid " + border, borderRadius: 12, padding: 16 }}>
                 <div style={{ fontSize: 14, fontWeight: 800, color: isDark ? "#ffffff" : "#18181b", textTransform: "uppercase" as const, letterSpacing: "1px", marginBottom: 6 }}>PSA 9</div>
                 <div style={{ fontSize: 12, fontWeight: 700, color: isDark ? "#e4e4e7" : "#27272a", marginBottom: 2 }}>Avg of last 5 sold</div>
-                <div style={{ fontSize: 24, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{psa9Avg !== null ? "$" + psa9Avg.toLocaleString() : "$" + card.psa9_price}</div>
+                <div style={{ fontSize: 24, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", color: psa9Avg ? blueText : textTer, marginBottom: 8 }}>{psa9Avg ? "$" + psa9Avg.toLocaleString() : "Low Data"}</div>
                 <div style={{ fontSize: 12, fontWeight: 700, color: isDark ? "#e4e4e7" : "#27272a" }}>Last Sold</div>
                 <div style={{ fontSize: 16, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", color: isDark ? "#e4e4e7" : "#27272a" }}>{psa9Last !== null ? "$" + psa9Last.toLocaleString() : "—"}</div>
               </div>
@@ -210,13 +210,13 @@ function CardDetailContent() {
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: 14, fontWeight: 800, color: isDark ? "#ffffff" : "#18181b", textTransform: "uppercase" as const, letterSpacing: "1px", marginBottom: 6 }}>PSA 10</div>
                   <div style={{ fontSize: 12, fontWeight: 700, color: isDark ? "#e4e4e7" : "#27272a", marginBottom: 2 }}>Avg of last 5 sold</div>
-                  <div style={{ fontSize: 24, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", color: blueText, marginBottom: 8 }}>{psa10Avg !== null ? "$" + psa10Avg.toLocaleString() : "$" + card.psa10_price}</div>
+                  <div style={{ fontSize: 24, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", color: psa10Avg ? blueText : textTer, marginBottom: 8 }}>{psa10Avg ? "$" + psa10Avg.toLocaleString() : "Low Data"}</div>
                   <div style={{ fontSize: 12, fontWeight: 700, color: isDark ? "#e4e4e7" : "#27272a" }}>Last Sold</div>
                   <div style={{ fontSize: 16, fontWeight: 700, fontFamily: "JetBrains Mono, monospace", color: isDark ? "#e4e4e7" : "#27272a" }}>{psa10Last !== null ? "$" + psa10Last.toLocaleString() : "—"}</div>
                 </div>
-                <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "center", justifyContent: "center", padding: "8px 12px", borderRadius: 12, background: green, minWidth: 80 }}>
-                  <div style={{ fontSize: 28, fontWeight: 800, fontFamily: "JetBrains Mono, monospace", color: "#ffffff", lineHeight: 1 }}>{gemRate}%</div>
-                  <div style={{ fontSize: 11, fontWeight: 700, color: "#ffffff", marginTop: 4, textTransform: "uppercase" as const, letterSpacing: "0.5px" }}>Gem Rate</div>
+                <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "center", justifyContent: "center", padding: "8px 12px", borderRadius: 12, background: gemRate > 0 ? green : (isDark ? "#2a2a32" : "#e4e4e7"), minWidth: 80 }}>
+                  <div style={{ fontSize: 28, fontWeight: 800, fontFamily: "JetBrains Mono, monospace", color: gemRate > 0 ? "#ffffff" : textTer, lineHeight: 1 }}>{gemRate > 0 ? gemRate + "%" : "Low"}</div>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: gemRate > 0 ? "#ffffff" : textTer, marginTop: 4, textTransform: "uppercase" as const, letterSpacing: "0.5px" }}>{gemRate > 0 ? "Gem Rate" : "Data"}</div>
                 </div>
               </div>
             </div>

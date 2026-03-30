@@ -179,8 +179,8 @@ export default function SetDetailPage() {
                     </div>
                     <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 2, whiteSpace: "normal", overflow: "visible", lineHeight: "1.3", minHeight: "34px" }}>{card.name}</div>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 4 }}>
-                      <span style={{ fontSize: 11, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", padding: "3px 8px", borderRadius: 6, background: gemBg2, color: gemColor }}>{realGemRate}% gem</span>
-                      <span style={{ fontSize: 13, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: greenText }}>${avgPrice.toLocaleString()}</span>
+                      <span style={{ fontSize: 11, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", padding: "3px 8px", borderRadius: 6, background: realGemRate > 0 ? gemBg2 : (isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)"), color: realGemRate > 0 ? gemColor : textTer }}>{realGemRate > 0 ? realGemRate + "% gem" : "Low Data"}</span>
+                      <span style={{ fontSize: 13, fontWeight: 600, fontFamily: "JetBrains Mono, monospace", color: avgPrice > 0 ? greenText : textTer }}>{avgPrice > 0 ? "$" + avgPrice.toLocaleString() : "Low Data"}</span>
                     </div>
                   </div>
                 </a>
