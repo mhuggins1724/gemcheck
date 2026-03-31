@@ -117,6 +117,7 @@ export default function SetsPage() {
           <div style={{ display: "flex", gap: 2 }}>
             <a href="/" style={{ padding: "6px 14px", borderRadius: 6, fontSize: 13, fontWeight: 400, color: textSec, textDecoration: "none" }}>Home</a>
             <a href="/sets" style={{ padding: "6px 14px", borderRadius: 6, fontSize: 13, fontWeight: 600, color: text, background: tertBg, textDecoration: "none" }}>Sets</a>
+            <a href="/market" style={{ padding: "6px 14px", borderRadius: 6, fontSize: 13, fontWeight: 400, color: textSec, textDecoration: "none" }}>Market Movers</a>
             <a href="/search" style={{ padding: "6px 14px", borderRadius: 6, fontSize: 13, fontWeight: 400, color: textSec, textDecoration: "none" }}>Search</a>
           </div>
           <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 8 }}>

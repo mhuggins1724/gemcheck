@@ -73,7 +73,7 @@ export default function Home() {
             <span style={{ fontSize: 20, fontWeight: 800, letterSpacing: "-0.5px", background: "linear-gradient(135deg, #3b82f6, #7c3aed)", backgroundClip: "text", WebkitBackgroundClip: "text", color: "transparent", WebkitTextFillColor: "transparent" }}>GemCheck</span>
           </a>
           <div style={{ display: "flex", gap: 2 }}>
-            {[{ label: "Home", href: "/", active: true }, { label: "Sets", href: "/sets" }, { label: "Top 100", href: "/#top-cards" }, { label: "Search", href: "/search" }].map(function(nav) {
+            {[{ label: "Home", href: "/", active: true }, { label: "Sets", href: "/sets" }, { label: "Top 100", href: "/#top-cards" }, { label: "Market Movers", href: "/market" }, { label: "Search", href: "/search" }].map(function(nav) {
               return <a key={nav.label} href={nav.href} style={{ padding: "6px 14px", borderRadius: 6, fontSize: 15, fontWeight: 700, color: nav.active ? c.text : c.textSecondary, background: nav.active ? c.surface : "transparent", textDecoration: "none" }}>{nav.label}</a>;
             })}
           </div>
