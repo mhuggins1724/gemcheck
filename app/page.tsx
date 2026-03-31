@@ -12,8 +12,8 @@ export default function Home() {
   const { isDark, toggleTheme } = useTheme();
   const [cards, setCards] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [totalCards, setTotalCards] = useState(21878);
-  const [totalSets, setTotalSets] = useState(175);
+  const [totalCards, setTotalCards] = useState(21939);
+  const [totalSets, setTotalSets] = useState(176);
   const [homeSort, setHomeSort] = useState("value-desc");
   var c = getColors(isDark);
 
