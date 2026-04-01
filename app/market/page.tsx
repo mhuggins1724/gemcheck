@@ -30,6 +30,8 @@ function getDaysAgo(days: number) {
 function calcMovers(cards: any[], period: string) {
   var daysMap: Record<string, number> = { "7d": 7, "30d": 30, "90d": 90 };
   var days = daysMap[period] || 30;
+  // Map days to how many monthly chart points back to compare
+  var monthsBack = period === "7d" ? 1 : period === "30d" ? 1 : 3;
   var cutoff = getDaysAgo(days);
 
   var results: any[] = [];
@@ -37,21 +39,22 @@ function calcMovers(cards: any[], period: string) {
   cards.forEach(function (card) {
     var chartData = card.price_chart_data || {};
     var rawChart = chartData.raw || [];
+
+    // Need at least 2 data points to compare
     if (rawChart.length < 2) return;
 
     // Current price = last chart point
     var current = rawChart[rawChart.length - 1].price;
-    if (current < 5) return; // Skip cards under $5
+    if (current < 5) return;
 
-    // Find price at cutoff date
-    var pastPrice = null;
-    for (var i = rawChart.length - 1; i >= 0; i--) {
-      if (rawChart[i].date <= cutoff) {
-        pastPrice = rawChart[i].price;
-        break;
-      }
+    // Compare to N months back in chart data
+    var pastIdx = Math.max(0, rawChart.length - 1 - monthsBack);
+    var pastPrice = rawChart[pastIdx].price;
+    if (pastPrice < 1) return;
+    // If same as current index, use the one before
+    if (pastIdx === rawChart.length - 1 && rawChart.length >= 2) {
+      pastPrice = rawChart[rawChart.length - 2].price;
     }
-    if (pastPrice === null || pastPrice < 1) return;
 
     var dollarChange = current - pastPrice;
     var pctChange = ((current - pastPrice) / pastPrice) * 100;
@@ -65,7 +68,8 @@ function calcMovers(cards: any[], period: string) {
     // All-time high/low from chart
     var allPrices = rawChart.map(function (p: any) { return p.price; });
     var allTimeHigh = Math.max.apply(null, allPrices);
-    var allTimeLow = Math.min.apply(null, allPrices.filter(function (p: number) { return p > 0; }));
+    var positivePrices = allPrices.filter(function (p: number) { return p > 0; });
+    var allTimeLow = positivePrices.length > 0 ? Math.min.apply(null, positivePrices) : current;
     var isNewHigh = current >= allTimeHigh * 0.95;
     var isNewLow = current <= allTimeLow * 1.05;
 
@@ -118,16 +122,19 @@ export default function MarketMoversPage() {
   var co = getColors(isDark);
 
   useEffect(function () {
-    // Fetch cards with chart data — only cards with price > $5
+    // Fetch in two steps: IDs first (fast), then chart data in batches
     (async function () {
+      // Step 1: Get IDs of cards worth $10+
+      var { data: idRows } = await supabase.from("cards").select("id").gt("raw_price", 9).limit(2000);
+      if (!idRows || idRows.length === 0) { setLoading(false); return; }
+      var allIds = idRows.map(function (r: any) { return r.id; });
+
+      // Step 2: Batch fetch chart data 50 at a time
       var allCards: any[] = [];
-      var page = 0;
-      while (true) {
-        var res = await supabase.from("cards").select("id,name,set_name,image_url,raw_price,price_chart_data,all_sales").gt("raw_price", 4).range(page * 1000, (page + 1) * 1000 - 1);
-        if (!res.data || res.data.length === 0) break;
-        allCards.push(...res.data);
-        if (res.data.length < 1000) break;
-        page++;
+      for (var i = 0; i < allIds.length; i += 50) {
+        var batch = allIds.slice(i, i + 50);
+        var { data } = await supabase.from("cards").select("id,name,set_name,image_url,raw_price,price_chart_data,all_sales").in("id", batch);
+        if (data) allCards.push.apply(allCards, data);
       }
       setCards(allCards);
       setLoading(false);
